@@ -2409,6 +2409,142 @@ hover:shadow-[0_0_18px_rgba(192,140,69,0.18)]"
           </div>
         </Container>
       </section>
+      {/* ===== SAMPLE PACK SECTION ===== */}
+      <section className="relative overflow-hidden bg-[#050302] py-12 md:py-16 xl:py-24 border-t border-[#6D5333]/40 border-b border-[#6D5333]/40">
+        <div className="absolute inset-0 opacity-[0.08] bg-[repeating-linear-gradient(135deg,rgba(192,140,69,0.45)_0px,rgba(192,140,69,0.45)_1px,transparent_1px,transparent_12px)] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/40 pointer-events-none" />
+
+        <Container>
+          <div className="relative z-10 grid grid-cols-1 md:grid-cols-[0.92fr_0.88fr] xl:grid-cols-[0.95fr_0.95fr] 2xl:grid-cols-[0.9fr_1.1fr] gap-8 md:gap-2 xl:gap-8 2xl:gap-16 items-center justify-center">
+            {/* TEXT */}
+            <div className="order-1 text-center md:text-left md:max-w-[500px] md:ml-auto xl:max-w-[560px] 2xl:max-w-none 2xl:ml-0">
+              <h2 className="max-w-[560px] mx-auto md:mx-0 font-cinzel text-[2rem] sm:text-[2.4rem] md:text-[2.5rem] lg:text-[2.9rem] xl:text-[3.6rem] 2xl:text-6xl font-black uppercase leading-[0.95] tracking-[0.045em] 2xl:tracking-[0.06em] text-[#E6DCC8]">
+                New to Old Ironsides?
+                <br />
+                <span className="text-[#B5976D]">Discover Your Roast.</span>
+              </h2>
+
+              <p className="mt-6 max-w-[560px] mx-auto md:mx-0 font-playfair italic text-[#B5976D] text-base md:text-lg xl:text-xl leading-relaxed">
+                Find your roast before committing to a full bag.
+              </p>
+
+              {/* MOBILE IMAGE */}
+              <div className="mt-7 md:hidden flex justify-center">
+                <div className="relative w-full max-w-[560px]">
+                  <div className="relative rounded-xl border border-[#6D5333]/50 bg-black shadow-2xl shadow-black/70 p-.5">
+                    <img
+                      src="/sample-pack2.jpg"
+                      alt="Old Ironsides Coffee sample packs"
+                      className="relative w-full h-auto object-contain"
+                    />
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
+                  </div>
+
+                  <Link
+                    to="/roast/armada-sample-pack"
+                    className="mx-auto -mt-7 relative z-10 block w-[92%] border border-[#6D5333]/60 bg-[#C08C45] px-8 py-4 text-center shadow-xl shadow-black/50 transition-all duration-200 hover:-translate-y-[1px] hover:bg-[#E6C07F] hover:border-[#E6C07F]"
+                  >
+                    <p className="font-oswald text-lg font-black uppercase tracking-[0.22em] text-black">
+                      SAMPLE BOX
+                    </p>
+
+                    <p className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-black/75">
+                      One Roast Free • Free Shipping
+                    </p>
+                  </Link>
+                </div>
+              </div>
+
+              <div className="mt-4 max-w-[560px] mx-auto md:mx-0 space-y-3">
+                <p className="text-neutral-300 text-[0.95rem] md:text-base xl:text-lg leading-relaxed">
+                  Each 2.5 oz sample is enough to brew roughly 6–8 cups of
+                  coffee, giving you a real taste of the roast before committing
+                  to a full bag.
+                </p>
+              </div>
+              <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-2 max-w-[520px] mx-auto md:mx-0">
+                {roastCards.map((card) => (
+                  <Link
+                    key={card.id}
+                    to={`/roast/${card.slug}`}
+                    className="
+flex items-center justify-center text-center
+border border-[#6D5333]/70
+bg-[#130E08]/80
+px-3 py-2
+text-[0.72rem] font-semibold uppercase tracking-[0.16em]
+text-[#B5976D]
+transition-all duration-200
+hover:border-[#C08C45]
+hover:text-[#E6C07F]
+hover:bg-[#32220D]
+"
+                  >
+                    {card.title}
+                  </Link>
+                ))}
+              </div>
+
+              <div className="mt-8 flex flex-col items-center md:items-start">
+                <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
+                  <Link
+                    to="/roast/armada-sample-pack"
+                    className="inline-flex h-[56px] items-center justify-center px-9 bg-[#C08C45] text-black font-extrabold text-[0.95rem] md:text-[1.05rem] tracking-[0.18em] uppercase border border-[#C08C45] transition-all duration-200 hover:-translate-y-[1px] hover:bg-[#E6C07F] hover:border-[#E6C07F]"
+                  >
+                    Shop Samples
+                  </Link>
+
+                  <div className="text-center sm:text-left">
+                    <p className="text-[#E6C07F] text-[0.75rem] font-bold uppercase tracking-[0.18em]">
+                      Sample Box Ships Free
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-3 relative overflow-hidden border border-[#5A4630]/60 bg-black/30 px-3 py-2 rounded-sm max-w-[500px]">
+                  <div className="absolute inset-y-0 left-0 w-[3px] bg-[#C08C45]" />
+
+                  <p className="pl-3 text-center md:text-left text-[10px] md:text-[11px] uppercase tracking-[0.16em] leading-snug text-[#D2B48C]">
+                    Sample packs excluded from 15% first-order and subscription
+                    discounts.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* DESKTOP IMAGE */}
+            <div className="hidden md:flex order-2 justify-start">
+              <div className="relative w-full max-w-[340px] lg:max-w-[390px] xl:max-w-[500px] 2xl:max-w-[620px]">
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <img
+                    src="/sample-pack2.jpg"
+                    alt="Old Ironsides Coffee sample packs"
+                    className="absolute inset-0 w-full h-full object-contain"
+                  />
+
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_58%,rgba(5,3,2,0.55)_100%)]" />
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050302]/70 via-transparent to-[#050302]/30" />
+                </div>
+
+                <Link
+                  to="/roast/armada-sample-pack"
+                  className="mx-auto -mt-7 relative z-10 block w-fit border border-[#6D5333]/60 bg-[#C08C45] px-8 py-4 text-center shadow-xl shadow-black/50 transition-all duration-200 hover:-translate-y-[1px] hover:bg-[#E6C07F] hover:border-[#E6C07F]"
+                >
+                  <p className="font-oswald text-lg font-black uppercase tracking-[0.22em] text-black">
+                    Sample Box
+                  </p>
+
+                  <p className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-black/75">
+                    One Roast Free • Free Shipping
+                  </p>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
       {/* ===== TASTING EVENTS SECTION ===== */}
       <section
         id="tasting-events"
@@ -2884,142 +3020,6 @@ hover:shadow-[0_0_18px_rgba(192,140,69,0.18)]"
         <div className="relative">
           <LaunchedFromHarbor noBg />
         </div>
-      </section>
-      {/* ===== SAMPLE PACK SECTION ===== */}
-      <section className="relative overflow-hidden bg-[#050302] py-12 md:py-16 xl:py-24 border-t border-[#6D5333]/40 border-b border-[#6D5333]/40">
-        <div className="absolute inset-0 opacity-[0.08] bg-[repeating-linear-gradient(135deg,rgba(192,140,69,0.45)_0px,rgba(192,140,69,0.45)_1px,transparent_1px,transparent_12px)] pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/40 pointer-events-none" />
-
-        <Container>
-          <div className="relative z-10 grid grid-cols-1 md:grid-cols-[0.92fr_0.88fr] xl:grid-cols-[0.95fr_0.95fr] 2xl:grid-cols-[0.9fr_1.1fr] gap-8 md:gap-2 xl:gap-8 2xl:gap-16 items-center justify-center">
-            {/* TEXT */}
-            <div className="order-1 text-center md:text-left md:max-w-[500px] md:ml-auto xl:max-w-[560px] 2xl:max-w-none 2xl:ml-0">
-              <h2 className="max-w-[560px] mx-auto md:mx-0 font-cinzel text-[2rem] sm:text-[2.4rem] md:text-[2.5rem] lg:text-[2.9rem] xl:text-[3.6rem] 2xl:text-6xl font-black uppercase leading-[0.95] tracking-[0.045em] 2xl:tracking-[0.06em] text-[#E6DCC8]">
-                Sample Our Coffee.
-                <br />
-                <span className="text-[#B5976D]">Discover Your Roast.</span>
-              </h2>
-
-              <p className="mt-6 max-w-[560px] mx-auto md:mx-0 font-playfair italic text-[#B5976D] text-base md:text-lg xl:text-xl leading-relaxed">
-                Find your roast before committing to a full bag.
-              </p>
-
-              {/* MOBILE IMAGE */}
-              <div className="mt-7 md:hidden flex justify-center">
-                <div className="relative w-full max-w-[560px]">
-                  <div className="relative rounded-xl border border-[#6D5333]/50 bg-black shadow-2xl shadow-black/70 p-.5">
-                    <img
-                      src="/sample-pack2.jpg"
-                      alt="Old Ironsides Coffee sample packs"
-                      className="relative w-full h-auto object-contain"
-                    />
-
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
-                  </div>
-
-                  <Link
-                    to="/roast/armada-sample-pack"
-                    className="mx-auto -mt-7 relative z-10 block w-[92%] border border-[#6D5333]/60 bg-[#C08C45] px-8 py-4 text-center shadow-xl shadow-black/50 transition-all duration-200 hover:-translate-y-[1px] hover:bg-[#E6C07F] hover:border-[#E6C07F]"
-                  >
-                    <p className="font-oswald text-lg font-black uppercase tracking-[0.22em] text-black">
-                      SAMPLE BOX
-                    </p>
-
-                    <p className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-black/75">
-                      One Roast Free • Free Shipping
-                    </p>
-                  </Link>
-                </div>
-              </div>
-
-              <div className="mt-4 max-w-[560px] mx-auto md:mx-0 space-y-3">
-                <p className="text-neutral-300 text-[0.95rem] md:text-base xl:text-lg leading-relaxed">
-                  Each 2.5 oz sample is enough to brew roughly 6–8 cups of
-                  coffee, giving you a real taste of the roast before committing
-                  to a full bag.
-                </p>
-              </div>
-              <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-2 max-w-[520px] mx-auto md:mx-0">
-                {roastCards.map((card) => (
-                  <Link
-                    key={card.id}
-                    to={`/roast/${card.slug}`}
-                    className="
-flex items-center justify-center text-center
-border border-[#6D5333]/70
-bg-[#130E08]/80
-px-3 py-2
-text-[0.72rem] font-semibold uppercase tracking-[0.16em]
-text-[#B5976D]
-transition-all duration-200
-hover:border-[#C08C45]
-hover:text-[#E6C07F]
-hover:bg-[#32220D]
-"
-                  >
-                    {card.title}
-                  </Link>
-                ))}
-              </div>
-
-              <div className="mt-8 flex flex-col items-center md:items-start">
-                <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
-                  <Link
-                    to="/roast/armada-sample-pack"
-                    className="inline-flex h-[56px] items-center justify-center px-9 bg-[#C08C45] text-black font-extrabold text-[0.95rem] md:text-[1.05rem] tracking-[0.18em] uppercase border border-[#C08C45] transition-all duration-200 hover:-translate-y-[1px] hover:bg-[#E6C07F] hover:border-[#E6C07F]"
-                  >
-                    Shop Samples
-                  </Link>
-
-                  <div className="text-center sm:text-left">
-                    <p className="text-[#E6C07F] text-[0.75rem] font-bold uppercase tracking-[0.18em]">
-                      Sample Box Ships Free
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-3 relative overflow-hidden border border-[#5A4630]/60 bg-black/30 px-3 py-2 rounded-sm max-w-[500px]">
-                  <div className="absolute inset-y-0 left-0 w-[3px] bg-[#C08C45]" />
-
-                  <p className="pl-3 text-center md:text-left text-[10px] md:text-[11px] uppercase tracking-[0.16em] leading-snug text-[#D2B48C]">
-                    Sample packs excluded from 15% first-order and subscription
-                    discounts.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* DESKTOP IMAGE */}
-            <div className="hidden md:flex order-2 justify-start">
-              <div className="relative w-full max-w-[340px] lg:max-w-[390px] xl:max-w-[500px] 2xl:max-w-[620px]">
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <img
-                    src="/sample-pack2.jpg"
-                    alt="Old Ironsides Coffee sample packs"
-                    className="absolute inset-0 w-full h-full object-contain"
-                  />
-
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_58%,rgba(5,3,2,0.55)_100%)]" />
-
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050302]/70 via-transparent to-[#050302]/30" />
-                </div>
-
-                <Link
-                  to="/roast/armada-sample-pack"
-                  className="mx-auto -mt-7 relative z-10 block w-fit border border-[#6D5333]/60 bg-[#C08C45] px-8 py-4 text-center shadow-xl shadow-black/50 transition-all duration-200 hover:-translate-y-[1px] hover:bg-[#E6C07F] hover:border-[#E6C07F]"
-                >
-                  <p className="font-oswald text-lg font-black uppercase tracking-[0.22em] text-black">
-                    Sample Box
-                  </p>
-
-                  <p className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-black/75">
-                    One Roast Free • Free Shipping
-                  </p>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </Container>
       </section>
 
       {/* ===== FLEET SUBSCRIPTIONS ===== */}

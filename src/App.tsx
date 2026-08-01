@@ -2545,6 +2545,24 @@ hover:bg-[#32220D]
           </div>
         </Container>
       </section>
+      {/* FLEET SECTION */}
+      <section className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden bg-black py-4 md:py-24">
+        {/* BACKGROUND IMAGE */}
+        <img
+          src="/dark-theme.png"
+          alt=""
+          aria-hidden
+          className="hidden md:block absolute inset-0 w-full h-full object-cover object-[center_20%] opacity-100 scale-110"
+        />
+
+        {/* OVERLAY */}
+        <div className="hidden md:block absolute inset-0 bg-black/45" />
+
+        {/* CONTENT */}
+        <div className="relative">
+          <LaunchedFromHarbor noBg />
+        </div>
+      </section>
       {/* ===== TASTING EVENTS SECTION ===== */}
       <section
         id="tasting-events"
@@ -2587,7 +2605,7 @@ hover:bg-[#32220D]
 
                     <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent p-5 pointer-events-none">
                       <p className="font-oswald text-2xl md:text-3xl font-black uppercase tracking-[0.08em] text-ironsideWhite/90">
-                        Easter Weekend
+                        Tasting Event
                       </p>
 
                       <p className="mt-1 text-[0.72rem] font-bold uppercase tracking-[0.22em] text-[#E6C07F]">
@@ -2618,7 +2636,7 @@ hover:bg-[#32220D]
               <div className="relative w-full max-w-[620px] hidden lg:block">
                 <div className="border border-[#6D5333]/55 bg-[#0A0603]/82 backdrop-blur-sm p-7 xl:p-8 shadow-2xl shadow-black/60">
                   <p className="text-[0.68rem] font-semibold uppercase tracking-[0.36em] text-[#B5976D]">
-                    Easter Weekend Tasting
+                    Weekend Tasting Event
                   </p>
 
                   <h2 className="mt-5 font-cinzel text-[2.2rem] sm:text-[2.55rem] xl:text-[3.4rem] font-black leading-[1.02] tracking-[0.03em] text-[#E6DCC8]">
@@ -2657,6 +2675,280 @@ hover:bg-[#32220D]
           </div>
         </Container>
       </section>
+      {/* ===== ROASTING PROCESS ===== */}
+      <section
+        id="roasting-process"
+        className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden bg-[#050302] py-12 sm:py-14 md:py-16 lg:py-18 xl:py-24 2xl:py-24 border-t border-[#6D5333]/40 border-b border-[#6D5333]/40"
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_28%,rgba(192,140,69,0.14),transparent_30%),radial-gradient(circle_at_82%_70%,rgba(109,83,51,0.14),transparent_34%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black pointer-events-none" />
+
+        <div className="relative z-10 mx-auto w-full px-5 sm:px-7 md:px-10 lg:px-14 xl:px-0 2xl:px-0 max-w-[620px] sm:max-w-[720px] md:max-w-[900px] lg:max-w-[1040px] xl:max-w-[1280px] 2xl:max-w-[1440px]">
+          <div className="grid grid-cols-1 md:grid-cols-[minmax(0,0.9fr)_minmax(0,0.82fr)] lg:grid-cols-[minmax(0,0.92fr)_minmax(0,0.82fr)] xl:grid-cols-[0.9fr_1.1fr] 2xl:grid-cols-[0.9fr_1.1fr] gap-8 sm:gap-9 md:gap-4 lg:gap-6 xl:gap-20 2xl:gap-20 items-center">
+            {/* TEXT */}
+            <div className="order-1 w-full mx-auto text-center md:text-left max-w-[620px] sm:max-w-[660px] md:max-w-[470px] lg:max-w-[500px] xl:max-w-none 2xl:max-w-none md:ml-auto xl:ml-0">
+              <div className="mb-5 flex justify-center md:justify-start">
+                <div className="border-l-2 border-[#C08C45] bg-black/45 px-4 py-2">
+                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-[#9C9791]">
+                    From The Roaster
+                  </p>
+                </div>
+              </div>
+
+              <h3 className="mx-auto md:mx-0 max-w-[620px] md:max-w-[470px] lg:max-w-[500px] xl:max-w-none font-playfair text-[2.35rem] sm:text-[2.8rem] md:text-[3.05rem] lg:text-[3.55rem] xl:text-7xl 2xl:text-7xl font-semibold italic leading-[1.02] tracking-[0.02em] text-[#E6DCC8]">
+                Roasted to order.
+                <br />
+                <span className="text-[#C08C45]">Timed to land fresh.</span>
+              </h3>
+
+              {/* MOBILE IMAGE */}
+              <div className="mt-8 flex justify-center md:hidden">
+                <div className="relative w-full max-w-[560px] sm:max-w-[620px]">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-[#6D5333]/60 bg-black shadow-2xl shadow-black/70">
+                    <img
+                      src="/roaster.jpg"
+                      alt="Coffee roasting process"
+                      className="absolute inset-0 h-full w-full object-cover object-center"
+                    />
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/10" />
+
+                    <div className="absolute left-3 right-3 bottom-3 sm:left-4 sm:right-4 sm:bottom-4 grid grid-cols-2 gap-2 sm:gap-3">
+                      <div className="border border-[#6D5333]/70 bg-black/75 px-3 py-3 sm:px-4 backdrop-blur-sm">
+                        <p className="font-oswald text-[1.45rem] sm:text-3xl font-black text-ironsideWhite leading-none">
+                          MONDAY
+                        </p>
+                        <p className="mt-1 text-[0.56rem] sm:text-[0.62rem] font-bold uppercase tracking-[0.16em] sm:tracking-[0.18em] text-[#B5976D]">
+                          Roast Day
+                        </p>
+                      </div>
+
+                      <div className="border border-[#6D5333]/70 bg-black/75 px-3 py-3 sm:px-4 backdrop-blur-sm">
+                        <p className="font-oswald text-[1.45rem] sm:text-3xl font-black text-ironsideWhite leading-none">
+                          THURSDAY
+                        </p>
+                        <p className="mt-1 text-[0.56rem] sm:text-[0.62rem] font-bold uppercase tracking-[0.16em] sm:tracking-[0.18em] text-[#B5976D]">
+                          Roast Day
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mx-auto -mt-5 relative z-10 w-fit border border-[#6D5333]/60 bg-[#130E08] px-5 sm:px-6 py-2 shadow-xl shadow-black/50">
+                    <p className="font-oswald text-sm sm:text-base font-black uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#C08C45]">
+                      Roasted Fresh
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* PROCESS */}
+              <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-3 lg:gap-4">
+                <div className="rounded-xl border border-[#6D5333]/50 bg-black/55 p-4 sm:p-5 md:p-4 lg:p-5">
+                  <p className="text-[#C08C45] text-xs sm:text-sm font-bold uppercase tracking-[0.16em] sm:tracking-[0.18em]">
+                    01 Order
+                  </p>
+                  <p className="mt-3 text-neutral-300 text-sm md:text-sm lg:text-base leading-relaxed">
+                    You place the order. Secures your beans.
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-[#6D5333]/50 bg-black/55 p-4 sm:p-5 md:p-4 lg:p-5">
+                  <p className="text-[#C08C45] text-xs sm:text-sm font-bold uppercase tracking-[0.16em] sm:tracking-[0.18em]">
+                    02 Roast
+                  </p>
+                  <p className="mt-3 text-neutral-300 text-sm md:text-sm lg:text-base leading-relaxed">
+                    We roast every Monday and Thursday.
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-[#6D5333]/50 bg-black/55 p-4 sm:p-5 md:p-4 lg:p-5">
+                  <p className="text-[#C08C45] text-xs sm:text-sm font-bold uppercase tracking-[0.16em] sm:tracking-[0.18em]">
+                    03 Ship
+                  </p>
+                  <p className="mt-3 text-neutral-300 text-sm md:text-sm lg:text-base leading-relaxed">
+                    Degassing and shipping are timed so it lands at your
+                    doorstep at peak freshness.
+                  </p>
+                </div>
+              </div>
+
+              <p className="mt-6 mx-auto md:mx-0 max-w-[620px] md:max-w-[470px] lg:max-w-[560px] xl:max-w-[660px] text-neutral-300 text-[0.95rem] sm:text-base md:text-base lg:text-lg leading-relaxed">
+                We do not roast big batches and let them sit. Orders are roasted
+                fresh, given time to settle, then shipped so the flavor opens up
+                when it reaches your cup.
+              </p>
+            </div>
+
+            {/* DESKTOP IMAGE */}
+            <div className="hidden md:flex order-2 justify-center md:justify-start xl:justify-end">
+              <div className="relative w-full max-w-[300px] md:max-w-[320px] lg:max-w-[390px] xl:max-w-[640px] 2xl:max-w-[640px]">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-[#6D5333]/60 bg-black shadow-2xl shadow-black/70">
+                  <img
+                    src="/roaster.jpg"
+                    alt="Coffee roasting process"
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/68 via-transparent to-black/10" />
+
+                  <div className="absolute left-3 right-3 bottom-3 md:left-3 md:right-auto md:bottom-3 lg:left-4 lg:bottom-4 xl:left-6 xl:bottom-6 grid grid-cols-2 gap-2 lg:gap-3">
+                    <div className="border border-[#6D5333]/70 bg-black/75 px-3 py-3 lg:px-4 lg:py-3 xl:px-5 xl:py-4 backdrop-blur-sm">
+                      <p className="font-oswald text-[1.35rem] md:text-[1.45rem] lg:text-3xl xl:text-4xl font-black text-ironsideWhite leading-none">
+                        MONDAY
+                      </p>
+                      <p className="mt-1 text-[0.52rem] lg:text-[0.65rem] font-bold uppercase tracking-[0.14em] lg:tracking-[0.18em] text-[#B5976D]">
+                        Roast Day
+                      </p>
+                    </div>
+
+                    <div className="border border-[#6D5333]/70 bg-black/75 px-3 py-3 lg:px-4 lg:py-3 xl:px-5 xl:py-4 backdrop-blur-sm">
+                      <p className="font-oswald text-[1.35rem] md:text-[1.45rem] lg:text-3xl xl:text-4xl font-black text-ironsideWhite leading-none">
+                        THURSDAY
+                      </p>
+                      <p className="mt-1 text-[0.52rem] lg:text-[0.65rem] font-bold uppercase tracking-[0.14em] lg:tracking-[0.18em] text-[#B5976D]">
+                        Roast Day
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mx-auto md:mx-0 -mt-5 lg:-mt-6 relative z-10 w-fit border border-[#6D5333]/60 bg-[#130E08] px-5 lg:px-7 py-2 shadow-xl shadow-black/50">
+                  <p className="font-oswald text-sm lg:text-lg font-black uppercase tracking-[0.18em] lg:tracking-[0.2em] text-[#C08C45]">
+                    Roasted To Order
+                  </p>
+                  <p className="mt-1 text-[0.65rem] lg:text-xs font-semibold uppercase tracking-[0.1em] lg:tracking-[0.12em] text-[#B5976D]">
+                    Timed For Peak Freshness
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== FLEET SUBSCRIPTIONS ===== */}
+      <section className="relative overflow-hidden bg-[#050302] py-12 md:py-16 border-t border-[#6D5333]/40 border-b border-[#6D5333]/40">
+        {/* warm separation glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_48%,rgba(192,140,69,0.16),transparent_28%),radial-gradient(circle_at_42%_62%,rgba(120,66,18,0.16),transparent_24%),radial-gradient(circle_at_72%_42%,rgba(192,140,69,0.10),transparent_30%)] pointer-events-none" />
+
+        {/* soft dark bronze wash */}
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(12,7,3,0.96)_0%,rgba(30,15,4,0.78)_38%,rgba(20,10,2,0.84)_62%,rgba(5,3,2,0.98)_100%)] pointer-events-none" />
+
+        {/* subtle texture */}
+        <div className="absolute inset-0 opacity-[0.035] bg-[radial-gradient(#C08C45_0.6px,transparent_0.6px)] [background-size:18px_18px] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_32%,rgba(192,140,69,0.12),transparent_30%),radial-gradient(circle_at_82%_68%,rgba(109,83,51,0.14),transparent_36%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-[#050302]/90 to-black pointer-events-none" />
+        {/* BIG warm cinematic glow */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute left-[18%] top-[18%] h-[520px] w-[520px] rounded-full bg-[#8A4B10]/22 blur-[120px]" />
+
+          <div className="absolute left-[32%] top-[42%] h-[380px] w-[380px] rounded-full bg-[#C08C45]/18 blur-[110px]" />
+
+          <div className="absolute right-[14%] top-[28%] h-[420px] w-[420px] rounded-full bg-[#5A2F08]/20 blur-[120px]" />
+
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_38%_48%,rgba(192,140,69,0.14),transparent_34%)]" />
+        </div>
+        <Container>
+          <div className="relative z-10 max-w-[1280px] mx-auto px-4 md:px-8">
+            <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 lg:gap-14 xl:gap-20 items-center">
+              {/* LEFT */}
+              <div className="relative">
+                <p className="font-cinzel text-[1.2rem] font-black uppercase tracking-[0.28em] text-[#EEE4D3]">
+                  COFFEE SUBSCRIPTION
+                </p>
+
+                <h2 className="mt-4 font-cinzel text-3xl md:text-5xl xl:text-6xl font-black uppercase leading-[0.95] tracking-[0.04em]">
+                  <span className="text-[#B88A4A]">Fresh Coffee.</span>
+
+                  <br />
+
+                  <span className="text-[#DDD2BE]">On Your Schedule.</span>
+                </h2>
+                <p className="mt-5 max-w-[640px] text-neutral-300 text-base md:text-lg leading-relaxed">
+                  Set your schedule once and stay stocked with fresh-roasted
+                  coffee without thinking about it again.
+                </p>
+
+                <div className="mt-7 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-[760px]">
+                  {[
+                    {
+                      title: "10% Off",
+                      text: "Core roasts when subscribed",
+                    },
+                    {
+                      title: "Flexible",
+                      text: "Pause, skip, or cancel anytime",
+                    },
+                    {
+                      title: "Fresh",
+                      text: "Roasted around order flow",
+                    },
+                  ].map((item) => (
+                    <div
+                      key={item.title}
+                      className="border border-[#6D5333]/50 bg-[#100905]/75 px-4 py-4"
+                    >
+                      <p className="font-oswald text-xl font-black uppercase text-[#E6C07F]">
+                        {item.title}
+                      </p>
+
+                      <p className="mt-2 text-sm leading-relaxed text-neutral-400">
+                        {item.text}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* RIGHT */}
+              <div className="relative border-l-2 border-[#C08C45] pl-5 md:pl-8">
+                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.3em] text-[#B5976D]">
+                  Fleet Benefits
+                </p>
+
+                <div className="mt-5 space-y-4">
+                  {[
+                    "Choose deliveries every 14, 30, or 60 days",
+                    "Subscription pricing applies automatically",
+                    "Oak & Copper available by subscription",
+                    "Manage everything from your account portal",
+                  ].map((item) => (
+                    <div key={item} className="flex items-start gap-3">
+                      <div className="mt-[7px] h-[6px] w-[6px] rounded-full bg-[#C08C45] shrink-0" />
+
+                      <p className="text-neutral-300 text-[0.96rem] leading-relaxed">
+                        {item}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                  <Link
+                    to="/subscriptions"
+                    className="inline-flex h-[52px] items-center justify-center px-7 bg-[#C08C45] text-black font-oswald text-sm font-black uppercase tracking-[0.18em] border border-[#C08C45] transition-all duration-200 hover:bg-[#E6C07F] hover:border-[#E6C07F]"
+                  >
+                    Subscribe
+                  </Link>
+
+                  <Link
+                    to="/account"
+                    className="inline-flex h-[52px] items-center justify-center px-7 border border-[#6D5333] bg-[#130E08] font-oswald text-sm font-black uppercase tracking-[0.16em] text-[#C08C45] transition-all duration-200 hover:border-[#C08C45] hover:bg-[#32220D] hover:text-[#E6C07F]"
+                  >
+                    Manage Subscription
+                  </Link>
+                </div>
+
+                <p className="mt-4 text-[0.72rem] uppercase tracking-[0.18em] text-[#9C9791]">
+                  No contracts. No nonsense.
+                </p>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
       {/* ===== FROM THE SAND TO THE SEA ===== */}
       <section
         id="origins-service"
@@ -2845,298 +3137,6 @@ hover:bg-[#32220D]
                 <p className="mt-3 text-neutral-300 text-base md:text-lg leading-relaxed">
                   Serve with purpose. Build with discipline. Deliver something
                   worth standing behind.
-                </p>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </section>
-      {/* ===== ROASTING PROCESS ===== */}
-      <section
-        id="roasting-process"
-        className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden bg-[#050302] py-12 sm:py-14 md:py-16 lg:py-18 xl:py-24 2xl:py-24 border-t border-[#6D5333]/40 border-b border-[#6D5333]/40"
-      >
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_28%,rgba(192,140,69,0.14),transparent_30%),radial-gradient(circle_at_82%_70%,rgba(109,83,51,0.14),transparent_34%)] pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black pointer-events-none" />
-
-        <div className="relative z-10 mx-auto w-full px-5 sm:px-7 md:px-10 lg:px-14 xl:px-0 2xl:px-0 max-w-[620px] sm:max-w-[720px] md:max-w-[900px] lg:max-w-[1040px] xl:max-w-[1280px] 2xl:max-w-[1440px]">
-          <div className="grid grid-cols-1 md:grid-cols-[minmax(0,0.9fr)_minmax(0,0.82fr)] lg:grid-cols-[minmax(0,0.92fr)_minmax(0,0.82fr)] xl:grid-cols-[0.9fr_1.1fr] 2xl:grid-cols-[0.9fr_1.1fr] gap-8 sm:gap-9 md:gap-4 lg:gap-6 xl:gap-20 2xl:gap-20 items-center">
-            {/* TEXT */}
-            <div className="order-1 w-full mx-auto text-center md:text-left max-w-[620px] sm:max-w-[660px] md:max-w-[470px] lg:max-w-[500px] xl:max-w-none 2xl:max-w-none md:ml-auto xl:ml-0">
-              <div className="mb-5 flex justify-center md:justify-start">
-                <div className="border-l-2 border-[#C08C45] bg-black/45 px-4 py-2">
-                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-[#9C9791]">
-                    From The Roaster
-                  </p>
-                </div>
-              </div>
-
-              <h3 className="mx-auto md:mx-0 max-w-[620px] md:max-w-[470px] lg:max-w-[500px] xl:max-w-none font-playfair text-[2.35rem] sm:text-[2.8rem] md:text-[3.05rem] lg:text-[3.55rem] xl:text-7xl 2xl:text-7xl font-semibold italic leading-[1.02] tracking-[0.02em] text-[#E6DCC8]">
-                Roasted to order.
-                <br />
-                <span className="text-[#C08C45]">Timed to land fresh.</span>
-              </h3>
-
-              {/* MOBILE IMAGE */}
-              <div className="mt-8 flex justify-center md:hidden">
-                <div className="relative w-full max-w-[560px] sm:max-w-[620px]">
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-[#6D5333]/60 bg-black shadow-2xl shadow-black/70">
-                    <img
-                      src="/roaster.jpg"
-                      alt="Coffee roasting process"
-                      className="absolute inset-0 h-full w-full object-cover object-center"
-                    />
-
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/10" />
-
-                    <div className="absolute left-3 right-3 bottom-3 sm:left-4 sm:right-4 sm:bottom-4 grid grid-cols-2 gap-2 sm:gap-3">
-                      <div className="border border-[#6D5333]/70 bg-black/75 px-3 py-3 sm:px-4 backdrop-blur-sm">
-                        <p className="font-oswald text-[1.45rem] sm:text-3xl font-black text-ironsideWhite leading-none">
-                          MONDAY
-                        </p>
-                        <p className="mt-1 text-[0.56rem] sm:text-[0.62rem] font-bold uppercase tracking-[0.16em] sm:tracking-[0.18em] text-[#B5976D]">
-                          Roast Day
-                        </p>
-                      </div>
-
-                      <div className="border border-[#6D5333]/70 bg-black/75 px-3 py-3 sm:px-4 backdrop-blur-sm">
-                        <p className="font-oswald text-[1.45rem] sm:text-3xl font-black text-ironsideWhite leading-none">
-                          THURSDAY
-                        </p>
-                        <p className="mt-1 text-[0.56rem] sm:text-[0.62rem] font-bold uppercase tracking-[0.16em] sm:tracking-[0.18em] text-[#B5976D]">
-                          Roast Day
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mx-auto -mt-5 relative z-10 w-fit border border-[#6D5333]/60 bg-[#130E08] px-5 sm:px-6 py-2 shadow-xl shadow-black/50">
-                    <p className="font-oswald text-sm sm:text-base font-black uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#C08C45]">
-                      Roasted Fresh
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* PROCESS */}
-              <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-3 lg:gap-4">
-                <div className="rounded-xl border border-[#6D5333]/50 bg-black/55 p-4 sm:p-5 md:p-4 lg:p-5">
-                  <p className="text-[#C08C45] text-xs sm:text-sm font-bold uppercase tracking-[0.16em] sm:tracking-[0.18em]">
-                    01 Order
-                  </p>
-                  <p className="mt-3 text-neutral-300 text-sm md:text-sm lg:text-base leading-relaxed">
-                    You place the order. Secures your beans.
-                  </p>
-                </div>
-
-                <div className="rounded-xl border border-[#6D5333]/50 bg-black/55 p-4 sm:p-5 md:p-4 lg:p-5">
-                  <p className="text-[#C08C45] text-xs sm:text-sm font-bold uppercase tracking-[0.16em] sm:tracking-[0.18em]">
-                    02 Roast
-                  </p>
-                  <p className="mt-3 text-neutral-300 text-sm md:text-sm lg:text-base leading-relaxed">
-                    We roast every Monday and Thursday.
-                  </p>
-                </div>
-
-                <div className="rounded-xl border border-[#6D5333]/50 bg-black/55 p-4 sm:p-5 md:p-4 lg:p-5">
-                  <p className="text-[#C08C45] text-xs sm:text-sm font-bold uppercase tracking-[0.16em] sm:tracking-[0.18em]">
-                    03 Ship
-                  </p>
-                  <p className="mt-3 text-neutral-300 text-sm md:text-sm lg:text-base leading-relaxed">
-                    Degassing and shipping are timed so it lands at your
-                    doorstep at peak freshness.
-                  </p>
-                </div>
-              </div>
-
-              <p className="mt-6 mx-auto md:mx-0 max-w-[620px] md:max-w-[470px] lg:max-w-[560px] xl:max-w-[660px] text-neutral-300 text-[0.95rem] sm:text-base md:text-base lg:text-lg leading-relaxed">
-                We do not roast big batches and let them sit. Orders are roasted
-                fresh, given time to settle, then shipped so the flavor opens up
-                when it reaches your cup.
-              </p>
-            </div>
-
-            {/* DESKTOP IMAGE */}
-            <div className="hidden md:flex order-2 justify-center md:justify-start xl:justify-end">
-              <div className="relative w-full max-w-[300px] md:max-w-[320px] lg:max-w-[390px] xl:max-w-[640px] 2xl:max-w-[640px]">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-[#6D5333]/60 bg-black shadow-2xl shadow-black/70">
-                  <img
-                    src="/roaster.jpg"
-                    alt="Coffee roasting process"
-                    className="absolute inset-0 h-full w-full object-cover"
-                  />
-
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/68 via-transparent to-black/10" />
-
-                  <div className="absolute left-3 right-3 bottom-3 md:left-3 md:right-auto md:bottom-3 lg:left-4 lg:bottom-4 xl:left-6 xl:bottom-6 grid grid-cols-2 gap-2 lg:gap-3">
-                    <div className="border border-[#6D5333]/70 bg-black/75 px-3 py-3 lg:px-4 lg:py-3 xl:px-5 xl:py-4 backdrop-blur-sm">
-                      <p className="font-oswald text-[1.35rem] md:text-[1.45rem] lg:text-3xl xl:text-4xl font-black text-ironsideWhite leading-none">
-                        MONDAY
-                      </p>
-                      <p className="mt-1 text-[0.52rem] lg:text-[0.65rem] font-bold uppercase tracking-[0.14em] lg:tracking-[0.18em] text-[#B5976D]">
-                        Roast Day
-                      </p>
-                    </div>
-
-                    <div className="border border-[#6D5333]/70 bg-black/75 px-3 py-3 lg:px-4 lg:py-3 xl:px-5 xl:py-4 backdrop-blur-sm">
-                      <p className="font-oswald text-[1.35rem] md:text-[1.45rem] lg:text-3xl xl:text-4xl font-black text-ironsideWhite leading-none">
-                        THURSDAY
-                      </p>
-                      <p className="mt-1 text-[0.52rem] lg:text-[0.65rem] font-bold uppercase tracking-[0.14em] lg:tracking-[0.18em] text-[#B5976D]">
-                        Roast Day
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mx-auto md:mx-0 -mt-5 lg:-mt-6 relative z-10 w-fit border border-[#6D5333]/60 bg-[#130E08] px-5 lg:px-7 py-2 shadow-xl shadow-black/50">
-                  <p className="font-oswald text-sm lg:text-lg font-black uppercase tracking-[0.18em] lg:tracking-[0.2em] text-[#C08C45]">
-                    Roasted To Order
-                  </p>
-                  <p className="mt-1 text-[0.65rem] lg:text-xs font-semibold uppercase tracking-[0.1em] lg:tracking-[0.12em] text-[#B5976D]">
-                    Timed For Peak Freshness
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FLEET SECTION */}
-      <section className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden bg-black py-4 md:py-24">
-        {/* BACKGROUND IMAGE */}
-        <img
-          src="/dark-theme.png"
-          alt=""
-          aria-hidden
-          className="hidden md:block absolute inset-0 w-full h-full object-cover object-[center_20%] opacity-100 scale-110"
-        />
-
-        {/* OVERLAY */}
-        <div className="hidden md:block absolute inset-0 bg-black/45" />
-
-        {/* CONTENT */}
-        <div className="relative">
-          <LaunchedFromHarbor noBg />
-        </div>
-      </section>
-
-      {/* ===== FLEET SUBSCRIPTIONS ===== */}
-      <section className="relative overflow-hidden bg-[#050302] py-12 md:py-16 border-t border-[#6D5333]/40 border-b border-[#6D5333]/40">
-        {/* warm separation glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_48%,rgba(192,140,69,0.16),transparent_28%),radial-gradient(circle_at_42%_62%,rgba(120,66,18,0.16),transparent_24%),radial-gradient(circle_at_72%_42%,rgba(192,140,69,0.10),transparent_30%)] pointer-events-none" />
-
-        {/* soft dark bronze wash */}
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(12,7,3,0.96)_0%,rgba(30,15,4,0.78)_38%,rgba(20,10,2,0.84)_62%,rgba(5,3,2,0.98)_100%)] pointer-events-none" />
-
-        {/* subtle texture */}
-        <div className="absolute inset-0 opacity-[0.035] bg-[radial-gradient(#C08C45_0.6px,transparent_0.6px)] [background-size:18px_18px] pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_32%,rgba(192,140,69,0.12),transparent_30%),radial-gradient(circle_at_82%_68%,rgba(109,83,51,0.14),transparent_36%)] pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-[#050302]/90 to-black pointer-events-none" />
-        {/* BIG warm cinematic glow */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute left-[18%] top-[18%] h-[520px] w-[520px] rounded-full bg-[#8A4B10]/22 blur-[120px]" />
-
-          <div className="absolute left-[32%] top-[42%] h-[380px] w-[380px] rounded-full bg-[#C08C45]/18 blur-[110px]" />
-
-          <div className="absolute right-[14%] top-[28%] h-[420px] w-[420px] rounded-full bg-[#5A2F08]/20 blur-[120px]" />
-
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_38%_48%,rgba(192,140,69,0.14),transparent_34%)]" />
-        </div>
-        <Container>
-          <div className="relative z-10 max-w-[1280px] mx-auto px-4 md:px-8">
-            <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 lg:gap-14 xl:gap-20 items-center">
-              {/* LEFT */}
-              <div className="relative">
-                <p className="font-cinzel text-[1.2rem] font-black uppercase tracking-[0.28em] text-[#EEE4D3]">
-                  COFFEE SUBSCRIPTION
-                </p>
-
-                <h2 className="mt-4 font-cinzel text-3xl md:text-5xl xl:text-6xl font-black uppercase leading-[0.95] tracking-[0.04em]">
-                  <span className="text-[#B88A4A]">Fresh Coffee.</span>
-
-                  <br />
-
-                  <span className="text-[#DDD2BE]">On Your Schedule.</span>
-                </h2>
-                <p className="mt-5 max-w-[640px] text-neutral-300 text-base md:text-lg leading-relaxed">
-                  Set your schedule once and stay stocked with fresh-roasted
-                  coffee without thinking about it again.
-                </p>
-
-                <div className="mt-7 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-[760px]">
-                  {[
-                    {
-                      title: "10% Off",
-                      text: "Core roasts when subscribed",
-                    },
-                    {
-                      title: "Flexible",
-                      text: "Pause, skip, or cancel anytime",
-                    },
-                    {
-                      title: "Fresh",
-                      text: "Roasted around order flow",
-                    },
-                  ].map((item) => (
-                    <div
-                      key={item.title}
-                      className="border border-[#6D5333]/50 bg-[#100905]/75 px-4 py-4"
-                    >
-                      <p className="font-oswald text-xl font-black uppercase text-[#E6C07F]">
-                        {item.title}
-                      </p>
-
-                      <p className="mt-2 text-sm leading-relaxed text-neutral-400">
-                        {item.text}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* RIGHT */}
-              <div className="relative border-l-2 border-[#C08C45] pl-5 md:pl-8">
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.3em] text-[#B5976D]">
-                  Fleet Benefits
-                </p>
-
-                <div className="mt-5 space-y-4">
-                  {[
-                    "Choose deliveries every 14, 30, or 60 days",
-                    "Subscription pricing applies automatically",
-                    "Oak & Copper available by subscription",
-                    "Manage everything from your account portal",
-                  ].map((item) => (
-                    <div key={item} className="flex items-start gap-3">
-                      <div className="mt-[7px] h-[6px] w-[6px] rounded-full bg-[#C08C45] shrink-0" />
-
-                      <p className="text-neutral-300 text-[0.96rem] leading-relaxed">
-                        {item}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                  <Link
-                    to="/subscriptions"
-                    className="inline-flex h-[52px] items-center justify-center px-7 bg-[#C08C45] text-black font-oswald text-sm font-black uppercase tracking-[0.18em] border border-[#C08C45] transition-all duration-200 hover:bg-[#E6C07F] hover:border-[#E6C07F]"
-                  >
-                    Subscribe
-                  </Link>
-
-                  <Link
-                    to="/account"
-                    className="inline-flex h-[52px] items-center justify-center px-7 border border-[#6D5333] bg-[#130E08] font-oswald text-sm font-black uppercase tracking-[0.16em] text-[#C08C45] transition-all duration-200 hover:border-[#C08C45] hover:bg-[#32220D] hover:text-[#E6C07F]"
-                  >
-                    Manage Subscription
-                  </Link>
-                </div>
-
-                <p className="mt-4 text-[0.72rem] uppercase tracking-[0.18em] text-[#9C9791]">
-                  No contracts. No nonsense.
                 </p>
               </div>
             </div>

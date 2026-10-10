@@ -11,86 +11,102 @@ const roasts = [
 
 export default function SampleSection() {
   return (
-    <section className="relative overflow-hidden bg-[#071421] px-5 py-14 md:px-8 md:py-16">
-      {/* BACKGROUND DEPTH */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_25%_15%,rgba(192,140,69,0.10),transparent_30%),radial-gradient(circle_at_80%_70%,rgba(109,83,51,0.15),transparent_35%)]" />
+    <section className="relative overflow-hidden bg-[#071421] px-4 py-8 md:px-6 md:py-9 lg:px-8">
+      {/* SUBTLE BACKGROUND DEPTH */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(192,140,69,0.07),transparent_30%),radial-gradient(circle_at_85%_70%,rgba(109,83,51,0.10),transparent_34%)]" />
 
-      <div className="relative mx-auto grid max-w-[1600px] gap-5 lg:grid-cols-[0.9fr_1.1fr]">
-        {/* LEFT FEATURE PANEL */}
-        <div className="relative bg-[#F4EBDD] p-[10px] shadow-[0_18px_50px_rgba(0,0,0,0.22)]">
-          <div className="absolute inset-[3px] border border-[#C08C45]/75" />
-          <div className="absolute inset-[11px] border border-[#6D5333]/35" />
+      <div className="relative mx-auto grid max-w-[1500px] grid-cols-1 gap-4 lg:grid-cols-[44%_56%]">
+        {/* =====================================================
+            LEFT PANEL
+        ====================================================== */}
+        <div className="relative overflow-hidden bg-[#F4EBDD] p-[7px] shadow-[0_12px_32px_rgba(0,0,0,0.20)]">
+          <div className="pointer-events-none absolute inset-[3px] border border-[#C08C45]/65" />
+          <div className="pointer-events-none absolute inset-[9px] border border-[#6D5333]/28" />
 
-          <div className="relative z-10 px-8 py-10 md:px-12 md:py-12 xl:px-14 xl:py-14">
-            <div className="mb-3 text-[0.76rem] font-semibold tracking-[0.28em] text-[#A36F2C]">
+          <div className="relative z-10 px-7 py-7 md:px-8 md:py-8 xl:px-9">
+            <div className="mb-2 text-[0.66rem] font-semibold tracking-[0.28em] text-[#A36F2C]">
               START SMALL. FIND YOUR ROAST.
             </div>
 
             <h2
-              className="max-w-[700px] text-[2.7rem] font-bold leading-[1.02] tracking-[0.01em] text-[#03111d] md:text-[3.2rem] xl:text-[3.6rem]"
+              className="text-[2.1rem] font-bold leading-[1.01] tracking-[0.005em] text-[#03111d] md:text-[2.3rem] xl:text-[2.55rem]"
               style={{ fontFamily: "'Cinzel', serif" }}
             >
-              NEW TO OLD IRONSIDES?
-              <span className="block text-[#8D5E27]">DISCOVER YOUR ROAST.</span>
+              NEW TO OLD
+              <br />
+              IRONSIDES?
+
+              <span className="mt-1 block text-[#8D5E27]">
+                DISCOVER YOUR ROAST.
+              </span>
             </h2>
 
-            <div className="mt-5 flex items-center gap-3">
-              <div className="h-px w-24 bg-[#C08C45]" />
-              <span className="text-[#C08C45]">✦</span>
-              <div className="h-px w-14 bg-[#C08C45]/55" />
-            </div>
-
-            <p className="mt-6 max-w-[620px] text-[1.08rem] leading-relaxed text-[#17202a]">
+            <p className="mt-4 max-w-[560px] text-[0.92rem] leading-[1.55] text-[#17202a]">
               Find your perfect roast before committing to a full bag. Each 2.5
               oz sample brews roughly 6–8 cups of coffee.
             </p>
 
-            <div className="mt-8 grid grid-cols-2 gap-3 xl:grid-cols-3">
+            {/* ROAST OPTIONS */}
+            <div className="mt-5 grid grid-cols-2 gap-2 xl:grid-cols-3">
               {roasts.map((roast) => (
                 <Link
                   key={roast}
                   to="/roast/armada-sample-pack"
-                  className="border border-[#6D5333]/65 bg-white/20 px-4 py-3 text-center text-[0.78rem] font-bold tracking-[0.12em] text-[#03111d] transition duration-200 hover:-translate-y-[1px] hover:border-[#C08C45] hover:bg-[#E5D3B7]"
+                  className="flex min-h-[40px] items-center justify-center border border-[#6D5333]/55 bg-white/18 px-3 py-2 text-center text-[0.68rem] font-bold tracking-[0.1em] text-[#03111d] transition hover:border-[#C08C45] hover:bg-[#E9D9C0]"
                 >
                   {roast}
                 </Link>
               ))}
             </div>
 
-            <div className="mt-8 flex flex-col gap-4 xl:flex-row xl:items-center">
+            {/* CTA ROW */}
+            <div className="mt-5 flex flex-col gap-3 xl:flex-row xl:items-center">
               <Link
                 to="/roast/armada-sample-pack"
-                className="inline-flex items-center justify-center bg-[#C08C45] px-9 py-4 font-bold tracking-[0.08em] text-black shadow-[0_8px_20px_rgba(192,140,69,0.22)] transition hover:-translate-y-[1px] hover:bg-[#D7A95D]"
+                className="inline-flex h-[46px] items-center justify-center bg-[#C08C45] px-7 text-[0.78rem] font-bold tracking-[0.08em] text-black transition hover:bg-[#D7A95D]"
               >
                 SHOP SAMPLES
-                <span className="ml-5 text-xl">→</span>
+                <span className="ml-4 text-lg">→</span>
               </Link>
 
-              <div className="flex items-center gap-3 text-sm font-semibold tracking-[0.1em] text-[#8A5B25]">
-                <span className="text-xl">◈</span>
+              <div className="text-[0.72rem] font-semibold tracking-[0.1em] text-[#8A5B25]">
                 SAMPLE BOX SHIPS FREE
               </div>
             </div>
 
-            <div className="mt-7 inline-block border border-[#6D5333]/20 bg-white/20 px-5 py-3 text-sm text-[#4b4238]">
+            {/* DISCLAIMER */}
+            <div className="mt-4 inline-block border border-[#6D5333]/18 bg-white/18 px-4 py-2 text-[0.72rem] text-[#51483e]">
               Sample packs excluded from first-order and subscription discounts.
             </div>
           </div>
         </div>
 
-        {/* RIGHT PRODUCT PANEL */}
-        <div className="relative overflow-hidden border border-[#C08C45]/75 bg-[#081522] p-3 shadow-[0_18px_60px_rgba(0,0,0,0.35)]">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(192,140,69,0.18),transparent_58%)]" />
+        {/* =====================================================
+            RIGHT PRODUCT PANEL
+        ====================================================== */}
+        <div className="relative overflow-hidden border border-[#C08C45]/65 bg-[#081522] p-[10px] shadow-[0_12px_35px_rgba(0,0,0,0.28)]">
+          <div className="relative h-full overflow-hidden border border-[#6D5333]/55 bg-[#06111b]">
+            {/* DESKTOP IMAGE */}
+            <div className="hidden h-full min-h-[355px] lg:block">
+              <img
+                src="/sample-pack2.jpg"
+                alt="Old Ironsides Coffee sample pack"
+                className="h-full w-full object-cover object-center"
+              />
+            </div>
 
-          <div className="relative h-full min-h-[610px] border border-[#6D5333]/60 bg-[#06111b]">
-            <div className="absolute left-5 top-5 h-12 w-12 border-l border-t border-[#C08C45]/65" />
-            <div className="absolute bottom-5 right-5 h-12 w-12 border-b border-r border-[#C08C45]/65" />
+            {/* MOBILE / TABLET IMAGE */}
+            <div className="aspect-[4/3] lg:hidden">
+              <img
+                src="/sample-pack2.jpg"
+                alt="Old Ironsides Coffee sample pack"
+                className="h-full w-full object-cover object-center"
+              />
+            </div>
 
-            <img
-              src="/sample-pack2.jpg"
-              alt="Old Ironsides Coffee sample pack"
-              className="absolute inset-0 h-full w-full scale-[1.06] object-contain"
-            />
+            {/* QUIET CORNER DETAILS */}
+            <div className="pointer-events-none absolute left-4 top-4 h-8 w-8 border-l border-t border-[#C08C45]/45" />
+            <div className="pointer-events-none absolute bottom-4 right-4 h-8 w-8 border-b border-r border-[#C08C45]/45" />
           </div>
         </div>
       </div>

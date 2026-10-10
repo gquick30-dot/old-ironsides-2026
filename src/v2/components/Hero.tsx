@@ -147,13 +147,13 @@ export default function Hero() {
               <img
                 src="/bags-hero.jpg"
                 alt="Old Ironsides Coffee roast lineup"
-                className="absolute right-0 top-0 h-full w-[70%] object-cover object-center transition duration-500 group-hover:scale-[1.015]"
+                className="absolute right-0 top-0 h-full w-[76%] object-cover object-center transition duration-500 group-hover:scale-[1.015]"
               />
 
-              {/* LESS NAVY COVERAGE SO ALL SIX BAGS READ BETTER */}
-              <div className="absolute inset-y-0 left-0 w-[55%] bg-gradient-to-r from-[#082237] from-[0%] via-[#082237] via-[50%] via-[#082237]/88 via-[68%] to-transparent" />
+              {/* SHORTER NAVY FIELD SO BAPTISM STAYS VISIBLE */}
+              <div className="absolute inset-y-0 left-0 w-[43%] bg-gradient-to-r from-[#082237] from-[0%] via-[#082237] via-[48%] via-[#082237]/85 via-[64%] via-[#082237]/35 via-[82%] to-transparent" />
 
-              <div className="relative z-10 flex h-full max-w-[49%] flex-col px-6 py-5">
+              <div className="relative z-10 flex h-full max-w-[43%] flex-col px-6 py-5">
                 <div className="text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-[#C08C45]">
                   THE FLEET
                 </div>
@@ -167,11 +167,11 @@ export default function Hero() {
                   Six Stories.
                 </h2>
 
-                <p className="mt-3 max-w-[225px] font-serif text-[0.83rem] leading-[1.3] text-[#E4DAC8]">
+                <p className="mt-3 max-w-[205px] font-serif text-[0.81rem] leading-[1.28] text-[#E4DAC8]">
                   Six distinctive roasts, each with a story of its own.
                 </p>
 
-                <span className="mt-auto pt-3 text-[0.68rem] font-semibold tracking-[0.08em] text-[#C08C45]">
+                <span className="mt-auto pt-3 text-[0.67rem] font-semibold tracking-[0.08em] text-[#C08C45]">
                   EXPLORE THE FLEET →
                 </span>
               </div>

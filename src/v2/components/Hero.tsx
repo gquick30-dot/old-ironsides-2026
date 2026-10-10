@@ -119,7 +119,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="relative h-[310px] sm:h-[390px]">
+          <div className="relative h-[310px] overflow-hidden sm:h-[390px]">
             <img
               src="/Hero-pic.jpg"
               alt="Old Ironsides Coffee Flagship roast with freshly brewed coffee"
@@ -130,63 +130,79 @@ export default function Hero() {
       </div>
 
       {/* =========================================================
-          SUPPORTING CARDS
-      ========================================================== */}
+    SUPPORTING CARDS
+========================================================== */}
       <div className="border-t border-[#d8cebf] bg-[#f7f3eb] px-4 py-3 lg:px-6">
         <div className="mx-auto max-w-[1500px]">
-          {/* DESKTOP CARDS */}
+          {/* =====================================================
+      {/* =====================================================
+    DESKTOP / TABLET CARDS
+====================================================== */}
           <div className="hidden md:grid md:grid-cols-3 md:gap-3">
-            {/* FLEET */}
+            {/* ================= FLEET ================= */}
             <Link
               to="/store"
-              className="group relative min-h-[182px] overflow-hidden border border-[#ddcfba] bg-[#082237]"
+              className="group relative min-h-[182px] overflow-hidden border border-[#d8cebf] bg-[#082237]"
             >
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_88%_45%,rgba(192,140,69,0.13),transparent_34%)]" />
+              <img
+                src="/bags-hero.jpg"
+                alt="Old Ironsides Coffee roast lineup"
+                className="absolute right-0 top-0 h-full w-[70%] object-cover object-center transition duration-500 group-hover:scale-[1.015]"
+              />
 
-              <div className="relative z-10 flex h-full flex-col justify-center px-6 py-5">
-                <div className="mb-2 text-[0.66rem] font-semibold uppercase tracking-[0.28em] text-[#C08C45]">
+              {/* LESS NAVY COVERAGE SO ALL SIX BAGS READ BETTER */}
+              <div className="absolute inset-y-0 left-0 w-[55%] bg-gradient-to-r from-[#082237] from-[0%] via-[#082237] via-[50%] via-[#082237]/88 via-[68%] to-transparent" />
+
+              <div className="relative z-10 flex h-full max-w-[49%] flex-col px-6 py-5">
+                <div className="text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-[#C08C45]">
                   THE FLEET
                 </div>
 
                 <h2
-                  className="text-[1.45rem] leading-[1.03] text-[#F0E7D5] xl:text-[1.6rem]"
+                  className="mt-2 text-[1.38rem] leading-[1.03] text-[#F0E7D5] xl:text-[1.5rem]"
                   style={{ fontFamily: "'Cinzel', serif" }}
                 >
-                  Five Roasts.
+                  Six Roasts.
                   <br />
-                  Five Stories.
+                  Six Stories.
                 </h2>
 
-                <p className="mt-3 max-w-[270px] font-serif text-[0.88rem] leading-[1.32] text-[#DDD2BE]">
-                  Coffees inspired by history and crafted for today.
+                <p className="mt-3 max-w-[225px] font-serif text-[0.83rem] leading-[1.3] text-[#E4DAC8]">
+                  Six distinctive roasts, each with a story of its own.
                 </p>
 
-                <span className="mt-4 text-[0.7rem] font-semibold tracking-[0.08em] text-[#C08C45]">
+                <span className="mt-auto pt-3 text-[0.68rem] font-semibold tracking-[0.08em] text-[#C08C45]">
                   EXPLORE THE FLEET →
                 </span>
               </div>
             </Link>
 
-            {/* PROCESS */}
+            {/* ================= PROCESS ================= */}
             <Link
               to="/roasting-process"
-              className="group relative min-h-[182px] overflow-hidden border border-[#ddcfba] bg-[#f7f3eb]"
+              className="group relative min-h-[182px] overflow-hidden border border-[#d8cebf] bg-[#f7f3eb]"
             >
+              {/* THIS IS THE ROASTER FIX */}
               <img
                 src="/roaster.jpg"
                 alt="Coffee roasting in small batches"
-                className="absolute right-[-6%] top-[-8%] h-[116%] w-[76%] object-cover object-center transition duration-500 group-hover:scale-[1.02]"
+                className="absolute right-0 top-0 h-full w-[66%] object-cover object-[67%_center] transition duration-500 group-hover:scale-[1.015]"
+                style={{
+                  WebkitMaskImage:
+                    "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.18) 10%, rgba(0,0,0,0.65) 24%, black 38%, black 100%)",
+                  maskImage:
+                    "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.18) 10%, rgba(0,0,0,0.65) 24%, black 38%, black 100%)",
+                }}
               />
 
-              <div className="absolute inset-0 bg-gradient-to-r from-[#f7f3eb] from-[0%] via-[#f7f3eb] via-[36%] via-[#f7f3eb]/95 via-[48%] via-[#f7f3eb]/65 via-[58%] to-transparent to-[78%]" />
-
-              <div className="relative z-10 flex h-full max-w-[60%] flex-col justify-center px-6 py-5">
-                <div className="mb-2 text-[0.66rem] font-semibold uppercase tracking-[0.28em] text-[#A36F2C]">
+              {/* NO CREAM GRADIENT OVER THE PHOTO */}
+              <div className="relative z-10 flex h-full max-w-[51%] flex-col px-6 py-5">
+                <div className="text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-[#A36F2C]">
                   OUR PROCESS
                 </div>
 
                 <h2
-                  className="text-[1.4rem] leading-[1.03] text-[#102942] xl:text-[1.55rem]"
+                  className="mt-2 text-[1.38rem] leading-[1.03] text-[#102942] xl:text-[1.5rem]"
                   style={{ fontFamily: "'Cinzel', serif" }}
                 >
                   Roasted in
@@ -194,20 +210,21 @@ export default function Hero() {
                   Small Batches.
                 </h2>
 
-                <p className="mt-3 font-serif text-[0.86rem] leading-[1.3] text-[#17324c]">
+                <p className="mt-3 max-w-[220px] font-serif text-[0.83rem] leading-[1.3] text-[#17324c]">
                   Every Monday and Thursday for peak freshness.
                 </p>
 
-                <span className="mt-4 text-[0.68rem] font-semibold tracking-[0.07em] text-[#A36F2C]">
+                <span className="mt-auto pt-3 text-[0.68rem] font-semibold tracking-[0.08em] text-[#A36F2C]">
                   OUR ROAST SCHEDULE →
                 </span>
               </div>
             </Link>
 
-            {/* MISSION */}
+            {/* ================= MISSION ================= */}
+            {/* LEAVE THIS ONE ALONE */}
             <Link
               to="/sdvosb"
-              className="group relative min-h-[182px] overflow-hidden border border-[#ddcfba] bg-[#f7f3eb]"
+              className="group relative min-h-[182px] overflow-hidden border border-[#d8cebf] bg-[#f7f3eb]"
             >
               <img
                 src="/flag-hero.png"
@@ -217,13 +234,13 @@ export default function Hero() {
 
               <div className="absolute inset-0 bg-gradient-to-r from-[#f7f3eb] from-[0%] via-[#f7f3eb] via-[38%] via-[#f7f3eb]/95 via-[49%] via-[#f7f3eb]/65 via-[59%] to-transparent to-[79%]" />
 
-              <div className="relative z-10 flex h-full max-w-[60%] flex-col justify-center px-6 py-5">
-                <div className="mb-2 text-[0.66rem] font-semibold uppercase tracking-[0.28em] text-[#A36F2C]">
+              <div className="relative z-10 flex h-full max-w-[60%] flex-col px-6 py-5">
+                <div className="text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-[#A36F2C]">
                   OUR MISSION
                 </div>
 
                 <h2
-                  className="text-[1.4rem] leading-[1.03] text-[#102942] xl:text-[1.55rem]"
+                  className="mt-2 text-[1.38rem] leading-[1.03] text-[#102942] xl:text-[1.5rem]"
                   style={{ fontFamily: "'Cinzel', serif" }}
                 >
                   Veteran Owned.
@@ -231,41 +248,49 @@ export default function Hero() {
                   Purpose Driven.
                 </h2>
 
-                <p className="mt-3 font-serif text-[0.86rem] leading-[1.3] text-[#17324c]">
+                <p className="mt-3 max-w-[230px] font-serif text-[0.83rem] leading-[1.3] text-[#17324c]">
                   Coffee with a history worth carrying forward.
                 </p>
 
-                <span className="mt-4 text-[0.68rem] font-semibold tracking-[0.07em] text-[#A36F2C]">
+                <span className="mt-auto pt-3 text-[0.68rem] font-semibold tracking-[0.08em] text-[#A36F2C]">
                   LEARN MORE →
                 </span>
               </div>
             </Link>
           </div>
 
-          {/* MOBILE CARDS */}
+          {/* =====================================================
+        MOBILE
+    ====================================================== */}
           <div className="grid grid-cols-1 gap-3 md:hidden">
             {/* FLEET */}
             <Link
               to="/store"
-              className="overflow-hidden border border-[#ddcfba] bg-[#082237]"
+              className="overflow-hidden border border-[#d8cebf] bg-[#082237]"
             >
-              <div className="px-5 py-5">
-                <div className="mb-2 text-[0.66rem] font-semibold uppercase tracking-[0.28em] text-[#C08C45]">
+              <img
+                src="/bags-hero.jpg"
+                alt="Old Ironsides Coffee roast lineup"
+                className="h-[150px] w-full object-cover object-center"
+              />
+
+              <div className="px-5 py-4">
+                <div className="text-[0.64rem] font-semibold uppercase tracking-[0.28em] text-[#C08C45]">
                   THE FLEET
                 </div>
 
                 <h2
-                  className="text-[1.45rem] leading-[1.05] text-[#F0E7D5]"
+                  className="mt-2 text-[1.35rem] leading-[1.05] text-[#F0E7D5]"
                   style={{ fontFamily: "'Cinzel', serif" }}
                 >
-                  Five Roasts. Five Stories.
+                  Six Roasts. Six Stories.
                 </h2>
 
-                <p className="mt-3 font-serif text-[0.9rem] leading-[1.35] text-[#DDD2BE]">
-                  Coffees inspired by history and crafted for today.
+                <p className="mt-2 font-serif text-[0.87rem] leading-[1.35] text-[#DDD2BE]">
+                  Six distinctive roasts, each with a story of its own.
                 </p>
 
-                <span className="mt-4 inline-block text-[0.7rem] font-semibold tracking-[0.08em] text-[#C08C45]">
+                <span className="mt-3 inline-block text-[0.68rem] font-semibold tracking-[0.08em] text-[#C08C45]">
                   EXPLORE THE FLEET →
                 </span>
               </div>
@@ -274,31 +299,31 @@ export default function Hero() {
             {/* PROCESS */}
             <Link
               to="/roasting-process"
-              className="overflow-hidden border border-[#ddcfba] bg-[#f7f3eb]"
+              className="overflow-hidden border border-[#d8cebf] bg-[#f7f3eb]"
             >
               <img
                 src="/roaster.jpg"
                 alt="Coffee roasting in small batches"
-                className="h-[170px] w-full object-cover object-center"
+                className="h-[150px] w-full object-cover object-[68%_center]"
               />
 
-              <div className="px-5 py-5">
-                <div className="mb-2 text-[0.66rem] font-semibold uppercase tracking-[0.28em] text-[#A36F2C]">
+              <div className="px-5 py-4">
+                <div className="text-[0.64rem] font-semibold uppercase tracking-[0.28em] text-[#A36F2C]">
                   OUR PROCESS
                 </div>
 
                 <h2
-                  className="text-[1.45rem] leading-[1.05] text-[#102942]"
+                  className="mt-2 text-[1.35rem] leading-[1.05] text-[#102942]"
                   style={{ fontFamily: "'Cinzel', serif" }}
                 >
                   Roasted in Small Batches.
                 </h2>
 
-                <p className="mt-3 font-serif text-[0.9rem] leading-[1.35] text-[#17324c]">
+                <p className="mt-2 font-serif text-[0.87rem] leading-[1.35] text-[#17324c]">
                   Every Monday and Thursday for peak freshness.
                 </p>
 
-                <span className="mt-4 inline-block text-[0.7rem] font-semibold tracking-[0.07em] text-[#A36F2C]">
+                <span className="mt-3 inline-block text-[0.68rem] font-semibold tracking-[0.08em] text-[#A36F2C]">
                   OUR ROAST SCHEDULE →
                 </span>
               </div>
@@ -307,31 +332,31 @@ export default function Hero() {
             {/* MISSION */}
             <Link
               to="/sdvosb"
-              className="overflow-hidden border border-[#ddcfba] bg-[#f7f3eb]"
+              className="overflow-hidden border border-[#d8cebf] bg-[#f7f3eb]"
             >
               <img
                 src="/flag-hero.png"
                 alt="American flag"
-                className="h-[170px] w-full object-cover object-center"
+                className="h-[150px] w-full object-cover object-center"
               />
 
-              <div className="px-5 py-5">
-                <div className="mb-2 text-[0.66rem] font-semibold uppercase tracking-[0.28em] text-[#A36F2C]">
+              <div className="px-5 py-4">
+                <div className="text-[0.64rem] font-semibold uppercase tracking-[0.28em] text-[#A36F2C]">
                   OUR MISSION
                 </div>
 
                 <h2
-                  className="text-[1.45rem] leading-[1.05] text-[#102942]"
+                  className="mt-2 text-[1.35rem] leading-[1.05] text-[#102942]"
                   style={{ fontFamily: "'Cinzel', serif" }}
                 >
                   Veteran Owned. Purpose Driven.
                 </h2>
 
-                <p className="mt-3 font-serif text-[0.9rem] leading-[1.35] text-[#17324c]">
+                <p className="mt-2 font-serif text-[0.87rem] leading-[1.35] text-[#17324c]">
                   Coffee with a history worth carrying forward.
                 </p>
 
-                <span className="mt-4 inline-block text-[0.7rem] font-semibold tracking-[0.07em] text-[#A36F2C]">
+                <span className="mt-3 inline-block text-[0.68rem] font-semibold tracking-[0.08em] text-[#A36F2C]">
                   LEARN MORE →
                 </span>
               </div>

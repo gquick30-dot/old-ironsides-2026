@@ -3,6 +3,7 @@ import CoffeeRitualSection from "../components/CoffeeRitualSection";
 import SampleSection from "../components/SampleSection";
 import FleetSection from "../components/FleetSection";
 import RoastingSection from "../components/RoastingSection";
+import HarvestSection from "../components/HarvestSection";
 export default function HomePage() {
   return (
     <>
@@ -11,6 +12,7 @@ export default function HomePage() {
       <SampleSection />
       <FleetSection />
       <RoastingSection />
+      <HarvestSection />
     </>
   );
 }

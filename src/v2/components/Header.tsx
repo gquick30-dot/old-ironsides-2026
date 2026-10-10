@@ -19,7 +19,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-[#03111d] text-white transition-all duration-300">
+    <header className="fixed inset-x-0 top-0 z-50 bg-[#06243A] text-white transition-all duration-300">
       {/* TOP TRUST BAR */}
       <div
         className={`overflow-hidden border-b border-[#6D5333] transition-all duration-300 ${

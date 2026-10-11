@@ -1,5 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import Header from "./Header";
+import ScrollToTop from "./ScrollToTop";
 
 export default function V2Layout() {
   const location = useLocation();
@@ -7,9 +8,9 @@ export default function V2Layout() {
 
   return (
     <>
+      <ScrollToTop />
       <Header />
 
-      {/* Non-home pages need only enough space to clear the fixed header */}
       {!isHome && <div className="h-[116px] lg:h-[126px]" />}
 
       <Outlet />

@@ -3,25 +3,36 @@ import { Link } from "react-router-dom";
 
 const legacyCards = [
   {
-    eyebrow: "THE SHIP",
-    title: "USS Constitution",
-    body: "The oldest commissioned warship afloat remains a symbol of endurance, craftsmanship, and refusal to be forgotten.",
-    link: "/fleet-history",
-    cta: "EXPLORE THE SHIP",
-  },
-  {
     eyebrow: "THE FOUNDERS",
     title: "Washington & Barry",
-    body: "The vision of George Washington and the leadership of Commodore John Barry helped make the Constitution, and the Navy itself, possible.",
-    link: "/fleet-history",
+    body:
+      "The vision of George Washington and the leadership of Commodore John Barry helped set the foundation for the Navy and the ship that would become Old Ironsides.",
+    link: "/fleet-story/flagship",
     cta: "READ THEIR STORY",
   },
   {
     eyebrow: "THE LEGEND",
-    title: "Battles & Legacy",
-    body: "From Guerriere to Java, the victories of Old Ironsides became part of the story that gave the ship its name and lasting place in history.",
-    link: "/fleet-history",
-    cta: "VIEW THE HISTORY",
+    title: "Guerriere & The Birth of Old Ironsides",
+    body:
+      "Under Captain Isaac Hull, Constitution's victory over HMS Guerriere gave the ship the name that would endure for centuries.",
+    link: "/fleet-story/baptism-by-fire",
+    cta: "READ THE BATTLE STORY",
+  },
+  {
+    eyebrow: "THE JAVA ACTION",
+    title: "Bainbridge vs Java",
+    body:
+      "Months later, Captain William Bainbridge led Constitution into another brutal engagement, defeating HMS Java off the coast of Brazil.",
+    link: "/fleet-story/java-action",
+    cta: "READ THE JAVA STORY",
+  },
+  {
+    eyebrow: "THE SHIP",
+    title: "Oak, Copper & Preservation",
+    body:
+      "From Joshua Humphreys' revolutionary design to the generations who later fought to preserve her, the ship herself has a story worth telling.",
+    link: "/fleet-story/oak-and-copper",
+    cta: "READ THE SHIP'S STORY",
   },
 ];
 
@@ -297,37 +308,35 @@ export default function MissionPage() {
             </p>
           </div>
 
-          <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3 xl:gap-5">
-            {legacyCards.map((card) => (
-              <article
-                key={card.title}
-                className="flex h-full flex-col border border-[#C08C45]/35 bg-[#F8F0E5] p-6 shadow-[0_10px_24px_rgba(61,39,19,0.05)]"
-              >
-                <div className="text-[0.66rem] font-bold tracking-[0.18em] text-[#A36F2C]">
-                  {card.eyebrow}
-                </div>
+          <div className="mt-7 grid gap-4 md:grid-cols-2 xl:gap-5">
+  {legacyCards.map((card) => (
+    <Link
+      key={card.title}
+      to={card.link}
+      className="group flex min-h-[230px] flex-col border border-[#C08C45]/35 bg-[#F8F0E5] p-6 shadow-[0_10px_24px_rgba(61,39,19,0.05)] transition duration-300 hover:-translate-y-1 hover:border-[#C08C45] hover:shadow-[0_16px_32px_rgba(61,39,19,0.10)] md:p-7"
+    >
+      <div className="text-[0.66rem] font-bold tracking-[0.18em] text-[#A36F2C]">
+        {card.eyebrow}
+      </div>
 
-                <h3
-                  className="mt-3 text-[1.5rem] font-semibold leading-[1.05] text-[#03111d]"
-                  style={{ fontFamily: "'Cinzel', serif" }}
-                >
-                  {card.title}
-                </h3>
+      <h3
+        className="mt-3 text-[1.5rem] font-semibold leading-[1.05] text-[#03111d] transition group-hover:text-[#8A5B25] md:text-[1.65rem]"
+        style={{ fontFamily: "'Cinzel', serif" }}
+      >
+        {card.title}
+      </h3>
 
-                <p className="mt-3 flex-1 text-[0.9rem] leading-[1.65] text-[#43443F]">
-                  {card.body}
-                </p>
+      <p className="mt-4 max-w-[580px] flex-1 text-[0.9rem] leading-[1.65] text-[#43443F]">
+        {card.body}
+      </p>
 
-                <Link
-                  to={card.link}
-                  className="mt-5 inline-flex w-fit items-center text-[0.72rem] font-bold tracking-[0.1em] text-[#8A5B25] transition hover:text-[#C08C45]"
-                >
-                  {card.cta}
-                  <span className="ml-3">→</span>
-                </Link>
-              </article>
-            ))}
-          </div>
+      <div className="mt-5 border-t border-[#6D5333]/20 pt-4 text-[0.68rem] font-bold tracking-[0.1em] text-[#8A5B25] transition group-hover:text-[#C08C45]">
+        {card.cta}
+        <span className="ml-3">→</span>
+      </div>
+    </Link>
+  ))}
+</div>
         </div>
       </section>
 

@@ -218,7 +218,7 @@ export default function Hero() {
 
             {/* MISSION */}
             <Link
-              to="/sdvosb"
+  to="/mission"
               className="group relative min-h-[182px] overflow-hidden border border-[#d8cebf] bg-[#f7f3eb]"
             >
               <img
@@ -328,7 +328,7 @@ export default function Hero() {
 
             {/* MISSION */}
             <Link
-              to="/sdvosb"
+  to="/mission"
               className="relative block overflow-hidden border border-[#d8cebf] bg-[#f7f3eb]"
             >
               <div className="relative h-[165px] overflow-hidden">

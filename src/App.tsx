@@ -4,6 +4,7 @@ import RoastingProcessPage from "./v2/pages/RoastingProcessPage";
 import V2Layout from "./v2/components/V2Layout";
 import CookieConsent from "./Components/CookieConsent";
 import SourcingPage from "./v2/components/SourcingPage";
+import MissionPage from "./v2/components/MissionPage";
 import {
   getProductByHandle,
   ensureCart,
@@ -12182,6 +12183,7 @@ function AppShell() {
   <Route index element={<HomePageV2 />} />
   <Route path="roasting-process" element={<RoastingProcessPage />} />
   <Route path="sourcing" element={<SourcingPage />} />
+  <Route path="mission" element={<MissionPage />} />
 </Route>
 
         <Route element={<Layout />}>

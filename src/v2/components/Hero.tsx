@@ -268,7 +268,7 @@ export default function Hero() {
                   className="absolute inset-0 h-full w-full object-cover object-center"
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-r from-[#082237] via-[#082237]/82 to-transparent" />
+<div className="absolute inset-0 bg-gradient-to-r from-[#082237] from-[0%] via-[#082237]/95 via-[44%] via-[#082237]/65 via-[62%] to-transparent to-[84%]" />
 
                 <div className="relative z-10 flex h-full w-[62%] flex-col justify-center px-5">
                   <div className="text-[0.61rem] font-semibold uppercase tracking-[0.27em] text-[#C08C45]">
@@ -344,15 +344,14 @@ export default function Hero() {
                   <div className="text-[0.61rem] font-semibold uppercase tracking-[0.27em] text-[#A36F2C]">
                     OUR MISSION
                   </div>
-
                   <h2
-                    className="mt-2 text-[1.36rem] leading-[1.03] text-[#102942]"
-                    style={{ fontFamily: "'Cinzel', serif" }}
-                  >
-                    Veteran Owned.
-                    <br />
-                    Purpose Driven.
-                  </h2>
+  className="mt-2 whitespace-nowrap text-[1.08rem] leading-[1.1] text-[#102942]"
+  style={{ fontFamily: "'Cinzel', serif" }}
+>
+  VETERAN OWNED.
+  <br />
+  PURPOSE DRIVEN.
+</h2>
 
                   <span className="mt-4 text-[0.65rem] font-semibold tracking-[0.07em] text-[#A36F2C]">
                     LEARN MORE →

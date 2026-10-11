@@ -13,7 +13,7 @@ export default function HomePage() {
       <SampleSection />
       <FleetSection />
       <RoastingSection />
-      <HarvestSection />
+
       <VeteranSection />
     </>
   );

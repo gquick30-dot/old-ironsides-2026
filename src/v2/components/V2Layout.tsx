@@ -9,8 +9,8 @@ export default function V2Layout() {
     <>
       <Header />
 
-      {/* Homepage hero already accounts for the fixed header */}
-      {!isHome && <div className="h-[148px] lg:h-[180px]" />}
+      {/* Non-home pages need only enough space to clear the fixed header */}
+      {!isHome && <div className="h-[116px] lg:h-[126px]" />}
 
       <Outlet />
     </>

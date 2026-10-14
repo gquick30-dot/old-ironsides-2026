@@ -5845,7 +5845,7 @@ function RoastDetailPage() {
   return (
     <main className="bg-[#F3EBDD] text-[#071F35]">
       {/* HERO / BUY AREA */}
-      <section className="relative overflow-hidden border-b border-[#C08C45]/25 bg-[#F3EBDD] px-4 pb-6 pt-10 sm:px-5 sm:pt-12 md:px-8 md:pb-7 md:pt-14 lg:pt-[72px]">
+      <section className="relative overflow-hidden border-b border-[#C08C45]/25 bg-[#F3EBDD] px-4 pb-5 pt-10 sm:px-5 sm:pt-12 md:px-8 md:pb-5 md:pt-14 lg:pt-[72px]">
         <div className="pointer-events-none absolute right-[-80px] top-[55px] hidden opacity-[0.025] lg:block">
           <img
             src="/emblem-black.png"
@@ -5869,7 +5869,7 @@ function RoastDetailPage() {
               alt={`${card.title} coffee`}
               loading="eager"
               decoding="async"
-              className="h-[460px] w-full object-cover object-center sm:h-[520px] lg:h-[545px] xl:h-[565px]"
+              className="h-[520px] w-full object-contain object-center sm:h-[580px] lg:h-[610px] xl:h-[625px]"
             />
           </div>
 
@@ -5970,7 +5970,34 @@ function RoastDetailPage() {
                 </div>
               </div>
             )}
+            {/* BEST BREW METHODS */}
+            <div className="border-b border-[#C08C45]/30 py-3">
+              <div className="mb-2 text-[0.56rem] font-bold tracking-[0.18em] text-[#8A5B25]">
+                BEST BREW METHODS
+              </div>
 
+              <div className="flex flex-wrap gap-2">
+                {(card.slug === "baptism-by-fire"
+                  ? ["FRENCH PRESS", "DRIP", "ESPRESSO"]
+                  : card.slug === "flagship"
+                  ? ["DRIP", "FRENCH PRESS", "COLD BREW"]
+                  : card.slug === "java-action"
+                  ? ["DRIP", "POUR OVER", "FRENCH PRESS"]
+                  : card.slug === "black-salvo"
+                  ? ["ESPRESSO", "DRIP", "FRENCH PRESS"]
+                  : card.slug === "brass-monkey"
+                  ? ["DRIP", "FRENCH PRESS", "COLD BREW"]
+                  : ["DRIP", "FRENCH PRESS", "POUR OVER"]
+                ).map((method) => (
+                  <div
+                    key={method}
+                    className="border border-[#BDA98A]/70 bg-[#FBF6ED] px-3 py-2 text-[0.58rem] font-bold tracking-[0.09em] text-[#5E554B]"
+                  >
+                    {method}
+                  </div>
+                ))}
+              </div>
+            </div>
             {(card.canBuy || isOak) && (
               <BuyBoxSection
                 card={card}

@@ -5,6 +5,7 @@ import V2Layout from "./v2/components/V2Layout";
 import CookieConsent from "./Components/CookieConsent";
 import SourcingPage from "./v2/components/SourcingPage";
 import MissionPage from "./v2/components/MissionPage";
+import StorePageV2 from "./v2/pages/StorePage";
 import {
   getProductByHandle,
   ensureCart,
@@ -12179,12 +12180,13 @@ function AppShell() {
   return (
     <>
       <Routes>
-      <Route element={<V2Layout />}>
-  <Route index element={<HomePageV2 />} />
-  <Route path="roasting-process" element={<RoastingProcessPage />} />
-  <Route path="sourcing" element={<SourcingPage />} />
-  <Route path="mission" element={<MissionPage />} />
-</Route>
+        <Route element={<V2Layout />}>
+          <Route index element={<HomePageV2 />} />
+          <Route path="store" element={<StorePageV2 />} />
+          <Route path="roasting-process" element={<RoastingProcessPage />} />
+          <Route path="sourcing" element={<SourcingPage />} />
+          <Route path="mission" element={<MissionPage />} />
+        </Route>
 
         <Route element={<Layout />}>
           <Route path="coffee" element={<Navigate to="/store" replace />} />
@@ -12193,7 +12195,7 @@ function AppShell() {
             element={<ArmadaSamplePage />}
           />
           <Route path="roast/:slug" element={<RoastDetailPage />} />
-          <Route path="store" element={<StorePage />} />
+
           <Route path="store/:slug" element={<StoreCategoryPage />} />
           <Route path="subscriptions" element={<SubscriptionLandingPage />} />
           {/* History Story pages */}

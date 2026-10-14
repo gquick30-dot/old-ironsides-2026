@@ -4491,33 +4491,31 @@ function BuyBoxSection({
 }) {
   const isSubscription = purchaseMode === "sub" && !isOak && size === "12oz";
 
-  const selectWhole = () => {
-    setBeanType("whole");
-    setShowBeanError(false);
-  };
-
-  const selectGround = () => {
-    if (size === "sample") return;
-    setBeanType("ground");
-    setShowBeanError(false);
-  };
-
   return (
-    <div className="mt-5">
-      {/* PREP */}
-      <div>
-        <div className="mb-2 text-[0.6rem] font-bold tracking-[0.18em] text-[#8A5B25]">
-          SELECT YOUR PREP
+    <div className="mt-4">
+      {/* STEP 1 — PREP */}
+      <div className="border border-[#8FA0AE]/40 bg-[#E6EBEE] p-3.5">
+        <div className="mb-2 flex items-center justify-between gap-3">
+          <div className="text-[0.6rem] font-bold tracking-[0.18em] text-[#071F35]">
+            STEP 1 — CHOOSE YOUR PREP
+          </div>
+
+          <div className="text-[0.52rem] font-bold tracking-[0.08em] text-[#A36F2C]">
+            REQUIRED
+          </div>
         </div>
 
         <div className="grid grid-cols-2 gap-2.5">
           <button
             type="button"
-            onClick={selectWhole}
-            className={`min-h-[58px] border px-4 text-left transition ${
+            onClick={() => {
+              setBeanType("whole");
+              setShowBeanError(false);
+            }}
+            className={`min-h-[56px] border px-4 text-left transition ${
               beanType === "whole"
                 ? "border-[#071F35] bg-[#071F35] text-[#F3EBDD]"
-                : "border-[#BDA98A] bg-[#FBF6ED] text-[#071F35] hover:border-[#C08C45]"
+                : "border-[#98A6B2] bg-[#F8F4EC] text-[#071F35] hover:border-[#C08C45]"
             }`}
           >
             <div
@@ -4528,8 +4526,8 @@ function BuyBoxSection({
             </div>
 
             <div
-              className={`mt-0.5 text-[0.66rem] ${
-                beanType === "whole" ? "text-[#D5CCBE]" : "text-[#776D61]"
+              className={`mt-0.5 text-[0.64rem] ${
+                beanType === "whole" ? "text-[#D6D1C7]" : "text-[#6A6A66]"
               }`}
             >
               Best for grinders
@@ -4539,13 +4537,17 @@ function BuyBoxSection({
           <button
             type="button"
             disabled={size === "sample"}
-            onClick={selectGround}
-            className={`min-h-[58px] border px-4 text-left transition ${
+            onClick={() => {
+              if (size === "sample") return;
+              setBeanType("ground");
+              setShowBeanError(false);
+            }}
+            className={`min-h-[56px] border px-4 text-left transition ${
               size === "sample"
-                ? "cursor-not-allowed border-[#C9BCA8] bg-[#EFE6D8] text-[#A59C90] opacity-60"
+                ? "cursor-not-allowed border-[#BBC1C5] bg-[#ECE8E0] text-[#99948C] opacity-60"
                 : beanType === "ground"
                 ? "border-[#071F35] bg-[#071F35] text-[#F3EBDD]"
-                : "border-[#BDA98A] bg-[#FBF6ED] text-[#071F35] hover:border-[#C08C45]"
+                : "border-[#98A6B2] bg-[#F8F4EC] text-[#071F35] hover:border-[#C08C45]"
             }`}
           >
             <div
@@ -4556,8 +4558,8 @@ function BuyBoxSection({
             </div>
 
             <div
-              className={`mt-0.5 text-[0.66rem] ${
-                beanType === "ground" ? "text-[#D5CCBE]" : "text-[#776D61]"
+              className={`mt-0.5 text-[0.64rem] ${
+                beanType === "ground" ? "text-[#D6D1C7]" : "text-[#6A6A66]"
               }`}
             >
               {size === "sample"
@@ -4567,20 +4569,24 @@ function BuyBoxSection({
           </button>
         </div>
 
+        <div className="mt-2 text-[0.54rem] font-semibold tracking-[0.05em] text-[#687681]">
+          Select a prep before adding to Chest.
+        </div>
+
         {showBeanError && (
-          <div className="mt-2 text-[0.68rem] font-semibold text-[#9D342B]">
-            Please choose whole bean or ground.
+          <div className="mt-2 border-l-2 border-[#A84236] pl-2 text-[0.68rem] font-bold text-[#A84236]">
+            Choose Whole Bean or Ground to continue.
           </div>
         )}
       </div>
 
-      {/* SIZE */}
-      <div className="mt-4">
+      {/* STEP 2 — SIZE */}
+      <div className="mt-3">
         <div className="mb-2 text-[0.6rem] font-bold tracking-[0.18em] text-[#8A5B25]">
-          CHOOSE YOUR SIZE
+          STEP 2 — CHOOSE YOUR SIZE
         </div>
 
-        <div className="grid grid-cols-[0.85fr_1.15fr] gap-2.5">
+        <div className="grid grid-cols-[0.8fr_1.2fr] gap-2.5">
           <button
             type="button"
             onClick={() => {
@@ -4589,20 +4595,20 @@ function BuyBoxSection({
               setBeanType("whole");
               setShowBeanError(false);
             }}
-            className={`min-h-[58px] border px-3 text-center transition ${
+            className={`min-h-[54px] border px-3 text-center transition ${
               size === "sample"
                 ? "border-[#071F35] bg-[#071F35] text-[#F3EBDD]"
                 : "border-[#BDA98A] bg-[#FBF6ED] text-[#071F35] hover:border-[#C08C45]"
             }`}
           >
             <div
-              className="text-[0.72rem] font-bold"
+              className="text-[0.7rem] font-bold"
               style={{ fontFamily: "'Cinzel', serif" }}
             >
               SAMPLE
             </div>
 
-            <div className="mt-0.5 text-[0.62rem] opacity-70">
+            <div className="mt-0.5 text-[0.58rem] opacity-70">
               2.5 oz • whole bean
             </div>
           </button>
@@ -4614,7 +4620,7 @@ function BuyBoxSection({
               setPurchaseMode("one");
               setShowBeanError(false);
             }}
-            className={`min-h-[58px] border px-3 text-center transition ${
+            className={`min-h-[54px] border px-3 text-center transition ${
               size === "12oz"
                 ? "border-[#C08C45] bg-[#C08C45] text-black"
                 : "border-[#BDA98A] bg-[#FBF6ED] text-[#071F35] hover:border-[#C08C45]"
@@ -4630,8 +4636,12 @@ function BuyBoxSection({
         </div>
       </div>
 
-      {/* PURCHASE MODE */}
-      <div className="mt-4">
+      {/* STEP 3 — PURCHASE */}
+      <div className="mt-3">
+        <div className="mb-2 text-[0.6rem] font-bold tracking-[0.18em] text-[#8A5B25]">
+          STEP 3 — PURCHASE OPTION
+        </div>
+
         <div className="grid grid-cols-2 gap-2.5">
           <button
             type="button"
@@ -4643,7 +4653,7 @@ function BuyBoxSection({
             }`}
           >
             <div
-              className="text-[0.72rem] font-bold"
+              className="text-[0.7rem] font-bold"
               style={{ fontFamily: "'Cinzel', serif" }}
             >
               SINGLE PURCHASE
@@ -4667,7 +4677,7 @@ function BuyBoxSection({
               }`}
             >
               <div
-                className="text-[0.72rem] font-bold"
+                className="text-[0.68rem] font-bold"
                 style={{ fontFamily: "'Cinzel', serif" }}
               >
                 SUBSCRIBE & SAVE 15%
@@ -4681,11 +4691,11 @@ function BuyBoxSection({
             </button>
           ) : (
             <div className="flex min-h-[54px] flex-col justify-center border border-[#071F35] bg-[#071F35] px-3 text-center">
-              <div className="text-[0.56rem] font-bold tracking-[0.1em] text-[#E6C07F]">
+              <div className="text-[0.54rem] font-bold tracking-[0.1em] text-[#E6C07F]">
                 PREMIUM RELEASE
               </div>
 
-              <div className="mt-0.5 text-[0.72rem] font-black tracking-[0.05em] text-white">
+              <div className="mt-0.5 text-[0.7rem] font-black tracking-[0.05em] text-white">
                 NO DISCOUNTS
               </div>
             </div>
@@ -4693,16 +4703,15 @@ function BuyBoxSection({
         </div>
       </div>
 
-      {/* SUB FREQUENCY */}
       {isSubscription && (
-        <div className="mt-3 border border-[#C08C45]/35 bg-[#F0E1CA] px-3 py-3">
+        <div className="mt-3 border border-[#C08C45]/35 bg-[#F0E1CA] px-3 py-2.5">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <div className="text-[0.56rem] font-bold tracking-[0.1em] text-[#8A5B25]">
+              <div className="text-[0.54rem] font-bold tracking-[0.1em] text-[#8A5B25]">
                 DELIVER EVERY
               </div>
 
-              <div className="mt-0.5 text-[0.62rem] text-[#6F6254]">
+              <div className="mt-0.5 text-[0.6rem] text-[#6F6254]">
                 Skip or cancel anytime.
               </div>
             </div>
@@ -4713,7 +4722,7 @@ function BuyBoxSection({
                   key={days}
                   type="button"
                   onClick={() => setSubEvery(days as 14 | 30 | 60)}
-                  className={`border px-3 py-2 text-[0.62rem] font-bold transition ${
+                  className={`border px-3 py-1.5 text-[0.6rem] font-bold ${
                     subEvery === days
                       ? "border-[#071F35] bg-[#071F35] text-white"
                       : "border-[#A88C68] bg-[#FBF6ED] text-[#6A5E52]"
@@ -4727,36 +4736,34 @@ function BuyBoxSection({
         </div>
       )}
 
-      {/* PRICE / CART */}
-      <div className="mt-4 border border-[#BDA98A]/60 bg-[#FBF6ED] p-3.5">
+      {/* PRICE / CHEST */}
+      <div className="mt-3 border border-[#BDA98A]/60 bg-[#FBF6ED] p-3">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-          <div className="min-w-[125px]">
+          <div className="min-w-[120px]">
             {isSubscription ? (
               <>
-                <div className="text-[0.7rem] text-[#8D8275] line-through">
+                <div className="text-[0.66rem] text-[#8D8275] line-through">
                   ${basePrice.toFixed(2)}
                 </div>
 
-                <div className="text-[1.45rem] font-bold leading-none text-[#071F35]">
+                <div className="text-[1.4rem] font-bold leading-none text-[#071F35]">
                   ${discounted.toFixed(2)}
-                  <span className="ml-1 text-[0.62rem] font-normal text-[#766C61]">
+                  <span className="ml-1 text-[0.6rem] font-normal text-[#766C61]">
                     / bag
                   </span>
                 </div>
 
-                <div className="mt-1 text-[0.56rem] font-bold tracking-[0.08em] text-[#8A5B25]">
+                <div className="mt-1 text-[0.54rem] font-bold tracking-[0.08em] text-[#8A5B25]">
                   SAVE $3.30
                 </div>
               </>
             ) : (
-              <>
-                <div className="text-[1.45rem] font-bold leading-none text-[#071F35]">
-                  ${basePrice.toFixed(2)}
-                  <span className="ml-1 text-[0.62rem] font-normal text-[#766C61]">
-                    {size === "sample" ? " / sample" : " / bag"}
-                  </span>
-                </div>
-              </>
+              <div className="text-[1.4rem] font-bold leading-none text-[#071F35]">
+                ${basePrice.toFixed(2)}
+                <span className="ml-1 text-[0.6rem] font-normal text-[#766C61]">
+                  {size === "sample" ? " / sample" : " / bag"}
+                </span>
+              </div>
             )}
           </div>
 
@@ -4782,7 +4789,7 @@ function BuyBoxSection({
           </div>
         </div>
 
-        <div className="mt-2 text-right text-[0.58rem] font-semibold tracking-[0.07em] text-[#7A6E61]">
+        <div className="mt-2 text-right text-[0.56rem] font-semibold tracking-[0.07em] text-[#7A6E61]">
           FREE SHIPPING ON 3+ BAGS
         </div>
       </div>
@@ -5838,8 +5845,17 @@ function RoastDetailPage() {
   return (
     <main className="bg-[#F3EBDD] text-[#071F35]">
       {/* HERO / BUY AREA */}
-      <section className="border-b border-[#C08C45]/25 px-4 pb-8 pt-5 sm:px-5 md:px-8 md:pb-10 md:pt-7">
-        <div className="mx-auto grid max-w-[1500px] gap-6 lg:grid-cols-[48%_52%] lg:items-start lg:gap-10">
+      <section className="relative overflow-hidden border-b border-[#C08C45]/25 bg-[#F3EBDD] px-4 pb-6 pt-10 sm:px-5 sm:pt-12 md:px-8 md:pb-7 md:pt-14 lg:pt-[72px]">
+        <div className="pointer-events-none absolute right-[-80px] top-[55px] hidden opacity-[0.025] lg:block">
+          <img
+            src="/emblem-black.png"
+            alt=""
+            aria-hidden="true"
+            className="h-[420px] w-[420px] object-contain"
+          />
+        </div>
+
+        <div className="relative mx-auto grid max-w-[1500px] gap-6 lg:grid-cols-[47%_53%] lg:items-start lg:gap-9">
           {/* PRODUCT IMAGE */}
           <div className="relative overflow-hidden border border-[#A68459]/30 bg-[#EEE2CF]">
             {card.isNew && (
@@ -5853,25 +5869,25 @@ function RoastDetailPage() {
               alt={`${card.title} coffee`}
               loading="eager"
               decoding="async"
-              className="aspect-[4/4.4] w-full object-cover object-center lg:aspect-[4/4.25]"
+              className="h-[460px] w-full object-cover object-center sm:h-[520px] lg:h-[545px] xl:h-[565px]"
             />
           </div>
 
           {/* PRODUCT INFO */}
           <div className="lg:pt-1">
-            <div className="text-[0.62rem] font-bold tracking-[0.22em] text-[#A36F2C]">
+            <div className="text-[0.6rem] font-bold tracking-[0.22em] text-[#A36F2C]">
               OLD IRONSIDES COFFEE
             </div>
 
             <h1
-              className="mt-2 text-[2.35rem] font-semibold leading-[0.96] text-[#071F35] sm:text-[2.8rem] lg:text-[3.3rem]"
+              className="mt-1.5 text-[2.3rem] font-semibold leading-[0.96] text-[#071F35] sm:text-[2.75rem] lg:text-[3.15rem]"
               style={{ fontFamily: "'Cinzel', serif" }}
             >
               {card.title}
             </h1>
 
             <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-2">
-              <div className="text-[0.86rem] font-bold tracking-[0.08em] text-[#A36F2C]">
+              <div className="text-[0.82rem] font-bold tracking-[0.08em] text-[#A36F2C]">
                 {card.subTitle}
               </div>
 
@@ -5892,26 +5908,65 @@ function RoastDetailPage() {
               )}
             </div>
 
-            <p className="mt-3 max-w-[610px] text-[0.9rem] leading-[1.55] text-[#56514B]">
+            <p className="mt-2.5 max-w-[610px] text-[0.86rem] leading-[1.5] text-[#56514B]">
               {hook}
             </p>
 
-            {/* NOTES */}
+            {/* SIGNATURE NOTES */}
             {notes.length > 0 && (
-              <div className="mt-5 border-y border-[#C08C45]/30 py-4">
-                <div className="text-[0.58rem] font-bold tracking-[0.18em] text-[#8A5B25]">
+              <div className="mt-4 border-y border-[#C08C45]/30 py-3">
+                <div className="mb-2.5 text-[0.56rem] font-bold tracking-[0.18em] text-[#8A5B25]">
                   SIGNATURE NOTES
                 </div>
 
-                <div className="mt-2.5 flex flex-wrap gap-2">
-                  {notes.map((note) => (
-                    <div
-                      key={note}
-                      className="border border-[#BDA98A]/70 bg-[#FBF6ED] px-3 py-2 text-[0.68rem] font-bold tracking-[0.07em] text-[#5E554B]"
-                    >
-                      {note.toUpperCase()}
-                    </div>
-                  ))}
+                <div className="grid grid-cols-3">
+                  {notes.map((note, index) => {
+                    const iconMap: Record<string, string> = {
+                      Hazelnut: "/symbols/hazelnut.png",
+                      "Warm Spice": "/symbols/spice1.png",
+                      Cream: "/symbols/cream1.png",
+
+                      Chocolate: "/symbols/chocolate1.png",
+                      Molasses: "/symbols/molasses1.png",
+                      Smoke: "/symbols/smoke1.png",
+
+                      Vanilla: "/symbols/vanilla1.png",
+                      Cocoa: "/symbols/cocoa1.png",
+                      Almond: "/symbols/almond1.png",
+
+                      Caramel: "/symbols/caramel1.png",
+                      "Red Apple": "/symbols/apple1.png",
+                      Oak: "/symbols/oak3.png",
+
+                      Pecan: "/symbols/pecan.jpg",
+                      "Brown Sugar": "/symbols/sugar.png",
+                      Spice: "/symbols/spice1.png",
+                    };
+
+                    return (
+                      <div
+                        key={note}
+                        className={`flex items-center gap-2.5 px-3 py-1 ${
+                          index !== notes.length - 1
+                            ? "border-r border-[#C08C45]/25"
+                            : ""
+                        }`}
+                      >
+                        {iconMap[note] && (
+                          <img
+                            src={iconMap[note]}
+                            alt=""
+                            aria-hidden="true"
+                            className="h-8 w-8 shrink-0 object-contain"
+                          />
+                        )}
+
+                        <span className="text-[0.58rem] font-bold tracking-[0.08em] text-[#5E554B]">
+                          {note.toUpperCase()}
+                        </span>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             )}
@@ -6938,7 +6993,7 @@ function RoastUnified({
       {/* =====================================================
           CRAFT — NAVY
       ====================================================== */}
-      <section className="bg-[#071421] px-5 py-9 text-[#E6DCC8] md:px-8 md:py-11">
+      <section className="bg-[#071421] px-5 py-7 text-[#E6DCC8] md:px-8 md:py-8">
         <div className="mx-auto grid max-w-[1500px] gap-7 lg:grid-cols-[0.75fr_1.25fr] lg:gap-12">
           <div>
             <div className="text-[0.62rem] font-bold tracking-[0.25em] text-[#C08C45]">
@@ -6946,7 +7001,7 @@ function RoastUnified({
             </div>
 
             <h2
-              className="mt-2 text-[2rem] font-semibold leading-[1] text-[#F3EBDD] md:text-[2.35rem]"
+              className="mt-2 text-[1.8rem] font-semibold leading-[1] text-[#F3EBDD] md:text-[2.1rem]"
               style={{ fontFamily: "'Cinzel', serif" }}
             >
               BUILT AROUND THE ROAST.

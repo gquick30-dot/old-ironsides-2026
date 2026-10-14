@@ -4450,12 +4450,11 @@ function FleetHistoryPage() {
     </main>
   );
 }
-/* ================== ROAST DETAIL PAGE (CLEAN) ================== */
 function BuyBoxSection({
-  mobile = false,
   card,
   isOak,
   size,
+  setSize,
   purchaseMode,
   setPurchaseMode,
   subEvery,
@@ -4470,13 +4469,11 @@ function BuyBoxSection({
   setQty,
   addToChest,
   adding,
-  buyBoxRef,
-  buyBoxDims,
 }: {
-  mobile?: boolean;
   card: any;
   isOak: boolean;
   size: "12oz" | "sample";
+  setSize: React.Dispatch<React.SetStateAction<"12oz" | "sample">>;
   purchaseMode: "one" | "sub";
   setPurchaseMode: React.Dispatch<React.SetStateAction<"one" | "sub">>;
   subEvery: 14 | 30 | 60;
@@ -4491,186 +4488,305 @@ function BuyBoxSection({
   setQty: React.Dispatch<React.SetStateAction<number>>;
   addToChest: () => void;
   adding: boolean;
-  buyBoxRef?: React.RefObject<HTMLDivElement | null>;
-  buyBoxDims?: { h: number };
 }) {
-  if (mobile) {
-    return (
-      <div className="order-2 w-full md:order-4 md:hidden mt-4">
-        <div className="space-y-3">
-          <PurchaseModeButton
-            mode="one"
-            size={size}
-            active={purchaseMode === "one"}
-            onClick={() => setPurchaseMode("one")}
-            basePrice={basePrice}
-            discounted={discounted}
-            isOak={isOak}
-          />
+  const isSubscription = purchaseMode === "sub" && !isOak && size === "12oz";
 
-          <PurchaseModeButton
-            mode="sub"
-            size={size}
-            active={purchaseMode === "sub"}
-            onClick={() => setPurchaseMode("sub")}
-            basePrice={basePrice}
-            discounted={discounted}
-            isOak={isOak}
-            subEvery={subEvery}
-            setSubEvery={setSubEvery}
-            showSubOptions={purchaseMode === "sub"}
-          />
-        </div>
+  const selectWhole = () => {
+    setBeanType("whole");
+    setShowBeanError(false);
+  };
 
-        <div className="mt-4 flex items-center gap-3">
-          <QuantityControl
-            qty={qty}
-            setQty={setQty}
-            className="inline-flex items-center rounded-md border border-[#6D5333]"
-            buttonClassName="px-3 py-2 text-[#E6C07F] hover:bg-[#32220D]"
-            inputClassName="w-12 text-center bg-black py-2 text-sm text-[#E6C07F] outline-none border-x border-[#6D5333]"
-          />
-
-          <button
-            type="button"
-            onClick={addToChest}
-            disabled={adding}
-            className={
-              "flex-1 rounded-md border border-[#C08C45] px-4 py-3 text-base font-semibold text-[#E6C07F] bg-black shadow-md shadow-[#C08C45]/10 transition " +
-              (adding
-                ? "opacity-60 cursor-not-allowed"
-                : "hover:bg-[#C08C45] hover:text-black")
-            }
-            aria-label={`Add ${card.title} to Chest`}
-          >
-            {adding ? "Adding..." : "Add to Chest"}
-          </button>
-        </div>
-
-        <div className="mt-2 text-sm text-right">
-          <span className="text-[#B39871] font-semibold">
-            3+ bags ship free
-          </span>
-        </div>
-      </div>
-    );
-  }
+  const selectGround = () => {
+    if (size === "sample") return;
+    setBeanType("ground");
+    setShowBeanError(false);
+  };
 
   return (
-    <>
-      <div
-        className={`hidden md:block order-2 md:order-4 mt-6 w-full${
-          card.slug === "flagship" ? DESKTOP_BUYBOX_SHIFT[card.slug] || "" : ""
-        }`}
-      >
-        <div className="flex flex-col md:flex-row md:items-stretch md:gap-4">
-          <div
-            ref={buyBoxRef}
-            className="inline-flex w-full md:w-auto items-center gap-4 rounded-md border border-[#6D5333] bg-black/70 p-3 px-4 shadow-md shadow-[#C08C45]/10"
-          >
-            <div className="text-sm">
-              {purchaseMode === "sub" && !isOak ? (
-                <>
-                  <span className="line-through text-[#9C9791] mr-2">
-                    {fmt(basePrice)}
-                  </span>
-                  <span className="font-bold text-[#E6C07F]">
-                    {fmt(discounted)}
-                  </span>
-                </>
-              ) : (
-                <span className="font-bold text-[#E6C07F]">
-                  {fmt(basePrice)}
-                </span>
-              )}
-
-              <span className="text-xs text-[#9C9791] ml-1">/ bag</span>
-            </div>
-
-            <div className="ml-auto inline-flex items-center gap-4">
-              <QuantityControl
-                qty={qty}
-                setQty={setQty}
-                className="inline-flex items-center rounded-md border border-[#6D5333]"
-                buttonClassName="px-2 py-1 text-[#E6C07F] hover:bg-[#32220D]"
-                inputClassName="w-12 text-center bg-black/70 py-1.5 text-sm text-[#E6C07F] outline-none border-x border-[#6D5333]"
-              />
-
-              <div className="flex items-center justify-between w-full px-[4px] md:px-[5px] gap-4">
-                <button
-                  type="button"
-                  onClick={addToChest}
-                  disabled={adding}
-                  className={
-                    "px-4 py-2 md:px-6 md:py-3 rounded-md text-sm md:text-base font-semibold border border-[#C08C45] text-[#E6C07F] bg-black transition shadow-md shadow-[#C08C45]/10 " +
-                    (adding
-                      ? "opacity-60 cursor-not-allowed"
-                      : "hover:bg-[#C08C45] hover:text-black")
-                  }
-                  aria-label={`Add ${card.title} to Chest`}
-                >
-                  {adding ? "Adding..." : "Add to Chest"}
-                </button>
-
-                <div className="text-[13px] md:text-[14px] font-extrabold tracking-wide text-right text-[#E6C07F] leading-tight">
-                  Free shipping on{" "}
-                  <span className="text-[#C08C45]">3+ bags</span>
-                </div>
-              </div>
-            </div>
-          </div>
+    <div className="mt-5">
+      {/* PREP */}
+      <div>
+        <div className="mb-2 text-[0.6rem] font-bold tracking-[0.18em] text-[#8A5B25]">
+          SELECT YOUR PREP
         </div>
-      </div>
 
-      <div
-        className={`hidden md:block order-3 md:order-3 mt-6 w-full${
-          card.slug === "flagship" ? DESKTOP_BUYBOX_SHIFT[card.slug] || "" : ""
-        }`}
-      >
-        <div className="w-full max-w-[620px] grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-2.5">
           <button
             type="button"
-            onClick={() => setPurchaseMode("one")}
-            className={
-              "h-[58px] rounded-md border text-sm md:text-base leading-none tracking-tight font-semibold transition text-center " +
-              (purchaseMode === "one"
-                ? "bg-[#C08C45] text-black border-[#C08C45]"
-                : "bg-[#130E08] text-[#C08C45] border-[#6D5333] hover:border-[#C08C45] hover:text-[#E6C07F]")
-            }
-            aria-pressed={purchaseMode === "one"}
+            onClick={selectWhole}
+            className={`min-h-[58px] border px-4 text-left transition ${
+              beanType === "whole"
+                ? "border-[#071F35] bg-[#071F35] text-[#F3EBDD]"
+                : "border-[#BDA98A] bg-[#FBF6ED] text-[#071F35] hover:border-[#C08C45]"
+            }`}
           >
-            Single Purchase
+            <div
+              className="text-[0.8rem] font-bold"
+              style={{ fontFamily: "'Cinzel', serif" }}
+            >
+              WHOLE BEAN
+            </div>
+
+            <div
+              className={`mt-0.5 text-[0.66rem] ${
+                beanType === "whole" ? "text-[#D5CCBE]" : "text-[#776D61]"
+              }`}
+            >
+              Best for grinders
+            </div>
           </button>
 
           <button
             type="button"
             disabled={size === "sample"}
-            onClick={() => {
-              if (size === "sample") return;
-              setPurchaseMode("sub");
-            }}
-            className={
-              "h-[58px] rounded-md border text-sm md:text-base font-semibold transition text-center " +
-              (size === "sample"
-                ? "bg-[#130E08] text-[#6D6D6D] border-[#6D5333]/40 opacity-50 cursor-not-allowed"
-                : purchaseMode === "sub"
-                ? "bg-[#32220D] text-[#E6C07F] border-[#C08C45]"
-                : "bg-[#130E08] text-[#C08C45] border-[#6D5333] hover:border-[#C08C45] hover:text-[#E6C07F]")
-            }
-            aria-pressed={purchaseMode === "sub"}
+            onClick={selectGround}
+            className={`min-h-[58px] border px-4 text-left transition ${
+              size === "sample"
+                ? "cursor-not-allowed border-[#C9BCA8] bg-[#EFE6D8] text-[#A59C90] opacity-60"
+                : beanType === "ground"
+                ? "border-[#071F35] bg-[#071F35] text-[#F3EBDD]"
+                : "border-[#BDA98A] bg-[#FBF6ED] text-[#071F35] hover:border-[#C08C45]"
+            }`}
           >
-            {isOak ? "Join the Fleet" : "Subscribe & Save 10%"}
+            <div
+              className="text-[0.8rem] font-bold"
+              style={{ fontFamily: "'Cinzel', serif" }}
+            >
+              GROUND
+            </div>
+
+            <div
+              className={`mt-0.5 text-[0.66rem] ${
+                beanType === "ground" ? "text-[#D5CCBE]" : "text-[#776D61]"
+              }`}
+            >
+              {size === "sample"
+                ? "Not available for samples"
+                : "Ready to brew"}
+            </div>
           </button>
         </div>
 
-        {purchaseMode === "sub" && size !== "sample" && (
-          <SubscriptionFrequencyPicker
-            subEvery={subEvery}
-            setSubEvery={setSubEvery}
-          />
+        {showBeanError && (
+          <div className="mt-2 text-[0.68rem] font-semibold text-[#9D342B]">
+            Please choose whole bean or ground.
+          </div>
         )}
       </div>
-    </>
+
+      {/* SIZE */}
+      <div className="mt-4">
+        <div className="mb-2 text-[0.6rem] font-bold tracking-[0.18em] text-[#8A5B25]">
+          CHOOSE YOUR SIZE
+        </div>
+
+        <div className="grid grid-cols-[0.85fr_1.15fr] gap-2.5">
+          <button
+            type="button"
+            onClick={() => {
+              setSize("sample");
+              setPurchaseMode("one");
+              setBeanType("whole");
+              setShowBeanError(false);
+            }}
+            className={`min-h-[58px] border px-3 text-center transition ${
+              size === "sample"
+                ? "border-[#071F35] bg-[#071F35] text-[#F3EBDD]"
+                : "border-[#BDA98A] bg-[#FBF6ED] text-[#071F35] hover:border-[#C08C45]"
+            }`}
+          >
+            <div
+              className="text-[0.72rem] font-bold"
+              style={{ fontFamily: "'Cinzel', serif" }}
+            >
+              SAMPLE
+            </div>
+
+            <div className="mt-0.5 text-[0.62rem] opacity-70">
+              2.5 oz • whole bean
+            </div>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              setSize("12oz");
+              setPurchaseMode("one");
+              setShowBeanError(false);
+            }}
+            className={`min-h-[58px] border px-3 text-center transition ${
+              size === "12oz"
+                ? "border-[#C08C45] bg-[#C08C45] text-black"
+                : "border-[#BDA98A] bg-[#FBF6ED] text-[#071F35] hover:border-[#C08C45]"
+            }`}
+          >
+            <div
+              className="text-[0.76rem] font-bold"
+              style={{ fontFamily: "'Cinzel', serif" }}
+            >
+              12 OZ BAG
+            </div>
+          </button>
+        </div>
+      </div>
+
+      {/* PURCHASE MODE */}
+      <div className="mt-4">
+        <div className="grid grid-cols-2 gap-2.5">
+          <button
+            type="button"
+            onClick={() => setPurchaseMode("one")}
+            className={`min-h-[54px] border px-3 text-center transition ${
+              purchaseMode === "one"
+                ? "border-[#071F35] bg-[#071F35] text-[#F3EBDD]"
+                : "border-[#BDA98A] bg-[#FBF6ED] text-[#071F35] hover:border-[#C08C45]"
+            }`}
+          >
+            <div
+              className="text-[0.72rem] font-bold"
+              style={{ fontFamily: "'Cinzel', serif" }}
+            >
+              SINGLE PURCHASE
+            </div>
+          </button>
+
+          {!isOak ? (
+            <button
+              type="button"
+              disabled={size === "sample"}
+              onClick={() => {
+                if (size === "sample") return;
+                setPurchaseMode("sub");
+              }}
+              className={`min-h-[54px] border px-3 text-center transition ${
+                size === "sample"
+                  ? "cursor-not-allowed border-[#C9BCA8] bg-[#EFE6D8] text-[#A59C90]"
+                  : purchaseMode === "sub"
+                  ? "border-[#C08C45] bg-[#E9D7B9] text-[#071F35]"
+                  : "border-[#C08C45]/70 bg-[#FBF6ED] text-[#8A5B25] hover:bg-[#F0E1CA]"
+              }`}
+            >
+              <div
+                className="text-[0.72rem] font-bold"
+                style={{ fontFamily: "'Cinzel', serif" }}
+              >
+                SUBSCRIBE & SAVE 15%
+              </div>
+
+              {size === "12oz" && (
+                <div className="mt-0.5 text-[0.66rem] font-bold">
+                  $18.70 / BAG
+                </div>
+              )}
+            </button>
+          ) : (
+            <div className="flex min-h-[54px] flex-col justify-center border border-[#071F35] bg-[#071F35] px-3 text-center">
+              <div className="text-[0.56rem] font-bold tracking-[0.1em] text-[#E6C07F]">
+                PREMIUM RELEASE
+              </div>
+
+              <div className="mt-0.5 text-[0.72rem] font-black tracking-[0.05em] text-white">
+                NO DISCOUNTS
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* SUB FREQUENCY */}
+      {isSubscription && (
+        <div className="mt-3 border border-[#C08C45]/35 bg-[#F0E1CA] px-3 py-3">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <div className="text-[0.56rem] font-bold tracking-[0.1em] text-[#8A5B25]">
+                DELIVER EVERY
+              </div>
+
+              <div className="mt-0.5 text-[0.62rem] text-[#6F6254]">
+                Skip or cancel anytime.
+              </div>
+            </div>
+
+            <div className="flex gap-1.5">
+              {[14, 30, 60].map((days) => (
+                <button
+                  key={days}
+                  type="button"
+                  onClick={() => setSubEvery(days as 14 | 30 | 60)}
+                  className={`border px-3 py-2 text-[0.62rem] font-bold transition ${
+                    subEvery === days
+                      ? "border-[#071F35] bg-[#071F35] text-white"
+                      : "border-[#A88C68] bg-[#FBF6ED] text-[#6A5E52]"
+                  }`}
+                >
+                  {days} DAYS
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* PRICE / CART */}
+      <div className="mt-4 border border-[#BDA98A]/60 bg-[#FBF6ED] p-3.5">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="min-w-[125px]">
+            {isSubscription ? (
+              <>
+                <div className="text-[0.7rem] text-[#8D8275] line-through">
+                  ${basePrice.toFixed(2)}
+                </div>
+
+                <div className="text-[1.45rem] font-bold leading-none text-[#071F35]">
+                  ${discounted.toFixed(2)}
+                  <span className="ml-1 text-[0.62rem] font-normal text-[#766C61]">
+                    / bag
+                  </span>
+                </div>
+
+                <div className="mt-1 text-[0.56rem] font-bold tracking-[0.08em] text-[#8A5B25]">
+                  SAVE $3.30
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="text-[1.45rem] font-bold leading-none text-[#071F35]">
+                  ${basePrice.toFixed(2)}
+                  <span className="ml-1 text-[0.62rem] font-normal text-[#766C61]">
+                    {size === "sample" ? " / sample" : " / bag"}
+                  </span>
+                </div>
+              </>
+            )}
+          </div>
+
+          <div className="flex flex-1 items-stretch gap-2">
+            <QuantityControl
+              qty={qty}
+              setQty={setQty}
+              className="inline-flex shrink-0 items-center border border-[#BDA98A]"
+              buttonClassName="px-3 text-[#071F35] hover:bg-[#EEE1CE]"
+              inputClassName="w-10 border-x border-[#BDA98A] bg-white py-3 text-center text-sm text-[#071F35] outline-none"
+            />
+
+            <button
+              type="button"
+              onClick={addToChest}
+              disabled={adding}
+              className={`flex min-h-[48px] flex-1 items-center justify-center bg-[#C08C45] px-5 text-[0.72rem] font-bold tracking-[0.08em] text-black transition ${
+                adding ? "cursor-not-allowed opacity-60" : "hover:bg-[#D7A95D]"
+              }`}
+            >
+              {adding ? "ADDING..." : "ADD TO CHEST"}
+            </button>
+          </div>
+        </div>
+
+        <div className="mt-2 text-right text-[0.58rem] font-semibold tracking-[0.07em] text-[#7A6E61]">
+          FREE SHIPPING ON 3+ BAGS
+        </div>
+      </div>
+    </div>
   );
 }
 function useBuyBox(card: any) {
@@ -4683,15 +4799,15 @@ function useBuyBox(card: any) {
   const [size, setSize] = useState<"12oz" | "sample">("12oz");
   const [showBeanError, setShowBeanError] = useState(false);
 
-  const basePrice =
-    size === "sample"
-      ? card.slug === "oak-and-copper"
-        ? 6
-        : 5
-      : isOak
-      ? 24.99
-      : card.price ?? 19.99;
-  const discounted = isOak ? basePrice : Number((basePrice * 0.9).toFixed(2));
+  const basePrice = size === "sample" ? (isOak ? 6 : 5) : isOak ? 24.99 : 22;
+
+  const discounted = isOak ? basePrice : Number((basePrice * 0.85).toFixed(2));
+
+  useEffect(() => {
+    if (isOak && purchaseMode === "sub") {
+      setPurchaseMode("one");
+    }
+  }, [isOak, purchaseMode]);
 
   return {
     isOak,
@@ -4728,20 +4844,27 @@ function PriceDisplay({
     return (
       <>
         {!isOak && (
-          <span className="line-through text-[#9C9791] mr-2">
-            {fmt(basePrice)}
+          <span className="mr-2 text-[#9C9791] line-through">
+            ${basePrice.toFixed(2)}
           </span>
         )}
-        <span className="font-semibold text-[#E6C07F]">{fmt(discounted)}</span>
-        <span className="text-xs text-[#9C9791] ml-1">{sizeLabel}</span>
+
+        <span className="font-semibold text-[#E6C07F]">
+          ${discounted.toFixed(2)}
+        </span>
+
+        <span className="ml-1 text-xs text-[#9C9791]">{sizeLabel}</span>
       </>
     );
   }
 
   return (
     <>
-      <span className="font-semibold text-[#E6C07F]">{fmt(basePrice)}</span>
-      <span className="text-xs text-[#9C9791] ml-1">{sizeLabel}</span>
+      <span className="font-semibold text-[#E6C07F]">
+        ${basePrice.toFixed(2)}
+      </span>
+
+      <span className="ml-1 text-xs text-[#9C9791]">{sizeLabel}</span>
     </>
   );
 }
@@ -5304,6 +5427,7 @@ const EMPTY_REVIEW_BREAKDOWN: Record<number, number> = {
 
 function RoastDetailPage() {
   const { slug } = useParams();
+
   const [mobileToast, setMobileToast] = useState<null | {
     title: string;
     qty: number;
@@ -5313,6 +5437,15 @@ function RoastDetailPage() {
 
   if (!card) return <NotFoundPage />;
 
+  const productImages: Record<string, string> = {
+    flagship: "/flagship-bag1.jpg",
+    "baptism-by-fire": "/baptism-bag1.jpg",
+    "java-action": "/java-bag1.jpg",
+    "black-salvo": "/salvo-bag1.jpg",
+    "brass-monkey": "/brass-bag1.jpg",
+    "oak-and-copper": "/copper-bag1.jpg",
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
 
@@ -5321,13 +5454,12 @@ function RoastDetailPage() {
         content_name: card.title,
         content_ids: [card.slug],
         content_type: "product",
-        value: card.slug === "oak-and-copper" ? 24.99 : card.price ?? 19.99,
+        value: card.slug === "oak-and-copper" ? 24.99 : 22,
         currency: "USD",
       });
     }
-  }, []);
+  }, [card.slug]);
 
-  // review data used for stars + counts beside the subtitle and in the histogram
   type Review = {
     id: string;
     name: string;
@@ -5340,35 +5472,54 @@ function RoastDetailPage() {
 
   const shopifyProductId = PRODUCT_IDS_BY_SLUG[card.slug];
 
-  function computeStats(list: Review[]): ReviewStats {
+  function computeStats(list: Review[]): ReviewData {
     const count = list.length;
-    if (count === 0)
-      return { avg: 0, count: 0, breakdown: { ...EMPTY_REVIEW_BREAKDOWN } };
-    const breakdown: Record<number, number> = { ...EMPTY_REVIEW_BREAKDOWN };
+
+    if (count === 0) {
+      return {
+        avg: 0,
+        count: 0,
+        breakdown: { ...EMPTY_REVIEW_BREAKDOWN },
+      };
+    }
+
+    const breakdown: Record<number, number> = {
+      ...EMPTY_REVIEW_BREAKDOWN,
+    };
+
     let sum = 0;
+
     for (const r of list) {
       sum += r.rating;
       breakdown[r.rating] = (breakdown[r.rating] || 0) + 1;
     }
-    const avg = Math.round((sum / count) * 10) / 10;
-    return { avg, count, breakdown };
+
+    return {
+      avg: Math.round((sum / count) * 10) / 10,
+      count,
+      breakdown,
+    };
   }
 
   const [reviewList, setReviewList] = useState<Review[]>([]);
   const [reviewData, setReviewData] = useState<ReviewData>(() =>
     computeStats([])
   );
+  const [reviewsLoaded, setReviewsLoaded] = useState(false);
 
   useEffect(() => {
     if (!shopifyProductId) {
       setReviewList([]);
       setReviewData(computeStats([]));
+      setReviewsLoaded(true);
       return;
     }
 
     const controller = new AbortController();
 
     async function loadReviews() {
+      setReviewsLoaded(false);
+
       try {
         const res = await fetch(
           `/api/get-reviews?shopifyProductId=${encodeURIComponent(
@@ -5385,15 +5536,19 @@ function RoastDetailPage() {
         }
 
         const data = await res.json();
+
         const list: Review[] = Array.isArray(data.reviews) ? data.reviews : [];
 
         setReviewList(list);
         setReviewData(computeStats(list));
       } catch (err) {
         if (err instanceof DOMException && err.name === "AbortError") return;
+
         console.error("Error loading reviews", err);
         setReviewList([]);
         setReviewData(computeStats([]));
+      } finally {
+        setReviewsLoaded(true);
       }
     }
 
@@ -5401,8 +5556,11 @@ function RoastDetailPage() {
 
     return () => controller.abort();
   }, [shopifyProductId]);
+
   const reviews: Review[] = reviewList;
+
   const { add } = useCart();
+
   const {
     isOak,
     purchaseMode,
@@ -5421,29 +5579,28 @@ function RoastDetailPage() {
     setSize,
   } = useBuyBox(card);
 
-  // Shopify product + chosen variant
   const [shopifyProduct, setShopifyProduct] = useState<any>(null);
-  // Map Seal plan names -> 14/30/60
+
   const planMap = useMemo(() => {
     const map: Record<number, string> = {};
     const allPlans: { name: string; id: string }[] = [];
 
     const groups = shopifyProduct?.sellingPlanGroups?.edges ?? [];
+
     for (const g of groups) {
       const plans = g?.node?.sellingPlans?.edges ?? [];
+
       for (const e of plans) {
         const name = (e?.node?.name || "").toLowerCase();
         const id = e?.node?.id;
+
         if (!id) continue;
 
         allPlans.push({ name, id });
 
-        // 14-day / bi-weekly
         if (name.includes("14") || name.includes("bi-weekly")) {
           map[14] = id;
-        }
-        // 60-day / bi-monthly / every 2 months
-        else if (
+        } else if (
           name.includes("60") ||
           name.includes("every 2 months") ||
           name.includes("every 2 month") ||
@@ -5451,11 +5608,8 @@ function RoastDetailPage() {
           name.includes("bi-monthly") ||
           name.includes("bimonthly")
         ) {
-          // important: treat bi-monthly as 60d BEFORE generic "monthly"
           map[60] = id;
-        }
-        // 30-day / monthly (but not bi-monthly)
-        else if (
+        } else if (
           name.includes("30") ||
           name.includes("every 1 month") ||
           name.includes("every month") ||
@@ -5466,47 +5620,44 @@ function RoastDetailPage() {
       }
     }
 
-    // Fallback: if we have at least 3 plans and only 14 + 30 mapped,
-    // treat the remaining one as 60.
     if (!map[60] && allPlans.length >= 3) {
       const used = new Set([map[14], map[30]].filter(Boolean));
       const leftover = allPlans.find((p) => !used.has(p.id));
+
       if (leftover) map[60] = leftover.id;
     }
 
-    console.log("[DEBUG] planMap", map, allPlans);
     return map;
   }, [shopifyProduct]);
 
   const [merchandiseId, setMerchandiseId] = useState<string | null>(null);
   const [adding, setAdding] = useState(false);
-  // Use the real Shopify product handles now
 
-  // Reset Bean Type selector whenever you navigate to a different roast page
   useEffect(() => {
     let cancelled = false;
+
     async function run() {
       try {
         const handle = String(slug);
         const p = await getProductByHandle(handle);
 
-        // DEBUG: confirm selling plans are coming through
-        console.log("[DEBUG] FULL PRODUCT for", handle, p);
-        console.log(
-          "[DEBUG] sellingPlanGroups for",
-          handle,
-          p?.sellingPlanGroups
-        );
-
-        if (!cancelled) setShopifyProduct(p || null);
+        if (!cancelled) {
+          setShopifyProduct(p || null);
+        }
       } catch (e) {
         console.warn("[Shopify] getProductByHandle failed", e);
-        if (!cancelled) setShopifyProduct(null);
+
+        if (!cancelled) {
+          setShopifyProduct(null);
+        }
       }
     }
+
     setQty(1);
     setBeanType("");
     setShowBeanError(false);
+    setSize("12oz");
+    setPurchaseMode("one");
 
     if (slug) run();
 
@@ -5520,60 +5671,31 @@ function RoastDetailPage() {
       setMerchandiseId(null);
       return;
     }
+
     if (beanType !== "whole" && beanType !== "ground") {
       setMerchandiseId(null);
       return;
     }
+
     setMerchandiseId(pickVariantIdByBean(shopifyProduct, beanType));
   }, [shopifyProduct, beanType]);
-
-  // Mirror BUY BOX width/height so Bean Type box matches exactly
-  const buyBoxRef = useRef<HTMLDivElement>(null);
-  const [buyBoxDims, setBuyBoxDims] = useState<{ h: number }>({
-    h: 0,
-  });
-
-  useEffect(() => {
-    const el = buyBoxRef.current;
-
-    if (!el || typeof ResizeObserver === "undefined") {
-      const measure = () => {
-        if (!buyBoxRef.current) return;
-        const r = buyBoxRef.current.getBoundingClientRect();
-        setBuyBoxDims({ h: Math.round(r.height) });
-      };
-      measure();
-      const onResize = () => requestAnimationFrame(measure);
-      window.addEventListener("resize", onResize);
-      return () => window.removeEventListener("resize", onResize);
-    }
-
-    const ro = new ResizeObserver(() => {
-      if (!buyBoxRef.current) return;
-      const r = buyBoxRef.current.getBoundingClientRect();
-      setBuyBoxDims({ h: Math.round(r.height) });
-    });
-
-    ro.observe(el);
-
-    const r = el.getBoundingClientRect();
-    setBuyBoxDims({ h: Math.round(r.height) });
-
-    return () => {
-      ro.disconnect();
-    };
-  }, []);
 
   const addToChest = async () => {
     const n = qty > 0 ? Math.min(99, Math.trunc(qty)) : 1;
     setQty(n);
+
     if (!beanType) {
       setShowBeanError(true);
+
       window.dispatchEvent(
-        new CustomEvent("flash", { detail: "Please choose bean type." })
+        new CustomEvent("flash", {
+          detail: "Please choose bean type.",
+        })
       );
+
       return;
     }
+
     setShowBeanError(false);
 
     if (!shopifyProduct) {
@@ -5582,10 +5704,12 @@ function RoastDetailPage() {
           detail: "Product not loaded yet. Try again.",
         })
       );
+
       return;
     }
 
     const variantLabel = beanType === "whole" ? "Whole Bean" : "Ground";
+
     let merchId = merchandiseId;
 
     if (size === "sample") {
@@ -5599,24 +5723,25 @@ function RoastDetailPage() {
 
       merchId = match?.node?.id ?? null;
     }
+
     if (!merchId) {
       window.dispatchEvent(
-        new CustomEvent("flash", { detail: "Variant not found in Shopify." })
+        new CustomEvent("flash", {
+          detail: "Variant not found in Shopify.",
+        })
       );
+
       return;
     }
 
     try {
       setAdding(true);
 
-      // 1) ensure Shopify cart
       const cart = await ensureCart();
 
-      // 2) add to Shopify cart
-      // Force samples to be one-time only
-      const effectivePurchaseMode = size === "sample" ? "sample" : purchaseMode;
+      const effectivePurchaseMode =
+        size === "sample" || isOak ? "one" : purchaseMode;
 
-      // pick selling plan if subscribing
       const planId =
         effectivePurchaseMode === "sub" ? planMap[subEvery] : undefined;
 
@@ -5626,7 +5751,7 @@ function RoastDetailPage() {
             detail: "Subscription plan not available yet. Try again.",
           })
         );
-        setAdding(false);
+
         return;
       }
 
@@ -5642,24 +5767,22 @@ function RoastDetailPage() {
         },
       });
 
-      // 3) mirror to your local cart UI
+      const activePrice =
+        effectivePurchaseMode === "sub" ? discounted : basePrice;
+
       const itemToAdd = {
         ...card,
         id: `${card.slug}-${size}-${beanType}`,
         sku: `${card.slug}-${size}-${beanType}`,
         title: `${card.title} (${variantLabel})`,
-        // store both the regular one-time price and the active price
         basePrice,
-        price:
-          effectivePurchaseMode === "sub" ? discounted ?? basePrice : basePrice,
+        price: activePrice,
         beanType,
         purchaseMode: effectivePurchaseMode,
         isSubscription: effectivePurchaseMode === "sub",
         subEvery: effectivePurchaseMode === "sub" ? subEvery : undefined,
         merchandiseId: merchId,
-        // active plan used right now
         sellingPlanId: planId,
-        // map of frequency -> planId so drawers can swap correctly
         sellingPlans: {
           ...(planMap[14] ? { 14: planMap[14] } : {}),
           ...(planMap[30] ? { 30: planMap[30] } : {}),
@@ -5668,28 +5791,26 @@ function RoastDetailPage() {
       };
 
       add(itemToAdd, n);
-      // 🔥 META ADD TO CART
+
       if (typeof window !== "undefined" && (window as any).fbq) {
         (window as any).fbq("track", "AddToCart", {
           content_name: `${card.title} (${variantLabel})`,
           content_ids: [card.slug],
           content_type: "product",
-          value: purchaseMode === "sub" ? discounted : basePrice,
+          value: activePrice,
           currency: "USD",
         });
       }
-      // set mobile toast state so we can render a bottom banner on mobile
+
       setMobileToast({
         title: `${card.title} (${variantLabel})`,
         qty: n,
       });
 
-      // auto-hide after 2.5s
       setTimeout(() => {
         setMobileToast(null);
       }, 2500);
 
-      // still fire the existing desktop/global flash event
       window.dispatchEvent(
         new CustomEvent("flash", {
           detail: `${n} × ${card.title} (${variantLabel}) added to Chest`,
@@ -5697,6 +5818,7 @@ function RoastDetailPage() {
       );
     } catch (e) {
       console.error(e);
+
       window.dispatchEvent(
         new CustomEvent("flash", {
           detail: "Could not add to cart. Check console.",
@@ -5707,472 +5829,138 @@ function RoastDetailPage() {
     }
   };
 
+  const notes = CRAFT_IN_THE_CUP_DATA[card.slug]?.notes ?? [];
+
+  const hook =
+    CRAFT_IN_THE_CUP_DATA[card.slug]?.shortHook ??
+    "Roasted to order for a smooth, fresh cup.";
+
   return (
-    <main className="relative overflow-x-hidden min-h-[calc(100vh-140px)] -mt-6 pt-0 pb-6 md:mt-0 md:pt-4 xl:pt-8 md:pb-10 xl:pb-16 bg-black md:bg-transparent px-0 sm:px-4 lg:px-6 xl:px-12 2xl:px-16">
-      <Container className="relative z-10 mt-0 md:mt-0 max-w-[1080px] xl:max-w-[1400px] mx-auto w-full max-w-full px-0 sm:px-4">
-        {/* ===== HERO ===== */}
-        <div className="relative">
-          {/* emblem moved to live behind the bag (image wrapper) */}
-
-          <div className="relative z-10 mt-0 md:-mt-2 lg:-mt-4 grid w-full overflow-x-hidden lg:grid-cols-[440px,1fr] xl:grid-cols-[520px,1fr] 2xl:grid-cols-[620px,1fr] gap-5 lg:gap-4 xl:gap-2 2xl:gap-12 items-start">
-            {/* HERO IMAGE */}
-            <div className="flex flex-col items-center md:items-start w-full md:w-auto relative mt-0 md:mt-0">
-              <div className="relative z-10 flex flex-col items-center md:items-start w-full md:w-auto">
-                {card.isNew && (
-                  <div className="absolute top-4 left-1/2 -translate-x-1/2 md:top-10 md:left-8 md:translate-x-0 z-20 px-3 py-1 text-[11px] md:text-xs font-bold bg-[#C08C45] text-black rounded shadow-md">
-                    JUST RELEASED
-                  </div>
-                )}
-
-                <div className="relative -mt-6 md:-mt-8 xl:-mt-12 2xl:-mt-16 w-full flex justify-center md:justify-start overflow-hidden">
-                  <div className="pointer-events-none absolute inset-0 z-20 shadow-[inset_0_0_40px_20px_rgba(0,0,0,0.75)]" />
-
-                  <img
-                    src={
-                      (card.detailImg || card.img)?.startsWith("/") ||
-                      (card.detailImg || card.img)?.startsWith("http")
-                        ? card.detailImg || card.img
-                        : `/${card.detailImg || card.img}`
-                    }
-                    alt={card.title}
-                    loading="eager"
-                    decoding="async"
-                    className="relative z-10 block w-full max-w-[400px] md:max-w-[430px] xl:max-w-[440px] 2xl:max-w-[820px] h-auto object-contain mx-auto"
-                  />
-                </div>
+    <main className="bg-[#F3EBDD] text-[#071F35]">
+      {/* HERO / BUY AREA */}
+      <section className="border-b border-[#C08C45]/25 px-4 pb-8 pt-5 sm:px-5 md:px-8 md:pb-10 md:pt-7">
+        <div className="mx-auto grid max-w-[1500px] gap-6 lg:grid-cols-[48%_52%] lg:items-start lg:gap-10">
+          {/* PRODUCT IMAGE */}
+          <div className="relative overflow-hidden border border-[#A68459]/30 bg-[#EEE2CF]">
+            {card.isNew && (
+              <div className="absolute left-4 top-4 z-20 bg-[#071F35] px-3 py-1.5 text-[0.55rem] font-bold tracking-[0.12em] text-[#E6C07F]">
+                JUST RELEASED
               </div>
-            </div>
+            )}
 
-            {/* ...rest of your text column stays exactly the same */}
-
-            {/* 2/3/4/5/6 live together in this column so desktop still sees one text column */}
-            <div className="order-2 md:order-none self-start flex flex-col space-y-3 -mt-4 md:mt-0 w-full min-w-0 overflow-hidden">
-              {/* ===== TITLE / SUBTITLE / STARS (Mobile #1, Desktop #1) ===== */}
-              <div className="order-1 md:order-1 -mt-4 md:mt-0 mb-0 flex items-start justify-between gap-3">
-                <div className="w-full">
-                  {/* Title */}
-                  <h1
-                    className="m-0 text-4xl md:text-5xl xl:text-6xl font-extrabold tracking-tight leading-tight"
-                    style={{
-                      color: "#C08C45",
-                      fontFamily: "'Cinzel', serif",
-                      fontWeight: 800,
-                    }}
-                  >
-                    {card.title}
-                  </h1>
-
-                  {/* Subtitle + stars + short hook */}
-                  <div className="mt-0 max-w-[72ch]">
-                    <div className="flex flex-wrap items-center gap-y-1">
-                      <div
-                        className="text-base md:text-[1.2rem]"
-                        style={{ color: "rgba(255,255,255,0.55)" }}
-                      >
-                        {card.subTitle}
-                      </div>
-
-                      <div
-                        className="flex items-center gap-2 ml-4 md:ml-20"
-                        style={{ color: "#C08C45" }}
-                      >
-                        <StarRatingDisplay
-                          avg={reviewData.avg ?? 0}
-                          count={reviewData.count}
-                          sizeClass="h-4 w-4 md:h-4 md:w-4"
-                          clipIdPrefix="titleStar"
-                          numberClassName="font-semibold tabular-nums text-sm"
-                          countClassName="text-[10px] md:text-xs tracking-wide whitespace-nowrap"
-                          showNumber
-                          showCount
-                          linkToReviews
-                        />
-                      </div>
-                    </div>
-
-                    <p
-                      className="mt-3 max-w-[54ch] text-base md:text-lg leading-relaxed"
-                      style={{ color: "rgba(255,255,255,0.60)" }}
-                    >
-                      {CRAFT_IN_THE_CUP_DATA[card.slug]?.shortHook ??
-                        "Roasted to order for a smooth, fresh cup."}
-                    </p>
-
-                    {/* DIVIDER */}
-                    <div className="flex items-center w-full max-w-[560px] mt-3 md:mt-4">
-                      <div className="h-px flex-1 bg-[#C08C45]/40" />
-                      <span className="px-2 md:px-3 text-[#E6C07F]/70 text-base md:text-lg leading-none">
-                        ★
-                      </span>
-                      <div className="h-px flex-1 bg-[#C08C45]/40" />
-                    </div>
-                    {/* SIGNATURE NOTES */}
-                    <div className="mt-4 md:mt-5 w-full max-w-[560px]">
-                      <div
-                        className="text-[11px] tracking-[0.2em] mb-3 font-semibold uppercase"
-                        style={{ color: "#8A6E4A" }}
-                      >
-                        SIGNATURE NOTES
-                      </div>
-
-                      <div className="grid grid-cols-3 border-b border-[#C08C45]/55 pb-4">
-                        {(CRAFT_IN_THE_CUP_DATA[card.slug]?.notes ?? []).map(
-                          (note, index, arr) => {
-                            const iconMap: Record<string, string> = {
-                              Hazelnut: "/symbols/hazelnut.png",
-                              "Warm Spice": "/symbols/spice1.png",
-                              Cream: "/symbols/cream1.png",
-
-                              Chocolate: "/symbols/chocolate1.png",
-                              Molasses: "/symbols/molasses1.png",
-                              Smoke: "/symbols/smoke1.png",
-
-                              Vanilla: "/symbols/vanilla1.png",
-                              Cocoa: "/symbols/cocoa1.png",
-                              Almond: "/symbols/almond1.png",
-
-                              Caramel: "/symbols/caramel1.png",
-                              "Red Apple": "/symbols/apple1.png",
-
-                              Oak: "/symbols/oak3.png",
-
-                              Pecan: "/symbols/pecan.jpg",
-                              "Brown Sugar": "/symbols/sugar.png",
-                              Spice: "/symbols/spice1.png",
-                            };
-
-                            return (
-                              <div
-                                key={note}
-                                className={`flex flex-col items-center justify-center px-2 py-1 ${
-                                  index !== arr.length - 1
-                                    ? "border-r border-[#6D5333]/70"
-                                    : ""
-                                }`}
-                              >
-                                <img
-                                  src={iconMap[note]}
-                                  alt={note}
-                                  className="h-9 w-9 md:h-10 md:w-10 object-contain opacity-95"
-                                />
-
-                                <span className="mt-2 text-[10px] md:text-[11px] font-bold uppercase tracking-[0.14em] text-[#B5976D] text-center leading-tight">
-                                  {note}
-                                </span>
-                              </div>
-                            );
-                          }
-                        )}
-                      </div>
-                      {/* BEST FOR */}
-                      <div className="mt-4 md:mt-5 w-full max-w-[560px]">
-                        <div className="flex items-center gap-2 mb-3">
-                          <div
-                            className="text-[11px] tracking-[0.2em] font-semibold uppercase shrink-0"
-                            style={{ color: "#8A6E4A" }}
-                          >
-                            BEST FOR
-                          </div>
-                          <div className="h-px flex-1 bg-[#C08C45]/55" />
-                        </div>
-
-                        <div className="grid grid-cols-3 gap-y-4 border-b border-[#C08C45]/55 pb-4">
-                          {(
-                            CRAFT_IN_THE_CUP_DATA[card.slug]?.bestFor ?? []
-                          ).map((item) => {
-                            const bestForIconMap: Record<string, string> = {
-                              "Daily drinkers": "/symbols/cup1.png",
-                              Drip: "/symbols/dripbrewer1.png",
-                              "French press": "/symbols/frenchpress1.png",
-                              "Cold brew": "/symbols/coldbrew1.png",
-
-                              "Dark roast lovers": "/symbols/DOUBLE BEAN.png",
-                              "Strong coffee drinkers": "/symbols/cup1.png",
-                              Espresso: "/symbols/espresso1.png",
-                              "Black or with cream": "/symbols/cream1.png",
-
-                              "Pour over": "/symbols/pourer1.png",
-                              "Bourbon lovers": "/symbols/oak3.png",
-                              "Premium drip": "/symbols/dripbrewer1.png",
-                              "Cold weather mornings": "/symbols/snowflake.png",
-                            };
-
-                            return (
-                              <div
-                                key={item}
-                                className="flex flex-col items-center justify-start px-2 text-center"
-                              >
-                                <img
-                                  src={bestForIconMap[item]}
-                                  alt={item}
-                                  className="h-9 w-9 md:h-10 md:w-10 object-contain opacity-95"
-                                />
-
-                                <span className="mt-2 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.12em] text-[#B5976D] leading-tight">
-                                  {item}
-                                </span>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-                      {(card.canBuy || isOak) && (
-                        <div className="mt-6">
-                          <div
-                            className="text-[11px] tracking-[0.2em] mb-3 font-semibold uppercase"
-                            style={{ color: "#B39871" }}
-                          >
-                            SELECT YOUR PREP
-                          </div>
-
-                          <div className="grid grid-cols-2 gap-3">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                setBeanType("whole");
-                                setShowBeanError(false);
-                              }}
-                              className={
-                                "relative h-[52px] md:h-[58px] overflow-visible border rounded-md px-2 md:px-4 text-left transition " +
-                                (beanType === "whole"
-                                  ? "bg-[#32220D] border-[#6D5333] text-[#E6C07F]"
-                                  : "bg-[#130E08] border-[#6D5333]/70 text-[#9C9791]")
-                              }
-                            >
-                              <img
-                                src="/wb-symbol.png"
-                                alt=""
-                                className="pointer-events-none absolute left-[8px] md:left-[20px] top-1/2 h-[58px] w-[58px] md:h-[92px] md:w-[92px] -translate-y-1/2 object-contain"
-                              />
-                              <div className="flex h-full w-full items-center justify-center">
-                                <div className="pl-[42px] md:pl-[54px] text-center leading-tight">
-                                  <div className="text-[12px] md:text-[16px] font-black tracking-wide font-cinzel">
-                                    WHOLE BEAN
-                                  </div>
-                                  <div className="mt-0.5 text-[10px] md:text-[13px] font-semibold opacity-75">
-                                    Best for grinders
-                                  </div>
-                                </div>
-                              </div>
-                            </button>
-
-                            <button
-                              type="button"
-                              disabled={size === "sample"}
-                              onClick={() => {
-                                if (size === "sample") return;
-                                setBeanType("ground");
-                                setShowBeanError(false);
-                              }}
-                              className={
-                                "relative h-[52px] md:h-[58px] overflow-visible border rounded-md px-2 md:px-4 text-left transition " +
-                                (size === "sample"
-                                  ? "bg-[#130E08] border-[#6D5333]/40 text-[#6D6D6D] opacity-50 cursor-not-allowed"
-                                  : beanType === "ground"
-                                  ? "bg-[#32220D] border-[#6D5333] text-[#E6C07F]"
-                                  : "bg-[#130E08] border-[#6D5333]/70 text-[#9C9791]")
-                              }
-                            >
-                              <img
-                                src="/g-symbol.png"
-                                alt=""
-                                className="pointer-events-none absolute left-[10px] md:left-[20px] top-1/2 h-[46px] w-[46px] md:h-[70px] md:w-[70px] -translate-y-1/2 object-contain"
-                              />
-                              <div className="flex h-full w-full items-center justify-center">
-                                <div className="pl-[42px] md:pl-[54px] text-center leading-tight">
-                                  <div className="text-[12px] md:text-[16px] font-black tracking-wide font-cinzel">
-                                    GROUND
-                                  </div>
-                                  <div className="mt-0.5 text-[10px] md:text-[13px] font-semibold opacity-75">
-                                    Ready to brew
-                                  </div>
-                                </div>
-                              </div>
-                            </button>
-                          </div>
-                        </div>
-                      )}
-                      {/* CHOOSE YOUR SIZE */}
-                      {(card.canBuy || isOak) && (
-                        <div className="mt-6 w-full max-w-[620px]">
-                          <div
-                            className="text-[11px] tracking-[0.2em] mb-3 font-semibold uppercase"
-                            style={{ color: "#B39871" }}
-                          >
-                            CHOOSE YOUR SIZE
-                          </div>
-
-                          <div className="grid grid-cols-3 gap-1.5 md:gap-3">
-                            {/* SAMPLE PACK */}
-                            <button
-                              type="button"
-                              onClick={() => {
-                                setSize("sample");
-                                setPurchaseMode("one");
-                                setBeanType("whole");
-                                setShowBeanError(false);
-                              }}
-                              className="h-[88px] md:h-[72px] border rounded-md px-4 text-center transition"
-                              style={{
-                                borderColor: "#6D5333",
-                                color:
-                                  size === "sample" ? "#E6C07F" : "#9C9791",
-                                backgroundColor:
-                                  size === "sample" ? "#32220D" : "#130E08",
-                              }}
-                            >
-                              <div className="font-cinzel text-[15px] font-black tracking-wide">
-                                SAMPLE (2.5 OZ)
-                              </div>
-
-                              <div className="mt-1 text-[11px] font-semibold text-[#B39871]">
-                                Whole Bean Only
-                              </div>
-                            </button>
-
-                            {/* 12 OZ BAG - ACTIVE */}
-                            <button
-                              type="button"
-                              onClick={() => {
-                                setSize("12oz");
-                                setPurchaseMode("one");
-                                setShowBeanError(false);
-                              }}
-                              className="h-[88px] md:h-[72px] border rounded-md px-4 text-center transition"
-                              style={{
-                                borderColor: "#6D5333",
-                                color: size === "12oz" ? "#E6C07F" : "#9C9791",
-                                backgroundColor:
-                                  size === "12oz" ? "#32220D" : "#130E08",
-                              }}
-                            >
-                              <div className="font-cinzel text-[15px] font-black tracking-wide">
-                                12 OZ BAG
-                              </div>
-                            </button>
-
-                            {/* 5 LB BAG */}
-                            {/* 5 LB BAG */}
-                            <button
-                              type="button"
-                              disabled
-                              className="h-[88px] md:h-[72px] border rounded-md px-4 text-center opacity-60 cursor-not-allowed"
-                              style={{
-                                borderColor: "#6D5333",
-                                color: "#9C9791",
-                                backgroundColor: "#130E08",
-                              }}
-                            >
-                              <div className="font-cinzel text-[15px] font-black tracking-wide">
-                                5 LB BAG
-                              </div>
-
-                              <div className="mt-1 text-[10px] md:text-[11px] tracking-wide">
-                                Coming Soon
-                              </div>
-                            </button>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* ===== END TITLE BLOCK ===== */}
-
-              {/* ===== MOBILE BUY BOX STYLE (md:hidden) ===== */}
-              {(card.canBuy || isOak) && (
-                <>
-                  <BuyBoxSection
-                    mobile
-                    size={size}
-                    card={card}
-                    isOak={isOak}
-                    purchaseMode={purchaseMode}
-                    setPurchaseMode={setPurchaseMode}
-                    subEvery={subEvery}
-                    setSubEvery={setSubEvery}
-                    basePrice={basePrice}
-                    discounted={discounted}
-                    beanType={beanType}
-                    setBeanType={setBeanType}
-                    showBeanError={showBeanError}
-                    setShowBeanError={setShowBeanError}
-                    qty={qty}
-                    setQty={setQty}
-                    addToChest={addToChest}
-                    adding={adding}
-                  />
-
-                  {mobileToast && (
-                    <div className="fixed left-0 right-0 top-1/2 transform -translate-y-1/2 z-[9999] px-4 md:hidden">
-                      <div className="w-full rounded-lg border border-[#C08C45]/70 bg-[#C08C45]/90 text-black shadow-lg shadow-[#C08C45]/20 px-6 py-4 flex items-center justify-center gap-4">
-                        <div className="flex-1 text-center">
-                          <div className="text-xl font-bold text-black">
-                            Added to Chest
-                          </div>
-                          <div className="text-lg font-bold text-neutral-800 leading-snug">
-                            {mobileToast.qty} × {mobileToast.title}
-                          </div>
-                        </div>
-
-                        <button
-                          type="button"
-                          onClick={() => setMobileToast(null)}
-                          className="text-[12px] text-neutral-500 hover:text-neutral-200"
-                          aria-label="Close message"
-                        >
-                          ✕
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </>
-              )}
-
-              {/* ================= DESKTOP VERSION (hidden on mobile) ================= */}
-              {(card.canBuy || isOak) && (
-                <BuyBoxSection
-                  card={card}
-                  size={size}
-                  isOak={isOak}
-                  purchaseMode={purchaseMode}
-                  setPurchaseMode={setPurchaseMode}
-                  subEvery={subEvery}
-                  setSubEvery={setSubEvery}
-                  basePrice={basePrice}
-                  discounted={discounted}
-                  beanType={beanType}
-                  setBeanType={setBeanType}
-                  showBeanError={showBeanError}
-                  setShowBeanError={setShowBeanError}
-                  qty={qty}
-                  setQty={setQty}
-                  addToChest={addToChest}
-                  adding={adding}
-                  buyBoxRef={buyBoxRef}
-                  buyBoxDims={buyBoxDims}
-                />
-              )}
-
-              {/* ===== END STORY ===== */}
-              {/* Hide on desktop, visible on mobile */}
-              <div className="md:hidden">
-                {/* Add any additional mobile content adjustments if needed */}
-              </div>
-            </div>
-            {/* end right column for desktop / stacked column for mobile */}
+            <img
+              src={productImages[card.slug]}
+              alt={`${card.title} coffee`}
+              loading="eager"
+              decoding="async"
+              className="aspect-[4/4.4] w-full object-cover object-center lg:aspect-[4/4.25]"
+            />
           </div>
-          {/* end hero grid */}
+
+          {/* PRODUCT INFO */}
+          <div className="lg:pt-1">
+            <div className="text-[0.62rem] font-bold tracking-[0.22em] text-[#A36F2C]">
+              OLD IRONSIDES COFFEE
+            </div>
+
+            <h1
+              className="mt-2 text-[2.35rem] font-semibold leading-[0.96] text-[#071F35] sm:text-[2.8rem] lg:text-[3.3rem]"
+              style={{ fontFamily: "'Cinzel', serif" }}
+            >
+              {card.title}
+            </h1>
+
+            <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-2">
+              <div className="text-[0.86rem] font-bold tracking-[0.08em] text-[#A36F2C]">
+                {card.subTitle}
+              </div>
+
+              {reviewsLoaded && reviewData.count > 0 && (
+                <div className="text-[#C08C45]">
+                  <StarRatingDisplay
+                    avg={reviewData.avg}
+                    count={reviewData.count}
+                    sizeClass="h-4 w-4"
+                    clipIdPrefix={`hero-${card.slug}`}
+                    numberClassName="text-[0.72rem] font-bold text-[#071F35]"
+                    countClassName="text-[0.66rem] font-semibold text-[#716658]"
+                    showNumber
+                    showCount
+                    linkToReviews
+                  />
+                </div>
+              )}
+            </div>
+
+            <p className="mt-3 max-w-[610px] text-[0.9rem] leading-[1.55] text-[#56514B]">
+              {hook}
+            </p>
+
+            {/* NOTES */}
+            {notes.length > 0 && (
+              <div className="mt-5 border-y border-[#C08C45]/30 py-4">
+                <div className="text-[0.58rem] font-bold tracking-[0.18em] text-[#8A5B25]">
+                  SIGNATURE NOTES
+                </div>
+
+                <div className="mt-2.5 flex flex-wrap gap-2">
+                  {notes.map((note) => (
+                    <div
+                      key={note}
+                      className="border border-[#BDA98A]/70 bg-[#FBF6ED] px-3 py-2 text-[0.68rem] font-bold tracking-[0.07em] text-[#5E554B]"
+                    >
+                      {note.toUpperCase()}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {(card.canBuy || isOak) && (
+              <BuyBoxSection
+                card={card}
+                size={size}
+                setSize={setSize}
+                isOak={isOak}
+                purchaseMode={purchaseMode}
+                setPurchaseMode={setPurchaseMode}
+                subEvery={subEvery}
+                setSubEvery={setSubEvery}
+                basePrice={basePrice}
+                discounted={discounted}
+                beanType={beanType}
+                setBeanType={setBeanType}
+                showBeanError={showBeanError}
+                setShowBeanError={setShowBeanError}
+                qty={qty}
+                setQty={setQty}
+                addToChest={addToChest}
+                adding={adding}
+              />
+            )}
+          </div>
         </div>
-      </Container>
-      {/* ===== PER-ROAST "THE CRAFT IN THE CUP" SECTION ===== */}
+      </section>
+
       <RoastUnified
         slug={card.slug}
         reviewData={reviewData}
         reviews={reviews}
       />
+
+      {mobileToast && (
+        <div className="fixed bottom-5 left-4 right-4 z-[9999] md:hidden">
+          <div className="border border-[#C08C45] bg-[#071F35] px-5 py-4 text-center shadow-2xl">
+            <div className="text-[0.65rem] font-bold tracking-[0.12em] text-[#E6C07F]">
+              ADDED TO CHEST
+            </div>
+
+            <div className="mt-1 text-sm font-semibold text-white">
+              {mobileToast.qty} × {mobileToast.title}
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
@@ -7080,36 +6868,35 @@ function RoastUnified({
     {
       title: string;
       paragraphs: string[];
-      level: 1 | 2 | 3 | 4 | 5;
     }
   > = {
     flagship: {
-      title: "USS Constitution - Commissioned October 21, 1797",
+      title: "USS Constitution — Commissioned October 21, 1797",
       paragraphs: [
         "Commissioned by President George Washington, the USS Constitution was built to stand as the strength and pride of a new Republic. She was one of six great frigates launched to secure America’s place on the seas, yet time and war would claim all but one.",
         "Through every storm and every battle, the Constitution endured. Today she stands as a living symbol of the nation she was made to defend.",
         "This roast honors that legacy, steady and enduring as the ship herself. Smooth, balanced, and bold, our Flagship Medium Roast carries her spirit in every cup.",
       ],
-      level: 3,
     },
+
     "baptism-by-fire": {
-      title: "USS Constitution vs HMS Guerriere - August 19, 1812",
+      title: "USS Constitution vs HMS Guerriere — August 19, 1812",
       paragraphs: [
         "Off the coast of Nova Scotia, the Constitution met the British frigate Guerriere in her first great trial at sea. As they drew within range, the sea erupted with the thunder of broadside cannons. British shot struck hard against the hull of the American frigate but failed to pierce it. A British sailor, awestruck by what he saw, shouted, “Her sides are made of iron!”",
         "Through smoke and cannon fire, the Guerriere’s masts splintered and her decks shattered. She fought bravely, but her rigging fell to ruin and her colors were struck. As flames consumed what remained, Old Ironsides sailed on, scarred yet unbroken, carrying a nation’s pride upon the sea.",
         "This bold roast carries that victory forward in every cup and enduring as the ship herself.",
       ],
-      level: 4,
     },
+
     "java-action": {
-      title: "USS Constitution vs HMS Java - December 29, 1812",
+      title: "USS Constitution vs HMS Java — December 29, 1812",
       paragraphs: [
         "In the wake of HMS Guerriere’s defeat, the Royal Navy cast its hope upon the formidable HMS Java to restore British honor. Swift, heavily armed, and set upon the hunt for the USS Constitution, she was expected to sink the American frigate once and for all.",
         "Off Brazil’s sunlit coast, the sea became the battlefield. Broadsides clashed, cannons roared, masts splintered, and the resolve of a young nation was tested once again. Out from the smoke and chaos, scarred but victorious, Old Ironsides watched as the Java burned in fiery defeat.",
         "This medium roast carries that victory forward in every cup, with a smooth, full-bodied flavor and a finish as enduring as Old Ironsides herself.",
       ],
-      level: 3,
     },
+
     "black-salvo": {
       title: "Black Salvo",
       paragraphs: [
@@ -7117,8 +6904,8 @@ function RoastUnified({
         "Black Salvo is roasted with that same intent. Bold yet remarkably smooth, this balanced blend delivers the depth and richness of a true espresso while remaining clean and easy to drink across any brew method.",
         "Built for strength, refined for everyday use, and steady from the first cup to the last.",
       ],
-      level: 3,
     },
+
     "oak-and-copper": {
       title: "Wrapped in Oak Above, Clad in Copper Below",
       paragraphs: [
@@ -7126,8 +6913,8 @@ function RoastUnified({
         "Born for speed, maneuver, and endurance, she cut through the waves, mastered the cannons, and earned her place among the legends of the sea.",
         "This bourbon barrel aged roast honors the shipwrights whose craft carried her through storms, battle, and into history.",
       ],
-      level: 3,
     },
+
     "brass-monkey": {
       title: 'The "Brass Monkey" Myth',
       paragraphs: [
@@ -7137,52 +6924,211 @@ function RoastUnified({
         "This roast salutes that folklore with a grin and a shiver. Bold, warming, and cold-weather approved. It cuts through the cold with rich, comforting flavor.",
         "Perfect for mornings so cold you question every choice that brought you outside.",
       ],
-      level: 3,
     },
   };
 
   const data = DATA[slug];
+
   if (!data) return null;
 
+  const craft = CRAFT_IN_THE_CUP_DATA[slug];
+
   return (
-    <section className="relative left-1/2 right-1/2 -mx-[50vw] w-screen">
-      <div className="border-t-2 border-[#C08C45]/70 relative translate-y-3 md:translate-y-6 w-[110%] -ml-[5%]" />
-      <div className="bg-black mt-[-1px]">
-        <Container className="pt-6 md:pt-8 pb-6 md:pb-10">
-          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(460px,520px)] lg:gap-10 items-start">
-            <div className="max-w-[80ch] md:pt-6 space-y-8">
-              <CraftInTheCupBlock slug={slug} />
-
-              <div className="h-px w-full bg-[#6D5333]/70" />
-
-              <RoastStoryBlock
-                title={data.title}
-                paragraphs={data.paragraphs}
-              />
+    <>
+      {/* =====================================================
+          CRAFT — NAVY
+      ====================================================== */}
+      <section className="bg-[#071421] px-5 py-9 text-[#E6DCC8] md:px-8 md:py-11">
+        <div className="mx-auto grid max-w-[1500px] gap-7 lg:grid-cols-[0.75fr_1.25fr] lg:gap-12">
+          <div>
+            <div className="text-[0.62rem] font-bold tracking-[0.25em] text-[#C08C45]">
+              THE CRAFT IN THE CUP
             </div>
 
-            <aside className="hidden md:block md:self-start md:justify-self-end w-full max-w-[520px] md:sticky md:top-14 md:mt-6">
-              <CareCard />
-            </aside>
+            <h2
+              className="mt-2 text-[2rem] font-semibold leading-[1] text-[#F3EBDD] md:text-[2.35rem]"
+              style={{ fontFamily: "'Cinzel', serif" }}
+            >
+              BUILT AROUND THE ROAST.
+            </h2>
           </div>
-        </Container>
 
-        <div className="block md:hidden bg-black">
-          <Container className="pt-2 pb-0">
-            <div className="mt-0">
-              <CareCard />
+          <div>
+            <p className="max-w-[760px] text-[0.92rem] leading-[1.7] text-[#D5CEC4]">
+              {craft?.shortHook ??
+                "Roasted in small batches and made to order for a fresher, more deliberate cup."}
+            </p>
+
+            {craft?.notes?.length > 0 && (
+              <div className="mt-5 flex flex-wrap gap-2">
+                {craft.notes.map((note: string) => (
+                  <span
+                    key={note}
+                    className="border border-[#C08C45]/35 px-3 py-2 text-[0.62rem] font-bold tracking-[0.1em] text-[#E6C07F]"
+                  >
+                    {note.toUpperCase()}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            <div className="mt-5 text-[0.64rem] font-semibold tracking-[0.08em] text-[#AFA79B]">
+              ROASTED TO ORDER • MONDAY & THURSDAY
             </div>
-          </Container>
+          </div>
         </div>
+      </section>
 
-        <div className="border-t-2 border-[#C08C45]/70 relative mt-6 md:mt-8 w-[110%] -ml-[5%]" />
-        <div className="bg-black">
-          <Container className="pt-6 md:pt-8 pb-6 md:pb-10">
-            <RoastLevelAnchors reviewData={reviewData} reviews={reviews} />
-          </Container>
+      {/* =====================================================
+          HISTORY — PARCHMENT
+      ====================================================== */}
+      <section className="bg-[#F3EBDD] px-5 py-10 md:px-8 md:py-12">
+        <div className="mx-auto grid max-w-[1500px] gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:gap-12">
+          <article>
+            <div className="text-[0.62rem] font-bold tracking-[0.25em] text-[#A36F2C]">
+              THE STORY BEHIND THE ROAST
+            </div>
+
+            <h2
+              className="mt-2 max-w-[900px] text-[1.8rem] font-semibold leading-[1.1] text-[#071F35] md:text-[2.25rem]"
+              style={{ fontFamily: "'Cinzel', serif" }}
+            >
+              {data.title}
+            </h2>
+
+            <div className="mt-5 max-w-[820px] space-y-4">
+              {data.paragraphs.map((paragraph) => (
+                <p
+                  key={paragraph}
+                  className="text-[0.9rem] leading-[1.75] text-[#514D46]"
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </article>
+
+          {/* STORAGE */}
+          <aside className="self-start border border-[#C08C45]/40 bg-[#F8EFE1] p-5 md:p-6">
+            <div className="text-[0.6rem] font-bold tracking-[0.2em] text-[#A36F2C]">
+              COFFEE STORAGE
+            </div>
+
+            <h3
+              className="mt-2 text-[1.25rem] font-semibold text-[#071F35]"
+              style={{ fontFamily: "'Cinzel', serif" }}
+            >
+              KEEP IT FRESH.
+            </h3>
+
+            <div className="mt-4 space-y-3 text-[0.78rem] leading-[1.55] text-[#5D554B]">
+              <p>
+                Keep unopened bags sealed in a cool, dry place until you are
+                ready to use them.
+              </p>
+
+              <p>
+                Once opened, keep coffee airtight and away from heat, moisture,
+                and direct sunlight.
+              </p>
+
+              <p>
+                For the best cup, grind whole bean coffee immediately before
+                brewing whenever possible.
+              </p>
+            </div>
+
+            <div className="mt-4 border-t border-[#C08C45]/25 pt-3 text-[0.6rem] font-bold tracking-[0.1em] text-[#8A5B25]">
+              FRESH COFFEE. SMALL BATCHES. ROASTED TO ORDER.
+            </div>
+          </aside>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* =====================================================
+          LIVE REVIEWS
+      ====================================================== */}
+      {reviewData.count > 0 && (
+        <section
+          id="reviews"
+          className="border-t border-[#C08C45]/25 bg-[#EFE4D3] px-5 py-10 md:px-8 md:py-12"
+        >
+          <div className="mx-auto max-w-[1500px]">
+            <div className="flex flex-col gap-3 border-b border-[#A68459]/30 pb-5 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <div className="text-[0.62rem] font-bold tracking-[0.25em] text-[#A36F2C]">
+                  CUSTOMER REVIEWS
+                </div>
+
+                <h2
+                  className="mt-2 text-[2rem] font-semibold text-[#071F35]"
+                  style={{ fontFamily: "'Cinzel', serif" }}
+                >
+                  WHAT THE FLEET SAYS.
+                </h2>
+              </div>
+
+              <div className="text-[#C08C45]">
+                <StarRatingDisplay
+                  avg={reviewData.avg}
+                  count={reviewData.count}
+                  sizeClass="h-5 w-5"
+                  clipIdPrefix={`reviews-${slug}`}
+                  numberClassName="font-bold text-[#071F35]"
+                  countClassName="text-[0.7rem] font-semibold text-[#655C51]"
+                  showNumber
+                  showCount
+                />
+              </div>
+            </div>
+
+            <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+              {reviews.map((review) => (
+                <article
+                  key={review.id}
+                  className="border border-[#A68459]/35 bg-[#FBF6ED] p-5"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="font-bold text-[#071F35]">
+                      {review.name}
+                    </div>
+
+                    <div className="text-[0.64rem] text-[#82776A]">
+                      {formatReviewDate(review.date)}
+                    </div>
+                  </div>
+
+                  <div className="mt-2">
+                    <ReviewStars
+                      rating={review.rating}
+                      sizeClass="h-3.5 w-3.5"
+                    />
+                  </div>
+
+                  {review.title && (
+                    <div className="mt-3 text-[0.82rem] font-bold text-[#3F3A34]">
+                      {review.title}
+                    </div>
+                  )}
+
+                  {review.body && (
+                    <p className="mt-2 text-[0.78rem] leading-[1.6] text-[#625A50]">
+                      {review.body}
+                    </p>
+                  )}
+
+                  {review.verified && (
+                    <div className="mt-4 text-[0.56rem] font-bold tracking-[0.12em] text-[#A36F2C]">
+                      VERIFIED BUYER
+                    </div>
+                  )}
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+    </>
   );
 }
 function StorePage() {
@@ -12186,6 +12132,7 @@ function AppShell() {
           <Route path="roasting-process" element={<RoastingProcessPage />} />
           <Route path="sourcing" element={<SourcingPage />} />
           <Route path="mission" element={<MissionPage />} />
+          <Route path="roast/:slug" element={<RoastDetailPage />} />
         </Route>
 
         <Route element={<Layout />}>
@@ -12194,7 +12141,6 @@ function AppShell() {
             path="roast/armada-sample-pack"
             element={<ArmadaSamplePage />}
           />
-          <Route path="roast/:slug" element={<RoastDetailPage />} />
 
           <Route path="store/:slug" element={<StoreCategoryPage />} />
           <Route path="subscriptions" element={<SubscriptionLandingPage />} />

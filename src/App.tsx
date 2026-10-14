@@ -4493,41 +4493,41 @@ function BuyBoxSection({
 
   return (
     <div className="mt-4">
-      {/* STEP 1 — PREP */}
-      <div className="border border-[#8FA0AE]/40 bg-[#E6EBEE] p-3.5">
-        <div className="mb-2 flex items-center justify-between gap-3">
-          <div className="text-[0.6rem] font-bold tracking-[0.18em] text-[#071F35]">
+      {/* STEP 1 */}
+      <div className="border border-[#C08C45]/45 bg-[#071F35] px-3.5 py-3.5">
+        <div className="mb-2.5 flex items-center justify-between gap-3">
+          <div className="text-[0.58rem] font-bold tracking-[0.18em] text-[#E6C07F]">
             STEP 1 — CHOOSE YOUR PREP
           </div>
 
-          <div className="text-[0.52rem] font-bold tracking-[0.08em] text-[#A36F2C]">
+          <div className="text-[0.5rem] font-bold tracking-[0.1em] text-[#C08C45]">
             REQUIRED
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-2.5">
+        <div className="grid grid-cols-2 gap-2">
           <button
             type="button"
             onClick={() => {
               setBeanType("whole");
               setShowBeanError(false);
             }}
-            className={`min-h-[56px] border px-4 text-left transition ${
+            className={`min-h-[52px] border px-4 text-left transition duration-200 ${
               beanType === "whole"
-                ? "border-[#071F35] bg-[#071F35] text-[#F3EBDD]"
-                : "border-[#98A6B2] bg-[#F8F4EC] text-[#071F35] hover:border-[#C08C45]"
+                ? "border-[#C08C45] bg-[#C08C45] text-black"
+                : "border-[#77664D] bg-[#F8F2E8] text-[#071F35] hover:border-[#C08C45] hover:bg-[#E7EDF0]"
             }`}
           >
             <div
-              className="text-[0.8rem] font-bold"
+              className="text-[0.76rem] font-bold"
               style={{ fontFamily: "'Cinzel', serif" }}
             >
               WHOLE BEAN
             </div>
 
             <div
-              className={`mt-0.5 text-[0.64rem] ${
-                beanType === "whole" ? "text-[#D6D1C7]" : "text-[#6A6A66]"
+              className={`mt-0.5 text-[0.61rem] ${
+                beanType === "whole" ? "text-black/65" : "text-[#6B6863]"
               }`}
             >
               Best for grinders
@@ -4542,24 +4542,24 @@ function BuyBoxSection({
               setBeanType("ground");
               setShowBeanError(false);
             }}
-            className={`min-h-[56px] border px-4 text-left transition ${
+            className={`min-h-[52px] border px-4 text-left transition duration-200 ${
               size === "sample"
-                ? "cursor-not-allowed border-[#BBC1C5] bg-[#ECE8E0] text-[#99948C] opacity-60"
+                ? "cursor-not-allowed border-[#645B50] bg-[#273846] text-[#8E969B] opacity-60"
                 : beanType === "ground"
-                ? "border-[#071F35] bg-[#071F35] text-[#F3EBDD]"
-                : "border-[#98A6B2] bg-[#F8F4EC] text-[#071F35] hover:border-[#C08C45]"
+                ? "border-[#C08C45] bg-[#C08C45] text-black"
+                : "border-[#77664D] bg-[#F8F2E8] text-[#071F35] hover:border-[#C08C45] hover:bg-[#E7EDF0]"
             }`}
           >
             <div
-              className="text-[0.8rem] font-bold"
+              className="text-[0.76rem] font-bold"
               style={{ fontFamily: "'Cinzel', serif" }}
             >
               GROUND
             </div>
 
             <div
-              className={`mt-0.5 text-[0.64rem] ${
-                beanType === "ground" ? "text-[#D6D1C7]" : "text-[#6A6A66]"
+              className={`mt-0.5 text-[0.61rem] ${
+                beanType === "ground" ? "text-black/65" : "text-[#6B6863]"
               }`}
             >
               {size === "sample"
@@ -4569,24 +4569,24 @@ function BuyBoxSection({
           </button>
         </div>
 
-        <div className="mt-2 text-[0.54rem] font-semibold tracking-[0.05em] text-[#687681]">
-          Select a prep before adding to Chest.
+        <div className="mt-2 text-[0.5rem] font-semibold tracking-[0.05em] text-[#AAA49B]">
+          Select Whole Bean or Ground before adding to Chest.
         </div>
 
         {showBeanError && (
-          <div className="mt-2 border-l-2 border-[#A84236] pl-2 text-[0.68rem] font-bold text-[#A84236]">
+          <div className="mt-2 border-l-2 border-[#D78A77] pl-2 text-[0.66rem] font-bold text-[#E5A28F]">
             Choose Whole Bean or Ground to continue.
           </div>
         )}
       </div>
 
-      {/* STEP 2 — SIZE */}
+      {/* STEP 2 */}
       <div className="mt-3">
-        <div className="mb-2 text-[0.6rem] font-bold tracking-[0.18em] text-[#8A5B25]">
+        <div className="mb-1.5 text-[0.56rem] font-bold tracking-[0.18em] text-[#8A5B25]">
           STEP 2 — CHOOSE YOUR SIZE
         </div>
 
-        <div className="grid grid-cols-[0.8fr_1.2fr] gap-2.5">
+        <div className="grid grid-cols-[0.8fr_1.2fr] gap-2">
           <button
             type="button"
             onClick={() => {
@@ -4595,20 +4595,20 @@ function BuyBoxSection({
               setBeanType("whole");
               setShowBeanError(false);
             }}
-            className={`min-h-[54px] border px-3 text-center transition ${
+            className={`min-h-[50px] border px-3 text-center transition duration-200 ${
               size === "sample"
                 ? "border-[#071F35] bg-[#071F35] text-[#F3EBDD]"
-                : "border-[#BDA98A] bg-[#FBF6ED] text-[#071F35] hover:border-[#C08C45]"
+                : "border-[#BDA98A] bg-[#FBF6ED] text-[#071F35] hover:border-[#C08C45] hover:bg-[#E7EDF0]"
             }`}
           >
             <div
-              className="text-[0.7rem] font-bold"
+              className="text-[0.68rem] font-bold"
               style={{ fontFamily: "'Cinzel', serif" }}
             >
               SAMPLE
             </div>
 
-            <div className="mt-0.5 text-[0.58rem] opacity-70">
+            <div className="mt-0.5 text-[0.56rem] opacity-70">
               2.5 oz • whole bean
             </div>
           </button>
@@ -4620,14 +4620,14 @@ function BuyBoxSection({
               setPurchaseMode("one");
               setShowBeanError(false);
             }}
-            className={`min-h-[54px] border px-3 text-center transition ${
+            className={`min-h-[50px] border px-3 text-center transition duration-200 ${
               size === "12oz"
                 ? "border-[#C08C45] bg-[#C08C45] text-black"
-                : "border-[#BDA98A] bg-[#FBF6ED] text-[#071F35] hover:border-[#C08C45]"
+                : "border-[#BDA98A] bg-[#FBF6ED] text-[#071F35] hover:border-[#C08C45] hover:bg-[#E7EDF0]"
             }`}
           >
             <div
-              className="text-[0.76rem] font-bold"
+              className="text-[0.72rem] font-bold"
               style={{ fontFamily: "'Cinzel', serif" }}
             >
               12 OZ BAG
@@ -4636,24 +4636,24 @@ function BuyBoxSection({
         </div>
       </div>
 
-      {/* STEP 3 — PURCHASE */}
+      {/* STEP 3 */}
       <div className="mt-3">
-        <div className="mb-2 text-[0.6rem] font-bold tracking-[0.18em] text-[#8A5B25]">
+        <div className="mb-1.5 text-[0.56rem] font-bold tracking-[0.18em] text-[#8A5B25]">
           STEP 3 — PURCHASE OPTION
         </div>
 
-        <div className="grid grid-cols-2 gap-2.5">
+        <div className="grid grid-cols-2 gap-2">
           <button
             type="button"
             onClick={() => setPurchaseMode("one")}
-            className={`min-h-[54px] border px-3 text-center transition ${
+            className={`min-h-[50px] border px-3 text-center transition duration-200 ${
               purchaseMode === "one"
                 ? "border-[#071F35] bg-[#071F35] text-[#F3EBDD]"
-                : "border-[#BDA98A] bg-[#FBF6ED] text-[#071F35] hover:border-[#C08C45]"
+                : "border-[#BDA98A] bg-[#FBF6ED] text-[#071F35] hover:border-[#C08C45] hover:bg-[#E7EDF0]"
             }`}
           >
             <div
-              className="text-[0.7rem] font-bold"
+              className="text-[0.68rem] font-bold"
               style={{ fontFamily: "'Cinzel', serif" }}
             >
               SINGLE PURCHASE
@@ -4668,34 +4668,34 @@ function BuyBoxSection({
                 if (size === "sample") return;
                 setPurchaseMode("sub");
               }}
-              className={`min-h-[54px] border px-3 text-center transition ${
+              className={`min-h-[50px] border px-3 text-center transition duration-200 ${
                 size === "sample"
                   ? "cursor-not-allowed border-[#C9BCA8] bg-[#EFE6D8] text-[#A59C90]"
                   : purchaseMode === "sub"
                   ? "border-[#C08C45] bg-[#E9D7B9] text-[#071F35]"
-                  : "border-[#C08C45]/70 bg-[#FBF6ED] text-[#8A5B25] hover:bg-[#F0E1CA]"
+                  : "border-[#C08C45]/70 bg-[#FBF6ED] text-[#8A5B25] hover:border-[#C08C45] hover:bg-[#E7EDF0]"
               }`}
             >
               <div
-                className="text-[0.68rem] font-bold"
+                className="text-[0.66rem] font-bold"
                 style={{ fontFamily: "'Cinzel', serif" }}
               >
                 SUBSCRIBE & SAVE 15%
               </div>
 
               {size === "12oz" && (
-                <div className="mt-0.5 text-[0.66rem] font-bold">
+                <div className="mt-0.5 text-[0.62rem] font-bold">
                   $18.70 / BAG
                 </div>
               )}
             </button>
           ) : (
-            <div className="flex min-h-[54px] flex-col justify-center border border-[#071F35] bg-[#071F35] px-3 text-center">
-              <div className="text-[0.54rem] font-bold tracking-[0.1em] text-[#E6C07F]">
+            <div className="flex min-h-[50px] flex-col justify-center border border-[#071F35] bg-[#071F35] px-3 text-center">
+              <div className="text-[0.52rem] font-bold tracking-[0.1em] text-[#E6C07F]">
                 PREMIUM RELEASE
               </div>
 
-              <div className="mt-0.5 text-[0.7rem] font-black tracking-[0.05em] text-white">
+              <div className="mt-0.5 text-[0.68rem] font-black tracking-[0.05em] text-white">
                 NO DISCOUNTS
               </div>
             </div>
@@ -4704,14 +4704,14 @@ function BuyBoxSection({
       </div>
 
       {isSubscription && (
-        <div className="mt-3 border border-[#C08C45]/35 bg-[#F0E1CA] px-3 py-2.5">
+        <div className="mt-2.5 border border-[#C08C45]/35 bg-[#F0E1CA] px-3 py-2.5">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <div className="text-[0.54rem] font-bold tracking-[0.1em] text-[#8A5B25]">
+              <div className="text-[0.52rem] font-bold tracking-[0.1em] text-[#8A5B25]">
                 DELIVER EVERY
               </div>
 
-              <div className="mt-0.5 text-[0.6rem] text-[#6F6254]">
+              <div className="mt-0.5 text-[0.58rem] text-[#6F6254]">
                 Skip or cancel anytime.
               </div>
             </div>
@@ -4722,10 +4722,10 @@ function BuyBoxSection({
                   key={days}
                   type="button"
                   onClick={() => setSubEvery(days as 14 | 30 | 60)}
-                  className={`border px-3 py-1.5 text-[0.6rem] font-bold ${
+                  className={`border px-3 py-1.5 text-[0.58rem] font-bold transition duration-200 ${
                     subEvery === days
                       ? "border-[#071F35] bg-[#071F35] text-white"
-                      : "border-[#A88C68] bg-[#FBF6ED] text-[#6A5E52]"
+                      : "border-[#A88C68] bg-[#FBF6ED] text-[#6A5E52] hover:bg-[#E7EDF0]"
                   }`}
                 >
                   {days} DAYS
@@ -4736,31 +4736,31 @@ function BuyBoxSection({
         </div>
       )}
 
-      {/* PRICE / CHEST */}
+      {/* PRICE / CART */}
       <div className="mt-3 border border-[#BDA98A]/60 bg-[#FBF6ED] p-3">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
           <div className="min-w-[120px]">
             {isSubscription ? (
               <>
-                <div className="text-[0.66rem] text-[#8D8275] line-through">
+                <div className="text-[0.64rem] text-[#8D8275] line-through">
                   ${basePrice.toFixed(2)}
                 </div>
 
-                <div className="text-[1.4rem] font-bold leading-none text-[#071F35]">
+                <div className="text-[1.35rem] font-bold leading-none text-[#071F35]">
                   ${discounted.toFixed(2)}
-                  <span className="ml-1 text-[0.6rem] font-normal text-[#766C61]">
+                  <span className="ml-1 text-[0.58rem] font-normal text-[#766C61]">
                     / bag
                   </span>
                 </div>
 
-                <div className="mt-1 text-[0.54rem] font-bold tracking-[0.08em] text-[#8A5B25]">
+                <div className="mt-1 text-[0.52rem] font-bold tracking-[0.08em] text-[#8A5B25]">
                   SAVE $3.30
                 </div>
               </>
             ) : (
-              <div className="text-[1.4rem] font-bold leading-none text-[#071F35]">
+              <div className="text-[1.35rem] font-bold leading-none text-[#071F35]">
                 ${basePrice.toFixed(2)}
-                <span className="ml-1 text-[0.6rem] font-normal text-[#766C61]">
+                <span className="ml-1 text-[0.58rem] font-normal text-[#766C61]">
                   {size === "sample" ? " / sample" : " / bag"}
                 </span>
               </div>
@@ -4772,7 +4772,7 @@ function BuyBoxSection({
               qty={qty}
               setQty={setQty}
               className="inline-flex shrink-0 items-center border border-[#BDA98A]"
-              buttonClassName="px-3 text-[#071F35] hover:bg-[#EEE1CE]"
+              buttonClassName="px-3 text-[#071F35] transition hover:bg-[#E7EDF0]"
               inputClassName="w-10 border-x border-[#BDA98A] bg-white py-3 text-center text-sm text-[#071F35] outline-none"
             />
 
@@ -4780,8 +4780,10 @@ function BuyBoxSection({
               type="button"
               onClick={addToChest}
               disabled={adding}
-              className={`flex min-h-[48px] flex-1 items-center justify-center bg-[#C08C45] px-5 text-[0.72rem] font-bold tracking-[0.08em] text-black transition ${
-                adding ? "cursor-not-allowed opacity-60" : "hover:bg-[#D7A95D]"
+              className={`flex min-h-[46px] flex-1 items-center justify-center bg-[#C08C45] px-5 text-[0.7rem] font-bold tracking-[0.08em] text-black transition duration-200 ${
+                adding
+                  ? "cursor-not-allowed opacity-60"
+                  : "hover:bg-[#071F35] hover:text-[#F3EBDD]"
               }`}
             >
               {adding ? "ADDING..." : "ADD TO CHEST"}
@@ -4789,7 +4791,7 @@ function BuyBoxSection({
           </div>
         </div>
 
-        <div className="mt-2 text-right text-[0.56rem] font-semibold tracking-[0.07em] text-[#7A6E61]">
+        <div className="mt-2 text-right text-[0.54rem] font-semibold tracking-[0.07em] text-[#7A6E61]">
           FREE SHIPPING ON 3+ BAGS
         </div>
       </div>
@@ -5845,19 +5847,19 @@ function RoastDetailPage() {
   return (
     <main className="bg-[#F3EBDD] text-[#071F35]">
       {/* HERO / BUY AREA */}
-      <section className="relative overflow-hidden border-b border-[#C08C45]/25 bg-[#F3EBDD] px-4 pb-5 pt-10 sm:px-5 sm:pt-12 md:px-8 md:pb-5 md:pt-14 lg:pt-[72px]">
-        <div className="pointer-events-none absolute right-[-80px] top-[55px] hidden opacity-[0.025] lg:block">
+      <section className="relative overflow-hidden border-b border-[#C08C45]/25 bg-[#F3EBDD] px-4 pb-4 pt-11 sm:px-5 sm:pt-12 md:px-8 md:pb-5 md:pt-14 lg:pt-[82px]">
+        <div className="pointer-events-none absolute right-[-90px] top-[60px] hidden opacity-[0.025] lg:block">
           <img
             src="/emblem-black.png"
             alt=""
             aria-hidden="true"
-            className="h-[420px] w-[420px] object-contain"
+            className="h-[430px] w-[430px] object-contain"
           />
         </div>
 
-        <div className="relative mx-auto grid max-w-[1500px] gap-6 lg:grid-cols-[47%_53%] lg:items-start lg:gap-9">
-          {/* PRODUCT IMAGE */}
-          <div className="relative overflow-hidden border border-[#A68459]/30 bg-[#EEE2CF]">
+        <div className="relative mx-auto grid max-w-[1500px] gap-6 lg:grid-cols-[47%_53%] lg:items-stretch lg:gap-8">
+          {/* PRODUCT PHOTO */}
+          <div className="relative min-h-[620px] overflow-hidden bg-[#F3EBDD] lg:min-h-[640px] xl:min-h-[660px]">
             {card.isNew && (
               <div className="absolute left-4 top-4 z-20 bg-[#071F35] px-3 py-1.5 text-[0.55rem] font-bold tracking-[0.12em] text-[#E6C07F]">
                 JUST RELEASED
@@ -5869,25 +5871,25 @@ function RoastDetailPage() {
               alt={`${card.title} coffee`}
               loading="eager"
               decoding="async"
-              className="h-[520px] w-full object-contain object-center sm:h-[580px] lg:h-[610px] xl:h-[625px]"
+              className="absolute inset-0 h-full w-full scale-[0.92] object-contain object-center"
             />
           </div>
 
           {/* PRODUCT INFO */}
-          <div className="lg:pt-1">
-            <div className="text-[0.6rem] font-bold tracking-[0.22em] text-[#A36F2C]">
+          <div className="flex flex-col justify-center lg:py-1">
+            <div className="text-[0.58rem] font-bold tracking-[0.22em] text-[#A36F2C]">
               OLD IRONSIDES COFFEE
             </div>
 
             <h1
-              className="mt-1.5 text-[2.3rem] font-semibold leading-[0.96] text-[#071F35] sm:text-[2.75rem] lg:text-[3.15rem]"
+              className="mt-1.5 text-[2.3rem] font-semibold leading-[0.96] text-[#071F35] sm:text-[2.75rem] lg:text-[3.1rem]"
               style={{ fontFamily: "'Cinzel', serif" }}
             >
               {card.title}
             </h1>
 
             <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-2">
-              <div className="text-[0.82rem] font-bold tracking-[0.08em] text-[#A36F2C]">
+              <div className="text-[0.8rem] font-bold tracking-[0.08em] text-[#A36F2C]">
                 {card.subTitle}
               </div>
 
@@ -5908,96 +5910,86 @@ function RoastDetailPage() {
               )}
             </div>
 
-            <p className="mt-2.5 max-w-[610px] text-[0.86rem] leading-[1.5] text-[#56514B]">
+            <p className="mt-2.5 max-w-[610px] text-[0.84rem] leading-[1.5] text-[#56514B]">
               {hook}
             </p>
-
-            {/* SIGNATURE NOTES */}
-            {notes.length > 0 && (
-              <div className="mt-4 border-y border-[#C08C45]/30 py-3">
-                <div className="mb-2.5 text-[0.56rem] font-bold tracking-[0.18em] text-[#8A5B25]">
-                  SIGNATURE NOTES
-                </div>
-
-                <div className="grid grid-cols-3">
-                  {notes.map((note, index) => {
-                    const iconMap: Record<string, string> = {
-                      Hazelnut: "/symbols/hazelnut.png",
-                      "Warm Spice": "/symbols/spice1.png",
-                      Cream: "/symbols/cream1.png",
-
-                      Chocolate: "/symbols/chocolate1.png",
-                      Molasses: "/symbols/molasses1.png",
-                      Smoke: "/symbols/smoke1.png",
-
-                      Vanilla: "/symbols/vanilla1.png",
-                      Cocoa: "/symbols/cocoa1.png",
-                      Almond: "/symbols/almond1.png",
-
-                      Caramel: "/symbols/caramel1.png",
-                      "Red Apple": "/symbols/apple1.png",
-                      Oak: "/symbols/oak3.png",
-
-                      Pecan: "/symbols/pecan.jpg",
-                      "Brown Sugar": "/symbols/sugar.png",
-                      Spice: "/symbols/spice1.png",
-                    };
-
-                    return (
-                      <div
-                        key={note}
-                        className={`flex items-center gap-2.5 px-3 py-1 ${
-                          index !== notes.length - 1
-                            ? "border-r border-[#C08C45]/25"
-                            : ""
-                        }`}
-                      >
-                        {iconMap[note] && (
-                          <img
-                            src={iconMap[note]}
-                            alt=""
-                            aria-hidden="true"
-                            className="h-8 w-8 shrink-0 object-contain"
-                          />
-                        )}
-
-                        <span className="text-[0.58rem] font-bold tracking-[0.08em] text-[#5E554B]">
-                          {note.toUpperCase()}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-            {/* BEST BREW METHODS */}
-            <div className="border-b border-[#C08C45]/30 py-3">
-              <div className="mb-2 text-[0.56rem] font-bold tracking-[0.18em] text-[#8A5B25]">
-                BEST BREW METHODS
+            {/* AT A GLANCE */}
+            <div className="mt-4 border-y border-[#C08C45]/30 py-3.5">
+              <div className="mb-2 text-[0.52rem] font-bold tracking-[0.18em] text-[#8A5B25]">
+                AT A GLANCE
               </div>
 
-              <div className="flex flex-wrap gap-2">
-                {(card.slug === "baptism-by-fire"
-                  ? ["FRENCH PRESS", "DRIP", "ESPRESSO"]
-                  : card.slug === "flagship"
-                  ? ["DRIP", "FRENCH PRESS", "COLD BREW"]
-                  : card.slug === "java-action"
-                  ? ["DRIP", "POUR OVER", "FRENCH PRESS"]
-                  : card.slug === "black-salvo"
-                  ? ["ESPRESSO", "DRIP", "FRENCH PRESS"]
-                  : card.slug === "brass-monkey"
-                  ? ["DRIP", "FRENCH PRESS", "COLD BREW"]
-                  : ["DRIP", "FRENCH PRESS", "POUR OVER"]
-                ).map((method) => (
-                  <div
-                    key={method}
-                    className="border border-[#BDA98A]/70 bg-[#FBF6ED] px-3 py-2 text-[0.58rem] font-bold tracking-[0.09em] text-[#5E554B]"
-                  >
-                    {method}
+              <div className="grid gap-3 border border-[#D8C6A9]/60 bg-[#F8F1E6] px-4 py-3 md:grid-cols-[1.25fr_0.75fr] md:items-center">
+                {/* SIGNATURE NOTES */}
+                <div>
+                  <div className="mb-2 text-[0.5rem] font-bold tracking-[0.16em] text-[#8A5B25]">
+                    SIGNATURE NOTES
                   </div>
-                ))}
+
+                  <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+                    {notes.map((note) => {
+                      const iconMap: Record<string, string> = {
+                        Hazelnut: "/symbols/hazelnut.png",
+                        "Warm Spice": "/symbols/spice1.png",
+                        Cream: "/symbols/cream1.png",
+                        Chocolate: "/symbols/chocolate1.png",
+                        Molasses: "/symbols/molasses1.png",
+                        Smoke: "/symbols/smoke1.png",
+                        Vanilla: "/symbols/vanilla1.png",
+                        Cocoa: "/symbols/cocoa1.png",
+                        Almond: "/symbols/almond1.png",
+                        Caramel: "/symbols/caramel1.png",
+                        "Red Apple": "/symbols/apple1.png",
+                        Oak: "/symbols/oak3.png",
+                        Pecan: "/symbols/pecan.jpg",
+                        "Brown Sugar": "/symbols/sugar.png",
+                        Spice: "/symbols/spice1.png",
+                      };
+
+                      return (
+                        <div key={note} className="flex items-center gap-2">
+                          {iconMap[note] && (
+                            <img
+                              src={iconMap[note]}
+                              alt=""
+                              aria-hidden="true"
+                              className="h-6 w-6 shrink-0 object-contain opacity-95"
+                            />
+                          )}
+
+                          <span className="text-[0.56rem] font-bold tracking-[0.07em] text-[#5E554B]">
+                            {note.toUpperCase()}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* BEST BREWED */}
+                <div className="border-t border-[#D8C6A9]/60 pt-3 md:border-l md:border-t-0 md:pl-5 md:pt-0">
+                  <div className="mb-2 text-[0.5rem] font-bold tracking-[0.16em] text-[#8A5B25]">
+                    BEST BREWED
+                  </div>
+
+                  <div className="text-[0.68rem] font-semibold leading-[1.6] text-[#071F35]">
+                    {(card.slug === "baptism-by-fire"
+                      ? ["French Press", "Drip", "Espresso"]
+                      : card.slug === "flagship"
+                      ? ["Drip", "French Press", "Cold Brew"]
+                      : card.slug === "java-action"
+                      ? ["Drip", "Pour Over", "French Press"]
+                      : card.slug === "black-salvo"
+                      ? ["Espresso", "Drip", "French Press"]
+                      : card.slug === "brass-monkey"
+                      ? ["Drip", "French Press", "Cold Brew"]
+                      : ["Drip", "French Press", "Pour Over"]
+                    ).join("  •  ")}
+                  </div>
+                </div>
               </div>
             </div>
+
             {(card.canBuy || isOak) && (
               <BuyBoxSection
                 card={card}

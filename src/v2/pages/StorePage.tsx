@@ -35,6 +35,15 @@ const roasts = [
     badge: "NEW",
   },
   {
+    name: "BRASS MONKEY",
+    roast: "FLAVORED ROAST",
+    notes: "Pecan • Brown Sugar • Spice",
+    slug: "brass-monkey",
+    image: "/brass-bag1.jpg",
+    price: 22,
+    badge: "FLAVORED",
+  },
+  {
     name: "OAK & COPPER",
     roast: "BOURBON BARREL AGED",
     notes: "Vanilla • Caramel • Oak",
@@ -44,15 +53,6 @@ const roasts = [
     badge: "LIMITED RELEASE",
     premium: true,
   },
-  {
-    name: "BRASS MONKEY",
-    roast: "FLAVORED ROAST",
-    notes: "Pecan • Brown Sugar • Spice",
-    slug: "brass-monkey",
-    image: "/brass-bag1.jpg",
-    price: 22,
-    badge: "FLAVORED",
-  },
 ];
 
 export default function StorePage() {
@@ -61,29 +61,29 @@ export default function StorePage() {
       {/* =====================================================
           COMPACT STORE HEADER
       ====================================================== */}
-      <section className="relative border-b border-[#C08C45]/25 bg-[#F3EBDD] px-4 pb-5 pt-5 sm:px-5 md:px-8 lg:pt-[58px]">
+      <section className="relative border-b border-[#C08C45]/25 bg-[#F3EBDD] px-4 pb-5 pt-8 sm:px-5 sm:pt-9 md:px-8 md:pb-5 md:pt-10 lg:pt-[78px]">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_10%,rgba(192,140,69,0.08),transparent_28%)]" />
 
         <div className="relative mx-auto max-w-[1500px]">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <div className="text-[0.6rem] font-bold tracking-[0.26em] text-[#A36F2C]">
                 THE OLD IRONSIDES FLEET
               </div>
 
               <h1
-                className="mt-1.5 text-[2rem] font-semibold leading-[0.98] text-[#071F35] sm:text-[2.35rem] md:text-[2.65rem]"
+                className="mt-1 text-[2rem] font-semibold leading-[0.98] text-[#071F35] sm:text-[2.35rem] md:text-[2.6rem]"
                 style={{ fontFamily: "'Cinzel', serif" }}
               >
                 CHOOSE YOUR ROAST.
               </h1>
 
-              <p className="mt-2 max-w-[620px] text-[0.82rem] leading-[1.5] text-[#55514B]">
-                Six distinct coffees. Roasted to order every Monday and Thursday.
+              <p className="mt-1.5 max-w-[620px] text-[0.8rem] leading-[1.45] text-[#55514B]">
+                Six distinct coffees. Roasted to order every Monday and
+                Thursday.
               </p>
             </div>
 
-            {/* TOP CONVERSION OPTIONS */}
             <div className="grid gap-2 sm:grid-cols-2">
               <Link
                 to="/roast/armada-sample-pack"
@@ -93,12 +93,12 @@ export default function StorePage() {
               </Link>
 
               <div className="flex min-h-[48px] flex-col justify-center border border-[#071F35]/25 bg-[#071F35] px-5">
-                <div className="text-[0.58rem] font-bold tracking-[0.12em] text-[#E6C07F]">
+                <div className="text-[0.56rem] font-bold tracking-[0.12em] text-[#E6C07F]">
                   SUBSCRIBE & SAVE 15%
                 </div>
 
-                <div className="mt-0.5 text-[0.72rem] font-semibold text-[#F3EBDD]">
-                  Core roasts $18.70 / bag
+                <div className="mt-0.5 text-[0.76rem] font-bold text-[#F3EBDD]">
+                  $18.70 / BAG
                 </div>
               </div>
             </div>
@@ -109,7 +109,7 @@ export default function StorePage() {
       {/* =====================================================
           ROAST GRID
       ====================================================== */}
-      <section className="px-4 py-4 sm:px-5 md:px-8 md:py-5">
+      <section className="px-4 pb-5 pt-5 sm:px-5 md:px-8 md:pb-6 md:pt-6">
         <div className="mx-auto max-w-[1500px]">
           {/* MOBILE */}
           <div className="space-y-2.5 md:hidden">
@@ -117,9 +117,8 @@ export default function StorePage() {
               <Link
                 key={item.slug}
                 to={`/roast/${item.slug}`}
-                className="relative grid min-h-[132px] grid-cols-[112px_1fr] overflow-hidden border border-[#A68459]/35 bg-[#FAF3E8]"
+                className="relative grid min-h-[132px] grid-cols-[112px_1fr] overflow-hidden border border-[#A68459]/45 bg-[#F8EFE1] shadow-[0_4px_12px_rgba(61,39,19,0.04)]"
               >
-                {/* PHOTO */}
                 <div className="relative overflow-hidden border-r border-[#A68459]/25">
                   <img
                     src={item.image}
@@ -134,7 +133,6 @@ export default function StorePage() {
                   )}
                 </div>
 
-                {/* INFO */}
                 <div className="flex flex-col justify-center px-4 py-3">
                   <div className="text-[0.49rem] font-bold tracking-[0.16em] text-[#A36F2C]">
                     {item.roast}
@@ -153,12 +151,12 @@ export default function StorePage() {
 
                   <div className="mt-2.5 flex items-end justify-between gap-3">
                     <div>
-                      <div className="text-[0.8rem] font-bold text-[#071F35]">
+                      <div className="text-[0.82rem] font-bold text-[#071F35]">
                         ${item.price.toFixed(2)}
                       </div>
 
                       {!item.premium ? (
-                        <div className="mt-1 text-[0.57rem] font-bold text-[#A36F2C]">
+                        <div className="mt-1 text-[0.62rem] font-bold text-[#8A5B25]">
                           SUBSCRIBE $18.70
                         </div>
                       ) : (
@@ -168,8 +166,8 @@ export default function StorePage() {
                       )}
                     </div>
 
-                    <div className="text-[0.52rem] font-bold tracking-[0.09em] text-[#A36F2C]">
-                      VIEW →
+                    <div className="text-[0.56rem] font-bold tracking-[0.09em] text-[#74491F]">
+                      VIEW ROAST →
                     </div>
                   </div>
                 </div>
@@ -183,10 +181,10 @@ export default function StorePage() {
               <Link
                 key={item.slug}
                 to={`/roast/${item.slug}`}
-                className="group relative grid min-h-[215px] grid-cols-[42%_58%] overflow-hidden border border-[#A68459]/35 bg-[#FAF3E8] shadow-[0_5px_16px_rgba(61,39,19,0.04)] transition duration-300 hover:-translate-y-[2px] hover:border-[#C08C45]/80 hover:shadow-[0_12px_26px_rgba(61,39,19,0.10)]"
+                className="group relative grid min-h-[215px] grid-cols-[42%_58%] overflow-hidden border border-[#A68459]/45 bg-[#F8EFE1] shadow-[0_5px_16px_rgba(61,39,19,0.05)] transition duration-300 hover:-translate-y-[2px] hover:border-[#C08C45]/90 hover:shadow-[0_12px_26px_rgba(61,39,19,0.10)]"
               >
                 {/* PHOTO */}
-                <div className="relative overflow-hidden border-r border-[#A68459]/25">
+                <div className="relative overflow-hidden border-r border-[#A68459]/30">
                   <img
                     src={item.image}
                     alt={`${item.name} coffee bag`}
@@ -217,7 +215,7 @@ export default function StorePage() {
                     {item.notes}
                   </div>
 
-                  <div className="mt-3 border-t border-[#6D5333]/20 pt-3">
+                  <div className="mt-3 border-t border-[#6D5333]/22 pt-3">
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <div className="text-[0.5rem] uppercase tracking-[0.1em] text-[#8B8175]">
@@ -229,35 +227,35 @@ export default function StorePage() {
                         </div>
                       </div>
 
-                      <div className="pt-4 text-[0.52rem] font-bold tracking-[0.09em] text-[#A36F2C]">
+                      <div className="pt-4 text-[0.56rem] font-bold tracking-[0.09em] text-[#74491F]">
                         VIEW ROAST →
                       </div>
                     </div>
 
                     {!item.premium ? (
-                      <div className="mt-2 flex items-center justify-between border border-[#C08C45]/30 bg-[#F0E1CA] px-3 py-2">
+                      <div className="mt-2 flex items-center justify-between border border-[#C08C45]/35 bg-[#071F35] px-3 py-2.5">
                         <div>
-                          <div className="text-[0.52rem] font-bold tracking-[0.08em] text-[#8A5B25]">
+                          <div className="text-[0.52rem] font-bold tracking-[0.08em] text-[#E6C07F]">
                             SUBSCRIBE & SAVE 15%
                           </div>
 
-                          <div className="mt-0.5 text-[0.7rem] font-bold text-[#071F35]">
+                          <div className="mt-0.5 text-[0.82rem] font-bold text-[#F3EBDD]">
                             $18.70 / BAG
                           </div>
                         </div>
 
-                        <div className="text-[0.52rem] font-semibold text-[#8A5B25]">
+                        <div className="text-[0.5rem] font-semibold tracking-[0.04em] text-[#C8B28E]">
                           SAVE $3.30
                         </div>
                       </div>
                     ) : (
-                      <div className="mt-2 border border-[#C08C45]/30 bg-[#F0E1CA] px-3 py-2">
-                        <div className="text-[0.52rem] font-bold tracking-[0.08em] text-[#8A5B25]">
+                      <div className="mt-2 border border-[#C08C45]/35 bg-[#071F35] px-3 py-2.5">
+                        <div className="text-[0.52rem] font-bold tracking-[0.08em] text-[#E6C07F]">
                           PREMIUM RELEASE
                         </div>
 
-                        <div className="mt-0.5 text-[0.58rem] font-semibold text-[#665B4F]">
-                          Discounts excluded
+                        <div className="mt-0.5 text-[0.72rem] font-black tracking-[0.06em] text-[#F3EBDD]">
+                          NO DISCOUNTS
                         </div>
                       </div>
                     )}
@@ -267,19 +265,6 @@ export default function StorePage() {
                 <div className="absolute bottom-0 left-0 h-[3px] w-0 bg-[#C08C45] transition-all duration-500 group-hover:w-full" />
               </Link>
             ))}
-          </div>
-
-          {/* SMALL TRUST STRIP */}
-          <div className="mt-4 flex flex-col justify-center gap-2 border-t border-[#A68459]/30 pt-4 text-center sm:flex-row sm:gap-8">
-            <div className="text-[0.58rem] font-bold tracking-[0.1em] text-[#716658]">
-              ROASTED MONDAY & THURSDAY
-            </div>
-
-            <div className="hidden text-[#C08C45] sm:block">•</div>
-
-            <div className="text-[0.58rem] font-bold tracking-[0.1em] text-[#716658]">
-              FREE SHIPPING ON 3+ BAGS
-            </div>
           </div>
         </div>
       </section>

@@ -168,7 +168,7 @@ function FlashToast() {
 
       // clear any existing hide timer, then start a fresh 2s timer
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
-      timeoutRef.current = window.setTimeout(() => setShow(false), 4000);
+      timeoutRef.current = window.setTimeout(() => setShow(false), 3000);
     };
 
     window.addEventListener("flash", onFlash as any);
@@ -181,14 +181,14 @@ function FlashToast() {
 
   return (
     <div
-      className={`fixed left-1/2 -translate-x-1/2 z-[100] transition-all duration-200 top-[calc(env(safe-area-inset-top)+8px)] ${
+      className={`fixed left-1/2 top-1/2 z-[10001] -translate-x-1/2 -translate-y-1/2 transition-all duration-200 lg:top-[150px] lg:translate-y-0 ${
         show
           ? "opacity-100 scale-100"
           : "opacity-0 scale-95 pointer-events-none"
       }`}
     >
       <div
-        className="rounded-lg bg-[#F3EBDD]/95 px-4 py-2 text-[#071F35] font-semibold shadow-xl text-center whitespace-pre-line"
+        className="w-[min(90vw,420px)] rounded-lg border-2 border-[#C08C45] bg-[#F3EBDD] px-6 py-4 text-center text-base font-bold text-[#071F35] shadow-2xl whitespace-pre-line"
         role="status"
         aria-live="polite"
       >

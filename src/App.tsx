@@ -819,9 +819,11 @@ function CartProvider({ children }: any) {
         return copy;
       });
 
-      // Do NOT auto-open the cart drawer on add (mobile included).
-      // We only show the flash banner + cart count update.
-      // Drawer opens only when the user taps the chest icon or a dedicated "View cart" CTA.
+      window.dispatchEvent(
+        new CustomEvent("flash", {
+          detail: `${qty} × ${displayTitle || "Coffee"} added to your chest!`,
+        })
+      );
     },
     [persist]
   );
@@ -12762,15 +12764,15 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
                 </div>
               </div>
             ) : (
-              <div className="text-[13px] font-extrabold text-center">
+              <div className="text-center text-[14px] font-extrabold tracking-wide text-[#087A37]">
                 {`Only ${bagsLeft} more bag${
                   bagsLeft === 1 ? "" : "s"
                 } to unlock free shipping`}
               </div>
             )}
-            <div className="mt-2 h-[6px] w-full bg-[#D8C6A9]/50 rounded">
+            <div className="mt-3 h-[8px] w-full overflow-hidden rounded-full bg-[#B8C5C0]">
               <div
-                className="h-[6px] bg-[#102D44] rounded"
+                className="h-[8px] rounded-full bg-[#35C46A] transition-all duration-300"
                 style={{
                   width: `${Math.min(
                     100,
@@ -13496,15 +13498,15 @@ function MobileCartSheet({ onClose }: { onClose: () => void }) {
                 </div>
               </div>
             ) : (
-              <div className="text-[13px] font-extrabold text-center">
+              <div className="text-center text-[14px] font-extrabold tracking-wide text-[#087A37]">
                 {`Only ${bagsLeft} more bag${
                   bagsLeft === 1 ? "" : "s"
                 } to unlock free shipping`}
               </div>
             )}
-            <div className="mt-2 h-[6px] w-full bg-[#D8C6A9]/50 rounded">
+            <div className="mt-3 h-[8px] w-full overflow-hidden rounded-full bg-[#B8C5C0]">
               <div
-                className="h-[6px] bg-[#102D44] rounded"
+                className="h-[8px] rounded-full bg-[#35C46A] transition-all duration-300"
                 style={{
                   width: `${Math.min(
                     100,
@@ -14022,6 +14024,7 @@ export default function App() {
       <CartProvider>
         <ErrorBoundary>
           <AppShell />
+          <FlashToast />
           <V2CartDrawerController />
         </ErrorBoundary>
       </CartProvider>

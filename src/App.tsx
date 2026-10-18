@@ -514,7 +514,7 @@ const roastCards = [
     imgRight: "ship-restore.jpeg", // New property for right image in duel
     heroImg: "ironship.jpg", // New property for hero section image
     price: 24.99,
-    canBuy: true,
+    canBuy: false,
     variant: "12oz Bag",
     battleDate: "",
     storyTitle: (
@@ -4862,14 +4862,24 @@ function BuyBoxSection({
               buttonClassName="px-3 text-[#071F35] transition hover:bg-[#E7EDF0]"
               inputClassName="w-9 border-x border-[#BDA98A] bg-white py-3 text-center text-sm text-[#071F35] outline-none"
             />
-            <button
-              type="button"
-              onClick={addToChest}
-              disabled={adding}
-              className={`flex h-[46px] min-w-[173px] items-center justify-center bg-[#071F35] px-5 text-[0.72rem] font-bold tracking-[0.08em] text-[#F3EBDD] transition hover:bg-[#123B55] disabled:opacity-60`}
-            >
-              {adding ? "ADDING..." : "ADD TO CHEST"}
-            </button>
+            {
+              <button
+                type="button"
+                onClick={addToChest}
+                disabled={adding || card.canBuy === false}
+                className={`flex h-[46px] min-w-[173px] items-center justify-center px-5 text-[0.72rem] font-bold tracking-[0.08em] transition ${
+                  card.canBuy === false
+                    ? "cursor-not-allowed border border-[#C08C45] bg-[#E5D4BC] text-[#805A31]"
+                    : "bg-[#071F35] text-[#F3EBDD] hover:bg-[#123B55] disabled:opacity-60"
+                }`}
+              >
+                {card.canBuy === false
+                  ? "TEMPORARILY SOLD OUT"
+                  : adding
+                  ? "ADDING..."
+                  : "ADD TO CHEST"}
+              </button>
+            }
             <span className="text-[0.7rem] font-bold uppercase tracking-[0.02em] text-[#8A5B25]">
               Free shipping on 3+ bags
             </span>
@@ -11786,7 +11796,6 @@ function Layout() {
   return (
     <div className="min-h-screen w-full bg-black text-[#F3EBDD] overflow-x-hidden pt-[20px] lg:pt-0">
       <ScrollToTop />
-      <FlashToast />
       <PromoSubscribeModal />
 
       {/* ===== HEADER (desktop + mobile) ===== */}

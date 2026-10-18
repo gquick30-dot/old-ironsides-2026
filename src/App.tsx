@@ -188,7 +188,7 @@ function FlashToast() {
       }`}
     >
       <div
-        className="w-[min(90vw,420px)] rounded-lg border-2 border-[#C08C45] bg-[#F3EBDD] px-6 py-4 text-center text-base font-bold text-[#071F35] shadow-2xl whitespace-pre-line"
+        className="w-[min(90vw,420px)] rounded-lg border-2 border-[#C08C45] bg-[#071F35] px-6 py-4 text-center text-base font-bold text-[#F3EBDD] shadow-2xl whitespace-pre-line"
         role="status"
         aria-live="polite"
       >

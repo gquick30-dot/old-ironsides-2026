@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-export default function Header() {
+export default function Header({ cartCount = 0 }: { cartCount?: number }) {
   const [shrunk, setShrunk] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -88,7 +88,7 @@ export default function Header() {
                 window.dispatchEvent(new Event("open-cart-drawer"))
               }
               aria-label="Shopping cart"
-              className="flex h-10 w-11 shrink-0 items-center justify-center border border-[#F3EBDD] text-[#F3EBDD]"
+              className="relative flex h-10 w-11 shrink-0 items-center justify-center border border-[#F3EBDD] text-[#F3EBDD]"
             >
               <svg
                 width="21"
@@ -105,6 +105,11 @@ export default function Header() {
                 <circle cx="20" cy="21" r="1" />
                 <path d="M1 1h4l2.4 12.4a2 2 0 0 0 2 1.6H20a2 2 0 0 0 2-1.6L23 6H6" />
               </svg>
+              {cartCount > 0 && (
+                <span className="absolute -right-2 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#C08C45] px-1 text-[11px] font-bold text-[#071F35]">
+                  {cartCount}
+                </span>
+              )}
             </button>
           </div>
         </div>
@@ -221,9 +226,14 @@ export default function Header() {
                 onClick={() =>
                   window.dispatchEvent(new Event("open-cart-drawer"))
                 }
-                className="border border-[#F3EBDD] px-5 py-3 text-[#F3EBDD] transition hover:bg-[#F3EBDD] hover:text-[#06243A]"
+                className="relative border border-[#F3EBDD] px-5 py-3 text-[#F3EBDD] transition hover:bg-[#F3EBDD] hover:text-[#06243A]"
               >
                 CHEST
+                {cartCount > 0 && (
+                  <span className="absolute -right-2 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#C08C45] px-1 text-[11px] font-bold text-[#071F35]">
+                    {cartCount}
+                  </span>
+                )}
               </button>
             </nav>
           </div>

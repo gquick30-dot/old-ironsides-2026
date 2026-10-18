@@ -12454,12 +12454,15 @@ function V2SampleRoute() {
 function V2ContactRoute() {
   return <V2ContactPage onSubmitPromo={submitPromoEmail} />;
 }
-
+function V2LayoutRoute() {
+  const { count } = useCart();
+  return <V2Layout cartCount={count} />;
+}
 function AppShell() {
   return (
     <>
       <Routes>
-        <Route element={<V2Layout />}>
+        <Route element={<V2LayoutRoute />}>
           <Route
             index
             element={<HomePageV2 onSubscribe={submitPromoEmail} />}

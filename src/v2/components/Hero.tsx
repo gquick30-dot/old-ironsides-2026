@@ -1,6 +1,93 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+const PRODUCT_IDS = [
+  "9271153885405",
+  "9271153754333",
+  "9271153918173",
+  "9271153787101",
+  "9271153819869",
+  "9418482024669",
+  "9479395180765",
+];
+function RatingStars({ rating }: { rating: number }) {
+  const safeRating = Math.max(0, Math.min(5, rating));
+
+  return (
+    <span
+      className="inline-flex items-center gap-[2px]"
+      aria-label={`${safeRating.toFixed(1)} out of 5 stars`}
+    >
+      {[0, 1, 2, 3, 4].map((i) => {
+        const fill = Math.max(0, Math.min(1, safeRating - i));
+
+        return (
+          <span
+            key={i}
+            className="relative inline-block text-[1rem] leading-none"
+          >
+            <span className="text-[#D8CEBF]">★</span>
+            <span
+              className="absolute left-0 top-0 overflow-hidden whitespace-nowrap text-[#C08C45]"
+              style={{ width: `${fill * 100}%` }}
+            >
+              ★
+            </span>
+          </span>
+        );
+      })}
+    </span>
+  );
+}
 export default function Hero() {
+  const [siteRating, setSiteRating] = useState<{
+    avg: number;
+    count: number;
+  }>({ avg: 0, count: 0 });
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadReviews() {
+      try {
+        const results = await Promise.all(
+          PRODUCT_IDS.map(async (id) => {
+            const response = await fetch(
+              `/api/get-reviews?shopifyProductId=${id}&perPage=100`
+            );
+
+            if (!response.ok) throw new Error("Review request failed");
+
+            return response.json();
+          })
+        );
+
+        const reviews = results.flatMap((result) =>
+          Array.isArray(result.reviews) ? result.reviews : []
+        );
+
+        if (cancelled || !reviews.length) return;
+
+        const total = reviews.reduce(
+          (sum, review) => sum + Number(review.rating || 0),
+          0
+        );
+
+        setSiteRating({
+          avg: total / reviews.length,
+          count: reviews.length,
+        });
+      } catch (error) {
+        console.error("Unable to load Judge.me reviews", error);
+      }
+    }
+
+    loadReviews();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
   return (
     <section className="relative overflow-hidden bg-[#f7f3eb] pt-[116px] lg:pt-[170px]">
       {/* =========================================================
@@ -54,11 +141,13 @@ export default function Hero() {
                 </Link>
               </div>
 
-              <div className="mt-5 flex items-center gap-2 font-serif text-[0.82rem] text-[#17324c]">
-                <span className="font-bold">4.9</span>
-                <span className="tracking-[0.04em] text-[#C08C45]">★★★★★</span>
-                <span>43 Verified Reviews</span>
-              </div>
+              {
+                <div className="mt-5 flex items-center gap-2 font-serif text-[0.82rem] text-[#17324c]">
+                  <span className="font-bold">{siteRating.avg.toFixed(1)}</span>
+                  <RatingStars rating={siteRating.avg} />
+                  <span>{siteRating.count} Customer Reviews</span>
+                </div>
+              }
             </div>
           </div>
 
@@ -74,7 +163,7 @@ export default function Hero() {
 
         {/* ================= MOBILE / TABLET HERO ================= */}
         <div className="lg:hidden">
-          <div className="px-5 pb-5 pt-6 sm:px-7">
+          <div className="px-5 pb-3 pt-5 sm:px-7">
             <div className="font-serif text-[0.64rem] uppercase leading-[1.55] tracking-[0.26em] text-[#17324c]">
               HISTORY FUELS A BRIGHTER TOMORROW.
             </div>
@@ -92,13 +181,25 @@ export default function Hero() {
                 ROASTED TO ORDER.
               </span>
             </h1>
+          </div>
 
-            <p className="mt-4 max-w-[500px] font-serif text-[0.97rem] leading-[1.42] text-[#17324c]">
+          {/* PRODUCT PHOTO */}
+          <div className="relative h-[235px] overflow-hidden sm:h-[330px]">
+            <img
+              src="/Hero-pic.jpg"
+              alt="Old Ironsides Coffee Flagship roast with freshly brewed coffee"
+              className="absolute inset-0 h-full w-full object-cover object-[56%_center]"
+            />
+          </div>
+
+          {/* DESCRIPTION + CTA */}
+          <div className="px-5 pb-5 pt-4 sm:px-7">
+            <p className="max-w-[500px] font-serif text-[0.94rem] leading-[1.4] text-[#17324c]">
               Small-batch coffee for those who value history, discipline, and a
               higher standard.
             </p>
 
-            <div className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+            <div className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
               <Link
                 to="/store"
                 className="inline-flex h-[48px] items-center justify-center bg-[#AD782F] px-6 font-serif text-[0.82rem] font-semibold tracking-[0.05em] text-white"
@@ -114,23 +215,16 @@ export default function Hero() {
               </Link>
             </div>
 
-            <div className="mt-4 flex items-center gap-2 font-serif text-[0.76rem] text-[#17324c]">
-              <span className="font-bold">4.9</span>
-              <span className="tracking-[0.03em] text-[#C08C45]">★★★★★</span>
-              <span>43 Verified Reviews</span>
-            </div>
-          </div>
-
-          <div className="relative aspect-[4/3] overflow-hidden sm:aspect-[16/10]">
-            <img
-              src="/Hero-pic.jpg"
-              alt="Old Ironsides Coffee Flagship roast with freshly brewed coffee"
-              className="absolute inset-0 h-full w-full object-cover object-[56%_center]"
-            />
+            {
+              <div className="mt-4 flex items-center gap-2 font-serif text-[0.76rem] text-[#17324c]">
+                <span className="font-bold">{siteRating.avg.toFixed(1)}</span>
+                <RatingStars rating={siteRating.avg} />
+                <span>{siteRating.count} Customer Reviews</span>
+              </div>
+            }
           </div>
         </div>
       </div>
-
       {/* =========================================================
           SUPPORTING CARDS
       ========================================================== */}
@@ -181,7 +275,7 @@ export default function Hero() {
               className="group relative min-h-[182px] overflow-hidden border border-[#d8cebf] bg-[#f7f3eb]"
             >
               <img
-                src="/roaster.jpg"
+                src="/roaster-site2.jpg"
                 alt="Coffee roasting in small batches"
                 className="absolute right-0 top-0 h-full w-[66%] object-cover object-[67%_center] transition duration-500 group-hover:scale-[1.015]"
                 style={{
@@ -218,7 +312,7 @@ export default function Hero() {
 
             {/* MISSION */}
             <Link
-  to="/mission"
+              to="/mission"
               className="group relative min-h-[182px] overflow-hidden border border-[#d8cebf] bg-[#f7f3eb]"
             >
               <img
@@ -268,7 +362,7 @@ export default function Hero() {
                   className="absolute inset-0 h-full w-full object-cover object-center"
                 />
 
-<div className="absolute inset-0 bg-gradient-to-r from-[#082237] from-[0%] via-[#082237]/95 via-[44%] via-[#082237]/65 via-[62%] to-transparent to-[84%]" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#082237] from-[0%] via-[#082237]/95 via-[44%] via-[#082237]/65 via-[62%] to-transparent to-[84%]" />
 
                 <div className="relative z-10 flex h-full w-[62%] flex-col justify-center px-5">
                   <div className="text-[0.61rem] font-semibold uppercase tracking-[0.27em] text-[#C08C45]">
@@ -298,7 +392,7 @@ export default function Hero() {
             >
               <div className="relative h-[165px] overflow-hidden">
                 <img
-                  src="/roaster.jpg"
+                  src="/roaster-site2.jpg"
                   alt="Coffee roasting in small batches"
                   className="absolute inset-y-0 right-0 h-full w-[62%] object-cover object-[68%_center]"
                 />
@@ -328,7 +422,7 @@ export default function Hero() {
 
             {/* MISSION */}
             <Link
-  to="/mission"
+              to="/mission"
               className="relative block overflow-hidden border border-[#d8cebf] bg-[#f7f3eb]"
             >
               <div className="relative h-[165px] overflow-hidden">
@@ -345,13 +439,13 @@ export default function Hero() {
                     OUR MISSION
                   </div>
                   <h2
-  className="mt-2 whitespace-nowrap text-[1.08rem] leading-[1.1] text-[#102942]"
-  style={{ fontFamily: "'Cinzel', serif" }}
->
-  VETERAN OWNED.
-  <br />
-  PURPOSE DRIVEN.
-</h2>
+                    className="mt-2 whitespace-nowrap text-[1.08rem] leading-[1.1] text-[#102942]"
+                    style={{ fontFamily: "'Cinzel', serif" }}
+                  >
+                    VETERAN OWNED.
+                    <br />
+                    PURPOSE DRIVEN.
+                  </h2>
 
                   <span className="mt-4 text-[0.65rem] font-semibold tracking-[0.07em] text-[#A36F2C]">
                     LEARN MORE →

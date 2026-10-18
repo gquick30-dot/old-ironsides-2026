@@ -2,53 +2,76 @@ import { Link } from "react-router-dom";
 
 export default function SampleSection() {
   return (
-    <section className="relative overflow-hidden bg-[#071421] px-4 py-7 md:px-6 md:py-9 lg:px-8">
-      {/* SUBTLE BACKGROUND DEPTH */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(192,140,69,0.06),transparent_30%),radial-gradient(circle_at_85%_70%,rgba(109,83,51,0.08),transparent_34%)]" />
+    <section className="overflow-hidden bg-[#071421] text-[#F4EBDD]">
+      <div className="mx-auto grid max-w-[1320px] items-center gap-5 px-5 py-7 sm:px-7 lg:grid-cols-[43%_57%] lg:gap-10 lg:px-10 lg:py-10">
+        {/* SAMPLE OFFER */}
+        <div className="min-w-0">
+          <p className="text-[0.62rem] font-bold uppercase tracking-[0.23em] text-[#C08C45]">
+            DISCOVER YOUR ROAST
+          </p>
 
-      <div className="relative mx-auto max-w-[1180px]">
-        <div className="relative overflow-hidden bg-[#F4EBDD] p-[7px] shadow-[0_12px_32px_rgba(0,0,0,0.20)]">
-          <div className="pointer-events-none absolute inset-[3px] border border-[#C08C45]/65" />
-          <div className="pointer-events-none absolute inset-[9px] border border-[#6D5333]/28" />
+          <h2
+            className="mt-3 text-[1.8rem] leading-[1.08] sm:text-[2.25rem] lg:text-[2.6rem]"
+            style={{ fontFamily: "'Cinzel', serif" }}
+          >
+            START SMALL.
+            <span className="mt-1 block text-[#C08C45]">
+              FIND YOUR FAVORITE.
+            </span>
+          </h2>
 
-          <div className="relative z-10 px-6 py-8 text-center sm:px-8 md:px-12 md:py-10">
-            <div className="text-[0.64rem] font-semibold uppercase tracking-[0.28em] text-[#A36F2C]">
-              START SMALL
-            </div>
+          <p className="mt-3 max-w-[440px] font-serif text-[0.85rem] leading-[1.45] text-[#DDD3C5] sm:text-[0.94rem] lg:mt-4">
+            Six signature coffees. Six 2.5 oz samples. Find your favorite before
+            buying a full bag.
+          </p>
 
-            <h2
-              className="mx-auto mt-3 max-w-[760px] text-[2rem] font-bold leading-[1.02] text-[#03111d] sm:text-[2.35rem] md:text-[2.7rem]"
-              style={{ fontFamily: "'Cinzel', serif" }}
+          {/* DESKTOP CTA */}
+          <div className="mt-5 hidden flex-wrap items-center gap-x-5 gap-y-3 lg:flex">
+            <Link
+              to="/roast/armada-sample-pack"
+              className="inline-flex min-h-[44px] items-center justify-center bg-[#B98238] px-6 text-[0.76rem] font-bold uppercase tracking-[0.08em] text-[#071421] transition hover:bg-[#D7A95D]"
             >
-              NEW TO OLD IRONSIDES?
-              <span className="mt-1 block text-[#8D5E27]">
-                START WITH A SAMPLE.
-              </span>
-            </h2>
+              SHOP THE SAMPLE PACK
+              <span className="ml-3 text-lg">→</span>
+            </Link>
 
-            <p className="mx-auto mt-4 max-w-[620px] text-[0.94rem] leading-[1.55] text-[#17202a] sm:text-[1rem]">
-              Try the lineup before committing to a full bag. Each 2.5 oz sample
-              brews roughly 6 to 8 cups of coffee.
-            </p>
-
-            <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Link
-                to="/roast/armada-sample-pack"
-                className="inline-flex h-[48px] w-full items-center justify-center bg-[#C08C45] px-8 text-[0.78rem] font-bold tracking-[0.1em] text-black transition hover:bg-[#D7A95D] sm:w-auto"
-              >
-                TRY A SAMPLE PACK
-                <span className="ml-4 text-lg">→</span>
-              </Link>
-
-              <div className="text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-[#8A5B25]">
-                Sample Box Ships Free
-              </div>
-            </div>
-
-            <div className="mx-auto mt-4 max-w-[520px] text-[0.68rem] leading-[1.45] text-[#665B4F]">
-              Sample packs excluded from first-order and subscription discounts.
-            </div>
+            <span className="text-[0.68rem] font-bold uppercase tracking-[0.12em] text-[#E6C07F]">
+              FREE SHIPPING
+            </span>
           </div>
+
+          <p className="mt-4 hidden text-[0.65rem] leading-[1.4] text-[#AFA99F] lg:block">
+            Sample packs excluded from first-order and subscription discounts.
+          </p>
+        </div>
+
+        {/* SAMPLE PACK PHOTOGRAPH */}
+        <div className="min-w-0">
+          <img
+            src="/sample-pack2.jpg"
+            alt="Six Old Ironsides Coffee sample bags displayed on roasted coffee beans"
+            className="block h-auto w-full"
+            loading="lazy"
+          />
+        </div>
+
+        {/* MOBILE CTA */}
+        <div className="lg:hidden">
+          <Link
+            to="/roast/armada-sample-pack"
+            className="flex min-h-[46px] w-full items-center justify-center bg-[#B98238] px-5 text-center text-[0.75rem] font-bold uppercase tracking-[0.07em] text-[#071421] shadow-[0_4px_0_#795021] transition active:translate-y-0.5 active:shadow-[0_2px_0_#795021]"
+          >
+            SHOP THE SAMPLE PACK
+            <span className="ml-3 text-lg">→</span>
+          </Link>
+
+          <p className="mt-3 text-center text-[0.7rem] font-bold uppercase tracking-[0.14em] text-[#E6C07F]">
+            FREE SHIPPING
+          </p>
+
+          <p className="mt-3 text-center text-[0.62rem] leading-[1.4] text-[#AFA99F]">
+            Sample packs excluded from first-order and subscription discounts.
+          </p>
         </div>
       </div>
     </section>

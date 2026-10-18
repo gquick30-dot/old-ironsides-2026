@@ -1,12 +1,29 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const roasts = [
+type RoastProfile = "smooth" | "bold" | "flavored" | "premium";
+
+type Roast = {
+  name: string;
+  roast: string;
+  notes: string;
+  slug: string;
+  image: string;
+  profile: RoastProfile;
+  price: number;
+  subscription: boolean;
+};
+
+const roasts: Roast[] = [
   {
     name: "FLAGSHIP",
     roast: "MEDIUM ROAST",
     notes: "Hazelnut • Warm Spice • Cream",
     slug: "flagship",
     image: "/Flagship Transparent Mockup.png",
+    profile: "smooth",
+    price: 22,
+    subscription: true,
   },
   {
     name: "BAPTISM BY FIRE",
@@ -14,13 +31,19 @@ const roasts = [
     notes: "Chocolate • Molasses • Smoke",
     slug: "baptism-by-fire",
     image: "/Baptism By Fire Transparent .png",
+    profile: "bold",
+    price: 22,
+    subscription: true,
   },
   {
     name: "THE JAVA ACTION",
     roast: "MEDIUM ROAST",
     notes: "Hazelnut • Caramel • Red Apple",
-    slug: "the-java-action",
+    slug: "java-action",
     image: "/Java Action Transparent.png",
+    profile: "smooth",
+    price: 22,
+    subscription: true,
   },
   {
     name: "BLACK SALVO",
@@ -28,6 +51,9 @@ const roasts = [
     notes: "Vanilla • Cocoa • Almond",
     slug: "black-salvo",
     image: "/black-salvo-emblem.png",
+    profile: "smooth",
+    price: 22,
+    subscription: true,
   },
   {
     name: "OAK & COPPER",
@@ -35,6 +61,9 @@ const roasts = [
     notes: "Vanilla • Caramel • Oak",
     slug: "oak-and-copper",
     image: "/Oak&Copper Bag Transparent.png",
+    profile: "premium",
+    price: 24.99,
+    subscription: false,
   },
   {
     name: "BRASS MONKEY",
@@ -42,147 +71,373 @@ const roasts = [
     notes: "Pecan • Brown Sugar • Spice",
     slug: "brass-monkey",
     image: "/Brass Monkey Transparent Bag.png",
+    profile: "flavored",
+    price: 22,
+    subscription: true,
   },
 ];
 
-export default function FleetSection() {
+const compassPoints: {
+  id: RoastProfile;
+  label: string;
+  position: "north" | "south" | "east" | "west";
+}[] = [
+  { id: "bold", label: "DARK & BOLD", position: "north" },
+  { id: "smooth", label: "SMOOTH & BALANCED", position: "south" },
+  { id: "flavored", label: "SWEET & FLAVORED", position: "east" },
+  { id: "premium", label: "PREMIUM SELECTION", position: "west" },
+];
+
+function CompassRose() {
   return (
-    <section className="relative overflow-hidden bg-[#F3EBDD] px-4 py-9 sm:px-5 md:px-6 md:py-11 xl:px-8 xl:py-12">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_10%,rgba(192,140,69,0.08),transparent_30%),radial-gradient(circle_at_85%_78%,rgba(109,83,51,0.06),transparent_34%)]" />
+    <svg
+      viewBox="0 0 100 100"
+      className="h-full w-full"
+      fill="none"
+      aria-hidden="true"
+    >
+      <circle
+        cx="50"
+        cy="50"
+        r="40"
+        stroke="#C08C45"
+        strokeWidth="0.8"
+        opacity="0.75"
+      />
 
-      <div className="relative mx-auto max-w-[1500px]">
-        {/* =====================================================
-            INTRO
-        ====================================================== */}
-        <div className="mx-auto max-w-[760px] text-center">
-          <div className="text-[0.64rem] font-bold tracking-[0.25em] text-[#A36F2C] md:text-[0.7rem]">
-            EXPLORE THE FLEET
+      <circle
+        cx="50"
+        cy="50"
+        r="32"
+        stroke="#C08C45"
+        strokeWidth="0.6"
+        opacity="0.35"
+      />
+
+      <path
+        d="M50 4V16 M50 84V96 M4 50H16 M84 50H96"
+        stroke="#D7B376"
+        strokeWidth="1.3"
+      />
+
+      <path d="M50 10L57 43L50 50L43 43Z" fill="#E6C07F" />
+      <path d="M50 90L57 57L50 50L43 57Z" fill="#956627" />
+      <path d="M90 50L57 43L50 50L57 57Z" fill="#C08C45" />
+      <path d="M10 50L43 43L50 50L43 57Z" fill="#E6C07F" />
+
+      <path
+        d="M50 50L72 28L57 50Z
+           M50 50L28 28L43 50Z
+           M50 50L72 72L57 50Z
+           M50 50L28 72L43 50Z"
+        fill="#A5783C"
+        opacity="0.6"
+      />
+
+      <circle
+        cx="50"
+        cy="50"
+        r="6"
+        fill="#071F35"
+        stroke="#E6C07F"
+        strokeWidth="1.5"
+      />
+      <circle cx="50" cy="50" r="2" fill="#E6C07F" />
+    </svg>
+  );
+}
+
+export default function FleetSection() {
+  const [selectedProfile, setSelectedProfile] = useState<RoastProfile | null>(
+    null
+  );
+
+  const displayedRoasts = selectedProfile
+    ? [
+        ...roasts.filter((item) => item.profile === selectedProfile),
+        ...roasts.filter((item) => item.profile !== selectedProfile),
+      ]
+    : roasts;
+
+  const matchCount = selectedProfile
+    ? roasts.filter((item) => item.profile === selectedProfile).length
+    : 0;
+
+  const activeLabel = compassPoints.find(
+    (point) => point.id === selectedProfile
+  )?.label;
+
+  function selectProfile(profile: RoastProfile) {
+    setSelectedProfile((current) => (current === profile ? null : profile));
+  }
+
+  return (
+    <section className="overflow-hidden bg-[#F1E8DA] px-4 py-7 text-[#102942] sm:px-6 md:py-9 xl:px-8">
+      <div className="mx-auto max-w-[1400px]">
+        {/* INTRO AND COMPASS */}
+        <div className="grid items-center gap-4 lg:grid-cols-[minmax(0,45fr)_minmax(0,55fr)] lg:gap-6">
+          {/* SECTION INTRO */}
+          <div className="min-w-0">
+            <p className="text-[0.62rem] font-bold uppercase tracking-[0.22em] text-[#A36F2C]">
+              THE OLD IRONSIDES FLEET
+            </p>
+
+            <h2
+              className="mt-2 text-[2rem] leading-[1.08] text-[#102942] sm:text-[2.6rem] xl:text-[2.9rem]"
+              style={{ fontFamily: "'Cinzel', serif" }}
+            >
+              FIND YOUR ROAST.
+            </h2>
+
+            {/* MOBILE DESCRIPTION ONLY */}
+            <p className="mt-3 max-w-[450px] font-serif text-[0.9rem] leading-[1.45] text-[#625D56] sm:text-[1rem] lg:hidden">
+              Follow the compass to your perfect cup.
+            </p>
           </div>
 
-          <h2
-            className="mt-2 text-[2.25rem] font-bold leading-[0.98] text-[#03111d] sm:text-[2.7rem] md:text-[3rem]"
-            style={{ fontFamily: "'Cinzel', serif" }}
-          >
-            OUR ROASTS
-          </h2>
+          {/* INTERACTIVE NAVAL COMPASS */}
+          <div className="relative min-w-0 overflow-hidden border border-[#A4773A] bg-[#071F35] shadow-[0_4px_0_#C9B99E,0_9px_18px_rgba(16,35,51,0.10)]">
+            {/* SUBTLE BACKGROUND LIGHTING */}
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_65%_50%,rgba(46,78,103,0.28),transparent_72%)]" />
 
-          <p className="mx-auto mt-3 max-w-[620px] text-[0.9rem] leading-[1.5] text-[#4A4742] md:text-[0.96rem]">
-            Six distinct coffees, from smooth and balanced to dark,
-            barrel-aged, and flavored.
-          </p>
+            {/* DESKTOP GUIDE INFORMATION */}
+            <div className="absolute inset-y-0 left-0 z-10 hidden w-[30%] translate-x-[15%] flex-col justify-center border-r border-[#C08C45]/35 px-5 lg:flex xl:px-7">
+              <p className="text-[0.67rem] font-bold uppercase tracking-[0.18em] text-[#C08C45]">
+                THE ROAST GUIDE
+              </p>
 
-          <div className="mt-4 flex flex-col items-center justify-center gap-2 sm:flex-row sm:gap-4">
-            <Link
-              to="/store"
-              className="inline-flex h-[44px] items-center justify-center bg-[#C08C45] px-6 text-[0.7rem] font-bold tracking-[0.1em] text-black transition hover:bg-[#D6A557]"
-            >
-              SHOP ALL ROASTS
-              <span className="ml-3">→</span>
-            </Link>
+              <div className="mt-3 h-px w-12 bg-[#C08C45]/65" />
 
-            <Link
-              to="/roast/armada-sample-pack"
-              className="text-[0.65rem] font-bold tracking-[0.09em] text-[#8A5B25] transition hover:text-[#03111d]"
-            >
-              NOT SURE? TRY A SAMPLE PACK
-            </Link>
-          </div>
-        </div>
+              <p className="mt-3 max-w-[230px] font-serif text-[0.88rem] leading-[1.45] text-[#F0E7D5] xl:text-[1rem]">
+                Follow the compass to your perfect cup.
+              </p>
+            </div>
 
-        {/* =====================================================
-            MOBILE ROAST LIST
-        ====================================================== */}
-        <div className="mt-7 space-y-2.5 md:hidden">
-          {roasts.map((item) => (
-            <Link
-              key={item.slug}
-              to={`/roast/${item.slug}`}
-              className="grid min-h-[118px] grid-cols-[105px_1fr] items-center overflow-hidden border border-[#A68459]/35 bg-[#F7EFE2]"
-            >
-              {/* BAG */}
-              <div className="relative flex h-full items-center justify-center overflow-hidden">
-                <div className="absolute bottom-[12%] h-[18px] w-[60%] rounded-[50%] bg-black/12 blur-lg" />
-
-                <img
-                  src={item.image}
-                  alt={`${item.name} coffee bag`}
-                  className="relative z-10 max-h-[105px] max-w-[90px] object-contain drop-shadow-[0_10px_8px_rgba(0,0,0,0.18)]"
-                />
+            {/* COMPASS INTERACTION AREA */}
+            <div className="relative mx-auto h-[166px] w-full max-w-[640px] sm:h-[178px] lg:ml-auto lg:mr-0 lg:h-[175px] lg:w-[70%] lg:max-w-none">
+              {/* COMPASS ROSE */}
+              <div className="pointer-events-none absolute left-1/2 top-1/2 h-[96px] w-[96px] -translate-x-1/2 -translate-y-1/2 sm:h-[108px] sm:w-[108px] lg:h-[112px] lg:w-[112px]">
+                <CompassRose />
               </div>
 
-              {/* DETAILS */}
-              <div className="border-l border-[#A68459]/20 py-4 pl-4 pr-3">
-                <div className="text-[0.55rem] font-bold tracking-[0.16em] text-[#9C692C]">
-                  {item.roast}
-                </div>
+              {/* FOUR INTERACTIVE DIRECTIONS */}
+              {compassPoints.map((point) => {
+                const selected = selectedProfile === point.id;
 
-                <h3
-                  className="mt-1 text-[1.05rem] font-bold leading-[1.05] text-[#03111d]"
-                  style={{ fontFamily: "'Cinzel', serif" }}
-                >
-                  {item.name}
-                </h3>
+                const positions = {
+                  north: "left-1/2 top-1.5 w-[43%] -translate-x-1/2",
+                  south: "bottom-1.5 left-1/2 w-[46%] -translate-x-1/2",
+                  west: "right-[calc(50%+56px)] top-1/2 w-[24%] -translate-y-1/2 sm:right-[calc(50%+68px)] sm:w-[23%]",
+                  east: "left-[calc(50%+56px)] top-1/2 w-[24%] -translate-y-1/2 sm:left-[calc(50%+68px)] sm:w-[23%]",
+                };
 
-                <div className="mt-2 text-[0.64rem] leading-[1.4] text-[#716658]">
-                  {item.notes}
-                </div>
-
-                <div className="mt-2 text-[0.58rem] font-bold tracking-[0.1em] text-[#A36F2C]">
-                  VIEW ROAST →
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* =====================================================
-            DESKTOP / TABLET ROAST GRID
-        ====================================================== */}
-        <div className="mt-8 hidden gap-4 md:grid md:grid-cols-2 xl:grid-cols-3 xl:gap-5">
-          {roasts.map((item) => (
-            <Link
-              key={item.slug}
-              to={`/roast/${item.slug}`}
-              className="group relative overflow-hidden border border-[#A68459]/35 bg-[#F7EFE2] transition duration-300 hover:-translate-y-[2px] hover:border-[#C08C45]/70 hover:shadow-[0_14px_30px_rgba(61,39,19,0.10)]"
-            >
-              <div className="grid min-h-[235px] grid-cols-[42%_58%]">
-                {/* BAG */}
-                <div className="relative flex items-center justify-center overflow-hidden">
-                  <div className="absolute bottom-[10%] h-[26px] w-[62%] rounded-[50%] bg-black/14 blur-xl" />
-
-                  <img
-                    src={item.image}
-                    alt={`${item.name} coffee bag`}
-                    className="relative z-10 max-h-[220px] max-w-[94%] object-contain drop-shadow-[0_14px_10px_rgba(0,0,0,0.20)] transition duration-300 group-hover:-translate-y-1"
-                  />
-                </div>
-
-                {/* DETAILS */}
-                <div className="flex flex-col justify-center py-5 pr-6">
-                  <div className="text-[0.62rem] font-bold tracking-[0.15em] text-[#9C692C]">
-                    {item.roast}
-                  </div>
-
-                  <h3
-                    className="mt-1.5 text-[1.28rem] font-bold leading-[1.03] text-[#03111d] transition group-hover:text-[#895B26] xl:text-[1.4rem]"
-                    style={{ fontFamily: "'Cinzel', serif" }}
+                return (
+                  <button
+                    key={point.id}
+                    type="button"
+                    onClick={() => selectProfile(point.id)}
+                    aria-pressed={selected}
+                    aria-label={`Find ${point.label.toLowerCase()} coffees`}
+                    className={`absolute z-10 flex min-h-[44px] items-center justify-center px-1 py-1 text-center text-[0.57rem] font-bold leading-[1.25] tracking-[0.02em] transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E6C07F] sm:px-2 sm:text-[0.66rem] ${
+                      positions[point.position]
+                    } ${
+                      selected
+                        ? "bg-[#EAD9BB] text-[#102942] shadow-[0_3px_0_#A8732C]"
+                        : "bg-transparent text-[#F0E7D5] hover:bg-[#183B54] hover:text-[#E6C07F]"
+                    }`}
                   >
-                    {item.name}
-                  </h3>
+                    <span
+                      className={`border-b pb-1 transition-colors ${
+                        selected ? "border-[#A8732C]" : "border-transparent"
+                      }`}
+                    >
+                      {point.label}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
 
-                  <div className="mt-3 text-[0.7rem] leading-[1.5] text-[#716658]">
-                    {item.notes}
+        {/* SELECTED MATCH STATUS ONLY */}
+        {selectedProfile && (
+          <div
+            aria-live="polite"
+            className="mt-5 flex flex-wrap items-center justify-between gap-3 border-b border-[#C7B79D] pb-3"
+          >
+            <div>
+              <p className="text-[0.59rem] font-bold uppercase tracking-[0.14em] text-[#956525]">
+                YOUR ROAST MATCHES
+              </p>
+
+              <p className="mt-1 font-serif text-[0.85rem] text-[#344253]">
+                {matchCount} {matchCount === 1 ? "coffee" : "coffees"} matching{" "}
+                {activeLabel?.toLowerCase()}.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setSelectedProfile(null)}
+              className="text-[0.64rem] font-bold uppercase tracking-[0.06em] text-[#956525] underline underline-offset-4 hover:text-[#102942]"
+            >
+              VIEW ALL ROASTS ↗
+            </button>
+          </div>
+        )}
+
+        {/* ROAST PRODUCT CARDS */}
+        <div className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4 xl:grid-cols-3 xl:gap-5">
+          {displayedRoasts.map((item) => {
+            const matched =
+              selectedProfile !== null && item.profile === selectedProfile;
+
+            const subscriptionPrice = item.price * 0.85;
+
+            return (
+              <Link
+                key={item.slug}
+                to={`/roast/${item.slug}`}
+                className={`group relative block min-w-0 overflow-hidden border transition-all duration-300 hover:-translate-y-[3px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#A36F2C] ${
+                  matched
+                    ? "border-[#C08C45] bg-[#092940] shadow-[0_5px_0_#A8732C,0_12px_24px_rgba(16,35,51,0.17)]"
+                    : "border-[#CCBCA6] bg-[#FBF7F0] shadow-[0_4px_0_#D6C7B4,0_7px_17px_rgba(40,27,16,0.06)] hover:border-[#B98238] hover:shadow-[0_6px_0_#C5AA82,0_13px_25px_rgba(40,27,16,0.12)]"
+                }`}
+              >
+                {matched && (
+                  <div className="absolute inset-y-0 left-0 z-10 w-[3px] bg-[#C08C45]" />
+                )}
+
+                <div className="grid min-h-[140px] grid-cols-[108px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] md:min-h-[220px] md:grid-cols-[43%_57%]">
+                  {/* BAG IMAGE */}
+                  <div className="relative flex min-w-0 items-center justify-center overflow-hidden p-2">
+                    <div
+                      className={`pointer-events-none absolute inset-4 rounded-full blur-2xl ${
+                        matched ? "bg-[#F0D6A8]/20" : "bg-[#CDB99E]/18"
+                      }`}
+                    />
+
+                    <img
+                      src={item.image}
+                      alt={`${item.name} coffee bag`}
+                      loading="lazy"
+                      className="relative z-10 max-h-[128px] max-w-full object-contain drop-shadow-[0_10px_9px_rgba(0,0,0,0.20)] transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-[1.025] sm:max-h-[150px] md:max-h-[218px]"
+                    />
                   </div>
 
-                  <div className="mt-4 border-t border-[#6D5333]/20 pt-3 text-[0.6rem] font-bold tracking-[0.11em] text-[#A36F2C]">
-                    VIEW ROAST →
+                  {/* ROAST DETAILS */}
+                  <div className="flex min-w-0 flex-col justify-center py-3 pl-1 pr-3 md:py-4 md:pl-0 md:pr-5">
+                    {matched && (
+                      <p className="mb-1.5 text-[0.55rem] font-bold uppercase tracking-[0.11em] text-[#E6C07F]">
+                        YOUR MATCH
+                      </p>
+                    )}
+
+                    <p
+                      className={`text-[0.56rem] font-bold uppercase tracking-[0.12em] ${
+                        matched ? "text-[#D6B884]" : "text-[#9C692C]"
+                      }`}
+                    >
+                      {item.roast}
+                    </p>
+
+                    <h3
+                      className={`mt-1 text-[1.1rem] font-bold leading-[1.1] md:text-[1.2rem] xl:text-[1.3rem] ${
+                        matched ? "text-[#F0E7D5]" : "text-[#102942]"
+                      }`}
+                      style={{ fontFamily: "'Cinzel', serif" }}
+                    >
+                      {item.name}
+                    </h3>
+
+                    <p
+                      className={`mt-2 text-[0.74rem] leading-[1.4] md:text-[0.7rem] ${
+                        matched ? "text-[#DDD0BE]" : "text-[#716658]"
+                      }`}
+                    >
+                      {item.notes}
+                    </p>
+
+                    {/* PRICING */}
+                    <div
+                      className={`mt-3 border-t pt-2.5 ${
+                        matched ? "border-[#C08C45]/40" : "border-[#6D5333]/20"
+                      }`}
+                    >
+                      <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
+                        <div>
+                          <span
+                            className={`text-[0.95rem] font-bold md:text-[1.05rem] ${
+                              matched ? "text-[#F0E7D5]" : "text-[#102942]"
+                            }`}
+                          >
+                            ${item.price.toFixed(2)}
+                          </span>
+
+                          <span
+                            className={`ml-1.5 text-[0.62rem] uppercase tracking-[0.05em] md:text-[0.53rem] ${
+                              matched ? "text-[#C5BAA9]" : "text-[#807567]"
+                            }`}
+                          >
+                            ONE-TIME
+                          </span>
+                        </div>
+
+                        <span
+                          className={`text-[0.59rem] font-bold uppercase tracking-[0.04em] md:text-[0.62rem] ${
+                            matched ? "text-[#E6C07F]" : "text-[#956525]"
+                          }`}
+                        >
+                          VIEW ROAST →
+                        </span>
+                      </div>
+
+                      {/* SUBSCRIPTION PRICE */}
+                      {item.subscription ? (
+                        <div className="mt-2 flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                          <span
+                            className={`text-[0.7rem] font-bold uppercase tracking-[0.02em] md:text-[0.66rem] ${
+                              matched ? "text-[#E6C07F]" : "text-[#A36F2C]"
+                            }`}
+                          >
+                            SUBSCRIBE & SAVE 15%
+                          </span>
+
+                          <span
+                            className={`text-[0.94rem] font-bold leading-tight md:text-[0.9rem] ${
+                              matched ? "text-[#F0E7D5]" : "text-[#102942]"
+                            }`}
+                          >
+                            ${subscriptionPrice.toFixed(2)} / BAG
+                          </span>
+                        </div>
+                      ) : (
+                        <p
+                          className={`mt-2 text-[0.63rem] font-bold uppercase tracking-[0.045em] ${
+                            matched ? "text-[#E6C07F]" : "text-[#956525]"
+                          }`}
+                        >
+                          LIMITED RELEASE • NO DISCOUNTS
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
+            );
+          })}
+        </div>
 
-              <div className="h-[3px] w-0 bg-[#C08C45] transition-all duration-500 group-hover:w-full" />
-            </Link>
-          ))}
+        {/* SHOP LINK */}
+        <div className="mt-6 text-center">
+          <Link
+            to="/store"
+            className="inline-flex min-h-[42px] items-center justify-center border-b-2 border-[#A36F2C] px-4 text-[0.7rem] font-bold uppercase tracking-[0.1em] text-[#102942] transition hover:text-[#A36F2C]"
+          >
+            SHOP THE COMPLETE FLEET
+            <span className="ml-3">→</span>
+          </Link>
         </div>
       </div>
     </section>

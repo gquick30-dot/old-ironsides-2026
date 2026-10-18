@@ -6,6 +6,14 @@ import CookieConsent from "./Components/CookieConsent";
 import SourcingPage from "./v2/components/SourcingPage";
 import MissionPage from "./v2/components/MissionPage";
 import StorePageV2 from "./v2/pages/StorePage";
+import V2FleetHistoryPage from "./v2/pages/FleetHistoryPage";
+import V2FleetStoryPage from "./v2/pages/FleetStoryPage";
+import V2LegalPage from "./v2/pages/LegalPage";
+import V2ArmadaSamplePage from "./v2/pages/ArmadaSamplePage";
+import V2AccountPage from "./v2/pages/AccountPage";
+import V2ContactPage from "./v2/pages/ContactPage";
+import V2SubscriptionPage from "./v2/pages/SubscriptionPage";
+
 import {
   getProductByHandle,
   ensureCart,
@@ -119,7 +127,7 @@ function ShopButton({ slug, title }: { slug: string; title: string }) {
   return (
     <Link
       to={`/roast/${slug}`}
-      className="group inline-flex items-center gap-2 rounded-xl px-5 py-3 font-semibold ring-1 ring-[#C08C45] text-[#C08C45] bg-transparent hover:bg-[#C08C45] hover:text-neutral-900 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C08C45]"
+      className="group inline-flex items-center gap-2 rounded-xl px-5 py-3 font-semibold ring-1 ring-[#C08C45] text-[#C08C45] bg-transparent hover:bg-[#F3EBDD] hover:text-[#071F35] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C08C45]"
       aria-label={`Shop ${title}`}
       title={`Shop ${title}`}
     >
@@ -180,7 +188,7 @@ function FlashToast() {
       }`}
     >
       <div
-        className="rounded-lg bg-[#C08C45]/95 px-4 py-2 text-neutral-900 font-semibold shadow-xl text-center whitespace-pre-line"
+        className="rounded-lg bg-[#F3EBDD]/95 px-4 py-2 text-[#071F35] font-semibold shadow-xl text-center whitespace-pre-line"
         role="status"
         aria-live="polite"
       >
@@ -308,7 +316,7 @@ class ErrorBoundary extends React.Component<any, { error: any }> {
   render() {
     if (this.state.error) {
       return (
-        <div className="p-6 text-sm text-red-300 bg-red-950/30 border border-red-800 rounded-xl m-4">
+        <div className="p-6 text-sm text-[#E6C07F] bg-red-950/30 border border-red-800 rounded-xl m-4">
           <div className="font-bold text-red-200">Something went wrong.</div>
           <pre className="whitespace-pre-wrap mt-2 text-red-200">
             {String(this.state.error?.message || this.state.error)}
@@ -337,7 +345,7 @@ const BackButton = ({
 }) => {
   const navigate = useNavigate();
   const base =
-    "inline-flex items-center gap-2 rounded-2xl border-2 border-[#C08C45] bg-amber-500/20 font-bold text-[#C08C45] hover:bg-[#C08C45] hover:text-neutral-900";
+    "inline-flex items-center gap-2 rounded-2xl border-2 border-[#C08C45] bg-amber-500/20 font-bold text-[#C08C45] hover:bg-[#F3EBDD] hover:text-[#071F35]";
   const sz = size === "sm" ? "px-3 py-2 text-sm" : "px-6 py-4 text-lg";
   const iconCls = size === "sm" ? "h-5 w-5" : "h-7 w-7";
   return (
@@ -375,7 +383,7 @@ const SectionTitle = ({ title, subtitle }: any) => {
     <div className="max-w-3xl">
       <TitleTag className={titleClasses}>{title}</TitleTag>
       {subtitle && (
-        <div className="mt-1 md:text-base space-y-1 text-neutral-300">
+        <div className="mt-1 md:text-base space-y-1 text-[#D5CEC4]">
           {subtitle}
         </div>
       )}
@@ -523,7 +531,7 @@ const roastCards = [
     id: "brass-monkey",
     slug: "brass-monkey",
     title: "BRASS MONKEY",
-    subTitle: "Winter Seasonal",
+    subTitle: "Flavored",
     note: "Warm Pecan",
     // Detail page hero image. Homepage tile still uses img.
     detailImg: "Brass Monkey-1.jpg",
@@ -609,7 +617,7 @@ function RoastMegaCard({
     <Link
       to={`/roast/${card.slug}`}
       onClick={onClick}
-      className="group relative overflow-hidden rounded-2xl ring-1 ring-neutral-800 bg-neutral-900/40 hover:bg-neutral-900 transition shadow-lg flex flex-col"
+      className="group relative overflow-hidden rounded-2xl ring-1 ring-[#6D5333]/40 bg-[#102D44]/40 hover:bg-[#102D44] transition shadow-lg flex flex-col"
     >
       <img
         src={
@@ -631,15 +639,13 @@ function RoastMegaCard({
         >
           {card.title}
         </div>
-        <div className="text-xs text-neutral-400">{card.variant}</div>
-        <div className="text-xs md:text-sm text-neutral-300">
-          {card.subTitle}
-        </div>
+        <div className="text-xs text-[#B8A994]">{card.variant}</div>
+        <div className="text-xs md:text-sm text-[#D5CEC4]">{card.subTitle}</div>
 
         {stats && (
           <div className="mt-1 flex items-center gap-1 text-[0.7rem] text-[#C08C45]">
             <span>★ {stats.avg.toFixed(1)}</span>
-            <span className="text-neutral-400">
+            <span className="text-[#B8A994]">
               ({stats.count} review{stats.count === 1 ? "" : "s"})
             </span>
           </div>
@@ -887,7 +893,7 @@ function CartProvider({ children }: any) {
       return Math.max(0, +p.toFixed(2));
     }
 
-    return Math.max(0, +(p * 0.9).toFixed(2));
+    return Math.max(0, +(p * 0.85).toFixed(2));
   }, []);
 
   // generic updater for one item
@@ -1284,7 +1290,7 @@ function RingThatBellBox({ mode = "section" }: { mode?: "section" | "card" }) {
   };
 
   const Card = (
-    <div className="rounded-2xl ring-1 ring-[#C08C45]/60 bg-neutral-900/60 p-6 sm:p-8 text-center">
+    <div className="rounded-2xl ring-1 ring-[#C08C45]/60 bg-[#102D44] p-6 sm:p-8 text-center">
       <div className="flex flex-col items-center justify-center gap-2 sm:gap-3 mb-4">
         <BellRinger iconClassName="h-9 w-9 sm:h-11 sm:w-11 text-[#C08C45]" />
         <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#C08C45]">
@@ -1292,7 +1298,7 @@ function RingThatBellBox({ mode = "section" }: { mode?: "section" | "card" }) {
         </h3>
       </div>
 
-      <p className="text-neutral-300 mb-5 text-base sm:text-lg md:text-xl">
+      <p className="text-[#D5CEC4] mb-5 text-base sm:text-lg md:text-xl">
         Get 15% off your first freshly roasted coffee order. <br />
         Subscribe later and save 10% off every order.
       </p>
@@ -1308,17 +1314,17 @@ function RingThatBellBox({ mode = "section" }: { mode?: "section" | "card" }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter your email"
-          className="flex-1 min-w-0 rounded-xl bg-neutral-900/70 border border-neutral-700 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#C08C45]"
+          className="flex-1 min-w-0 rounded-xl bg-[#102D44]/70 border border-neutral-700 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#C08C45]"
         />
         <button
           type="submit"
-          className="w-full sm:w-auto px-6 py-3 rounded-xl bg-[#C08C45] text-neutral-900 font-semibold hover:bg-[#C08C45]"
+          className="w-full sm:w-auto px-6 py-3 rounded-xl bg-[#F3EBDD] text-[#071F35] font-semibold hover:bg-[#F3EBDD]"
         >
           GET 15% OFF
         </button>
       </form>
 
-      <div className="mt-6 text-xs sm:text-sm text-neutral-400">
+      <div className="mt-6 text-xs sm:text-sm text-[#B8A994]">
         Already a member?{" "}
         <Link to="/account/login" className="text-[#C08C45] hover:underline">
           Sign in
@@ -1326,7 +1332,7 @@ function RingThatBellBox({ mode = "section" }: { mode?: "section" | "card" }) {
       </div>
 
       {submitted && (
-        <p className="mt-3 text-sm text-emerald-400">
+        <p className="mt-3 text-sm text-[#E6C07F]">
           Welcome aboard! Your discount will be applied at checkout. <br />
           Does not stack with subscriptions.
         </p>
@@ -1337,7 +1343,7 @@ function RingThatBellBox({ mode = "section" }: { mode?: "section" | "card" }) {
   if (mode === "card") return Card;
 
   return (
-    <section className="py-10 md:py-14 border-b border-neutral-800">
+    <section className="py-10 md:py-14 border-b border-[#6D5333]/40">
       <Container>
         <div className="max-w-xl mx-auto">{Card}</div>
       </Container>
@@ -1393,7 +1399,7 @@ function MegaSubscribeBox({
     <div className="w-full lg:w-[36rem]">
       {/* MOBILE VERSION ONLY (tighter v2) */}
       <div className="md:hidden">
-        <div className="mx-auto max-w-[16.5rem] overflow-hidden rounded-2xl ring-1 ring-[#C08C45]/60 bg-neutral-900/60">
+        <div className="mx-auto max-w-[16.5rem] overflow-hidden rounded-2xl ring-1 ring-[#C08C45]/60 bg-[#102D44]">
           {imageSrc ? (
             <img
               src={imageSrc}
@@ -1416,7 +1422,7 @@ function MegaSubscribeBox({
             </div>
 
             <p
-              className="text-neutral-300 mb-2 whitespace-pre-line"
+              className="text-[#D5CEC4] mb-2 whitespace-pre-line"
               style={{ fontSize: 11, lineHeight: 1.2 }}
             >
               {sub}
@@ -1437,15 +1443,15 @@ function MegaSubscribeBox({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                className="flex-1 min-w-0 rounded-md bg-neutral-900/70 border border-neutral-700 px-2 py-[5px] text-[11px] focus:outline-none focus:ring-2 focus:ring-[#C08C45]"
+                className="flex-1 min-w-0 rounded-md bg-[#102D44]/70 border border-neutral-700 px-2 py-[5px] text-[11px] focus:outline-none focus:ring-2 focus:ring-[#C08C45]"
               />
-              <button className="w-full px-3 py-[6px] rounded-md bg-[#C08C45] text-neutral-900 text-[11px] font-semibold hover:bg-[#C08C45]">
+              <button className="w-full px-3 py-[6px] rounded-md bg-[#F3EBDD] text-[#071F35] text-[11px] font-semibold hover:bg-[#F3EBDD]">
                 {btn}
               </button>
             </form>
 
             <div
-              className="mt-1 text-neutral-400"
+              className="mt-1 text-[#B8A994]"
               style={{ fontSize: 9.5, lineHeight: 1.2 }}
             >
               Already a member?{" "}
@@ -1458,7 +1464,7 @@ function MegaSubscribeBox({
             </div>
 
             {done && (
-              <p className="mt-1 text-emerald-400" style={{ fontSize: 10.5 }}>
+              <p className="mt-1 text-[#E6C07F]" style={{ fontSize: 10.5 }}>
                 Welcome aboard! Your discount will be applied at checkout.{" "}
                 <br /> Does not stack with subscriptions.
               </p>
@@ -1469,7 +1475,7 @@ function MegaSubscribeBox({
 
       {/* DESKTOP/TABLET VERSION — unchanged */}
       <div className="hidden md:block">
-        <div className="rounded-2xl ring-1 ring-[#C08C45]/60 bg-neutral-900/60 p-6 sm:p-8 text-center">
+        <div className="rounded-2xl ring-1 ring-[#C08C45]/60 bg-[#102D44] p-6 sm:p-8 text-center">
           <div className="flex flex-col items-center justify-center gap-2 sm:gap-3 mb-4">
             <Bell className="h-6 w-6 sm:h-7 sm:w-7 text-[#C08C45]" />
             <h3 className="text-xl sm:text-2xl font-extrabold text-[#C08C45]">
@@ -1477,7 +1483,7 @@ function MegaSubscribeBox({
             </h3>
           </div>
 
-          <p className="text-neutral-300 mb-5 text-base sm:text-lg md:text-xl whitespace-pre-line">
+          <p className="text-[#D5CEC4] mb-5 text-base sm:text-lg md:text-xl whitespace-pre-line">
             {sub}
           </p>
 
@@ -1496,14 +1502,14 @@ function MegaSubscribeBox({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
-              className="flex-1 min-w-0 rounded-xl bg-neutral-900/70 border border-neutral-700 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#C08C45]"
+              className="flex-1 min-w-0 rounded-xl bg-[#102D44]/70 border border-neutral-700 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#C08C45]"
             />
-            <button className="w-full sm:w-auto px-6 py-3 rounded-xl bg-[#C08C45] text-neutral-900 font-semibold hover:bg-[#C08C45]">
+            <button className="w-full sm:w-auto px-6 py-3 rounded-xl bg-[#F3EBDD] text-[#071F35] font-semibold hover:bg-[#F3EBDD]">
               {btn}
             </button>
           </form>
 
-          <div className="mt-3 text-[11px] sm:text-xs text-neutral-400">
+          <div className="mt-3 text-[11px] sm:text-xs text-[#B8A994]">
             Already a member?{" "}
             <Link
               to="/account/login"
@@ -1514,7 +1520,7 @@ function MegaSubscribeBox({
           </div>
 
           {done && (
-            <p className="mt-3 text-sm text-emerald-400">
+            <p className="mt-3 text-sm text-[#E6C07F]">
               Welcome aboard! Your discount will be applied at checkout. <br />{" "}
               Does not stack with subscriptions.
             </p>
@@ -1527,7 +1533,7 @@ function MegaSubscribeBox({
 
 function GovXLoginBox() {
   return (
-    <div className="rounded-2xl ring-1 ring-[#C08C45]/60 bg-neutral-900/60 p-5 text-center">
+    <div className="rounded-2xl ring-1 ring-[#C08C45]/60 bg-[#102D44] p-5 text-center">
       <div className="flex flex-col items-center justify-center gap-2 mb-2">
         <Bell className="h-5 w-5 text-[#C08C45]" />
         <h4 className="text-base sm:text-lg font-extrabold text-[#C08C45]">
@@ -1535,7 +1541,7 @@ function GovXLoginBox() {
         </h4>
       </div>
 
-      <p className="text-neutral-300 text-sm sm:text-[15px] leading-relaxed">
+      <p className="text-[#D5CEC4] text-sm sm:text-[15px] leading-relaxed">
         Enjoy <span className="font-semibold text-[#C08C45]">10% off</span> both
         coffee and merch — plus{" "}
         <span className="font-semibold text-[#C08C45]">$1 extra per bag</span>{" "}
@@ -1544,12 +1550,12 @@ function GovXLoginBox() {
 
       <a
         href="https://auth.govx.com/shopify/verify?shop=81ub0m-s7.myshopify.com&utm_source=shopify&utm_medium=govxid&utm_campaign=custom_link"
-        className="mt-3 w-full inline-block px-4 py-2 rounded-lg bg-[#C08C45] text-neutral-900 text-sm font-semibold hover:bg-[#C08C45] underline-offset-2 hover:underline"
+        className="mt-3 w-full inline-block px-4 py-2 rounded-lg bg-[#F3EBDD] text-[#071F35] text-sm font-semibold hover:bg-[#F3EBDD] underline-offset-2 hover:underline"
       >
         Get Govx discount code
       </a>
 
-      <div className="mt-2 text-[11px] text-neutral-400">
+      <div className="mt-2 text-[11px] text-[#B8A994]">
         Need help?{" "}
         <Link to="/contact" className="text-[#C08C45] hover:underline">
           Contact the crew
@@ -1574,7 +1580,7 @@ function NotifyForm({ onSubmit }: any) {
   };
   if (done)
     return (
-      <p className="mt-2 text-xs text-emerald-400">
+      <p className="mt-2 text-xs text-[#E6C07F]">
         Aye! We'll notify you when it's in stock.
       </p>
     );
@@ -1587,9 +1593,9 @@ function NotifyForm({ onSubmit }: any) {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Enter your email"
-        className="w-full sm:flex-1 min-w-0 rounded-lg bg-neutral-900/70 border border-neutral-700 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-[#C08C45]"
+        className="w-full sm:flex-1 min-w-0 rounded-lg bg-[#102D44]/70 border border-neutral-700 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-[#C08C45]"
       />
-      <button className="w-full sm:w-auto px-3 py-2 rounded-lg bg-[#C08C45] text-neutral-900 text-xs font-semibold hover:bg-[#C08C45]">
+      <button className="w-full sm:w-auto px-3 py-2 rounded-lg bg-[#F3EBDD] text-[#071F35] text-xs font-semibold hover:bg-[#F3EBDD]">
         Notify
       </button>
     </form>
@@ -1781,7 +1787,7 @@ function LaunchedFromHarbor({ noBg = false }: { noBg?: boolean }) {
                         text-[10px] font-black tracking-[0.08em]
                         ${
                           isOakCopper
-                            ? "border-[#C08C45]/80 bg-[#C08C45] text-[#0d0d0d]"
+                            ? "border-[#C08C45]/80 bg-[#F3EBDD] text-[#0d0d0d]"
                             : "border-[#6D5333]/80 bg-black/75 backdrop-blur-[2px] text-[#E6C07F]"
                         }
                       `}
@@ -1844,7 +1850,7 @@ function LaunchedFromHarbor({ noBg = false }: { noBg?: boolean }) {
 
                       <div
                         className={`mt-3 h-px w-20 ${
-                          isOakCopper ? "bg-[#E6C07F]/70" : "bg-[#C08C45]/70"
+                          isOakCopper ? "bg-[#E6C07F]/70" : "bg-[#F3EBDD]/70"
                         }`}
                       />
 
@@ -1883,7 +1889,7 @@ function LaunchedFromHarbor({ noBg = false }: { noBg?: boolean }) {
                         }`}
                       />
 
-                      <div className="mt-3 text-[14px] sm:text-[15px] text-neutral-100 font-semibold">
+                      <div className="mt-3 text-[14px] sm:text-[15px] text-[#F3EBDD] font-semibold">
                         From {fmt(base)}
                       </div>
                     </div>
@@ -1892,7 +1898,7 @@ function LaunchedFromHarbor({ noBg = false }: { noBg?: boolean }) {
                   {/* Divider */}
                   <div
                     className={`mx-4 h-px ${
-                      isOakCopper ? "bg-[#C08C45]/25" : "bg-[#6D5333]/35"
+                      isOakCopper ? "bg-[#F3EBDD]/25" : "bg-[#6D5333]/35"
                     }`}
                   />
 
@@ -1905,7 +1911,7 @@ function LaunchedFromHarbor({ noBg = false }: { noBg?: boolean }) {
                       onClick={(e) => e.stopPropagation()}
                       className="
                         flex-1 py-3 text-center text-[0.95rem] font-bold tracking-widest uppercase
-                        bg-[#C08C45] text-[#0d0d0d]
+                        bg-[#F3EBDD] text-[#0d0d0d]
                         transition-all duration-200
                         hover:bg-[#E6C07F]
                       "
@@ -1924,8 +1930,8 @@ function LaunchedFromHarbor({ noBg = false }: { noBg?: boolean }) {
                         border transition-all duration-200
                         ${
                           isOakCopper
-                            ? "border-[#C08C45]/50 text-[#C08C45] hover:bg-[#C08C45]/10 hover:border-[#C08C45]/80"
-                            : "border-[#6D5333]/60 text-[#B39871] hover:bg-[#6D5333]/20 hover:border-[#C08C45]/60 hover:text-[#C08C45]"
+                            ? "border-[#C08C45]/50 text-[#C08C45] hover:bg-[#F3EBDD]/10 hover:border-[#C08C45]/80"
+                            : "border-[#6D5333]/60 text-[#B39871] hover:bg-[#6D5333]/20 hover:border-[#C08C45]/60 hover:text-[#F3EBDD]"
                         }
                       `}
                       style={{ fontFamily: "'Cinzel', serif" }}
@@ -1971,7 +1977,7 @@ function LaunchedFromHarbor({ noBg = false }: { noBg?: boolean }) {
 
               <div className="ml-3">
                 <div
-                  className="text-[11px] sm:text-[13px] lg:text-[15px] font-black tracking-[0.12em] text-neutral-300"
+                  className="text-[11px] sm:text-[13px] lg:text-[15px] font-black tracking-[0.12em] text-[#D5CEC4]"
                   style={{ fontFamily: "'Cinzel', serif" }}
                 >
                   {item.title}
@@ -1994,19 +2000,19 @@ function SDVOSBHighlight() {
   return (
     <section
       id="sdvosb-highlight"
-      className="py-10 sm:py-12 border-t border-neutral-800"
+      className="py-10 sm:py-12 border-t border-[#6D5333]/40"
     >
       <Container>
-        <div className="max-w-xl mx-auto rounded-2xl ring-1 ring-[#C08C45]/60 bg-neutral-900/60 p-6 sm:p-8 text-center">
+        <div className="max-w-xl mx-auto rounded-2xl ring-1 ring-[#C08C45]/60 bg-[#102D44] p-6 sm:p-8 text-center">
           <h3 className="text-xl sm:text-2xl font-extrabold text-[#C08C45]">
             SDVOSB
           </h3>
-          <p className="text-neutral-300 mt-2 text-sm sm:text-base">
+          <p className="text-[#D5CEC4] mt-2 text-sm sm:text-base">
             Government contract information.
           </p>
           <Link
             to="/sdvosb"
-            className="inline-block mt-4 px-4 py-2 rounded-lg bg-[#C08C45] text-neutral-900 font-semibold text-sm sm:text-base hover:bg-[#C08C45]"
+            className="inline-block mt-4 px-4 py-2 rounded-lg bg-[#F3EBDD] text-[#071F35] font-semibold text-sm sm:text-base hover:bg-[#F3EBDD]"
           >
             View Details
           </Link>
@@ -2164,11 +2170,11 @@ function HomePage() {
 
               {/* DIVIDER */}
               <div className="flex items-center w-full mt-5 md:mt-6">
-                <div className="h-px flex-1 bg-[#C08C45]/70" />
+                <div className="h-px flex-1 bg-[#F3EBDD]/70" />
                 <span className="px-2 md:px-3 text-[#E6C07F] text-base md:text-lg leading-none">
                   ★
                 </span>
-                <div className="h-px flex-1 bg-[#C08C45]/40" />
+                <div className="h-px flex-1 bg-[#F3EBDD]/40" />
               </div>
 
               {/* SUBTEXT */}
@@ -2186,7 +2192,7 @@ function HomePage() {
                     className="relative inline-flex h-[58px] w-full md:w-fit items-center justify-center
 px-8 sm:px-9
 rounded-none overflow-hidden
-bg-[#C08C45]
+bg-[#F3EBDD]
 text-black font-extrabold
 text-lg sm:text-base md:text-[1.35rem] tracking-[0.04em]
 border border-[#C08C45]
@@ -2213,7 +2219,7 @@ border border-[#C08C45]
 shadow-[inset_0_0_12px_rgba(255,255,255,0.05),0_0_18px_rgba(192,140,69,0.12)]
 transition-all duration-200
 hover:-translate-y-[1px]
-hover:bg-[#C08C45]
+hover:bg-[#F3EBDD]
 hover:text-black
 hover:border-[#C08C45]
 hover:shadow-[0_0_18px_rgba(192,140,69,0.18)]"
@@ -2261,7 +2267,7 @@ hover:shadow-[0_0_18px_rgba(192,140,69,0.18)]"
 
                             <path
                               d="M12 .587l3.668 7.568L24 9.753l-6 5.854L19.335 24 12 19.771 4.665 24 6 15.607 0 9.753l8.332-1.598z"
-                              className="text-neutral-800"
+                              className="text-[#071F35]"
                               fill="currentColor"
                             />
 
@@ -2284,13 +2290,13 @@ hover:shadow-[0_0_18px_rgba(192,140,69,0.18)]"
                         );
                       })}
 
-                      <span className="text-[0.95rem] text-neutral-300">
+                      <span className="text-[0.95rem] text-[#D5CEC4]">
                         {siteRating.count} Verified Reviews
                       </span>
                     </div>
                   )}
 
-                  <div className="mt-1.5 flex items-center justify-center gap-2 text-neutral-300 text-[0.95rem] sm:hidden text-center">
+                  <div className="mt-1.5 flex items-center justify-center gap-2 text-[#D5CEC4] text-[0.95rem] sm:hidden text-center">
                     <span className="inline-flex items-center gap-2">
                       Veteran Owned. Veteran Roasted.
                       <img
@@ -2347,7 +2353,7 @@ hover:shadow-[0_0_18px_rgba(192,140,69,0.18)]"
                   <div className="mt-7 flex flex-col sm:flex-row gap-3">
                     <a
                       href="#fleet"
-                      className="inline-flex h-[46px] items-center justify-center rounded-md border border-[#C08C45] bg-[#C08C45] px-6 font-oswald text-sm font-bold uppercase tracking-[0.16em] text-black transition hover:bg-[#E6C07F] hover:border-[#E6C07F]"
+                      className="inline-flex h-[46px] items-center justify-center rounded-md border border-[#C08C45] bg-[#F3EBDD] px-6 font-oswald text-sm font-bold uppercase tracking-[0.16em] text-black transition hover:bg-[#E6C07F] hover:border-[#E6C07F]"
                     >
                       Shop The Fleet
                     </a>
@@ -2365,7 +2371,7 @@ hover:shadow-[0_0_18px_rgba(192,140,69,0.18)]"
               {/* RIGHT COLLAGE */}
               <div className="order-2">
                 <div className="relative mx-auto lg:ml-auto w-full max-w-[710px]">
-                  <div className="absolute -inset-5 rounded-[2rem] bg-[#C08C45]/10 blur-2xl" />
+                  <div className="absolute -inset-5 rounded-[2rem] bg-[#F3EBDD]/10 blur-2xl" />
 
                   <div className="relative grid grid-cols-1 sm:grid-cols-[1fr_0.78fr] gap-4 md:gap-5 items-center">
                     {/* MAIN IMAGE */}
@@ -2448,7 +2454,7 @@ hover:shadow-[0_0_18px_rgba(192,140,69,0.18)]"
 
                   <Link
                     to="/roast/armada-sample-pack"
-                    className="mx-auto -mt-7 relative z-10 block w-[92%] border border-[#6D5333]/60 bg-[#C08C45] px-8 py-4 text-center shadow-xl shadow-black/50 transition-all duration-200 hover:-translate-y-[1px] hover:bg-[#E6C07F] hover:border-[#E6C07F]"
+                    className="mx-auto -mt-7 relative z-10 block w-[92%] border border-[#6D5333]/60 bg-[#F3EBDD] px-8 py-4 text-center shadow-xl shadow-black/50 transition-all duration-200 hover:-translate-y-[1px] hover:bg-[#E6C07F] hover:border-[#E6C07F]"
                   >
                     <p className="font-oswald text-lg font-black uppercase tracking-[0.22em] text-black">
                       SAMPLE BOX
@@ -2462,7 +2468,7 @@ hover:shadow-[0_0_18px_rgba(192,140,69,0.18)]"
               </div>
 
               <div className="mt-4 max-w-[560px] mx-auto md:mx-0 space-y-3">
-                <p className="text-neutral-300 text-[0.95rem] md:text-base xl:text-lg leading-relaxed">
+                <p className="text-[#D5CEC4] text-[0.95rem] md:text-base xl:text-lg leading-relaxed">
                   Each 2.5 oz sample is enough to brew roughly 6–8 cups of
                   coffee, giving you a real taste of the roast before committing
                   to a full bag.
@@ -2495,7 +2501,7 @@ hover:bg-[#32220D]
                 <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
                   <Link
                     to="/roast/armada-sample-pack"
-                    className="inline-flex h-[56px] items-center justify-center px-9 bg-[#C08C45] text-black font-extrabold text-[0.95rem] md:text-[1.05rem] tracking-[0.18em] uppercase border border-[#C08C45] transition-all duration-200 hover:-translate-y-[1px] hover:bg-[#E6C07F] hover:border-[#E6C07F]"
+                    className="inline-flex h-[56px] items-center justify-center px-9 bg-[#F3EBDD] text-black font-extrabold text-[0.95rem] md:text-[1.05rem] tracking-[0.18em] uppercase border border-[#C08C45] transition-all duration-200 hover:-translate-y-[1px] hover:bg-[#E6C07F] hover:border-[#E6C07F]"
                   >
                     Shop Samples
                   </Link>
@@ -2508,7 +2514,7 @@ hover:bg-[#32220D]
                 </div>
 
                 <div className="mt-3 relative overflow-hidden border border-[#5A4630]/60 bg-black/30 px-3 py-2 rounded-sm max-w-[500px]">
-                  <div className="absolute inset-y-0 left-0 w-[3px] bg-[#C08C45]" />
+                  <div className="absolute inset-y-0 left-0 w-[3px] bg-[#F3EBDD]" />
 
                   <p className="pl-3 text-center md:text-left text-[10px] md:text-[11px] uppercase tracking-[0.16em] leading-snug text-[#D2B48C]">
                     Sample packs excluded from 15% first-order and subscription
@@ -2535,7 +2541,7 @@ hover:bg-[#32220D]
 
                 <Link
                   to="/roast/armada-sample-pack"
-                  className="mx-auto -mt-7 relative z-10 block w-fit border border-[#6D5333]/60 bg-[#C08C45] px-8 py-4 text-center shadow-xl shadow-black/50 transition-all duration-200 hover:-translate-y-[1px] hover:bg-[#E6C07F] hover:border-[#E6C07F]"
+                  className="mx-auto -mt-7 relative z-10 block w-fit border border-[#6D5333]/60 bg-[#F3EBDD] px-8 py-4 text-center shadow-xl shadow-black/50 transition-all duration-200 hover:-translate-y-[1px] hover:bg-[#E6C07F] hover:border-[#E6C07F]"
                 >
                   <p className="font-oswald text-lg font-black uppercase tracking-[0.22em] text-black">
                     Sample Box
@@ -2593,7 +2599,7 @@ hover:bg-[#32220D]
                     <span className="text-[#E6C07F]">Great People.</span>
                   </h2>
                 </div>
-                <div className="absolute -inset-5 bg-[#C08C45]/10 blur-3xl pointer-events-none" />
+                <div className="absolute -inset-5 bg-[#F3EBDD]/10 blur-3xl pointer-events-none" />
 
                 <div className="relative w-full max-w-[560px]">
                   <div className="relative aspect-[9/14] md:aspect-[4/5] overflow-hidden rounded-2xl border border-[#6D5333]/60 bg-black shadow-2xl shadow-black/80">
@@ -2631,7 +2637,7 @@ hover:bg-[#32220D]
 
                 <Link
                   to="/roast/armada-sample-pack"
-                  className="mt-5 inline-flex h-[46px] items-center justify-center px-6 rounded-none bg-[#C08C45] text-black font-oswald font-black uppercase text-[0.82rem] tracking-[0.16em] border border-[#C08C45] transition-all duration-200 hover:bg-[#E6C07F]"
+                  className="mt-5 inline-flex h-[46px] items-center justify-center px-6 rounded-none bg-[#F3EBDD] text-black font-oswald font-black uppercase text-[0.82rem] tracking-[0.16em] border border-[#C08C45] transition-all duration-200 hover:bg-[#E6C07F]"
                 >
                   Try A Sample
                 </Link>
@@ -2655,7 +2661,7 @@ hover:bg-[#32220D]
                     coffee.
                   </p>
 
-                  <p className="mt-5 text-neutral-300 text-base xl:text-lg leading-relaxed">
+                  <p className="mt-5 text-[#D5CEC4] text-base xl:text-lg leading-relaxed">
                     The turnout was incredible. People tasted the lineup, talked
                     coffee, shared stories, brought good energy, and made the
                     whole thing feel like exactly what Old Ironsides Coffee was
@@ -2665,7 +2671,7 @@ hover:bg-[#32220D]
                   <div className="mt-7 flex items-center gap-5">
                     <Link
                       to="/roast/armada-sample-pack"
-                      className="inline-flex h-[50px] items-center justify-center px-7 rounded-none bg-[#C08C45] text-black font-oswald font-black uppercase text-[0.9rem] tracking-[0.18em] border border-[#C08C45] transition-all duration-200 hover:-translate-y-[1px] hover:bg-[#E6C07F] hover:border-[#E6C07F]"
+                      className="inline-flex h-[50px] items-center justify-center px-7 rounded-none bg-[#F3EBDD] text-black font-oswald font-black uppercase text-[0.9rem] tracking-[0.18em] border border-[#C08C45] transition-all duration-200 hover:-translate-y-[1px] hover:bg-[#E6C07F] hover:border-[#E6C07F]"
                     >
                       Try A Sample
                     </Link>
@@ -2753,7 +2759,7 @@ hover:bg-[#32220D]
                   <p className="text-[#C08C45] text-xs sm:text-sm font-bold uppercase tracking-[0.16em] sm:tracking-[0.18em]">
                     01 Order
                   </p>
-                  <p className="mt-3 text-neutral-300 text-sm md:text-sm lg:text-base leading-relaxed">
+                  <p className="mt-3 text-[#D5CEC4] text-sm md:text-sm lg:text-base leading-relaxed">
                     You place the order. Secures your beans.
                   </p>
                 </div>
@@ -2762,7 +2768,7 @@ hover:bg-[#32220D]
                   <p className="text-[#C08C45] text-xs sm:text-sm font-bold uppercase tracking-[0.16em] sm:tracking-[0.18em]">
                     02 Roast
                   </p>
-                  <p className="mt-3 text-neutral-300 text-sm md:text-sm lg:text-base leading-relaxed">
+                  <p className="mt-3 text-[#D5CEC4] text-sm md:text-sm lg:text-base leading-relaxed">
                     We roast every Monday and Thursday.
                   </p>
                 </div>
@@ -2771,14 +2777,14 @@ hover:bg-[#32220D]
                   <p className="text-[#C08C45] text-xs sm:text-sm font-bold uppercase tracking-[0.16em] sm:tracking-[0.18em]">
                     03 Ship
                   </p>
-                  <p className="mt-3 text-neutral-300 text-sm md:text-sm lg:text-base leading-relaxed">
+                  <p className="mt-3 text-[#D5CEC4] text-sm md:text-sm lg:text-base leading-relaxed">
                     Degassing and shipping are timed so it lands at your
                     doorstep at peak freshness.
                   </p>
                 </div>
               </div>
 
-              <p className="mt-6 mx-auto md:mx-0 max-w-[620px] md:max-w-[470px] lg:max-w-[560px] xl:max-w-[660px] text-neutral-300 text-[0.95rem] sm:text-base md:text-base lg:text-lg leading-relaxed">
+              <p className="mt-6 mx-auto md:mx-0 max-w-[620px] md:max-w-[470px] lg:max-w-[560px] xl:max-w-[660px] text-[#D5CEC4] text-[0.95rem] sm:text-base md:text-base lg:text-lg leading-relaxed">
                 We do not roast big batches and let them sit. Orders are roasted
                 fresh, given time to settle, then shipped so the flavor opens up
                 when it reaches your cup.
@@ -2848,7 +2854,7 @@ hover:bg-[#32220D]
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute left-[18%] top-[18%] h-[520px] w-[520px] rounded-full bg-[#8A4B10]/22 blur-[120px]" />
 
-          <div className="absolute left-[32%] top-[42%] h-[380px] w-[380px] rounded-full bg-[#C08C45]/18 blur-[110px]" />
+          <div className="absolute left-[32%] top-[42%] h-[380px] w-[380px] rounded-full bg-[#F3EBDD]/18 blur-[110px]" />
 
           <div className="absolute right-[14%] top-[28%] h-[420px] w-[420px] rounded-full bg-[#5A2F08]/20 blur-[120px]" />
 
@@ -2870,7 +2876,7 @@ hover:bg-[#32220D]
 
                   <span className="text-[#DDD2BE]">On Your Schedule.</span>
                 </h2>
-                <p className="mt-5 max-w-[640px] text-neutral-300 text-base md:text-lg leading-relaxed">
+                <p className="mt-5 max-w-[640px] text-[#D5CEC4] text-base md:text-lg leading-relaxed">
                   Set your schedule once and stay stocked with fresh-roasted
                   coffee without thinking about it again.
                 </p>
@@ -2898,7 +2904,7 @@ hover:bg-[#32220D]
                         {item.title}
                       </p>
 
-                      <p className="mt-2 text-sm leading-relaxed text-neutral-400">
+                      <p className="mt-2 text-sm leading-relaxed text-[#B8A994]">
                         {item.text}
                       </p>
                     </div>
@@ -2920,9 +2926,9 @@ hover:bg-[#32220D]
                     "Manage everything from your account portal",
                   ].map((item) => (
                     <div key={item} className="flex items-start gap-3">
-                      <div className="mt-[7px] h-[6px] w-[6px] rounded-full bg-[#C08C45] shrink-0" />
+                      <div className="mt-[7px] h-[6px] w-[6px] rounded-full bg-[#F3EBDD] shrink-0" />
 
-                      <p className="text-neutral-300 text-[0.96rem] leading-relaxed">
+                      <p className="text-[#D5CEC4] text-[0.96rem] leading-relaxed">
                         {item}
                       </p>
                     </div>
@@ -2932,7 +2938,7 @@ hover:bg-[#32220D]
                 <div className="mt-8 flex flex-col sm:flex-row gap-3">
                   <Link
                     to="/subscriptions"
-                    className="inline-flex h-[52px] items-center justify-center px-7 bg-[#C08C45] text-black font-oswald text-sm font-black uppercase tracking-[0.18em] border border-[#C08C45] transition-all duration-200 hover:bg-[#E6C07F] hover:border-[#E6C07F]"
+                    className="inline-flex h-[52px] items-center justify-center px-7 bg-[#F3EBDD] text-black font-oswald text-sm font-black uppercase tracking-[0.18em] border border-[#C08C45] transition-all duration-200 hover:bg-[#E6C07F] hover:border-[#E6C07F]"
                   >
                     Subscribe
                   </Link>
@@ -3038,13 +3044,13 @@ hover:bg-[#32220D]
                   The Code
                 </p>
 
-                <p className="mt-5 text-neutral-300 text-[0.95rem] xl:text-base leading-relaxed">
+                <p className="mt-5 text-[#D5CEC4] text-[0.95rem] xl:text-base leading-relaxed">
                   My service was in the sand, not on the deck. But the code was
                   the same: discipline, loyalty, pressure, and the refusal to
                   quit.
                 </p>
 
-                <p className="mt-4 text-neutral-300 text-base xl:text-lg leading-relaxed">
+                <p className="mt-4 text-[#D5CEC4] text-base xl:text-lg leading-relaxed">
                   Old Ironsides Coffee was built from that standard. Not as a
                   gimmick. As a way to make coffee with care, consistency, and
                   something worth standing behind.
@@ -3054,7 +3060,7 @@ hover:bg-[#32220D]
                   <p className="text-[#E6C07F] text-[0.72rem] font-bold uppercase tracking-[0.2em]">
                     The Standard
                   </p>
-                  <p className="mt-3 text-neutral-300 text-base leading-relaxed">
+                  <p className="mt-3 text-[#D5CEC4] text-base leading-relaxed">
                     Serve with purpose. Build with discipline. Deliver something
                     worth standing behind.
                   </p>
@@ -3123,13 +3129,13 @@ hover:bg-[#32220D]
                 </div>
               </div>
 
-              <p className="mt-5 text-neutral-300 text-[0.95rem] xl:text-base leading-relaxed">
+              <p className="mt-5 text-[#D5CEC4] text-[0.95rem] xl:text-base leading-relaxed">
                 My service was in the sand, not on the deck. But the code was
                 the same: discipline, loyalty, pressure, and the refusal to
                 quit.
               </p>
 
-              <p className="mt-4 text-neutral-300 text-base xl:text-lg leading-relaxed">
+              <p className="mt-4 text-[#D5CEC4] text-base xl:text-lg leading-relaxed">
                 Old Ironsides Coffee was built from that standard. Not as a
                 gimmick. As a way to make coffee with care, consistency, and
                 something worth standing behind.
@@ -3139,7 +3145,7 @@ hover:bg-[#32220D]
                 <p className="text-[#E6C07F] text-[0.78rem] font-bold uppercase tracking-[0.2em]">
                   The Standard
                 </p>
-                <p className="mt-3 text-neutral-300 text-base md:text-lg leading-relaxed">
+                <p className="mt-3 text-[#D5CEC4] text-base md:text-lg leading-relaxed">
                   Serve with purpose. Build with discipline. Deliver something
                   worth standing behind.
                 </p>
@@ -3179,20 +3185,20 @@ hover:bg-[#32220D]
                   <span className="text-[#C08C45]">Old Ironsides.</span>
                 </h3>
 
-                <p className="mt-5 max-w-[720px] mx-auto lg:mx-0 text-neutral-300 text-base xl:text-lg leading-relaxed">
+                <p className="mt-5 max-w-[720px] mx-auto lg:mx-0 text-[#D5CEC4] text-base xl:text-lg leading-relaxed">
                   Old Ironsides Coffee Company is a veteran-owned small-batch
                   coffee brand inspired by the USS Constitution, the world’s
                   oldest commissioned warship still afloat.
                 </p>
 
-                <p className="mt-4 max-w-[720px] mx-auto lg:mx-0 text-neutral-300 text-base xl:text-lg leading-relaxed">
+                <p className="mt-4 max-w-[720px] mx-auto lg:mx-0 text-[#D5CEC4] text-base xl:text-lg leading-relaxed">
                   Built in Boston and launched in 1797, the ship became a
                   lasting symbol of American resilience, craftsmanship, and
                   grit. During the War of 1812, her live-oak hull earned the
                   nickname “Old Ironsides.”
                 </p>
 
-                <p className="mt-4 max-w-[720px] mx-auto lg:mx-0 text-neutral-300 text-base xl:text-lg leading-relaxed">
+                <p className="mt-4 max-w-[720px] mx-auto lg:mx-0 text-[#D5CEC4] text-base xl:text-lg leading-relaxed">
                   That same spirit drives everything we do today: fresh-roasted
                   coffee crafted with discipline, pride, and respect for the
                   work.
@@ -3201,7 +3207,7 @@ hover:bg-[#32220D]
                 <div className="mt-7 flex justify-center lg:justify-start">
                   <Link
                     to="/fleet-history"
-                    className="inline-flex items-center justify-center border border-[#C08C45] bg-[#C08C45] px-7 py-3 font-oswald text-[0.82rem] font-black uppercase tracking-[0.22em] text-black transition hover:bg-[#E6C07F]"
+                    className="inline-flex items-center justify-center border border-[#C08C45] bg-[#F3EBDD] px-7 py-3 font-oswald text-[0.82rem] font-black uppercase tracking-[0.22em] text-black transition hover:bg-[#E6C07F]"
                   >
                     Explore The History
                   </Link>
@@ -3240,7 +3246,7 @@ hover:bg-[#32220D]
                       The Standard
                     </p>
 
-                    <p className="mt-3 text-neutral-300 text-base leading-relaxed">
+                    <p className="mt-3 text-[#D5CEC4] text-base leading-relaxed">
                       The USS Constitution was built to endure. That standard
                       carries into the brand: durability, discipline, and pride
                       in the work.
@@ -3300,7 +3306,7 @@ hover:bg-[#32220D]
               origin story.
             </p>
 
-            <p className="mt-5 text-neutral-300 text-[1rem] leading-relaxed">
+            <p className="mt-5 text-[#D5CEC4] text-[1rem] leading-relaxed">
               We source coffee from regions known for quality, character, and
               craft. Many of the farms we work with use organic growing
               practices, while others follow the same careful farming methods
@@ -3335,7 +3341,7 @@ hover:bg-[#32220D]
               <p className="text-[#C08C45] text-sm font-bold uppercase tracking-[0.18em]">
                 Our Standard
               </p>
-              <p className="mt-3 text-neutral-300 text-[0.96rem] leading-relaxed">
+              <p className="mt-3 text-[#D5CEC4] text-[0.96rem] leading-relaxed">
                 No gimmicks. No factory-store nonsense. Just small-batch coffee
                 chosen with care, roasted fresh, and built around people who
                 give a damn.
@@ -3346,7 +3352,7 @@ hover:bg-[#32220D]
               Our Core Bean Origins:
             </p>
 
-            <div className="mt-4 grid grid-cols-2 gap-y-3 gap-x-6 max-w-[320px] mx-auto">
+            <div className="mt-4 mx-auto grid max-w-[320px] grid-cols-2 gap-x-6 gap-y-3">
               {[
                 "Ethiopia",
                 "Colombia",
@@ -3357,7 +3363,7 @@ hover:bg-[#32220D]
               ].map((origin) => (
                 <div key={origin} className="flex items-center gap-2">
                   <span className="h-[5px] w-[5px] rounded-full bg-[#C08C45]" />
-                  <span className="text-[0.8rem] font-bold uppercase tracking-[0.14em] text-[#C08C45]">
+                  <span className="text-[0.8rem] font-bold uppercase tracking-[0.14em] text-[#F3EBDD]">
                     {origin}
                   </span>
                 </div>
@@ -3420,7 +3426,7 @@ hover:bg-[#32220D]
                     the land and the people who work it.
                   </p>
 
-                  <p className="mt-4 max-w-[760px] text-neutral-300 text-base xl:text-lg leading-relaxed">
+                  <p className="mt-4 max-w-[760px] text-[#D5CEC4] text-base xl:text-lg leading-relaxed">
                     We source coffee from regions known for quality, character,
                     and craft. Many of the farms we work with use organic
                     growing practices, while others follow the same careful
@@ -3434,7 +3440,7 @@ hover:bg-[#32220D]
                       <p className="text-[#C08C45] text-[0.8rem] font-bold uppercase tracking-[0.16em]">
                         Small Batch
                       </p>
-                      <p className="mt-2 text-neutral-300 text-sm leading-relaxed">
+                      <p className="mt-2 text-[#D5CEC4] text-sm leading-relaxed">
                         Flavor and character, not warehouse volume.
                       </p>
                     </div>
@@ -3443,7 +3449,7 @@ hover:bg-[#32220D]
                       <p className="text-[#C08C45] text-[0.8rem] font-bold uppercase tracking-[0.16em]">
                         Fair Sourcing
                       </p>
-                      <p className="mt-2 text-neutral-300 text-sm leading-relaxed">
+                      <p className="mt-2 text-[#D5CEC4] text-sm leading-relaxed">
                         Quality, care, and respect behind every roast.
                       </p>
                     </div>
@@ -3452,7 +3458,7 @@ hover:bg-[#32220D]
                       <p className="text-[#C08C45] text-[0.8rem] font-bold uppercase tracking-[0.16em]">
                         Real Origins
                       </p>
-                      <p className="mt-2 text-neutral-300 text-sm leading-relaxed">
+                      <p className="mt-2 text-[#D5CEC4] text-sm leading-relaxed">
                         Altitude, climate, soil, and tradition in the cup.
                       </p>
                     </div>
@@ -3473,7 +3479,7 @@ hover:bg-[#32220D]
                         "Guatemala",
                       ].map((origin) => (
                         <div key={origin} className="flex items-center gap-2">
-                          <span className="h-[5px] w-[5px] rounded-full bg-[#C08C45]" />
+                          <span className="h-[5px] w-[5px] rounded-full bg-[#F3EBDD]" />
                           <span className="text-[0.78rem] font-bold uppercase tracking-[0.14em] text-[#C08C45]">
                             {origin}
                           </span>
@@ -3571,7 +3577,7 @@ hover:bg-[#32220D]
                 </div>
               </div>
 
-              <p className="mt-5 max-w-[700px] mx-auto lg:mx-0 text-neutral-300 text-base md:text-lg leading-relaxed">
+              <p className="mt-5 max-w-[700px] mx-auto lg:mx-0 text-[#D5CEC4] text-base md:text-lg leading-relaxed">
                 Old Ironsides Coffee was built by a veteran, so supporting
                 active duty, veterans, and first responders is part of the
                 company from the start.
@@ -3582,7 +3588,7 @@ hover:bg-[#32220D]
                   GovX Discount
                 </p>
 
-                <p className="mt-3 text-neutral-300 text-base md:text-lg leading-relaxed">
+                <p className="mt-3 text-[#D5CEC4] text-base md:text-lg leading-relaxed">
                   Active duty, veterans, and first responders receive $1 off
                   every bag, every day. The discount stacks with subscriptions.
                 </p>
@@ -3590,7 +3596,7 @@ hover:bg-[#32220D]
                 <div className="mt-5 flex flex-col sm:flex-row gap-3 sm:items-center">
                   <a
                     href="https://auth.govx.com/shopify/verify?shop=81ub0m-s7.myshopify.com&utm_source=shopify&utm_medium=govxid&utm_campaign=custom_link"
-                    className="inline-flex h-[48px] items-center justify-center px-6 bg-[#C08C45] text-black font-extrabold text-[0.85rem] tracking-[0.16em] uppercase border border-[#C08C45] transition-all duration-200 hover:-translate-y-[1px] hover:bg-[#E6C07F] hover:border-[#E6C07F]"
+                    className="inline-flex h-[48px] items-center justify-center px-6 bg-[#F3EBDD] text-black font-extrabold text-[0.85rem] tracking-[0.16em] uppercase border border-[#C08C45] transition-all duration-200 hover:-translate-y-[1px] hover:bg-[#E6C07F] hover:border-[#E6C07F]"
                   >
                     Get GovX Discount Code
                   </a>
@@ -3646,7 +3652,7 @@ hover:bg-[#32220D]
                   coffee conversation.
                 </p>
 
-                <p className="mt-6 max-w-[690px] mx-auto lg:mx-0 text-neutral-300 text-base md:text-lg leading-relaxed">
+                <p className="mt-6 max-w-[690px] mx-auto lg:mx-0 text-[#D5CEC4] text-base md:text-lg leading-relaxed">
                   Old Ironsides Coffee is still run close to the deck. No
                   outsourced support maze. No corporate black hole. When you
                   reach out, you are talking directly to the company behind the
@@ -3660,7 +3666,7 @@ hover:bg-[#32220D]
                     <p className="text-[#C08C45] text-[0.72rem] font-bold uppercase tracking-[0.22em]">
                       Rooted in pride.
                     </p>
-                    <p className="mt-2 text-neutral-300 text-sm leading-relaxed">
+                    <p className="mt-2 text-[#D5CEC4] text-sm leading-relaxed">
                       Inspired by the USS Constitution and America’s naval
                       heritage.
                     </p>
@@ -3670,7 +3676,7 @@ hover:bg-[#32220D]
                     <p className="text-[#C08C45] text-[0.72rem] font-bold uppercase tracking-[0.22em]">
                       Nationwide Shipping
                     </p>
-                    <p className="mt-2 text-neutral-300 text-sm leading-relaxed">
+                    <p className="mt-2 text-[#D5CEC4] text-sm leading-relaxed">
                       Fresh-roasted coffee shipped across the United States.
                     </p>
                   </div>
@@ -3679,7 +3685,7 @@ hover:bg-[#32220D]
 
               {/* RIGHT CONTACT CARD */}
               <div className="relative">
-                <div className="absolute -inset-6 bg-[#C08C45]/8 blur-3xl pointer-events-none" />
+                <div className="absolute -inset-6 bg-[#F3EBDD]/8 blur-3xl pointer-events-none" />
 
                 <div className="relative overflow-hidden rounded-2xl border border-[#6D5333]/60 bg-black/70 backdrop-blur-md shadow-2xl shadow-black/70">
                   <div className="border-b border-[#6D5333]/50 bg-[#130E08]/85 px-6 py-5">
@@ -3704,7 +3710,7 @@ hover:bg-[#32220D]
                         </p>
                       </div>
 
-                      <p className="mt-3 text-neutral-300 text-base break-all">
+                      <p className="mt-3 text-[#D5CEC4] text-base break-all">
                         HQ@oldironsidescoffee.org
                       </p>
 
@@ -3718,7 +3724,7 @@ hover:bg-[#32220D]
                         Port Of Call
                       </p>
 
-                      <p className="mt-3 text-neutral-300 text-base leading-relaxed">
+                      <p className="mt-3 text-[#D5CEC4] text-base leading-relaxed">
                         6 Liberty Square #2564
                         <br />
                         Boston, MA 02109
@@ -3769,7 +3775,7 @@ hover:bg-[#32220D]
                     <span className="text-[#C08C45]">Procurement</span>
                   </h3>
 
-                  <p className="mt-5 max-w-[540px] mx-auto lg:mx-0 text-neutral-300 text-base md:text-lg leading-relaxed">
+                  <p className="mt-5 max-w-[540px] mx-auto lg:mx-0 text-[#D5CEC4] text-base md:text-lg leading-relaxed">
                     Information for agency purchasing, procurement officers, and
                     government contract opportunities.
                   </p>
@@ -3797,7 +3803,7 @@ function ShopCoffeeCard({ className = "" }: { className?: string }) {
         // responsive sizing
         "w-[11rem] h-[13rem] sm:w-[12.5rem] sm:h-[15rem] md:w-[13.75rem] md:h-[16.25rem]",
         "translate-y-4 md:translate-y-6",
-        "bg-neutral-900/40 hover:bg-neutral-900 transition",
+        "bg-[#102D44]/40 hover:bg-[#102D44] transition",
         className,
       ].join(" ")}
     >
@@ -3811,7 +3817,7 @@ function ShopCoffeeCard({ className = "" }: { className?: string }) {
         className="absolute inset-0 w-full h-full object-cover"
       />
 
-      <div className="absolute inset-x-0 bottom-0 p-3 bg-neutral-950/40 backdrop-blur-sm">
+      <div className="absolute inset-x-0 bottom-0 p-3 bg-[#071F35]/40 backdrop-blur-sm">
         <div className="text-center text-base sm:text-lg md:text-xl text-[#C08C45] font-bold group-hover:underline">
           SHOP COFFEE
         </div>
@@ -3829,10 +3835,13 @@ function FleetPage() {
 }
 
 const cardFrame =
-  "w-full max-w-[24rem] md:max-w-[26rem] aspect-[3/4] overflow-hidden rounded-2xl ring-1 ring-[#C08C45]/60 shadow-2xl shadow-amber-500/20 bg-neutral-900/40";
+  "w-full max-w-[24rem] md:max-w-[26rem] aspect-[3/4] overflow-hidden rounded-2xl ring-1 ring-[#C08C45]/35 shadow-2xl shadow-black/25 bg-[#102D44]/30";
+
 function FleetStoryPage() {
   const { slug } = useParams();
+
   const card = roastCards.find((c) => c.slug === slug);
+
   if (!card) return <NotFoundPage />;
 
   useEffect(() => {
@@ -3840,9 +3849,13 @@ function FleetStoryPage() {
   }, []);
 
   const isFlagship = card.slug === "flagship";
+
   const isBaptism = card.slug === "baptism-by-fire";
+
   const isJavaAction = card.slug === "java-action";
+
   const isOakAndCopper = card.slug === "oak-and-copper";
+
   const displayTitle = isFlagship
     ? "FLAGSHIP"
     : isBaptism
@@ -3855,8 +3868,11 @@ function FleetStoryPage() {
 
   const battleLineMap: Record<string, string> = {
     "java-action": "USS Constitution vs HMS Java",
+
     "baptism-by-fire": "USS Constitution vs HMS Guerriere",
+
     "oak-and-copper": "Wrapped in Oak Above, Clad in Copper Below",
+
     flagship: "",
   };
 
@@ -3869,26 +3885,37 @@ function FleetStoryPage() {
   const captionsBySlug: Record<string, { left: string; right: string }> = {
     "java-action": {
       left: "Capt. William Bainbridge",
+
       right: "Capt. Henry Lambert, Representation only",
     },
+
     "baptism-by-fire": {
       left: "Capt. Isaac Hull",
+
       right: "Capt. James Dacres Surrenders to Capt. Hull",
     },
+
     flagship: {
       left: "President George Washington",
+
       right: "Commodore John Barry",
     },
+
     "oak-and-copper": {
       left: "USS Constitution at Philadelphia Navy Yard, c. 1875",
+
       right: "USS Constitution Restoration, Boston Navy Yard c. 1930",
     },
   };
+
   const caps = captionsBySlug[card.slug] ?? {
     left: "President George Washington",
+
     right: "Commodore John Barry",
   };
+
   // Use conditional fallback for undefined properties
+
   const heroImg =
     (card.heroImg &&
       (card.heroImg.startsWith("/") || card.heroImg.startsWith("http")
@@ -3913,36 +3940,52 @@ function FleetStoryPage() {
   const duelStoryMap: Record<string, { title: string; story: string[] }> = {
     "java-action": {
       title: "Duel Between Two Captains",
+
       story: [
         "Captain William Bainbridge of the USS Constitution was a seasoned and resolute leader, whose calm under pressure and tactical brilliance turned the tide in the fierce battle against the HMS Java. Despite being wounded twice during the engagement, Bainbridge maintained control, directing his crew with precision. His unwavering resolve and the Constitution’s superior strength secured a decisive victory, further solidifying his place in naval history. The triumph proved invaluable to the young nation, boosting morale and solidifying Bainbridge’s reputation as one of the finest commanders of the U.S. Navy.",
+
         "On the opposing side, Captain Henry Lambert of the HMS Java faced an overwhelming challenge. The British frigate, despite its armament, struggled against the Constitution’s superior firepower and maneuverability. Lambert, gravely wounded during the battle, was unable to lead his crew effectively as the situation deteriorated. Tragically, he succumbed to his injuries on January 4, 1813, in Salvador, Brazil. His death marked a somber end to a promising career, and he was buried with full military honors.",
+
         "In the aftermath, the victory of the Constitution was not just a naval success, it was a defining moment for both captains. Bainbridge’s victory became a cornerstone of his career, while Lambert’s life was cut short, forever tying his legacy to the defeat of the Java. Their fates, shaped by that battle, would be forever linked to the USS Constitution’s engagement with the HMS Java.",
       ],
     },
+
     "baptism-by-fire": {
       title: "Duel Between Two Captains",
+
       story: [
         "Captain Isaac Hull, commanding the USS Constitution, was a master tactician. His calm under fire and expert maneuvering turned the tide of battle against the HMS Guerriere. In just 30 minutes, Hull’s decisive actions crippled the British ship, earning him praise and hero status. The victory not only secured his place in history but also gave the young United States a powerful boost in morale during the War of 1812.",
+
         "On the other side, Captain James Richard Dacres of the Guerriere faced harsh consequences. Despite struggling with poor weather and his ship’s slower maneuvering, Dacres was held responsible for the loss. The British Navy ordered a court-martial, not for incompetence but for the disgrace of losing a royal vessel. Though Dacres was exonerated, his reputation was forever tarnished. The battle’s aftermath cast a long shadow over his career, marking the start of his decline in naval service.",
+
         "In the end, the Constitution’s victory was more than just a military win. It was a statement of American strength and a defining moment for both captains—one that would shape their legacies for years to come.",
       ],
     },
 
     "oak-and-copper": {
       title: "Saving Old Ironsides",
+
       story: [
         "By the middle of the 1800s, time had not been kind to the USS Constitution. Her victories had faded into memory, her hull weathered by decades of service. Stripped of her guns and glory, she lay in quiet neglect, her timbers worn and her decks nearly bare. To many, she was a relic of another age — a ship whose time had passed.",
+
         "When word spread that the Navy planned to scrap her, the nation reacted with outrage. From classrooms to city halls, citizens spoke out. Poet Oliver Wendell Holmes captured the nation’s voice with his stirring poem “Old Ironsides,” calling for her to be spared. His words struck deep, and Congress took notice.",
+
         "Repairs began, but it would take another century for a true restoration to bring her back to life. In the 1930s, shipwrights once again worked the oak and copper that had made her a legend. Piece by piece, they returned her to her former strength.",
+
         "Today, the Constitution still sails because a nation remembered. Saved by its people, restored by its craftsmen, she remains a living symbol of endurance — proof that history, like her hull, was built to last.",
       ],
     },
+
     flagship: {
       title: "The Founding Fathers Of The Navy",
+
       story: [
         "As tensions with Britain grew, the young United States needed more than a standing army. The nation’s very survival depended on securing its maritime borders and asserting control over its own waters. President George Washington recognized this and understood that to defend its sovereignty, America required a powerful navy.",
+
         "In 1794, with British ships still harassing American merchants and impressing sailors, Washington took a historic step. He signed the Naval Act, which authorized the construction of six frigates, including the USS Constitution. This decision was more than just military strategy; it was a statement of American resolve, an acknowledgment that the U.S. would no longer be at the mercy of foreign powers on the seas.",
+
         "Leading the way was Commodore John Barry, the first commissioned officer of the United States Navy, known as the Father of the Navy.  A seasoned veteran of the Revolutionary War, Barry’s leadership and deep naval expertise would prove essential. His commitment to building a formidable naval force ensured that the Constitution would be a ship capable of standing up to the British and defending the nation’s interests.",
+
         "Together, Washington’s foresight and Barry’s experience laid the foundation for the Navy. The USS Constitution was not just a ship, it was a symbol of the nation's growing strength and independence, forged from the vision of two men determined to ensure America's place on the world stage.",
       ],
     },
@@ -3950,6 +3993,7 @@ function FleetStoryPage() {
 
   const duelStory = duelStoryMap[card.slug] || {
     title: "Duel Between Two Captains",
+
     story:
       "A historic clash at sea between two mighty ships, each a symbol of national pride.",
   };
@@ -3957,18 +4001,18 @@ function FleetStoryPage() {
   const storiesHome = "/origins#origins-history"; // Add this line right here
 
   return (
-    <main className="relative overflow-hidden pt-0 pb-12 md:py-20 max-md:-mt-10">
+    <main className="relative overflow-hidden bg-[#071F35] pt-0 pb-12 md:py-20 max-md:-mt-10">
       <img
         src="/maps-books.png"
         alt=""
-        className="hidden md:block pointer-events-none select-none absolute inset-0 w-full h-full object-cover opacity-35 z-0"
+        className="hidden md:block pointer-events-none select-none absolute inset-0 w-full h-full object-cover opacity-15 z-0"
       />
 
       <Container className="relative z-10 max-md:pt-0">
         <div className="hidden md:flex justify-end">
           <Link
             to="/fleet-history" // Use the constant STORIES_HOME here
-            className="inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm ring-1 ring-[#C08C45]/70 text-[#C08C45] hover:bg-[#C08C45] hover:text-neutral-900 transition"
+            className="inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm ring-1 ring-[#C08C45]/45 text-[#E6C07F] hover:bg-[#F3EBDD] hover:text-[#071F35] transition"
             onClick={() => {
               try {
                 sessionStorage.setItem("storiesReturnTo", "/fleet-history");
@@ -3978,6 +4022,7 @@ function FleetStoryPage() {
             ← Back
           </Link>
         </div>
+
         <div className="mt-0 md:mt-4 max-md:mt-0 flex items-start mb-16 md:mb-0 lg:mb-0 max-md:flex-col max-md:gap-4 max-md:mb-12">
           <figure
             className={`${cardFrame} md:h-[720px] md:w-[130%] max-md:h-[120vw] max-md:w-[92%] max-md:mx-auto relative max-md:bg-transparent max-md:ring-0 max-md:shadow-none`}
@@ -3986,7 +4031,7 @@ function FleetStoryPage() {
             <img
               src={heroImg}
               alt={card.title}
-              className="block w-full h-full object-cover max-md:rounded-2xl max-md:ring-1 max-md:ring-[#C08C45]/60"
+              className="block w-full h-full object-cover max-md:rounded-2xl max-md:ring-1 max-md:ring-[#C08C45]/35"
               loading="eager"
               decoding="async"
             />
@@ -3996,41 +4041,42 @@ function FleetStoryPage() {
             {" "}
             {/* Adjusted spacing between image and text */}
             <h1
-              className="m-0 text-3xl md:text-4xl font-extrabold tracking-tight text-[#C08C45]"
+              className="m-0 text-3xl md:text-4xl font-extrabold tracking-tight text-[#F3EBDD]"
               style={{ fontFamily: "'Cinzel', serif", fontWeight: 800 }}
             >
               {displayTitle}
             </h1>
             {/* Only show USS Constitution for Flagship, remove subtitle for Flagship */}
             {isFlagship && displayTitle === "FLAGSHIP" ? (
-              <div className="mt-1 text-neutral-300 text-base md:text-lg">
+              <div className="mt-1 text-[#E6DCC8] text-base md:text-lg">
                 USS Constitution
               </div>
             ) : (
               battleLine && (
-                <div className="mt-1 text-neutral-300 text-base md:text-lg">
+                <div className="mt-1 text-[#E6DCC8] text-base md:text-lg">
                   {battleLine}
                 </div>
               )
             )}
             {card.battleDate && (
-              <div className="text-[#C08C45] font-semibold text-sm md:text-base">
+              <div className="text-[#E6C07F] font-semibold text-sm md:text-base">
                 {card.battleDate}
               </div>
             )}
             {/* Amber border line */}
-            <div className="mt-2 h-px w-full bg-[#C08C45]/30" />
+            <div className="mt-2 h-px w-full bg-[#C08C45]/35" />
             {/* Main Story Block */}
             {isFlagship && displayTitle === "FLAGSHIP" && (
               <div className="mt-6">
-                <p className="mt-4 text-neutral-300 text-lg leading-relaxed">
+                <p className="mt-4 text-[#E6DCC8] text-lg leading-relaxed">
                   As a young nation, America found itself facing the might of
                   European powers, particularly Britain, whose navy dominated
                   the seas. The British, still wounded from their defeat in the
                   Revolutionary War, sought to reassert their control over
                   American trade routes and maritime freedom.
                 </p>
-                <p className="mt-4 text-neutral-300 text-lg leading-relaxed">
+
+                <p className="mt-4 text-[#E6DCC8] text-lg leading-relaxed">
                   Meanwhile, the United States, though growing in strength and
                   influence, lacked the naval power to defend its sovereignty.
                   British ships frequently seized American merchant vessels,
@@ -4038,7 +4084,8 @@ function FleetStoryPage() {
                   that threatened the nation's economy. The young republic
                   needed a solution, and quickly.
                 </p>
-                <p className="mt-4 text-neutral-300 text-lg leading-relaxed">
+
+                <p className="mt-4 text-[#E6DCC8] text-lg leading-relaxed">
                   In this clash between two nations, one seeking to dominate the
                   seas and the other determined to protect its rights, the USS
                   Constitution was born. Congress understood that to safeguard
@@ -4047,7 +4094,8 @@ function FleetStoryPage() {
                   more than just a warship; she would be a symbol of America's
                   resolve, a weapon forged for both defense and national pride.
                 </p>
-                <p className="mt-4 text-neutral-300 text-lg leading-relaxed">
+
+                <p className="mt-4 text-[#E6DCC8] text-lg leading-relaxed">
                   With the Constitution's commissioning, the stage was set for a
                   battle of maritime strength and national identity. As tensions
                   continued to rise, the frigate would soon face the ultimate
@@ -4058,7 +4106,7 @@ function FleetStoryPage() {
             {/* Main Story Block for Baptism by Fire */}
             {isBaptism && displayTitle === "BAPTISM BY FIRE" && (
               <div className="mt-6">
-                <p className="mt-4 text-neutral-300 text-lg leading-relaxed">
+                <p className="mt-4 text-[#E6DCC8] text-lg leading-relaxed">
                   On August 19, 1812, off the coast of Nova Scotia, the USS
                   Constitution met the HMS Guerriere in one of the most pivotal
                   naval engagements of the War of 1812. The Constitution,
@@ -4068,7 +4116,8 @@ function FleetStoryPage() {
                   stopping American trade and defending British interests at
                   sea.
                 </p>
-                <p className="mt-4 text-neutral-300 text-lg leading-relaxed">
+
+                <p className="mt-4 text-[#E6DCC8] text-lg leading-relaxed">
                   As the two ships closed in on each other, the Constitution
                   proved to be a master of maneuvering, a key advantage that
                   would set the stage for the battle. Captain Hull skillfully
@@ -4079,7 +4128,8 @@ function FleetStoryPage() {
                   deadly broadsides, with her crew unloading devastating cannon
                   fire on the Guerriere.
                 </p>
-                <p className="mt-4 text-neutral-300 text-lg leading-relaxed">
+
+                <p className="mt-4 text-[#E6DCC8] text-lg leading-relaxed">
                   The decisive blow came when a well-aimed shot from the
                   Constitution’s main guns struck the Guerriere's mizzenmast,
                   causing it to collapse. This crippled the British ship’s
@@ -4089,7 +4139,8 @@ function FleetStoryPage() {
                   Within 30 minutes of fierce fighting, the Guerriere was forced
                   to surrender, her crew battered and broken.
                 </p>
-                <p className="mt-4 text-neutral-300 text-lg leading-relaxed">
+
+                <p className="mt-4 text-[#E6DCC8] text-lg leading-relaxed">
                   The American victory was a powerful statement, not only
                   because of the Constitution’s ability to withstand British
                   cannonfire, leading to her nickname "Old Ironsides," but also
@@ -4103,7 +4154,7 @@ function FleetStoryPage() {
             {/* Add main story for Java Action and Oak & Copper as needed */}
             {isJavaAction && (
               <div className="mt-6">
-                <p className="mt-4 text-neutral-300 text-lg leading-relaxed">
+                <p className="mt-4 text-[#E6DCC8] text-lg leading-relaxed">
                   On December 29, 1812, off the coast of Brazil, the USS
                   Constitution squared off against the HMS Java in a battle that
                   would further cement the Constitution’s legendary reputation.
@@ -4113,7 +4164,8 @@ function FleetStoryPage() {
                   heavily armed, the Java lacked the seasoned crew that
                   Bainbridge's Constitution brought to the fight.
                 </p>
-                <p className="mt-4 text-neutral-300 text-lg leading-relaxed">
+
+                <p className="mt-4 text-[#E6DCC8] text-lg leading-relaxed">
                   The battle began when the Constitution spotted the Java on the
                   horizon. As the two ships closed in, the Java fired the first
                   shot, damaging the Constitution’s rigging. The Constitution
@@ -4123,7 +4175,8 @@ function FleetStoryPage() {
                   Constitution's helm, and the crew was forced to steer manually
                   using the tiller, maintaining control despite the chaos.
                 </p>
-                <p className="mt-4 text-neutral-300 text-lg leading-relaxed">
+
+                <p className="mt-4 text-[#E6DCC8] text-lg leading-relaxed">
                   As the fight continued, the Constitution’s superior firepower
                   and sturdier construction began to turn the tide. A well-aimed
                   shot from the Constitution’s guns brought down the Java's
@@ -4131,7 +4184,8 @@ function FleetStoryPage() {
                   crippling the British frigate. With her rigging and crew in
                   disarray, the Java’s ability to fight back diminished rapidly.
                 </p>
-                <p className="mt-4 text-neutral-300 text-lg leading-relaxed">
+
+                <p className="mt-4 text-[#E6DCC8] text-lg leading-relaxed">
                   In the final moments of the battle, the Constitution unleashed
                   a devastating broadside that left the Java dismasted and
                   helpless. With her sails in tatters and her crew
@@ -4139,7 +4193,8 @@ function FleetStoryPage() {
                   Constitution, having secured victory, ordered the Java to be
                   destroyed to prevent her from falling into enemy hands.
                 </p>
-                <p className="mt-4 text-neutral-300 text-lg leading-relaxed">
+
+                <p className="mt-4 text-[#E6DCC8] text-lg leading-relaxed">
                   The victory was a powerful morale boost for the United States
                   during the War of 1812. Not only was it the second triumph for
                   the Constitution, but it also demonstrated the effectiveness
@@ -4152,7 +4207,7 @@ function FleetStoryPage() {
             )}
             {isOakAndCopper && (
               <div className="mt-6">
-                <p className="mt-4 text-neutral-300 text-lg leading-relaxed">
+                <p className="mt-4 text-[#E6DCC8] text-lg leading-relaxed">
                   After the Revolution, the new United States faced the open
                   seas with little to defend its trade or its honor. Foreign
                   powers tested its resolve, and pirates hunted its merchant
@@ -4161,7 +4216,8 @@ function FleetStoryPage() {
                   water, naval architect Joshua Humphreys. What he designed
                   would not just defend a nation, but define it.
                 </p>
-                <p className="mt-4 text-neutral-300 text-lg leading-relaxed">
+
+                <p className="mt-4 text-[#E6DCC8] text-lg leading-relaxed">
                   Humphreys imagined a new kind of frigate, one unlike any built
                   before. She would be larger, stronger, and faster, able to
                   face the guns of the great powers yet light enough to slip
@@ -4169,14 +4225,16 @@ function FleetStoryPage() {
                   Hartt’s shipyard in Boston, and from that moment, the work
                   became a calling.
                 </p>
-                <p className="mt-4 text-neutral-300 text-lg leading-relaxed">
+
+                <p className="mt-4 text-[#E6DCC8] text-lg leading-relaxed">
                   The shipwrights chose live oak from the southern coast, wood
                   so dense it could turn back cannon fire. Each beam was shaped
                   by hand, each curve measured by experience more than rule. The
                   men who built her worked through heat and storm, carving
                   strength into every joint.
                 </p>
-                <p className="mt-4 text-neutral-300 text-lg leading-relaxed">
+
+                <p className="mt-4 text-[#E6DCC8] text-lg leading-relaxed">
                   Over her oak frame they fastened plates of copper rolled at
                   Paul Revere’s foundry. It was a bold idea, one that gave her a
                   smooth, gleaming armor against the sea. The copper kept her
@@ -4184,7 +4242,8 @@ function FleetStoryPage() {
                   her size. Where others dragged through the water, the
                   Constitution sliced cleanly through the waves.
                 </p>
-                <p className="mt-4 text-neutral-300 text-lg leading-relaxed">
+
+                <p className="mt-4 text-[#E6DCC8] text-lg leading-relaxed">
                   On her launch day in 1797, the people of Boston filled the
                   shore to watch her slip into the harbor. Her name, chosen by
                   Washington himself, spoke to the strength of the nation she
@@ -4195,7 +4254,7 @@ function FleetStoryPage() {
                 </p>
               </div>
             )}
-            <div className="mt-4 text-neutral-300 text-lg leading-relaxed">
+            <div className="mt-4 text-[#E6DCC8] text-lg leading-relaxed">
               {card.mainStory} {/* Only display the full story */}
             </div>
           </div>
@@ -4204,11 +4263,12 @@ function FleetStoryPage() {
         <div
           role="separator"
           aria-hidden="true"
-          className="my-0 md:my-12 lg:my-16 h-px w-full bg-[#C08C45]/30"
+          className="my-0 md:my-12 lg:my-16 h-px w-full bg-[#C08C45]/35"
         />
 
         <div className="mt-16 md:mt-0 lg:mt-0 max-md:grid max-md:grid-cols-2 max-md:gap-2 md:flex md:items-start md:gap-6">
           {/* Left Image (desktop left, mobile left) */}
+
           <figure className="md:flex-shrink-0 max-md:col-span-1">
             <div
               className={`${cardFrame} ${
@@ -4223,21 +4283,23 @@ function FleetStoryPage() {
                 decoding="async"
               />
             </div>
-            <figcaption className="mt-2 text-xs md:text-sm text-[#C08C45] text-center">
+
+            <figcaption className="mt-2 text-xs md:text-sm text-[#E6C07F] text-center">
               {caps.left}
             </figcaption>
           </figure>
 
           {/* Text Block (desktop center, mobile below spanning both) */}
+
           <div className="md:flex-grow md:px-6 max-md:col-span-2 max-md:order-3 max-md:mt-6 text-left px-2">
             <h2
-              className="text-xl md:text-2xl font-bold text-[#C08C45] tracking-tight max-md:text-center md:text-center"
+              className="text-xl md:text-2xl font-bold text-[#F3EBDD] tracking-tight max-md:text-center md:text-center"
               style={{ fontFamily: "'Cinzel', serif", fontWeight: 700 }}
             >
               {duelStory.title}
             </h2>
 
-            <div className="mt-4 md:mt-3 text-neutral-300 text-lg leading-relaxed max-md:text-left">
+            <div className="mt-4 md:mt-3 text-[#E6DCC8] text-lg leading-relaxed max-md:text-left">
               {typeof duelStory.story === "string"
                 ? duelStory.story.split("\n").map((paragraph, i) => (
                     <p key={i} className="mb-4 last:mb-0">
@@ -4257,6 +4319,7 @@ function FleetStoryPage() {
           </div>
 
           {/* Right Image (desktop right, mobile right) */}
+
           <figure className="md:flex-shrink-0 max-md:col-span-1">
             <div
               className={`${cardFrame} ${
@@ -4271,7 +4334,8 @@ function FleetStoryPage() {
                 decoding="async"
               />
             </div>
-            <figcaption className="mt-2 text-xs md:text-sm text-[#C08C45] text-center">
+
+            <figcaption className="mt-2 text-xs md:text-sm text-[#E6C07F] text-center">
               {caps.right}
             </figcaption>
           </figure>
@@ -4280,20 +4344,28 @@ function FleetStoryPage() {
     </main>
   );
 }
+
 function FleetHistoryPage() {
   const histScrollRef = React.useRef<HTMLDivElement | null>(null);
+
   const histCardRefs = React.useRef<(HTMLAnchorElement | null)[]>([]);
+
   const [histIdx, setHistIdx] = React.useState(0);
 
   const histSlugs = [
     "flagship",
+
     "baptism-by-fire",
+
     "java-action",
+
     "oak-and-copper",
   ];
 
   const fleetCards = histSlugs
+
     .map((slug) => roastCards.find((c) => c.slug === slug))
+
     .filter(Boolean);
 
   React.useEffect(() => {
@@ -4303,45 +4375,58 @@ function FleetHistoryPage() {
   const histScrollTo = React.useCallback(
     (idx: number) => {
       const len = histSlugs.length;
+
       const clamped = ((idx % len) + len) % len;
+
       const el = histCardRefs.current[clamped];
 
       if (el && histScrollRef.current) {
         el.scrollIntoView({
           behavior: "smooth",
+
           inline: "center",
+
           block: "nearest",
         });
       }
 
       setHistIdx(clamped);
     },
+
     [histSlugs.length]
   );
 
   const histPrev = React.useCallback(
     () => histScrollTo(histIdx - 1),
+
     [histIdx, histScrollTo]
   );
 
   const histNext = React.useCallback(
     () => histScrollTo(histIdx + 1),
+
     [histIdx, histScrollTo]
   );
 
   const onHistScroll = React.useCallback(() => {
     const c = histScrollRef.current;
+
     if (!c) return;
 
     const sl = c.scrollLeft;
+
     let best = 0;
+
     let bestDist = Infinity;
 
     histCardRefs.current.forEach((el, i) => {
       if (!el) return;
+
       const dist = Math.abs(el.offsetLeft - sl);
+
       if (dist < bestDist) {
         bestDist = dist;
+
         best = i;
       }
     });
@@ -4350,26 +4435,26 @@ function FleetHistoryPage() {
   }, []);
 
   return (
-    <main className="relative overflow-hidden bg-black pt-8 pb-16 md:pt-14 md:pb-24">
+    <main className="relative overflow-hidden bg-[#071F35] pt-8 pb-16 md:pt-14 md:pb-24">
       <img
         src="/maps-books.png"
         alt=""
         className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-25"
       />
 
-      <div className="absolute inset-0 z-0 bg-black/75 pointer-events-none" />
+      <div className="absolute inset-0 z-0 bg-[#071F35]/80 pointer-events-none" />
 
       <Container>
         <div className="relative z-10 mx-auto max-w-5xl text-center">
-          <p className="font-oswald text-[0.75rem] font-black uppercase tracking-[0.28em] text-[#C08C45]">
+          <p className="font-oswald text-[0.75rem] font-black uppercase tracking-[0.28em] text-[#E6C07F]">
             Old Ironsides History
           </p>
 
-          <h1 className="mt-3 font-cinzel text-3xl md:text-5xl font-black uppercase tracking-[0.12em] text-[#E6C07F]">
+          <h1 className="mt-3 font-cinzel text-3xl md:text-5xl font-bold uppercase tracking-[0.08em] text-[#F3EBDD]">
             The History Behind The Fleet
           </h1>
 
-          <p className="mx-auto mt-4 max-w-2xl text-sm md:text-base leading-relaxed text-neutral-300">
+          <p className="mx-auto mt-4 max-w-2xl text-sm md:text-base leading-relaxed text-[#E6DCC8]">
             The ships, battles, captains, and stories behind each roast.
           </p>
         </div>
@@ -4387,7 +4472,7 @@ function FleetHistoryPage() {
                   histCardRefs.current[i] = el;
                 }}
                 to={`/fleet-story/${card.slug}`}
-                className="group relative min-w-[78%] sm:min-w-[48%] md:min-w-0 snap-center overflow-hidden rounded-2xl border border-[#6D5333]/70 bg-[#080503] shadow-xl shadow-black/50 transition hover:-translate-y-1 hover:border-[#C08C45]"
+                className="group relative min-w-[78%] sm:min-w-[48%] md:min-w-0 snap-center overflow-hidden rounded-2xl border border-[#C08C45]/30 bg-[#102D44] shadow-xl shadow-black/25 transition hover:-translate-y-1 hover:border-[#C08C45]"
               >
                 <div className="relative aspect-[3/4] overflow-hidden">
                   <img
@@ -4396,10 +4481,10 @@ function FleetHistoryPage() {
                     className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                   />
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#071F35] via-[#071F35]/45 to-transparent" />
 
                   <div className="absolute bottom-0 left-0 right-0 p-5">
-                    <p className="font-oswald text-[0.68rem] font-black uppercase tracking-[0.22em] text-[#C08C45]">
+                    <p className="font-oswald text-[0.68rem] font-black uppercase tracking-[0.22em] text-[#E6C07F]">
                       Fleet Story
                     </p>
 
@@ -4410,12 +4495,12 @@ function FleetHistoryPage() {
                     </h2>
 
                     {card.battleDate && (
-                      <p className="mt-1 text-sm font-semibold text-[#C08C45]">
+                      <p className="mt-1 text-sm font-semibold text-[#E6C07F]">
                         {card.battleDate}
                       </p>
                     )}
 
-                    <p className="mt-3 text-sm leading-relaxed text-neutral-300">
+                    <p className="mt-3 text-sm leading-relaxed text-[#E6DCC8]">
                       Read the story behind the roast.
                     </p>
                   </div>
@@ -4428,19 +4513,19 @@ function FleetHistoryPage() {
             <button
               type="button"
               onClick={histPrev}
-              className="rounded-full border border-[#6D5333] px-4 py-2 text-[#C08C45]"
+              className="rounded-full border border-[#C08C45]/40 px-4 py-2 text-[#E6C07F]"
             >
               ←
             </button>
 
-            <div className="text-xs uppercase tracking-[0.2em] text-neutral-400">
+            <div className="text-xs uppercase tracking-[0.2em] text-[#D5CEC4]">
               {histIdx + 1} / {histSlugs.length}
             </div>
 
             <button
               type="button"
               onClick={histNext}
-              className="rounded-full border border-[#6D5333] px-4 py-2 text-[#C08C45]"
+              className="rounded-full border border-[#C08C45]/40 px-4 py-2 text-[#E6C07F]"
             >
               →
             </button>
@@ -4450,6 +4535,7 @@ function FleetHistoryPage() {
     </main>
   );
 }
+
 function BuyBoxSection({
   card,
   isOak,
@@ -4494,13 +4580,13 @@ function BuyBoxSection({
   return (
     <div className="mt-4">
       {/* STEP 1 */}
-      <div className="border border-[#C08C45]/45 bg-[#071F35] px-3.5 py-3.5">
+      <div className="border border-[#D8C6A9]/70 bg-[#F8F1E6] px-3.5 py-3.5">
         <div className="mb-2.5 flex items-center justify-between gap-3">
-          <div className="text-[0.58rem] font-bold tracking-[0.18em] text-[#E6C07F]">
+          <div className="text-[0.58rem] font-bold tracking-[0.18em] text-[#8A5B25]">
             STEP 1 — CHOOSE YOUR PREP
           </div>
 
-          <div className="text-[0.5rem] font-bold tracking-[0.1em] text-[#C08C45]">
+          <div className="text-[0.5rem] font-bold tracking-[0.1em] text-[#8A5B25]">
             REQUIRED
           </div>
         </div>
@@ -4512,10 +4598,10 @@ function BuyBoxSection({
               setBeanType("whole");
               setShowBeanError(false);
             }}
-            className={`min-h-[52px] border px-4 text-left transition duration-200 ${
+            className={`min-h-[52px] border px-4 text-left transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E6C07F] focus-visible:ring-offset-2 focus-visible:ring-offset-[#071F35] ${
               beanType === "whole"
-                ? "border-[#C08C45] bg-[#C08C45] text-black"
-                : "border-[#77664D] bg-[#F8F2E8] text-[#071F35] hover:border-[#C08C45] hover:bg-[#E7EDF0]"
+                ? "border-[#A36F2C] bg-[#D4B27C] text-[#071F35]"
+                : "border-[#C9B99F] bg-[#FBF6ED] text-[#071F35] hover:border-[#A36F2C] hover:bg-[#F2E7D5]"
             }`}
           >
             <div
@@ -4542,12 +4628,12 @@ function BuyBoxSection({
               setBeanType("ground");
               setShowBeanError(false);
             }}
-            className={`min-h-[52px] border px-4 text-left transition duration-200 ${
+            className={`min-h-[52px] border px-4 text-left transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E6C07F] focus-visible:ring-offset-2 focus-visible:ring-offset-[#071F35] ${
               size === "sample"
                 ? "cursor-not-allowed border-[#645B50] bg-[#273846] text-[#8E969B] opacity-60"
                 : beanType === "ground"
-                ? "border-[#C08C45] bg-[#C08C45] text-black"
-                : "border-[#77664D] bg-[#F8F2E8] text-[#071F35] hover:border-[#C08C45] hover:bg-[#E7EDF0]"
+                ? "border-[#A36F2C] bg-[#D4B27C] text-[#071F35]"
+                : "border-[#C9B99F] bg-[#FBF6ED] text-[#071F35] hover:border-[#A36F2C] hover:bg-[#F2E7D5]"
             }`}
           >
             <div
@@ -4569,19 +4655,19 @@ function BuyBoxSection({
           </button>
         </div>
 
-        <div className="mt-2 text-[0.5rem] font-semibold tracking-[0.05em] text-[#AAA49B]">
+        <div className="mt-2 text-[0.56rem] font-medium tracking-[0.02em] text-[#766C61]">
           Select Whole Bean or Ground before adding to Chest.
         </div>
 
         {showBeanError && (
-          <div className="mt-2 border-l-2 border-[#D78A77] pl-2 text-[0.66rem] font-bold text-[#E5A28F]">
+          <div className="mt-2 border-l-2 border-red-600 pl-2 text-[0.66rem] font-bold text-red-700">
             Choose Whole Bean or Ground to continue.
           </div>
         )}
       </div>
 
       {/* STEP 2 */}
-      <div className="mt-3">
+      <div className="mt-5">
         <div className="mb-1.5 text-[0.56rem] font-bold tracking-[0.18em] text-[#8A5B25]">
           STEP 2 — CHOOSE YOUR SIZE
         </div>
@@ -4595,9 +4681,9 @@ function BuyBoxSection({
               setBeanType("whole");
               setShowBeanError(false);
             }}
-            className={`min-h-[50px] border px-3 text-center transition duration-200 ${
+            className={`min-h-[50px] border px-3 text-center transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C08C45] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F3EBDD] ${
               size === "sample"
-                ? "border-[#071F35] bg-[#071F35] text-[#F3EBDD]"
+                ? "border-[#A36F2C] bg-[#D4B27C] text-[#071F35]"
                 : "border-[#BDA98A] bg-[#FBF6ED] text-[#071F35] hover:border-[#C08C45] hover:bg-[#E7EDF0]"
             }`}
           >
@@ -4620,9 +4706,9 @@ function BuyBoxSection({
               setPurchaseMode("one");
               setShowBeanError(false);
             }}
-            className={`min-h-[50px] border px-3 text-center transition duration-200 ${
+            className={`min-h-[50px] border px-3 text-center transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C08C45] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F3EBDD] ${
               size === "12oz"
-                ? "border-[#C08C45] bg-[#C08C45] text-black"
+                ? "border-[#A36F2C] bg-[#D4B27C] text-[#071F35]"
                 : "border-[#BDA98A] bg-[#FBF6ED] text-[#071F35] hover:border-[#C08C45] hover:bg-[#E7EDF0]"
             }`}
           >
@@ -4637,7 +4723,7 @@ function BuyBoxSection({
       </div>
 
       {/* STEP 3 */}
-      <div className="mt-3">
+      <div className="mt-5">
         <div className="mb-1.5 text-[0.56rem] font-bold tracking-[0.18em] text-[#8A5B25]">
           STEP 3 — PURCHASE OPTION
         </div>
@@ -4646,9 +4732,9 @@ function BuyBoxSection({
           <button
             type="button"
             onClick={() => setPurchaseMode("one")}
-            className={`min-h-[50px] border px-3 text-center transition duration-200 ${
+            className={`min-h-[50px] border px-3 text-center transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C08C45] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F3EBDD] ${
               purchaseMode === "one"
-                ? "border-[#071F35] bg-[#071F35] text-[#F3EBDD]"
+                ? "border-[#A36F2C] bg-[#D4B27C] text-[#071F35]"
                 : "border-[#BDA98A] bg-[#FBF6ED] text-[#071F35] hover:border-[#C08C45] hover:bg-[#E7EDF0]"
             }`}
           >
@@ -4668,7 +4754,7 @@ function BuyBoxSection({
                 if (size === "sample") return;
                 setPurchaseMode("sub");
               }}
-              className={`min-h-[50px] border px-3 text-center transition duration-200 ${
+              className={`min-h-[50px] border px-3 text-center transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C08C45] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F3EBDD] ${
                 size === "sample"
                   ? "cursor-not-allowed border-[#C9BCA8] bg-[#EFE6D8] text-[#A59C90]"
                   : purchaseMode === "sub"
@@ -4737,7 +4823,7 @@ function BuyBoxSection({
       )}
 
       {/* PRICE / CART */}
-      <div className="mt-3 border border-[#BDA98A]/60 bg-[#FBF6ED] p-3">
+      <div className="mt-4 border-t border-[#C08C45]/35 pt-4">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
           <div className="min-w-[120px]">
             {isSubscription ? (
@@ -4766,34 +4852,36 @@ function BuyBoxSection({
               </div>
             )}
           </div>
-
-          <div className="flex flex-1 items-stretch gap-2">
+          <div className="flex flex-1 flex-wrap items-center gap-2 sm:justify-start">
             <QuantityControl
               qty={qty}
               setQty={setQty}
-              className="inline-flex shrink-0 items-center border border-[#BDA98A]"
+              className="inline-flex h-[46px] shrink-0 items-center border border-[#BDA98A]"
               buttonClassName="px-3 text-[#071F35] transition hover:bg-[#E7EDF0]"
-              inputClassName="w-10 border-x border-[#BDA98A] bg-white py-3 text-center text-sm text-[#071F35] outline-none"
+              inputClassName="w-9 border-x border-[#BDA98A] bg-white py-3 text-center text-sm text-[#071F35] outline-none"
             />
-
             <button
               type="button"
               onClick={addToChest}
               disabled={adding}
-              className={`flex min-h-[46px] flex-1 items-center justify-center bg-[#C08C45] px-5 text-[0.7rem] font-bold tracking-[0.08em] text-black transition duration-200 ${
-                adding
-                  ? "cursor-not-allowed opacity-60"
-                  : "hover:bg-[#071F35] hover:text-[#F3EBDD]"
-              }`}
+              className={`flex h-[46px] min-w-[173px] items-center justify-center bg-[#071F35] px-5 text-[0.72rem] font-bold tracking-[0.08em] text-[#F3EBDD] transition hover:bg-[#123B55] disabled:opacity-60`}
             >
               {adding ? "ADDING..." : "ADD TO CHEST"}
             </button>
+            <span className="text-[0.7rem] font-bold uppercase tracking-[0.02em] text-[#8A5B25]">
+              Free shipping on 3+ bags
+            </span>
           </div>
         </div>
 
-        <div className="mt-2 text-right text-[0.54rem] font-semibold tracking-[0.07em] text-[#7A6E61]">
-          FREE SHIPPING ON 3+ BAGS
-        </div>
+        {showBeanError && (
+          <div
+            role="alert"
+            className="mt-3 border border-red-400 bg-red-50 px-3 py-3 text-center text-[0.8rem] font-bold text-red-700"
+          >
+            PLEASE SELECT WHOLE BEAN OR GROUND BEFORE ADDING TO CART.
+          </div>
+        )}
       </div>
     </div>
   );
@@ -4940,7 +5028,7 @@ function PurchaseModeButton({
           <div
             className={
               "h-2.5 w-2.5 rounded-full " +
-              (active ? "bg-[#C08C45]" : "bg-transparent")
+              (active ? "bg-[#F3EBDD]" : "bg-transparent")
             }
           />
         </div>
@@ -4963,7 +5051,7 @@ function PurchaseModeButton({
 
           {isSub && !isOak && !disabled && (
             <div className="mt-2 flex items-center gap-2">
-              <span className="inline-block text-[11px] font-bold leading-none px-2 py-1 rounded-[4px] bg-[#C08C45] text-black tracking-tight">
+              <span className="inline-block text-[11px] font-bold leading-none px-2 py-1 rounded-[4px] bg-[#F3EBDD] text-black tracking-tight">
                 SAVE 10%
               </span>
 
@@ -5170,7 +5258,7 @@ function StarRatingDisplay({
 
               <path
                 d={STAR_PATH}
-                className="text-neutral-800"
+                className="text-[#071F35]"
                 fill="currentColor"
               />
 
@@ -5295,7 +5383,7 @@ function ReviewCard({
         <div className="font-semibold text-[#C08C45] text-sm leading-tight">
           {r.name}
         </div>
-        <div className="text-[10px] md:text-xs text-neutral-400">
+        <div className="text-[10px] md:text-xs text-[#B8A994]">
           {formattedDate}
         </div>
       </div>
@@ -5305,7 +5393,7 @@ function ReviewCard({
 
       {/* Title */}
       {r.title && (
-        <div className="mt-2 text-[0.8rem] md:text-sm font-semibold text-neutral-300">
+        <div className="mt-2 text-[0.8rem] md:text-sm font-semibold text-[#D5CEC4]">
           {r.title}
         </div>
       )}
@@ -5314,7 +5402,7 @@ function ReviewCard({
       {r.body && (
         <p
           className={
-            "mt-1 text-neutral-300 leading-relaxed " +
+            "mt-1 text-[#D5CEC4] leading-relaxed " +
             (isMobile
               ? "text-[0.8rem] max-h-24 overflow-hidden"
               : "text-sm max-h-16 overflow-hidden")
@@ -5334,24 +5422,24 @@ function ReviewCard({
       {/* Expanded */}
       {expanded && (
         <div
-          className="absolute left-0 right-0 -top-2 z-50 rounded-xl border border-[#C08C45]/70 bg-neutral-900 shadow-2xl shadow-amber-500/20 p-4"
+          className="absolute left-0 right-0 -top-2 z-50 rounded-xl border border-[#C08C45]/70 bg-[#102D44] shadow-2xl shadow-amber-500/20 p-4"
           onClick={() => setExpanded(false)}
         >
           <div className="flex items-start justify-between">
             <div className="font-semibold text-[#C08C45]">{r.name}</div>
-            <div className="text-xs text-neutral-400">{formattedDate}</div>
+            <div className="text-xs text-[#B8A994]">{formattedDate}</div>
           </div>
 
           <ReviewStars rating={r.rating} />
 
           {r.title && (
-            <div className="mt-2 text-sm font-semibold text-neutral-300">
+            <div className="mt-2 text-sm font-semibold text-[#D5CEC4]">
               {r.title}
             </div>
           )}
 
           {r.body && (
-            <p className="mt-1 text-sm text-neutral-300 leading-relaxed">
+            <p className="mt-1 text-sm text-[#D5CEC4] leading-relaxed">
               {r.body}
             </p>
           )}
@@ -5840,14 +5928,57 @@ function RoastDetailPage() {
 
   const notes = CRAFT_IN_THE_CUP_DATA[card.slug]?.notes ?? [];
 
-  const hook =
-    CRAFT_IN_THE_CUP_DATA[card.slug]?.shortHook ??
-    "Roasted to order for a smooth, fresh cup.";
+  const roastDetails: Record<
+    string,
+    { description: string; origins: string[] }
+  > = {
+    flagship: {
+      description:
+        "A smooth, full-bodied medium roast made for everyday drinking. Balanced, never bitter, and rich enough to enjoy black or with cream and sugar.",
+      origins: ["El Salvador", "Indonesia"],
+    },
+    "baptism-by-fire": {
+      description:
+        "The darkest roast in the fleet. Bold, commanding, and full-bodied, delivering deep chocolate richness with a smooth finish that never turns bitter. Strength and flavor, without the burnt taste.",
+      origins: ["Indonesia", "Colombia"],
+    },
+    "java-action": {
+      description:
+        "A smooth, balanced medium roast with a creamy sweet finish and just enough depth to keep things interesting. Rich, satisfying, and easy to drink black or with a touch of cream.",
+      origins: ["Guatemala", "Ethiopia", "Colombia"],
+    },
+    "black-salvo": {
+      description:
+        "Our most versatile blend in the fleet. Makes amazing espressos while also delivering a very smooth, easy drinking cup across any brew method.",
+      origins: ["Ethiopia", "Brazil"],
+    },
+    "oak-and-copper": {
+      description:
+        "Coffee beans aged in freshly emptied bourbon barrels, slowly absorbing notes of oak, caramel, and warm spice. Roasted to reveal a rich, smooth cup with subtle bourbon character and deep complexity.",
+      origins: ["Colombia"],
+    },
+    "brass-monkey": {
+      description:
+        "A Southern Pecan flavored coffee with warm notes of pecan, brown sugar, and spice. A smooth, comforting cup especially suited to cold mornings.",
+      origins: ["Brazil"],
+    },
+  };
+
+  const originImages: Record<string, string> = {
+    "El Salvador": "/el salvador filled2.png",
+    Indonesia: "/indonesia filled2.png",
+    Colombia: "/columbia filled2.png",
+    Guatemala: "/guatemala filled2.png",
+    Ethiopia: "/ethiopia filled2.png",
+    Brazil: "/Brazil amber filled2.png",
+  };
+
+  const roastDetail = roastDetails[card.slug];
 
   return (
     <main className="bg-[#F3EBDD] text-[#071F35]">
       {/* HERO / BUY AREA */}
-      <section className="relative overflow-hidden border-b border-[#C08C45]/25 bg-[#F3EBDD] px-4 pb-4 pt-11 sm:px-5 sm:pt-12 md:px-8 md:pb-5 md:pt-14 lg:pt-[82px]">
+      <section className="relative overflow-hidden border-b border-[#C08C45]/25 bg-[#F3EBDD] px-4 pb-4 pt-3 sm:px-5 sm:pt-5 md:px-8 md:pb-5 md:pt-8 lg:pt-[82px]">
         <div className="pointer-events-none absolute right-[-90px] top-[60px] hidden opacity-[0.025] lg:block">
           <img
             src="/emblem-black.png"
@@ -5857,9 +5988,9 @@ function RoastDetailPage() {
           />
         </div>
 
-        <div className="relative mx-auto grid max-w-[1500px] gap-6 lg:grid-cols-[47%_53%] lg:items-stretch lg:gap-8">
+        <div className="relative mx-auto grid max-w-[1500px] gap-2 lg:grid-cols-[47%_53%] lg:items-stretch lg:gap-8">
           {/* PRODUCT PHOTO */}
-          <div className="relative min-h-[620px] overflow-hidden bg-[#F3EBDD] lg:min-h-[640px] xl:min-h-[660px]">
+          <div className="relative h-[390px] overflow-hidden bg-[#F3EBDD] sm:h-[480px] lg:h-auto lg:min-h-[640px] xl:min-h-[660px]">
             {card.isNew && (
               <div className="absolute left-4 top-4 z-20 bg-[#071F35] px-3 py-1.5 text-[0.55rem] font-bold tracking-[0.12em] text-[#E6C07F]">
                 JUST RELEASED
@@ -5877,10 +6008,6 @@ function RoastDetailPage() {
 
           {/* PRODUCT INFO */}
           <div className="flex flex-col justify-center lg:py-1">
-            <div className="text-[0.58rem] font-bold tracking-[0.22em] text-[#A36F2C]">
-              OLD IRONSIDES COFFEE
-            </div>
-
             <h1
               className="mt-1.5 text-[2.3rem] font-semibold leading-[0.96] text-[#071F35] sm:text-[2.75rem] lg:text-[3.1rem]"
               style={{ fontFamily: "'Cinzel', serif" }}
@@ -5893,7 +6020,7 @@ function RoastDetailPage() {
                 {card.subTitle}
               </div>
 
-              {reviewsLoaded && reviewData.count > 0 && (
+              {
                 <div className="text-[#C08C45]">
                   <StarRatingDisplay
                     avg={reviewData.avg}
@@ -5907,12 +6034,14 @@ function RoastDetailPage() {
                     linkToReviews
                   />
                 </div>
-              )}
+              }
             </div>
 
             <p className="mt-2.5 max-w-[610px] text-[0.84rem] leading-[1.5] text-[#56514B]">
-              {hook}
+              {CRAFT_IN_THE_CUP_DATA[card.slug]?.shortHook ??
+                "Roasted to order for a smooth, fresh cup."}
             </p>
+
             {/* AT A GLANCE */}
             <div className="mt-4 border-y border-[#C08C45]/30 py-3.5">
               <div className="mb-2 text-[0.52rem] font-bold tracking-[0.18em] text-[#8A5B25]">
@@ -6272,7 +6401,7 @@ function ArmadaSamplePage() {
                 </div>
 
                 <div className="mt-4 md:hidden relative overflow-hidden border border-[#5A4630]/60 bg-black/40 px-4 py-3 rounded-sm">
-                  <div className="absolute inset-y-0 left-0 w-[3px] bg-[#C08C45]" />
+                  <div className="absolute inset-y-0 left-0 w-[3px] bg-[#F3EBDD]" />
 
                   <p className="pl-3 text-[11px] tracking-[0.14em] leading-relaxed text-[#D2B48C] uppercase">
                     Sample packs are priced separately and are not eligible for
@@ -6281,11 +6410,11 @@ function ArmadaSamplePage() {
                 </div>
 
                 <div className="flex items-center w-full mt-3 md:mt-4">
-                  <div className="h-px flex-1 bg-[#C08C45]/70" />
+                  <div className="h-px flex-1 bg-[#F3EBDD]/70" />
                   <span className="px-2 md:px-3 text-[#E6C07F] text-base md:text-lg leading-none">
                     ★
                   </span>
-                  <div className="h-px flex-1 bg-[#C08C45]/70" />
+                  <div className="h-px flex-1 bg-[#F3EBDD]/70" />
                 </div>
               </div>
             </div>
@@ -6301,7 +6430,7 @@ function ArmadaSamplePage() {
               </div>
 
               <div className="hidden md:block mb-4 relative overflow-hidden border border-[#5A4630]/60 bg-black/40 px-4 py-3 rounded-sm">
-                <div className="absolute inset-y-0 left-0 w-[3px] bg-[#C08C45]" />
+                <div className="absolute inset-y-0 left-0 w-[3px] bg-[#F3EBDD]" />
 
                 <p className="pl-3 text-[11px] md:text-[12px] uppercase tracking-[0.14em] leading-relaxed text-[#D2B48C]">
                   Sample packs are priced separately and are not eligible for
@@ -6404,7 +6533,7 @@ function CareCard() {
           Buying 3+ bags to save on shipping? Here is how to keep extras fresh.
         </p>
 
-        <ol className="mt-3 space-y-2 text-[0.9rem] text-neutral-300 leading-snug list-decimal pl-5">
+        <ol className="mt-3 space-y-2 text-[0.9rem] text-[#D5CEC4] leading-snug list-decimal pl-5">
           <li>Freeze unopened 12-oz bags inside Ziplocks or vacuum-sealed.</li>
           <li>
             When ready, let the bag reach room temperature{" "}
@@ -6439,7 +6568,7 @@ function CareCard() {
           Buying 3+ bags to save on shipping? Here is how to keep extras fresh.
         </p>
 
-        <ol className="mt-3 space-y-2 text-[1.006rem] text-neutral-300 list-decimal pl-5">
+        <ol className="mt-3 space-y-2 text-[1.006rem] text-[#D5CEC4] list-decimal pl-5">
           <li>Freeze unopened 12-oz bags inside Ziplocks or vacuum-sealed.</li>
           <li>
             When ready, let the bag reach room temperature{" "}
@@ -6675,8 +6804,8 @@ function CraftInTheCupBlock({ slug }: { slug: string }) {
 
       <div className={originRowClass}>
         <h3
-          className="text-base md:text-lg font-semibold shrink-0"
-          style={{ color: "#C08C45" }}
+          className="shrink-0 text-base font-bold text-[#E6C07F] md:text-lg"
+          style={{ fontFamily: "'Cinzel', serif" }}
         >
           Bean Origins
         </h3>
@@ -6713,8 +6842,8 @@ function Pager({
           "px-3 py-1.5 rounded-md border " +
           (small ? "text-xs " : "text-sm ") +
           (page === 1
-            ? "border-neutral-800 text-neutral-600 cursor-not-allowed"
-            : "border-[#C08C45]/60 text-[#C08C45] hover:bg-[#C08C45] hover:text-neutral-900")
+            ? "border-[#6D5333]/40 text-neutral-600 cursor-not-allowed"
+            : "border-[#C08C45]/60 text-[#C08C45] hover:bg-[#F3EBDD] hover:text-[#071F35]")
         }
       >
         ‹ Prev
@@ -6731,8 +6860,8 @@ function Pager({
               "h-8 min-w-[2rem] px-2 rounded-md border " +
               (small ? "text-xs " : "text-sm ") +
               (active
-                ? "border-[#C08C45] bg-[#C08C45] text-neutral-900 font-semibold"
-                : "border-[#C08C45]/40 text-[#C08C45] hover:bg-[#C08C45] hover:text-neutral-900")
+                ? "border-[#C08C45] bg-[#F3EBDD] text-[#071F35] font-semibold"
+                : "border-[#C08C45]/40 text-[#C08C45] hover:bg-[#F3EBDD] hover:text-[#071F35]")
             }
           >
             {n}
@@ -6747,8 +6876,8 @@ function Pager({
           "px-3 py-1.5 rounded-md border " +
           (small ? "text-xs " : "text-sm ") +
           (page === pageCount
-            ? "border-neutral-800 text-neutral-600 cursor-not-allowed"
-            : "border-[#C08C45]/60 text-[#C08C45] hover:bg-[#C08C45] hover:text-neutral-900")
+            ? "border-[#6D5333]/40 text-neutral-600 cursor-not-allowed"
+            : "border-[#C08C45]/60 text-[#C08C45] hover:bg-[#F3EBDD] hover:text-[#071F35]")
         }
       >
         Next ›
@@ -6794,7 +6923,7 @@ function RoastLevelAnchors({
                 sizeClass="h-6 w-6"
                 clipIdPrefix="reviewsStarDesktopHeader"
                 numberClassName="font-semibold tabular-nums text-sm md:text-base"
-                countClassName="text-neutral-400 text-lg"
+                countClassName="text-[#B8A994] text-lg"
                 showNumber
                 showCount
               />
@@ -6805,16 +6934,16 @@ function RoastLevelAnchors({
           <div className="mt-4 mx-auto max-w-[780px] w-full rounded-xl border border-[#C08C45]/40 bg-black/40 p-4 md:p-6">
             {[5, 4, 3, 2, 1].map((s) => (
               <div key={s} className="flex items-center gap-3 py-1">
-                <div className="w-8 text-right text-sm text-neutral-300">
+                <div className="w-8 text-right text-sm text-[#D5CEC4]">
                   {s}★
                 </div>
-                <div className="flex-1 h-2 rounded-full bg-neutral-800 overflow-hidden">
+                <div className="flex-1 h-2 rounded-full bg-[#18374F] overflow-hidden">
                   <div
-                    className="h-full bg-[#C08C45]"
+                    className="h-full bg-[#F3EBDD]"
                     style={{ width: `${pct(b[s] || 0)}%` }}
                   />
                 </div>
-                <div className="w-12 text-left text-sm text-neutral-400">
+                <div className="w-12 text-left text-sm text-[#B8A994]">
                   {b[s] || 0}
                 </div>
               </div>
@@ -6853,7 +6982,7 @@ function RoastLevelAnchors({
               clipWidthBase={20}
               clipIdPrefix="reviewsStarMobileHeader"
               numberClassName="font-semibold tabular-nums text-sm md:text-base"
-              countClassName="text-neutral-400 text-xs tracking-wide"
+              countClassName="text-[#B8A994] text-xs tracking-wide"
               showNumber
               showCount
             />
@@ -6862,16 +6991,16 @@ function RoastLevelAnchors({
           <div className="mt-2 mx-auto w-full rounded-xl border border-[#C08C45]/40 bg-black/40 p-3">
             {[5, 4, 3, 2, 1].map((s) => (
               <div key={s} className="flex items-center gap-3 py-1">
-                <div className="w-8 text-right text-xs text-neutral-300">
+                <div className="w-8 text-right text-xs text-[#D5CEC4]">
                   {s}★
                 </div>
-                <div className="flex-1 h-2 rounded-full bg-neutral-800 overflow-hidden">
+                <div className="flex-1 h-2 rounded-full bg-[#18374F] overflow-hidden">
                   <div
-                    className="h-full bg-[#C08C45]"
+                    className="h-full bg-[#F3EBDD]"
                     style={{ width: `${pct(b[s] || 0)}%` }}
                   />
                 </div>
-                <div className="w-10 text-left text-xs text-neutral-400">
+                <div className="w-10 text-left text-xs text-[#B8A994]">
                   {b[s] || 0}
                 </div>
               </div>
@@ -6905,7 +7034,7 @@ function RoastStoryBlock({
   paragraphs: string[];
 }) {
   return (
-    <div className="space-y-3 text-neutral-300 text-base md:text-lg leading-relaxed">
+    <div className="space-y-3 text-[#D5CEC4] text-base md:text-lg leading-relaxed">
       <p className="text-[#C08C45] text-base md:text-lg">{title}</p>
 
       {paragraphs.map((p, i) => (
@@ -7001,55 +7130,156 @@ function RoastUnified({
     },
   };
 
+  const [reviewPage, setReviewPage] = useState(1);
+  const reviewsPerPage = 8;
+  const totalReviewPages = Math.ceil(reviews.length / reviewsPerPage);
+  const currentReviewPage = Math.min(reviewPage, Math.max(1, totalReviewPages));
+  const visibleReviews = reviews.slice(
+    (currentReviewPage - 1) * reviewsPerPage,
+    currentReviewPage * reviewsPerPage
+  );
   const data = DATA[slug];
 
   if (!data) return null;
 
   const craft = CRAFT_IN_THE_CUP_DATA[slug];
 
+  const roastDetails: Record<
+    string,
+    { description: string; origins: string[] }
+  > = {
+    flagship: {
+      description:
+        "Our everyday staple, Flagship is a breakfast-style medium roast that is smooth, balanced, reliable, and never bitter. A roast you can reach for day after day.",
+      origins: ["El Salvador", "Indonesia"],
+    },
+    "baptism-by-fire": {
+      description:
+        "The darkest roast in the fleet. Bold, commanding, and full-bodied, delivering deep chocolate richness with a smooth finish that never turns bitter. Strength and flavor, without the burnt taste.",
+      origins: ["Indonesia", "Colombia"],
+    },
+    "java-action": {
+      description:
+        "A smooth, balanced medium roast with a creamy sweet finish and just enough depth to keep things interesting. Rich, satisfying, and easy to drink black or with a touch of cream.",
+      origins: ["Guatemala", "Ethiopia", "Colombia"],
+    },
+    "black-salvo": {
+      description:
+        "Our most versatile blend in the fleet. Makes amazing espressos while also delivering a very smooth, easy drinking cup across any brew method.",
+      origins: ["Ethiopia", "Brazil"],
+    },
+    "oak-and-copper": {
+      description:
+        "Coffee beans aged in freshly emptied bourbon barrels, slowly absorbing notes of oak, caramel, and warm spice. Roasted to reveal a rich, smooth cup with subtle bourbon character and deep complexity.",
+      origins: ["Colombia"],
+    },
+    "brass-monkey": {
+      description:
+        "A Southern Pecan flavored coffee with warm notes of pecan, brown sugar, and spice. A smooth, comforting cup especially suited to cold mornings.",
+      origins: ["Brazil"],
+    },
+  };
+
+  const originImages: Record<string, string> = {
+    "El Salvador": "/el salvador filled2.png",
+    Indonesia: "/indonesia filled2.png",
+    Colombia: "/columbia filled2.png",
+    Guatemala: "/guatemala filled2.png",
+    Ethiopia: "/ethiopia filled2.png",
+    Brazil: "/Brazil amber filled2.png",
+  };
+
+  const roastDetail = roastDetails[slug];
+
   return (
     <>
       {/* =====================================================
-          CRAFT — NAVY
-      ====================================================== */}
-      <section className="bg-[#071421] px-5 py-7 text-[#E6DCC8] md:px-8 md:py-8">
-        <div className="mx-auto grid max-w-[1500px] gap-7 lg:grid-cols-[0.75fr_1.25fr] lg:gap-12">
-          <div>
+    CRAFT — NAVY
+====================================================== */}
+
+      <section className="bg-[#071421] px-5 py-9 text-[#E6DCC8] md:px-8 md:py-12">
+        <div className="mx-auto grid max-w-[1400px] gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:items-start lg:gap-12">
+          <div className="min-w-0">
             <div className="text-[0.62rem] font-bold tracking-[0.25em] text-[#C08C45]">
               THE CRAFT IN THE CUP
             </div>
 
             <h2
-              className="mt-2 text-[1.8rem] font-semibold leading-[1] text-[#F3EBDD] md:text-[2.1rem]"
+              className="mt-2 text-[1.85rem] font-semibold leading-[1.1] text-[#F3EBDD] md:text-[2.3rem]"
               style={{ fontFamily: "'Cinzel', serif" }}
             >
               BUILT AROUND THE ROAST.
             </h2>
-          </div>
 
-          <div>
-            <p className="max-w-[760px] text-[0.92rem] leading-[1.7] text-[#D5CEC4]">
-              {craft?.shortHook ??
-                "Roasted in small batches and made to order for a fresher, more deliberate cup."}
+            <p className="mt-4 max-w-[760px] text-[0.92rem] leading-[1.7] text-[#D5CEC4] md:text-[1rem]">
+              {roastDetail?.description ??
+                craft?.shortHook ??
+                "Roasted to order for a fresh, balanced cup."}
             </p>
 
-            {craft?.notes?.length > 0 && (
-              <div className="mt-5 flex flex-wrap gap-2">
-                {craft.notes.map((note: string) => (
-                  <span
-                    key={note}
-                    className="border border-[#C08C45]/35 px-3 py-2 text-[0.62rem] font-bold tracking-[0.1em] text-[#E6C07F]"
-                  >
-                    {note.toUpperCase()}
-                  </span>
-                ))}
+            {roastDetail && (
+              <div className="mt-6 border-t border-[#C08C45]/20 pt-5">
+                <div className="text-[0.7rem] font-bold uppercase tracking-[0.16em] text-[#F3EBDD]">
+                  BEAN ORIGINS
+                </div>
+
+                <div className="mt-4 flex flex-wrap items-start gap-x-8 gap-y-5">
+                  {roastDetail.origins.map((country) => (
+                    <div
+                      key={country}
+                      className="flex min-w-[85px] flex-col items-center gap-2 text-center"
+                    >
+                      <img
+                        src={originImages[country]}
+                        alt=""
+                        aria-hidden="true"
+                        className="h-14 w-14 object-contain md:h-16 md:w-16"
+                      />
+                      <span className="text-[0.62rem] font-bold uppercase tracking-[0.08em] text-[#E6C07F]">
+                        {country}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
 
-            <div className="mt-5 text-[0.64rem] font-semibold tracking-[0.08em] text-[#AFA79B]">
+            <div className="mt-7 border-t border-[#C08C45]/20 pt-4 text-[0.64rem] font-semibold tracking-[0.08em] text-[#AFA79B]">
               ROASTED TO ORDER • MONDAY & THURSDAY
             </div>
           </div>
+
+          <aside className="border border-[#C08C45]/40 bg-[#0C1D2C] p-5 md:p-6">
+            <div className="text-[0.6rem] font-bold tracking-[0.2em] text-[#C08C45]">
+              COFFEE STORAGE
+            </div>
+
+            <h3
+              className="mt-2 text-[1.25rem] font-semibold text-[#F3EBDD]"
+              style={{ fontFamily: "'Cinzel', serif" }}
+            >
+              KEEP IT FRESH.
+            </h3>
+
+            <div className="mt-4 space-y-3 text-[0.82rem] leading-[1.6] text-[#D5CEC4]">
+              <p>
+                Keep unopened bags sealed in a cool, dry place until you are
+                ready to use them.
+              </p>
+              <p>
+                Once opened, keep coffee airtight and away from heat, moisture,
+                and direct sunlight.
+              </p>
+              <p>
+                For the best cup, grind whole bean coffee immediately before
+                brewing whenever possible.
+              </p>
+            </div>
+
+            <div className="mt-5 border-t border-[#C08C45]/25 pt-3 text-[0.6rem] font-bold tracking-[0.1em] text-[#C08C45]">
+              FRESH COFFEE. SMALL BATCHES. ROASTED TO ORDER.
+            </div>
+          </aside>
         </div>
       </section>
 
@@ -7057,7 +7287,7 @@ function RoastUnified({
           HISTORY — PARCHMENT
       ====================================================== */}
       <section className="bg-[#F3EBDD] px-5 py-10 md:px-8 md:py-12">
-        <div className="mx-auto grid max-w-[1500px] gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:gap-12">
+        <div className="mx-auto max-w-[1400px]">
           <article>
             <div className="text-[0.62rem] font-bold tracking-[0.25em] text-[#A36F2C]">
               THE STORY BEHIND THE ROAST
@@ -7081,127 +7311,146 @@ function RoastUnified({
               ))}
             </div>
           </article>
-
-          {/* STORAGE */}
-          <aside className="self-start border border-[#C08C45]/40 bg-[#F8EFE1] p-5 md:p-6">
-            <div className="text-[0.6rem] font-bold tracking-[0.2em] text-[#A36F2C]">
-              COFFEE STORAGE
-            </div>
-
-            <h3
-              className="mt-2 text-[1.25rem] font-semibold text-[#071F35]"
-              style={{ fontFamily: "'Cinzel', serif" }}
-            >
-              KEEP IT FRESH.
-            </h3>
-
-            <div className="mt-4 space-y-3 text-[0.78rem] leading-[1.55] text-[#5D554B]">
-              <p>
-                Keep unopened bags sealed in a cool, dry place until you are
-                ready to use them.
-              </p>
-
-              <p>
-                Once opened, keep coffee airtight and away from heat, moisture,
-                and direct sunlight.
-              </p>
-
-              <p>
-                For the best cup, grind whole bean coffee immediately before
-                brewing whenever possible.
-              </p>
-            </div>
-
-            <div className="mt-4 border-t border-[#C08C45]/25 pt-3 text-[0.6rem] font-bold tracking-[0.1em] text-[#8A5B25]">
-              FRESH COFFEE. SMALL BATCHES. ROASTED TO ORDER.
-            </div>
-          </aside>
         </div>
       </section>
 
       {/* =====================================================
           LIVE REVIEWS
       ====================================================== */}
-      {reviewData.count > 0 && (
-        <section
-          id="reviews"
-          className="border-t border-[#C08C45]/25 bg-[#EFE4D3] px-5 py-10 md:px-8 md:py-12"
-        >
-          <div className="mx-auto max-w-[1500px]">
-            <div className="flex flex-col gap-3 border-b border-[#A68459]/30 pb-5 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <div className="text-[0.62rem] font-bold tracking-[0.25em] text-[#A36F2C]">
-                  CUSTOMER REVIEWS
-                </div>
-
-                <h2
-                  className="mt-2 text-[2rem] font-semibold text-[#071F35]"
-                  style={{ fontFamily: "'Cinzel', serif" }}
-                >
-                  WHAT THE FLEET SAYS.
-                </h2>
-              </div>
-
-              <div className="text-[#C08C45]">
-                <StarRatingDisplay
-                  avg={reviewData.avg}
-                  count={reviewData.count}
-                  sizeClass="h-5 w-5"
-                  clipIdPrefix={`reviews-${slug}`}
-                  numberClassName="font-bold text-[#071F35]"
-                  countClassName="text-[0.7rem] font-semibold text-[#655C51]"
-                  showNumber
-                  showCount
-                />
-              </div>
+      <section
+        id="reviews"
+        className="border-t border-[#C08C45]/25 bg-[#EFE4D3] px-5 py-10 md:px-8 md:py-12"
+      >
+        <div className="mx-auto max-w-[1400px]">
+          <div className="text-center">
+            <h2 className="text-[1.5rem] font-bold uppercase tracking-[0.03em] text-[#071F35]">
+              CUSTOMER REVIEWS
+            </h2>
+            <div className="mt-3 flex items-center justify-center gap-2 text-[#C08C45]">
+              <StarRatingDisplay
+                avg={reviewData.avg}
+                count={reviewData.count}
+                sizeClass="h-5 w-5"
+                clipIdPrefix={`reviews-${slug}`}
+                numberClassName="text-[0.85rem] font-bold text-[#071F35]"
+                countClassName="text-[0.78rem] text-[#655C51]"
+                showNumber
+                showCount
+              />
             </div>
+          </div>
 
-            <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-              {reviews.map((review) => (
-                <article
-                  key={review.id}
-                  className="border border-[#A68459]/35 bg-[#FBF6ED] p-5"
+          <div className="mx-auto mt-5 max-w-[690px] border border-[#BDA98A]/60 bg-[#FBF6ED] px-5 py-5">
+            {[5, 4, 3, 2, 1].map((stars) => {
+              const count = reviewData.breakdown[stars] || 0;
+              const percent = reviewData.count
+                ? (count / reviewData.count) * 100
+                : 0;
+              return (
+                <div
+                  key={stars}
+                  className="mb-2 flex items-center gap-3 last:mb-0"
                 >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="font-bold text-[#071F35]">
-                      {review.name}
-                    </div>
-
-                    <div className="text-[0.64rem] text-[#82776A]">
-                      {formatReviewDate(review.date)}
-                    </div>
-                  </div>
-
-                  <div className="mt-2">
-                    <ReviewStars
-                      rating={review.rating}
-                      sizeClass="h-3.5 w-3.5"
+                  <span className="w-7 text-xs font-bold text-[#071F35]">
+                    {stars}★
+                  </span>
+                  <div className="h-2 flex-1 overflow-hidden rounded-full bg-[#DDD0BD]">
+                    <div
+                      className="h-full rounded-full bg-[#B9873E]"
+                      style={{ width: `${percent}%` }}
                     />
                   </div>
+                  <span className="w-7 text-right text-xs text-[#655C51]">
+                    {count}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
 
+          {visibleReviews.length > 0 ? (
+            <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              {visibleReviews.map((review) => (
+                <article
+                  key={review.id}
+                  className="min-h-[150px] border border-[#BDA98A]/60 bg-[#FBF6ED] p-4"
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <span className="text-[0.8rem] font-bold text-[#8A5B25]">
+                      {review.name}
+                    </span>
+                    <span className="shrink-0 text-[0.65rem] text-[#82776A]">
+                      {formatReviewDate(review.date)}
+                    </span>
+                  </div>
+                  <ReviewStars rating={review.rating} sizeClass="h-4 w-4" />
                   {review.title && (
-                    <div className="mt-3 text-[0.82rem] font-bold text-[#3F3A34]">
+                    <p className="mt-2 text-[0.8rem] font-semibold text-[#071F35]">
                       {review.title}
-                    </div>
+                    </p>
                   )}
-
                   {review.body && (
-                    <p className="mt-2 text-[0.78rem] leading-[1.6] text-[#625A50]">
+                    <p className="mt-1 text-[0.78rem] leading-[1.55] text-[#514D46]">
                       {review.body}
                     </p>
                   )}
-
                   {review.verified && (
-                    <div className="mt-4 text-[0.56rem] font-bold tracking-[0.12em] text-[#A36F2C]">
+                    <p className="mt-3 text-[0.62rem] font-bold uppercase tracking-[0.05em] text-[#A36F2C]">
                       VERIFIED BUYER
-                    </div>
+                    </p>
                   )}
                 </article>
               ))}
             </div>
-          </div>
-        </section>
-      )}
+          ) : (
+            <div className="mt-6 border border-[#BDA98A]/60 bg-[#FBF6ED] px-5 py-8 text-center text-sm text-[#655C51]">
+              Customer reviews will appear here when review data is available.
+            </div>
+          )}
+
+          {totalReviewPages > 1 && (
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
+              <button
+                type="button"
+                disabled={currentReviewPage === 1}
+                onClick={() => setReviewPage((p) => Math.max(1, p - 1))}
+                className="border border-[#BDA98A] px-3 py-2 text-xs text-[#071F35] disabled:opacity-40"
+              >
+                ‹ Prev
+              </button>
+              {Array.from({ length: totalReviewPages }, (_, i) => i + 1).map(
+                (page) => (
+                  <button
+                    key={page}
+                    type="button"
+                    onClick={() => setReviewPage(page)}
+                    aria-current={
+                      currentReviewPage === page ? "page" : undefined
+                    }
+                    className={`h-9 w-9 border text-xs font-bold ${
+                      currentReviewPage === page
+                        ? "border-[#B9873E] bg-[#B9873E] text-[#071F35]"
+                        : "border-[#BDA98A] text-[#071F35]"
+                    }`}
+                  >
+                    {page}
+                  </button>
+                )
+              )}
+              <button
+                type="button"
+                disabled={currentReviewPage === totalReviewPages}
+                onClick={() =>
+                  setReviewPage((p) => Math.min(totalReviewPages, p + 1))
+                }
+                className="border border-[#BDA98A] px-3 py-2 text-xs text-[#071F35] disabled:opacity-40"
+              >
+                Next ›
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
     </>
   );
 }
@@ -7259,9 +7508,9 @@ function StorePage() {
                     role="presentation"
                     aria-disabled="true"
                     tabIndex={-1}
-                    className="group overflow-hidden rounded-2xl ring-1 ring-[#C08C45]/60 bg-neutral-900/40 shadow-lg shadow-[#C08C45]/10 transition cursor-default select-none"
+                    className="group overflow-hidden rounded-2xl ring-1 ring-[#C08C45]/60 bg-[#102D44]/40 shadow-lg shadow-[#C08C45]/10 transition cursor-default select-none"
                   >
-                    <div className="aspect-[3/4] w-full overflow-hidden bg-neutral-900">
+                    <div className="aspect-[3/4] w-full overflow-hidden bg-[#102D44]">
                       <img
                         src={
                           t.img?.startsWith("/") || t.img?.startsWith("http")
@@ -7287,7 +7536,7 @@ function StorePage() {
                       >
                         {t.label}
                       </div>
-                      <div className="text-[11px] text-neutral-400">
+                      <div className="text-[11px] text-[#B8A994]">
                         Coming soon
                       </div>
                     </div>
@@ -7302,7 +7551,7 @@ function StorePage() {
             {tiles.map((t) => (
               <div
                 key={t.key}
-                className="rounded-2xl ring-1 ring-neutral-800 bg-neutral-900/40 transition text-left overflow-hidden flex flex-col"
+                className="rounded-2xl ring-1 ring-[#6D5333]/40 bg-[#102D44]/40 transition text-left overflow-hidden flex flex-col"
               >
                 <div className="aspect-[4/3] w-full overflow-hidden">
                   <img
@@ -7318,7 +7567,7 @@ function StorePage() {
                   </div>
                 </div>
                 <div className="px-6 pb-6">
-                  <div className="mt-2 text-sm text-neutral-400">
+                  <div className="mt-2 text-sm text-[#B8A994]">
                     Subscribe to get first access on gear. <br />
                     Plus 15% off on first order of coffee.
                   </div>
@@ -7364,15 +7613,15 @@ function StoreCategoryPage() {
           {[1, 2, 3, 4, 5, 6].map((i) => (
             <div
               key={i}
-              className="aspect-[4/3] rounded-2xl ring-1 ring-neutral-800 bg-neutral-900/50 grid place-content-center text-neutral-500"
+              className="aspect-[4/3] rounded-2xl ring-1 ring-[#6D5333]/40 bg-[#102D44]/50 grid place-content-center text-neutral-500"
             >
               Image placeholder
             </div>
           ))}
         </div>
         <div className="mt-8 max-w-xl">
-          <div className="rounded-2xl ring-1 ring-[#C08C45]/50 bg-neutral-900/60 p-5">
-            <div className="text-sm text-neutral-200">
+          <div className="rounded-2xl ring-1 ring-[#C08C45]/50 bg-[#102D44] p-5">
+            <div className="text-sm text-[#E6DCC8]">
               Get an alert when {title.toLowerCase()} drops.
             </div>
             <NotifyForm onSubmit={() => {}} />
@@ -7409,13 +7658,13 @@ function ContactPage() {
             <div className="mt-3 space-y-3">
               <a
                 href="mailto:HQ@oldironsidescoffee.org"
-                className="flex items-center gap-3 text-neutral-300 hover:text-[#E6C07F]"
+                className="flex items-center gap-3 text-[#D5CEC4] hover:text-[#E6C07F]"
               >
                 <Mail className="h-5 w-5 text-[#C08C45]" />
                 <span>HQ@oldironsidescoffee.org</span>
               </a>
 
-              <div className="text-neutral-400 leading-relaxed">
+              <div className="text-[#B8A994] leading-relaxed">
                 6 Liberty Square #2564
                 <br />
                 Boston, MA 02109
@@ -7425,7 +7674,7 @@ function ContactPage() {
             <div className="mt-6 border-t border-[#6D5333]/60 pt-5">
               <h4 className="font-semibold text-[#C08C45]">Follow Us</h4>
 
-              <div className="mt-3 flex flex-wrap gap-4 text-neutral-300">
+              <div className="mt-3 flex flex-wrap gap-4 text-[#D5CEC4]">
                 <a
                   href="https://instagram.com/oldironsidescoffee"
                   target="_blank"
@@ -7490,23 +7739,23 @@ function SDVOSBPage() {
           <div className="rounded-2xl border border-[#6D5333] bg-[#130E08]/80 p-6">
             <h3 className="text-[#C08C45] font-semibold">Core Identifiers</h3>
 
-            <ul className="mt-3 text-sm text-neutral-300 space-y-2">
+            <ul className="mt-3 text-sm text-[#D5CEC4] space-y-2">
               <li>
-                <span className="text-neutral-400">CAGE Code:</span>{" "}
+                <span className="text-[#B8A994]">CAGE Code:</span>{" "}
                 <span className="ml-2">—</span>
               </li>
               <li>
-                <span className="text-neutral-400">UEI (SAM):</span>{" "}
+                <span className="text-[#B8A994]">UEI (SAM):</span>{" "}
                 <span className="ml-2">—</span>
               </li>
               <li>
-                <span className="text-neutral-400">NAICS:</span>{" "}
+                <span className="text-[#B8A994]">NAICS:</span>{" "}
                 <span className="ml-2">
                   311920 (Coffee & Tea Mfg), 424490, 722515 …
                 </span>
               </li>
               <li>
-                <span className="text-neutral-400">PSC/UNSPSC:</span>{" "}
+                <span className="text-[#B8A994]">PSC/UNSPSC:</span>{" "}
                 <span className="ml-2">—</span>
               </li>
             </ul>
@@ -7515,7 +7764,7 @@ function SDVOSBPage() {
           <div className="rounded-2xl border border-[#6D5333] bg-[#130E08]/80 p-6">
             <h3 className="text-[#C08C45] font-semibold">Capabilities</h3>
 
-            <ul className="mt-3 text-sm text-neutral-300 list-disc list-inside space-y-1">
+            <ul className="mt-3 text-sm text-[#D5CEC4] list-disc list-inside space-y-1">
               <li>Small-batch roasting and packaging (retail & bulk)</li>
               <li>
                 Custom blends, unit/command branding, and gift provisioning
@@ -7527,7 +7776,7 @@ function SDVOSBPage() {
           <div className="rounded-2xl border border-[#6D5333] bg-[#130E08]/80 p-6 md:col-span-2">
             <h3 className="text-[#C08C45] font-semibold">Past Performance</h3>
 
-            <p className="mt-2 text-sm text-neutral-300">
+            <p className="mt-2 text-sm text-[#D5CEC4]">
               Add awards, POs, references here.
             </p>
           </div>
@@ -7588,16 +7837,16 @@ function LegalPage() {
     return () => clearInterval(id);
   }, []);
 
-  const sectionWrap = "mt-6 text-neutral-100";
+  const sectionWrap = "mt-6 text-[#F3EBDD]";
   const proseWrap = "max-w-[72ch] leading-relaxed";
   const stack = "space-y-8";
   const h3 = "text-[#C08C45] font-semibold";
-  const p = "mt-1 text-neutral-300";
-  const pTight = "text-neutral-300";
-  const ul = "mt-1 list-disc list-outside pl-5 space-y-1 text-neutral-300";
-  const ulT2 = "mt-2 list-disc list-outside pl-5 space-y-1 text-neutral-300";
-  const ol = "mt-1 list-decimal list-outside pl-5 space-y-1 text-neutral-300";
-  const link = "text-[#E6C07F] hover:text-[#C08C45] hover:underline";
+  const p = "mt-1 text-[#D5CEC4]";
+  const pTight = "text-[#D5CEC4]";
+  const ul = "mt-1 list-disc list-outside pl-5 space-y-1 text-[#D5CEC4]";
+  const ulT2 = "mt-2 list-disc list-outside pl-5 space-y-1 text-[#D5CEC4]";
+  const ol = "mt-1 list-decimal list-outside pl-5 space-y-1 text-[#D5CEC4]";
+  const link = "text-[#E6C07F] hover:text-[#F3EBDD] hover:underline";
 
   return (
     <main className="md:py-16 max-md:py-6 max-md:-mt-12">
@@ -7623,7 +7872,7 @@ function LegalPage() {
 
         {slug === "shipping" && (
           <div className="mt-6 mb-6 rounded-2xl border border-[#6D5333] bg-[#130E08]/80 p-6">
-            <div className="text-sm md:text-base text-neutral-200">
+            <div className="text-sm md:text-base text-[#E6DCC8]">
               <p>We roast on Monday and Tuesday and ship on Wednesday.</p>
 
               <p className="mt-2">
@@ -7750,7 +7999,7 @@ function LegalPage() {
                     </li>
                     <li>
                       Taste preferences after correct fulfillment
-                      <span className="text-neutral-400">
+                      <span className="text-[#B8A994]">
                         {" "}
                         (still contact us and we’ll carefully review your case)
                       </span>
@@ -7775,7 +8024,7 @@ function LegalPage() {
         )}
 
         {slug === "terms" && (
-          <section className="mt-3 text-neutral-100">
+          <section className="mt-3 text-[#F3EBDD]">
             <div className={proseWrap}>
               <div className={stack}>
                 <div>
@@ -8207,7 +8456,7 @@ function LegalPage() {
         )}
 
         {slug === "privacy" && (
-          <section className="mt-3 text-neutral-100">
+          <section className="mt-3 text-[#F3EBDD]">
             <div className="max-w-[68ch] leading-relaxed space-y-8">
               <div className="space-y-2">
                 <h3 className={h3}>Effective date</h3>
@@ -8249,7 +8498,7 @@ function LegalPage() {
                 <p className={pTight}>
                   We collect information depending on how you interact with us.
                 </p>
-                <ul className="list-disc pl-5 space-y-2 text-neutral-300">
+                <ul className="list-disc pl-5 space-y-2 text-[#D5CEC4]">
                   <li>
                     <span className="font-semibold">Identifiers:</span> name,
                     email address, billing and shipping addresses, phone number,
@@ -8308,7 +8557,7 @@ function LegalPage() {
                   For users in the EEA and UK, legal bases appear in
                   parentheses.
                 </p>
-                <ul className="list-disc pl-5 space-y-2 text-neutral-300">
+                <ul className="list-disc pl-5 space-y-2 text-[#D5CEC4]">
                   <li>
                     <span className="font-semibold">Provide the services:</span>{" "}
                     process and fulfill orders, manage subscriptions, deliver
@@ -8356,7 +8605,7 @@ function LegalPage() {
                   enable site functionality, analytics, and marketing.
                 </p>
                 <h4 className={h3}>Your choices</h4>
-                <ul className="list-disc pl-5 space-y-2 text-neutral-300">
+                <ul className="list-disc pl-5 space-y-2 text-[#D5CEC4]">
                   <li>Control cookies in your browser settings.</li>
                   <li>
                     Opt out through the cookie banner or device settings where
@@ -8375,7 +8624,7 @@ function LegalPage() {
                   We do not sell personal information for money. We may share
                   limited information with advertising and analytics partners.
                 </p>
-                <ul className="list-disc pl-5 space-y-2 text-neutral-300">
+                <ul className="list-disc pl-5 space-y-2 text-[#D5CEC4]">
                   <li>
                     <span className="font-semibold">
                       Service providers and processors:
@@ -8407,7 +8656,7 @@ function LegalPage() {
 
               <div className="space-y-2">
                 <h3 className={h3}>5. Your choices about marketing</h3>
-                <ul className="list-disc pl-5 space-y-2 text-neutral-300">
+                <ul className="list-disc pl-5 space-y-2 text-[#D5CEC4]">
                   <li>
                     <span className="font-semibold">Email:</span> use the
                     unsubscribe link or email{" "}
@@ -8432,7 +8681,7 @@ function LegalPage() {
                   Your rights depend on your location. We will honor requests as
                   required by law.
                 </p>
-                <ul className="list-disc pl-5 space-y-2 text-neutral-300">
+                <ul className="list-disc pl-5 space-y-2 text-[#D5CEC4]">
                   <li>
                     know and access categories and specific pieces of personal
                     information,
@@ -8461,7 +8710,7 @@ function LegalPage() {
 
               <div className="space-y-2">
                 <h3 className={h3}>7. California disclosures</h3>
-                <ul className="list-disc pl-5 space-y-2 text-neutral-300">
+                <ul className="list-disc pl-5 space-y-2 text-[#D5CEC4]">
                   <li>
                     <span className="font-semibold">Categories collected:</span>{" "}
                     identifiers, commercial information, internet activity,
@@ -8512,7 +8761,7 @@ function LegalPage() {
                 <p className={pTight}>
                   We keep personal information only as long as necessary.
                 </p>
-                <ul className="list-disc pl-5 space-y-2 text-neutral-300">
+                <ul className="list-disc pl-5 space-y-2 text-[#D5CEC4]">
                   <li>orders and tax records: up to 7 years,</li>
                   <li>
                     customer support records: up to 3 years after resolution,
@@ -8809,7 +9058,7 @@ function CartPage() {
         try {
           await cartDiscountCodesUpdate({
             cartId,
-            discountCodes: ["IRONSIDES15"],
+            discountCodes: ["IRONSIDES20"],
           });
         } catch {}
       }
@@ -8874,7 +9123,7 @@ function CartPage() {
           <div>
             {/* Message centered, nudged upward toward banner */}
             <div className="mb-6 text-center relative">
-              <p className="text-sm md:text-base text-blue-300 relative -top-[50px] pointer-events-none select-none">
+              <p className="text-sm md:text-base text-[#E6DCC8] relative -top-[50px] pointer-events-none select-none">
                 <>
                   All of our coffees are roasted fresh every Monday and ship
                   Tuesday/Wednesday. <br />
@@ -8901,7 +9150,7 @@ function CartPage() {
                 {cart.map((item: any) => (
                   <div
                     key={item.id}
-                    className="flex items-center gap-4 rounded-xl ring-1 ring-neutral-800 bg-neutral-900/50 p-4"
+                    className="flex items-center gap-4 rounded-xl ring-1 ring-[#6D5333]/40 bg-[#102D44]/50 p-4"
                   >
                     {/* Product image */}
                     <img
@@ -8918,7 +9167,7 @@ function CartPage() {
 
                       {/* Variant line (only if present) */}
                       {item?.variant ? (
-                        <div className="text-xs text-neutral-400">
+                        <div className="text-xs text-[#B8A994]">
                           {item.variant}
                         </div>
                       ) : null}
@@ -8933,7 +9182,7 @@ function CartPage() {
                           days. 10% off applied.
                         </div>
                       ) : (
-                        <div className="mt-1 text-m text-neutral-400">
+                        <div className="mt-1 text-m text-[#B8A994]">
                           Priced as if the Crown won the war.{" "}
                           <span className="text-[#C08C45]">
                             Subscribe and save 10% off this item.
@@ -8951,13 +9200,13 @@ function CartPage() {
                       >
                         <button
                           onClick={() => dec(item.id)}
-                          className="px-2 py-1 hover:bg-neutral-800 rounded-l-lg"
+                          className="px-2 py-1 hover:bg-[#18374F] rounded-l-lg"
                           aria-label={`Decrease quantity of ${item.title}`}
                         >
                           <Minus className="h-4 w-4" />
                         </button>
                         <div
-                          className="w-10 text-center bg-neutral-900/70 py-1 text-sm"
+                          className="w-10 text-center bg-[#102D44]/70 py-1 text-sm"
                           role="status"
                           aria-live="polite"
                         >
@@ -8965,7 +9214,7 @@ function CartPage() {
                         </div>
                         <button
                           onClick={() => inc(item.id)}
-                          className="px-2 py-1 hover:bg-neutral-800 rounded-r-lg"
+                          className="px-2 py-1 hover:bg-[#18374F] rounded-r-lg"
                           aria-label={`Increase quantity of ${item.title}`}
                         >
                           <Plus className="h-4 w-4" />
@@ -8974,7 +9223,7 @@ function CartPage() {
 
                       <button
                         onClick={() => remove(item.id)}
-                        className="p-2 rounded-lg hover:bg-neutral-800"
+                        className="p-2 rounded-lg hover:bg-[#18374F]"
                         aria-label={`Remove ${item.title}`}
                       >
                         <Trash2 className="h-5 w-5" />
@@ -8985,11 +9234,11 @@ function CartPage() {
 
                 {/* Free shipping indicator (half width, amber count) */}
                 <div className="w-full md:w-1/3">
-                  <div className="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/50 p-4">
+                  <div className="rounded-xl ring-1 ring-[#6D5333]/40 bg-[#102D44]/50 p-4">
                     {!freeShippingQualified ? (
                       <>
                         <div className="flex items-center justify-between text-sm">
-                          <span className="text-neutral-300">
+                          <span className="text-[#D5CEC4]">
                             Add{" "}
                             <span className="text-[#C08C45] font-semibold">
                               {Math.max(
@@ -9009,9 +9258,9 @@ function CartPage() {
                             {coffeeBagCount}/{freeShippingThreshold}
                           </span>
                         </div>
-                        <div className="mt-2 h-2 rounded-full bg-neutral-800">
+                        <div className="mt-2 h-2 rounded-full bg-[#18374F]">
                           <div
-                            className="h-2 rounded-full bg-[#C08C45] transition-all"
+                            className="h-2 rounded-full bg-[#F3EBDD] transition-all"
                             style={{
                               width: `${Math.round(
                                 Math.min(
@@ -9026,7 +9275,7 @@ function CartPage() {
                         </div>
                       </>
                     ) : (
-                      <div className="text-emerald-400 text-sm font-semibold">
+                      <div className="text-[#E6C07F] text-sm font-semibold">
                         Free Shipping Applied
                       </div>
                     )}
@@ -9037,16 +9286,16 @@ function CartPage() {
               {/* Checkout sidebar */}
               <aside className="space-y-6">
                 {/* Checkout box */}
-                <div className="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/50 p-6 h-max">
+                <div className="rounded-xl ring-1 ring-[#6D5333]/40 bg-[#102D44]/50 p-6 h-max">
                   {/* Subtotal */}
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-neutral-400">Subtotal</span>
+                    <span className="text-[#B8A994]">Subtotal</span>
                     <span className="font-semibold">{fmt(subtotal)}</span>
                   </div>
 
                   {/* Shipping */}
                   <div className="mt-2 flex items-center justify-between text-sm">
-                    <span className="text-neutral-400">Shipping</span>
+                    <span className="text-[#B8A994]">Shipping</span>
                     {shipping === 0 ? (
                       <span className="font-semibold text-[#C08C45]">
                         {shippingLabel}
@@ -9060,14 +9309,14 @@ function CartPage() {
                   </div>
 
                   {/* Total */}
-                  <div className="mt-3 border-t border-neutral-800 pt-3 flex items-center justify-between text-lg">
+                  <div className="mt-3 border-t border-[#6D5333]/40 pt-3 flex items-center justify-between text-lg">
                     <span className="text-[#C08C45]">Total</span>
                     <span className="font-semibold">{fmt(total)}</span>
                   </div>
 
                   <button
                     onClick={onCheckoutClick}
-                    className="mt-4 w-full px-4 py-2 rounded-lg bg-[#C08C45] text-neutral-900 font-semibold hover:bg-[#C08C45]"
+                    className="mt-4 w-full px-4 py-2 rounded-lg bg-[#F3EBDD] text-[#071F35] font-semibold hover:bg-[#F3EBDD]"
                     aria-label="Proceed to checkout"
                   >
                     Checkout
@@ -9075,14 +9324,14 @@ function CartPage() {
                 </div>
 
                 {/* Ring That Bell subscribe box */}
-                <div className="rounded-2xl ring-1 ring-[#C08C45]/60 bg-neutral-900/60 p-8 text-center">
+                <div className="rounded-2xl ring-1 ring-[#C08C45]/60 bg-[#102D44] p-8 text-center">
                   <div className="flex items-center justify-center gap-3 mb-3">
                     <Bell className="h-7 w-7 text-[#C08C45]" />
                     <h3 className="text-2xl font-extrabold text-[#C08C45]">
                       RING THAT BELL
                     </h3>
                   </div>
-                  <p className="text-neutral-300 mb-5 text-lg md:text-xl">
+                  <p className="text-[#D5CEC4] mb-5 text-lg md:text-xl">
                     Get 15% off your first order. <br /> Subscribe and save 10%
                     off every order.
                   </p>
@@ -9102,14 +9351,14 @@ function CartPage() {
                       value={sbEmail}
                       onChange={(e) => setSbEmail(e.target.value)}
                       placeholder="Enter your email"
-                      className="flex-1 rounded-xl bg-neutral-900/70 border border-neutral-700 px-4 py-3 text-sm text-white placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#C08C45]"
+                      className="flex-1 rounded-xl bg-[#102D44]/70 border border-neutral-700 px-4 py-3 text-sm text-white placeholder:text-[#B8A994] focus:outline-none focus:ring-2 focus:ring-[#C08C45]"
                     />
-                    <button className="px-6 py-3 rounded-xl bg-[#C08C45] text-neutral-900 font-semibold hover:bg-[#C08C45]">
+                    <button className="px-6 py-3 rounded-xl bg-[#F3EBDD] text-[#071F35] font-semibold hover:bg-[#F3EBDD]">
                       GET 15% OFF
                     </button>
                   </form>
 
-                  <div className="mt-3 text-xs text-neutral-400">
+                  <div className="mt-3 text-xs text-[#B8A994]">
                     Already a member?{" "}
                     <Link
                       to="/account/login"
@@ -9120,7 +9369,7 @@ function CartPage() {
                   </div>
 
                   {sbDone && (
-                    <p className="mt-3 text-sm text-emerald-400">
+                    <p className="mt-3 text-sm text-[#E6C07F]">
                       Welcome aboard! Your discount will be applied at checkout.
                     </p>
                   )}
@@ -9129,8 +9378,8 @@ function CartPage() {
             </div>
           </div>
         ) : (
-          <div className="mt-6 rounded-2xl ring-1 ring-neutral-800 bg-neutral-900/40 p-10 text-center">
-            <p className="text-neutral-400 text-xl">
+          <div className="mt-6 rounded-2xl ring-1 ring-[#6D5333]/40 bg-[#102D44]/40 p-10 text-center">
+            <p className="text-[#B8A994] text-xl">
               No items yet. Sail back to the{" "}
               <Link to="/store" className="text-[#C08C45] hover:underline">
                 Harbor
@@ -9173,7 +9422,7 @@ function SubscriptionLandingPage() {
   );
 
   return (
-    <main className="relative overflow-hidden bg-black text-neutral-100">
+    <main className="relative overflow-hidden bg-black text-[#F3EBDD]">
       {/* HERO */}
       <section className="relative overflow-hidden border-b border-[#6D5333]/40 bg-[#050302]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_25%,rgba(192,140,69,0.14),transparent_30%),radial-gradient(circle_at_82%_70%,rgba(109,83,51,0.14),transparent_34%)] pointer-events-none" />
@@ -9202,7 +9451,7 @@ function SubscriptionLandingPage() {
               <div className="mt-6 flex flex-col sm:flex-row justify-center gap-3">
                 <a
                   href="#choose-subscription"
-                  className="inline-flex h-[48px] items-center justify-center rounded-md bg-[#C08C45] px-7 font-oswald text-sm font-black uppercase tracking-[0.16em] text-black transition hover:bg-[#E6C07F]"
+                  className="inline-flex h-[48px] items-center justify-center rounded-md bg-[#F3EBDD] px-7 font-oswald text-sm font-black uppercase tracking-[0.16em] text-black transition hover:bg-[#E6C07F]"
                 >
                   Start A Subscription
                 </a>
@@ -9241,7 +9490,7 @@ function SubscriptionLandingPage() {
                     {title}
                   </h2>
 
-                  <p className="mt-1 text-neutral-400 text-sm leading-relaxed">
+                  <p className="mt-1 text-[#B8A994] text-sm leading-relaxed">
                     {text}
                   </p>
                 </div>
@@ -9269,7 +9518,7 @@ function SubscriptionLandingPage() {
                 Choose Your Roast
               </h2>
 
-              <p className="mt-3 text-neutral-300 text-base md:text-lg leading-relaxed">
+              <p className="mt-3 text-[#D5CEC4] text-base md:text-lg leading-relaxed">
                 Tap a roast. The product page opens with subscription selected.
               </p>
             </div>
@@ -9308,7 +9557,7 @@ function SubscriptionLandingPage() {
                           {r.subTitle}
                         </p>
 
-                        <p className="mt-2 text-neutral-300 text-sm leading-relaxed line-clamp-2">
+                        <p className="mt-2 text-[#D5CEC4] text-sm leading-relaxed line-clamp-2">
                           {r.note ||
                             "Fresh-roasted and built for the daily cup."}
                         </p>
@@ -9319,7 +9568,7 @@ function SubscriptionLandingPage() {
                               {isOak ? "Subscribe" : "Save 10%"}
                             </span>
 
-                            <span className="text-neutral-300 text-sm font-semibold">
+                            <span className="text-[#D5CEC4] text-sm font-semibold">
                               {fmt(subPrice)}
                             </span>
                           </div>
@@ -9329,7 +9578,7 @@ function SubscriptionLandingPage() {
                           </p>
                         </div>
 
-                        <div className="mt-3 h-[44px] rounded-md bg-[#C08C45] text-black font-oswald font-black uppercase tracking-[0.14em] flex items-center justify-center text-sm transition group-hover:bg-[#E6C07F]">
+                        <div className="mt-3 h-[44px] rounded-md bg-[#F3EBDD] text-black font-oswald font-black uppercase tracking-[0.14em] flex items-center justify-center text-sm transition group-hover:bg-[#E6C07F]">
                           Subscribe
                         </div>
                       </div>
@@ -9358,7 +9607,7 @@ function SubscriptionLandingPage() {
                 <span className="text-[#C08C45]">Coffee Deliveries</span>
               </h2>
 
-              <p className="mt-3 text-neutral-300 text-base leading-relaxed">
+              <p className="mt-3 text-[#D5CEC4] text-base leading-relaxed">
                 Sign in to view deliveries, orders, shipping, and account help.
               </p>
 
@@ -9370,14 +9619,14 @@ function SubscriptionLandingPage() {
                   <div className="font-oswald text-xl font-black uppercase text-[#C08C45]">
                     Account
                   </div>
-                  <p className="mt-1 text-neutral-400 text-sm">
+                  <p className="mt-1 text-[#B8A994] text-sm">
                     Orders and shipping.
                   </p>
                 </Link>
 
                 <Link
                   to="/account/login"
-                  className="rounded-xl border border-[#C08C45] bg-[#C08C45] p-4 text-center transition hover:bg-[#E6C07F]"
+                  className="rounded-xl border border-[#C08C45] bg-[#F3EBDD] p-4 text-center transition hover:bg-[#E6C07F]"
                 >
                   <div className="font-oswald text-xl font-black uppercase text-black">
                     Sign In
@@ -9405,7 +9654,7 @@ function SubscriptionLandingPage() {
                     {q}
                   </h3>
 
-                  <p className="mt-2 text-neutral-300 text-sm leading-relaxed">
+                  <p className="mt-2 text-[#D5CEC4] text-sm leading-relaxed">
                     {a}
                   </p>
                 </div>
@@ -9742,8 +9991,8 @@ function SubscribeManagePage({
       className={
         "px-3 py-2 rounded-lg text-sm " +
         (tab === id
-          ? "bg-[#C08C45] text-neutral-900 font-semibold"
-          : "border border-neutral-700 hover:border-[#C08C45]/40 text-neutral-300")
+          ? "bg-[#F3EBDD] text-[#071F35] font-semibold"
+          : "border border-neutral-700 hover:border-[#C08C45]/40 text-[#D5CEC4]")
       }
     >
       {children}
@@ -9774,7 +10023,7 @@ function SubscribeManagePage({
             {/* Login */}
             <form
               onSubmit={handleLogin}
-              className="rounded-2xl ring-1 ring-neutral-800 bg-neutral-900/50 p-6"
+              className="rounded-2xl ring-1 ring-[#6D5333]/40 bg-[#102D44]/50 p-6"
             >
               <div className="text-lg font-semibold text-[#C08C45] mb-3">
                 Log in
@@ -9784,20 +10033,20 @@ function SubscribeManagePage({
                   name="email"
                   type="email"
                   placeholder="Email address"
-                  className="w-full rounded-lg bg-neutral-900/70 border border-neutral-700 px-3 py-2 text-sm"
+                  className="w-full rounded-lg bg-[#102D44]/70 border border-neutral-700 px-3 py-2 text-sm"
                 />
                 <div className="relative">
                   <input
                     name="password"
                     type={showPassword ? "text" : "password"}
                     placeholder="Password"
-                    className="w-full rounded-lg bg-neutral-900/70 border border-neutral-700 px-3 py-2 pr-10 text-sm"
+                    className="w-full rounded-lg bg-[#102D44]/70 border border-neutral-700 px-3 py-2 pr-10 text-sm"
                   />
 
                   <button
                     type="button"
                     onClick={() => setShowPassword((v) => !v)}
-                    className="absolute inset-y-0 right-2 flex items-center text-neutral-400 hover:text-[#C08C45]"
+                    className="absolute inset-y-0 right-2 flex items-center text-[#B8A994] hover:text-[#F3EBDD]"
                     aria-label={
                       showPassword ? "Hide password" : "Show password"
                     }
@@ -9846,10 +10095,10 @@ function SubscribeManagePage({
                   </button>
                 </div>
 
-                {error && <div className="text-sm text-red-300">{error}</div>}
+                {error && <div className="text-sm text-[#E6C07F]">{error}</div>}
                 <button
                   disabled={loading}
-                  className="w-full px-4 py-2 rounded-lg bg-[#C08C45] text-neutral-900 font-semibold hover:bg-[#C08C45]"
+                  className="w-full px-4 py-2 rounded-lg bg-[#F3EBDD] text-[#071F35] font-semibold hover:bg-[#F3EBDD]"
                 >
                   {loading ? "Signing in..." : "Log in"}
                 </button>
@@ -9868,7 +10117,7 @@ function SubscribeManagePage({
             {/* Register */}
             <form
               onSubmit={handleRegister}
-              className="rounded-2xl ring-1 ring-neutral-800 bg-neutral-900/50 p-6"
+              className="rounded-2xl ring-1 ring-[#6D5333]/40 bg-[#102D44]/50 p-6"
             >
               <div className="text-lg font-semibold text-[#C08C45] mb-3">
                 JOIN THE FLEET & SAVE
@@ -9878,18 +10127,18 @@ function SubscribeManagePage({
                 <input
                   name="name"
                   placeholder="Full name"
-                  className="w-full rounded-lg bg-neutral-900/70 border border-neutral-700 px-3 py-2 text-sm"
+                  className="w-full rounded-lg bg-[#102D44]/70 border border-neutral-700 px-3 py-2 text-sm"
                 />
                 <input
                   name="email"
                   type="email"
                   placeholder="Email address"
-                  className="w-full rounded-lg bg-neutral-900/70 border border-neutral-700 px-3 py-2 text-sm"
+                  className="w-full rounded-lg bg-[#102D44]/70 border border-neutral-700 px-3 py-2 text-sm"
                 />
 
                 <button
                   disabled={loading}
-                  className="w-full px-4 py-2 rounded-lg bg-[#C08C45] text-neutral-900 font-semibold hover:bg-[#C08C45] disabled:opacity-60"
+                  className="w-full px-4 py-2 rounded-lg bg-[#F3EBDD] text-[#071F35] font-semibold hover:bg-[#F3EBDD] disabled:opacity-60"
                 >
                   {loading ? "Creating..." : "Create account"}
                 </button>
@@ -9913,7 +10162,7 @@ function SubscribeManagePage({
       <Container>
         <div className="-mt-28 md:mt-0">
           <div className="flex items-start justify-between">
-            <span className="text-neutral-300">
+            <span className="text-[#D5CEC4]">
               Welcome,{" "}
               <span className="text-[#C08C45] font-semibold">
                 {getDisplayName(user) || user?.email}
@@ -9934,7 +10183,7 @@ function SubscribeManagePage({
             <div className="ml-auto">
               <button
                 onClick={handleLogout}
-                className="px-3 py-2 rounded-lg border border-neutral-700 hover:border-[#C08C45]/40 text-neutral-300 text-sm"
+                className="px-3 py-2 rounded-lg border border-neutral-700 hover:border-[#C08C45]/40 text-[#D5CEC4] text-sm"
               >
                 Log out
               </button>
@@ -9945,7 +10194,7 @@ function SubscribeManagePage({
           {tab === "overview" && (
             <div className="mt-6 grid md:grid-cols-3 gap-6">
               {/* Next delivery / subscriptions summary */}
-              <div className="rounded-2xl ring-1 ring-neutral-800 bg-neutral-900/50 p-6 flex flex-col justify-between">
+              <div className="rounded-2xl ring-1 ring-[#6D5333]/40 bg-[#102D44]/50 p-6 flex flex-col justify-between">
                 <div>
                   <div className="text-[#C08C45] font-semibold">
                     Subscriptions and upcoming deliveries:
@@ -9953,20 +10202,20 @@ function SubscribeManagePage({
 
                   <div className="mt-3 space-y-2 text-sm">
                     {subs.length === 0 ? (
-                      <div className="text-neutral-400">
+                      <div className="text-[#B8A994]">
                         No active subscriptions.
                       </div>
                     ) : (
                       subs.slice(0, 4).map((s) => (
                         <div
                           key={s.id}
-                          className="border-t border-neutral-800 pt-2 first:border-t-0 first:pt-0"
+                          className="border-t border-[#6D5333]/40 pt-2 first:border-t-0 first:pt-0"
                         >
                           <div className="text-[#C08C45] font-semibold">
                             {s.product}
                           </div>
 
-                          <div className="text-neutral-400">
+                          <div className="text-[#B8A994]">
                             {s.nextCharge
                               ? `Ships around ${s.nextCharge}`
                               : s.nextInDays != null
@@ -9980,7 +10229,7 @@ function SubscribeManagePage({
                   </div>
 
                   {subs.length > 4 && (
-                    <div className="mt-2 text-xs text-neutral-400">
+                    <div className="mt-2 text-xs text-[#B8A994]">
                       +{subs.length - 4} more subscriptions
                     </div>
                   )}
@@ -9995,7 +10244,7 @@ function SubscribeManagePage({
               </div>
 
               {/* Recent orders */}
-              <div className="rounded-2xl ring-1 ring-neutral-800 bg-neutral-900/50 p-6 flex flex-col justify-between">
+              <div className="rounded-2xl ring-1 ring-[#6D5333]/40 bg-[#102D44]/50 p-6 flex flex-col justify-between">
                 <div>
                   <div className="text-[#C08C45] font-semibold">
                     Recent orders
@@ -10003,7 +10252,7 @@ function SubscribeManagePage({
 
                   <div className="mt-3 space-y-2 text-sm">
                     {orders.length === 0 ? (
-                      <div className="text-neutral-400">No orders yet.</div>
+                      <div className="text-[#B8A994]">No orders yet.</div>
                     ) : (
                       orders.slice(0, 4).map((o) => {
                         const items = Array.isArray(o.items) ? o.items : [];
@@ -10019,17 +10268,17 @@ function SubscribeManagePage({
                         return (
                           <div
                             key={o.id}
-                            className="border-t border-neutral-800 pt-2 first:border-t-0 first:pt-0"
+                            className="border-t border-[#6D5333]/40 pt-2 first:border-t-0 first:pt-0"
                           >
                             <div className="text-[#C08C45] font-semibold">
                               {o.id}
                             </div>
 
-                            <div className="text-neutral-400">
+                            <div className="text-[#B8A994]">
                               {o.date} • {o.status} • {fmt(o.total)}
                             </div>
 
-                            <div className="text-neutral-300">
+                            <div className="text-[#D5CEC4]">
                               {firstLine}
                               {moreCount > 0 ? ` + ${moreCount} more` : ""}
                             </div>
@@ -10049,13 +10298,13 @@ function SubscribeManagePage({
               </div>
 
               {/* Default shipping */}
-              <div className="rounded-2xl ring-1 ring-neutral-800 bg-neutral-900/50 p-6">
+              <div className="rounded-2xl ring-1 ring-[#6D5333]/40 bg-[#102D44]/50 p-6">
                 <div className="text-[#C08C45] font-semibold">
                   Default shipping address
                 </div>
 
                 {defaultAddress ? (
-                  <div className="mt-2 text-neutral-300 text-sm">
+                  <div className="mt-2 text-[#D5CEC4] text-sm">
                     {defaultAddress.name && (
                       <>
                         {defaultAddress.name}
@@ -10087,7 +10336,7 @@ function SubscribeManagePage({
                     {defaultAddress.country}
                   </div>
                 ) : (
-                  <div className="mt-2 text-neutral-400 text-sm">
+                  <div className="mt-2 text-[#B8A994] text-sm">
                     No default address on file yet. Update it in your Shopify
                     account.
                   </div>
@@ -10095,7 +10344,7 @@ function SubscribeManagePage({
 
                 <button
                   onClick={() => setTab("profile")}
-                  className="mt-3 px-3 py-2 rounded-lg border border-neutral-700 text-sm text-[#C08C45] hover:border-[#C08C45]/60 hover:bg-[#C08C45]/10"
+                  className="mt-3 px-3 py-2 rounded-lg border border-neutral-700 text-sm text-[#C08C45] hover:border-[#C08C45]/60 hover:bg-[#F3EBDD]/10"
                 >
                   Manage addresses →
                 </button>
@@ -10107,7 +10356,7 @@ function SubscribeManagePage({
           {tab === "subscriptions" && (
             <div className="mt-6 space-y-4 max-w-3xl mx-auto">
               {subs.length === 0 && (
-                <div className="text-neutral-400">
+                <div className="text-[#B8A994]">
                   No active subscriptions. Add Subscribe & Save from the store
                   to start.
                 </div>
@@ -10115,13 +10364,13 @@ function SubscribeManagePage({
               {subs.map((s) => (
                 <div
                   key={s.id}
-                  className="rounded-2xl ring-1 ring-neutral-800 bg-neutral-900/50 p-6 border-l-4 border-[#C08C45]/60"
+                  className="rounded-2xl ring-1 ring-[#6D5333]/40 bg-[#102D44]/50 p-6 border-l-4 border-[#C08C45]/60"
                 >
                   <div className="flex flex-wrap items-center gap-3">
                     <div className="font-semibold text-[#C08C45]">
                       {s.product}
                     </div>
-                    <div className="text-sm text-neutral-400">
+                    <div className="text-sm text-[#B8A994]">
                       • Next ship date:{" "}
                       {s.nextCharge
                         ? formatDate(s.nextCharge)
@@ -10136,7 +10385,7 @@ function SubscribeManagePage({
                     </div>
                   </div>
 
-                  <div className="mt-4 border-t border-neutral-800" />
+                  <div className="mt-4 border-t border-[#6D5333]/40" />
 
                   <div className="mt-4">
                     <button
@@ -10148,7 +10397,7 @@ function SubscribeManagePage({
                           "noopener,noreferrer"
                         )
                       }
-                      className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-[#C08C45] text-neutral-900 text-sm font-semibold hover:bg-[#C08C45]"
+                      className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-[#F3EBDD] text-[#071F35] text-sm font-semibold hover:bg-[#F3EBDD]"
                     >
                       Manage subscription
                     </button>
@@ -10162,28 +10411,28 @@ function SubscribeManagePage({
           {tab === "orders" && (
             <div className="mt-6 space-y-4 max-w-3xl mx-auto">
               {orders.length === 0 && (
-                <div className="text-neutral-400">No orders yet.</div>
+                <div className="text-[#B8A994]">No orders yet.</div>
               )}
               {orders.map((o) => (
                 <div
                   key={o.id}
-                  className="rounded-2xl ring-1 ring-neutral-800 bg-neutral-900/50 p-6 border-l-4 border-[#C08C45]/60"
+                  className="rounded-2xl ring-1 ring-[#6D5333]/40 bg-[#102D44]/50 p-6 border-l-4 border-[#C08C45]/60"
                 >
                   <div className="flex items-center gap-4">
                     <div className="font-semibold text-[#C08C45]">{o.id}</div>
 
-                    <div className="flex items-center gap-2 text-sm text-neutral-400">
+                    <div className="flex items-center gap-2 text-sm text-[#B8A994]">
                       <span>{o.date}</span>
                       <span>•</span>
                       <span>{fmt(o.total)}</span>
                     </div>
 
-                    <div className="ml-auto text-xs rounded px-2 py-1 ring-1 ring-neutral-700 text-neutral-300 uppercase tracking-wide">
+                    <div className="ml-auto text-xs rounded px-2 py-1 ring-1 ring-[#6D5333]/60 text-[#D5CEC4] uppercase tracking-wide">
                       {o.status}
                     </div>
                   </div>
 
-                  <ul className="mt-3 text-sm text-neutral-300 list-disc list-inside">
+                  <ul className="mt-3 text-sm text-[#D5CEC4] list-disc list-inside">
                     {o.items.map((it: any, i: number) => (
                       <li key={i}>
                         {it.title} × {it.qty}
@@ -10191,7 +10440,7 @@ function SubscribeManagePage({
                     ))}
                   </ul>
 
-                  <div className="mt-3 grid md:grid-cols-2 gap-4 text-xs text-neutral-400">
+                  <div className="mt-3 grid md:grid-cols-2 gap-4 text-xs text-[#B8A994]">
                     <div>
                       <div className="uppercase tracking-wide mb-1">
                         Help with this order
@@ -10217,19 +10466,19 @@ function SubscribeManagePage({
           {tab === "profile" && (
             <div className="mt-6 grid md:grid-cols-2 gap-6">
               {/* Contact + address */}
-              <div className="rounded-2xl ring-1 ring-neutral-800 bg-neutral-900/50 p-6">
+              <div className="rounded-2xl ring-1 ring-[#6D5333]/40 bg-[#102D44]/50 p-6">
                 <div className="text-[#C08C45] font-semibold mb-3">
                   Contact and shipping
                 </div>
-                <div className="text-sm text-neutral-300 space-y-4">
+                <div className="text-sm text-[#D5CEC4] space-y-4">
                   <div>
-                    <div className="text-xs uppercase tracking-wide text-neutral-400 mb-1">
+                    <div className="text-xs uppercase tracking-wide text-[#B8A994] mb-1">
                       Email
                     </div>
                     <div>{user?.email}</div>
                   </div>
                   <div>
-                    <div className="text-xs uppercase tracking-wide text-neutral-400 mb-1">
+                    <div className="text-xs uppercase tracking-wide text-[#B8A994] mb-1">
                       Default shipping address
                     </div>
                     <div className="space-y-0.5">
@@ -10382,13 +10631,13 @@ function SubscribeManagePage({
                         className={[
                           "w-full text-left rounded-lg border p-3 transition relative",
                           isDefault
-                            ? "border-[#C08C45] bg-[#C08C45]/10"
+                            ? "border-[#C08C45] bg-[#F3EBDD]/10"
                             : "border-neutral-700 hover:border-[#C08C45]/60",
                         ].join(" ")}
                       >
                         {/* Address display (no click-to-set-default) */}
                         <div className="block w-full text-left pr-24">
-                          <div className="font-semibold text-neutral-200">
+                          <div className="font-semibold text-[#E6DCC8]">
                             {a.firstName} {a.lastName}
                             {isDefault && (
                               <span className="ml-2 text-xs text-[#C08C45]">
@@ -10462,7 +10711,7 @@ function SubscribeManagePage({
                                   setLoading(false);
                                 }
                               }}
-                              className="px-2 py-1 text-xs rounded border border-neutral-600 text-neutral-200 hover:border-[#C08C45]/60 disabled:opacity-60"
+                              className="px-2 py-1 text-xs rounded border border-[#C08C45]/60 text-[#E6DCC8] hover:border-[#C08C45]/60 disabled:opacity-60"
                             >
                               Set default
                             </button>
@@ -10506,7 +10755,7 @@ function SubscribeManagePage({
                                 })
                               );
                             }}
-                            className="px-2 py-1 text-xs rounded border border-neutral-600 text-neutral-200 hover:border-[#C08C45]/60"
+                            className="px-2 py-1 text-xs rounded border border-[#C08C45]/60 text-[#E6DCC8] hover:border-[#C08C45]/60"
                           >
                             Edit
                           </button>
@@ -10518,7 +10767,7 @@ function SubscribeManagePage({
                               setDeleteId(a.id);
                               setConfirmDelete(true);
                             }}
-                            className="px-2 py-1 text-xs rounded border border-red-800 text-red-300 hover:border-red-600"
+                            className="px-2 py-1 text-xs rounded border border-red-800 text-[#E6C07F] hover:border-red-600"
                           >
                             Delete
                           </button>
@@ -10549,7 +10798,7 @@ function SubscribeManagePage({
                           )?.reset?.();
                           setError("");
                         }}
-                        className="px-3 py-1 text-xs rounded border border-[#C08C45] text-[#C08C45] hover:bg-[#C08C45]/10 font-semibold"
+                        className="px-3 py-1 text-xs rounded border border-[#C08C45] text-[#C08C45] hover:bg-[#F3EBDD]/10 font-semibold"
                       >
                         Cancel
                       </button>
@@ -10560,37 +10809,37 @@ function SubscribeManagePage({
                     <input
                       name="firstName"
                       placeholder="First name"
-                      className="w-full rounded-lg bg-neutral-900/70 border border-neutral-700 px-3 py-2 text-sm"
+                      className="w-full rounded-lg bg-[#102D44]/70 border border-neutral-700 px-3 py-2 text-sm"
                     />
                     <input
                       name="lastName"
                       placeholder="Last name"
-                      className="w-full rounded-lg bg-neutral-900/70 border border-neutral-700 px-3 py-2 text-sm"
+                      className="w-full rounded-lg bg-[#102D44]/70 border border-neutral-700 px-3 py-2 text-sm"
                     />
                   </div>
 
                   <input
                     name="address1"
                     placeholder="Address line 1"
-                    className="w-full rounded-lg bg-neutral-900/70 border border-neutral-700 px-3 py-2 text-sm"
+                    className="w-full rounded-lg bg-[#102D44]/70 border border-neutral-700 px-3 py-2 text-sm"
                   />
                   <input
                     name="address2"
                     placeholder="Address line 2 (optional)"
-                    className="w-full rounded-lg bg-neutral-900/70 border border-neutral-700 px-3 py-2 text-sm"
+                    className="w-full rounded-lg bg-[#102D44]/70 border border-neutral-700 px-3 py-2 text-sm"
                   />
 
                   <div className="grid md:grid-cols-2 gap-3">
                     <input
                       name="city"
                       placeholder="City"
-                      className="w-full rounded-lg bg-neutral-900/70 border border-neutral-700 px-3 py-2 text-sm"
+                      className="w-full rounded-lg bg-[#102D44]/70 border border-neutral-700 px-3 py-2 text-sm"
                     />
                     <select
                       name="province"
                       required
                       defaultValue=""
-                      className="w-full rounded-lg bg-neutral-900/70 border border-neutral-700 px-3 py-2 text-sm"
+                      className="w-full rounded-lg bg-[#102D44]/70 border border-neutral-700 px-3 py-2 text-sm"
                     >
                       <option value="" disabled>
                         State
@@ -10607,7 +10856,7 @@ function SubscribeManagePage({
                     <input
                       name="zip"
                       placeholder="ZIP / Postal code"
-                      className="w-full rounded-lg bg-neutral-900/70 border border-neutral-700 px-3 py-2 text-sm"
+                      className="w-full rounded-lg bg-[#102D44]/70 border border-neutral-700 px-3 py-2 text-sm"
                     />
                     <div className="space-y-2">
                       <select
@@ -10615,12 +10864,12 @@ function SubscribeManagePage({
                         required
                         defaultValue="United States"
                         disabled
-                        className="w-full rounded-lg bg-neutral-900/70 border border-neutral-700 px-3 py-2 text-sm opacity-80"
+                        className="w-full rounded-lg bg-[#102D44]/70 border border-neutral-700 px-3 py-2 text-sm opacity-80"
                       >
                         <option value="United States">United States</option>
                       </select>
 
-                      <div className="text-xs text-neutral-400">
+                      <div className="text-xs text-[#B8A994]">
                         International? Contact us:{" "}
                         <a
                           href="mailto:support@oldironsidescoffee.org"
@@ -10635,16 +10884,18 @@ function SubscribeManagePage({
                   <input
                     name="phone"
                     placeholder="Phone (optional)"
-                    className="w-full rounded-lg bg-neutral-900/70 border border-neutral-700 px-3 py-2 text-sm"
+                    className="w-full rounded-lg bg-[#102D44]/70 border border-neutral-700 px-3 py-2 text-sm"
                   />
 
-                  {error && <div className="text-sm text-red-300">{error}</div>}
+                  {error && (
+                    <div className="text-sm text-[#E6C07F]">{error}</div>
+                  )}
                   {deleteId && confirmDelete && (
                     <div className="mt-4 rounded-lg border border-red-800 bg-red-900/30 p-4">
-                      <div className="text-red-300 font-semibold mb-2">
+                      <div className="text-[#E6C07F] font-semibold mb-2">
                         Delete this address?
                       </div>
-                      <div className="text-sm text-neutral-300 mb-3">
+                      <div className="text-sm text-[#D5CEC4] mb-3">
                         This action cannot be undone.
                       </div>
 
@@ -10655,7 +10906,7 @@ function SubscribeManagePage({
                             setConfirmDelete(false);
                             setDeleteId(null);
                           }}
-                          className="px-3 py-2 rounded-lg border border-neutral-600 text-neutral-200 hover:border-[#C08C45]/60"
+                          className="px-3 py-2 rounded-lg border border-[#C08C45]/60 text-[#E6DCC8] hover:border-[#C08C45]/60"
                         >
                           Cancel
                         </button>
@@ -10785,7 +11036,7 @@ function SubscribeManagePage({
 
                   <button
                     disabled={loading}
-                    className="px-3 py-2 rounded-lg bg-[#C08C45] text-neutral-900 text-sm font-semibold hover:bg-[#C08C45] disabled:opacity-60"
+                    className="px-3 py-2 rounded-lg bg-[#F3EBDD] text-[#071F35] text-sm font-semibold hover:bg-[#F3EBDD] disabled:opacity-60"
                   >
                     {loading ? "Saving..." : "Save address"}
                   </button>
@@ -10793,16 +11044,16 @@ function SubscribeManagePage({
               </div>
 
               {/* Security */}
-              <div className="rounded-2xl ring-1 ring-neutral-800 bg-neutral-900/50 p-6">
+              <div className="rounded-2xl ring-1 ring-[#6D5333]/40 bg-[#102D44]/50 p-6">
                 <div className="text-[#C08C45] font-semibold mb-3">
                   Security and password
                 </div>
-                <div className="text-sm text-neutral-300 space-y-3">
+                <div className="text-sm text-[#D5CEC4] space-y-3">
                   <p>
                     You can change your password and update login details from
                     your secure account portal once connected.
                   </p>
-                  <p className="text-neutral-400 text-xs">
+                  <p className="text-[#B8A994] text-xs">
                     For now, email{" "}
                     <a
                       href="mailto:support@oldironsidescoffee.com"
@@ -10815,7 +11066,7 @@ function SubscribeManagePage({
                 </div>
                 <button
                   // REAL: link to password reset flow
-                  className="mt-4 px-3 py-2 rounded-lg bg-[#C08C45] text-neutral-900 text-sm font-semibold hover:bg-[#C08C45]"
+                  className="mt-4 px-3 py-2 rounded-lg bg-[#F3EBDD] text-[#071F35] text-sm font-semibold hover:bg-[#F3EBDD]"
                 >
                   Request password reset
                 </button>
@@ -10844,11 +11095,11 @@ function NotFoundPage() {
           <BackButton size="sm" />
         </div>
 
-        <div className="mt-6 rounded-2xl ring-1 ring-neutral-800 bg-neutral-900/40 p-10 text-center">
+        <div className="mt-6 rounded-2xl ring-1 ring-[#6D5333]/40 bg-[#102D44]/40 p-10 text-center">
           {/* keep the rest of your existing card content, but remove the duplicate h1/subtitle inside */}
           <Link
             to="/"
-            className="mt-4 inline-block px-5 py-2 rounded-xl bg-[#C08C45] text-neutral-900 font-semibold hover:bg-[#C08C45]"
+            className="mt-4 inline-block px-5 py-2 rounded-xl bg-[#F3EBDD] text-[#071F35] font-semibold hover:bg-[#F3EBDD]"
           >
             Return to Port
           </Link>
@@ -11148,7 +11399,7 @@ function PromoSubscribeModal() {
       {/* Modal shell */}
       <div className="relative z-10 w-[92vw] max-w-[380px] md:w-[98vw] md:max-w-6xl">
         <div
-          className="relative rounded-2xl md:rounded-2xl ring-1 ring-[#C08C45]/60 bg-neutral-900/60 
+          className="relative rounded-2xl md:rounded-2xl ring-1 ring-[#C08C45]/60 bg-[#102D44] 
   overflow-y-auto md:overflow-visible max-h-[96vh] md:min-h-0 md:max-h-none"
         >
           {/* TOP-RIGHT CLOSE (X) */}
@@ -11156,7 +11407,7 @@ function PromoSubscribeModal() {
             type="button"
             onClick={safeClose}
             className="absolute right-3 top-3 z-20 inline-flex h-10 w-10 items-center justify-center rounded-md
-            bg-neutral-900/70 ring-1 ring-[#C08C45] text-[#C08C45] hover:text-[#C08C45]
+            bg-[#102D44]/70 ring-1 ring-[#C08C45] text-[#C08C45] hover:text-[#F3EBDD]
             hover:ring-[#C08C45] transition"
             aria-label="Close"
           >
@@ -11172,7 +11423,7 @@ function PromoSubscribeModal() {
           <div className="grid md:grid-cols-[auto,1fr] items-stretch gap-0 min-h-full">
             {/* MOBILE HERO */}
             <div className="md:hidden">
-              <div className="relative w-full h-[246px] sm:h-[282px] bg-neutral-900 overflow-hidden">
+              <div className="relative w-full h-[246px] sm:h-[282px] bg-[#102D44] overflow-hidden">
                 <img
                   src="/captain-deck1.jpg"
                   alt=""
@@ -11190,7 +11441,7 @@ function PromoSubscribeModal() {
 
             {/* DESKTOP HERO */}
             <div className="hidden md:flex items-center justify-start pl-6 pr-0 py-6">
-              <div className="rounded-2xl ring-1 ring-[#C08C45] bg-neutral-900/60 overflow-hidden shadow-2xl shadow-black/40">
+              <div className="rounded-2xl ring-1 ring-[#C08C45] bg-[#102D44] overflow-hidden shadow-2xl shadow-black/40">
                 <div className="w-[19rem] lg:w-[21rem] aspect-[4/5]">
                   <img
                     src="/captain-deck1.jpg"
@@ -11214,7 +11465,7 @@ function PromoSubscribeModal() {
                     </h3>
                   </div>
 
-                  <p className="text-neutral-300 mb-3 md:mb-5 text-[14px] leading-snug md:text-[1.5625rem] md:leading-normal md:whitespace-nowrap">
+                  <p className="text-[#D5CEC4] mb-3 md:mb-5 text-[14px] leading-snug md:text-[1.5625rem] md:leading-normal md:whitespace-nowrap">
                     Get 15% off your first fresh coffee order.
                     <br className="hidden md:block" />
                   </p>
@@ -11226,7 +11477,7 @@ function PromoSubscribeModal() {
                       {phase === "success" ? (
                         <>
                           {/* Full-width amber banner fixed to the top */}
-                          <div className="fixed inset-x-0 top-0 z-[2147483647] bg-[#C08C45] text-neutral-900 text-center font-semibold px-4 py-3 shadow-lg">
+                          <div className="fixed inset-x-0 top-0 z-[2147483647] bg-[#F3EBDD] text-[#071F35] text-center font-semibold px-4 py-3 shadow-lg">
                             Welcome aboard! Your discount applied at checkout
                           </div>
 
@@ -11250,12 +11501,12 @@ function PromoSubscribeModal() {
                               value={email}
                               onChange={(e) => setEmail(e.target.value)}
                               placeholder="Enter your email"
-                              className="rounded-xl bg-neutral-900/70 border border-neutral-700 px-3 py-2 text-[16px] text-white placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#C08C45] md:px-5 md:py-3 md:text-[1.25rem] md:flex-none md:w-[50%]"
+                              className="rounded-xl bg-[#102D44]/70 border border-neutral-700 px-3 py-2 text-[16px] text-white placeholder:text-[#B8A994] focus:outline-none focus:ring-2 focus:ring-[#C08C45] md:px-5 md:py-3 md:text-[1.25rem] md:flex-none md:w-[50%]"
                               style={{ color: "#ffffff" }}
                             />
                             <button
                               type="submit"
-                              className="px-4 py-2 md:px-10 md:py-3.5 rounded-xl ring-1 ring-[#C08C45]/70 bg-[#C08C45] text-neutral-900 text-[18px] md:text-lg font-semibold hover:bg-[#C08C45] transition-all"
+                              className="px-4 py-2 md:px-10 md:py-3.5 rounded-xl ring-1 ring-[#C08C45]/70 bg-[#F3EBDD] text-[#071F35] text-[18px] md:text-lg font-semibold hover:bg-[#F3EBDD] transition-all"
                             >
                               GET 15% OFF
                             </button>
@@ -11292,12 +11543,12 @@ function PromoSubscribeModal() {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="Enter your email"
-                          className="rounded-xl bg-neutral-900/70 border border-neutral-700 px-3 py-2 text-[16px] text-white placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#C08C45] md:px-5 md:py-3 md:text-[1.25rem] md:flex-none md:w-[50%]"
+                          className="rounded-xl bg-[#102D44]/70 border border-neutral-700 px-3 py-2 text-[16px] text-white placeholder:text-[#B8A994] focus:outline-none focus:ring-2 focus:ring-[#C08C45] md:px-5 md:py-3 md:text-[1.25rem] md:flex-none md:w-[50%]"
                           style={{ color: "#ffffff" }}
                         />
                         <button
                           type="submit"
-                          className="px-4 py-2 md:px-10 md:py-3.5 rounded-xl ring-1 ring-[#C08C45]/70 bg-[#C08C45] text-neutral-900 text-[18px] md:text-lg font-semibold hover:bg-[#C08C45] transition-all"
+                          className="px-4 py-2 md:px-10 md:py-3.5 rounded-xl ring-1 ring-[#C08C45]/70 bg-[#F3EBDD] text-[#071F35] text-[18px] md:text-lg font-semibold hover:bg-[#F3EBDD] transition-all"
                         >
                           GET 15% OFF
                         </button>
@@ -11308,7 +11559,7 @@ function PromoSubscribeModal() {
                       </div>
 
                       <div className="mt-3 mx-auto max-w-[520px] relative overflow-hidden border border-[#5A4630]/60 bg-black/30 px-4 py-2 rounded-sm">
-                        <div className="absolute inset-y-0 left-0 w-[3px] bg-[#C08C45]" />
+                        <div className="absolute inset-y-0 left-0 w-[3px] bg-[#F3EBDD]" />
 
                         <p className="pl-3 text-[10px] uppercase tracking-[0.14em] leading-snug text-[#D2B48C] text-center">
                           Full-size bags only. Sample packs and limited releases
@@ -11326,7 +11577,7 @@ function PromoSubscribeModal() {
                     type="button"
                     onClick={safeClose}
                     className="inline-flex items-center justify-center px-5 py-2.5 rounded-xl ring-1 ring-[#C08C45]/60 
-                    text-[#C08C45] font-semibold text-lg hover:bg-[#C08C45] hover:text-neutral-900 transition-all"
+                    text-[#C08C45] font-semibold text-lg hover:bg-[#F3EBDD] hover:text-[#071F35] transition-all"
                     aria-label="Close banner"
                   >
                     Nah. Tax me like it&apos;s 1773. Give my 15% to the
@@ -11339,7 +11590,7 @@ function PromoSubscribeModal() {
 
           {/* FOOTER: mobile Nah (hide after success) */}
           <div
-            className={`border-t border-neutral-800 p-4 justify-center bg-neutral-900/40 md:hidden ${
+            className={`border-t border-[#6D5333]/40 p-4 justify-center bg-[#102D44]/40 md:hidden ${
               phase === "success" ? "hidden" : "flex"
             }`}
           >
@@ -11348,7 +11599,7 @@ function PromoSubscribeModal() {
               onClick={safeClose}
               className="inline-flex items-center justify-center px-4 md:px-5 py-2 rounded-xl ring-1 ring-[#C08C45]/60 
               text-[#C08C45] font-semibold text-m md:text-lg
-              hover:bg-[#C08C45] hover:text-neutral-900 transition-all"
+              hover:bg-[#F3EBDD] hover:text-[#071F35] transition-all"
               aria-label="Close banner"
             >
               Nah. Tax me like it&apos;s 1773. Give my 15% to the Redcoats.
@@ -11531,7 +11782,7 @@ function Layout() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
   return (
-    <div className="min-h-screen w-full bg-black text-neutral-100 overflow-x-hidden pt-[20px] lg:pt-0">
+    <div className="min-h-screen w-full bg-black text-[#F3EBDD] overflow-x-hidden pt-[20px] lg:pt-0">
       <ScrollToTop />
       <FlashToast />
       <PromoSubscribeModal />
@@ -11541,7 +11792,7 @@ function Layout() {
         className={
           "fixed top-0 inset-x-0 z-[999999] md:z-50 transition-colors duration-300 " +
           (shrunk
-            ? "bg-black border-b border-neutral-800 shadow-lg"
+            ? "bg-black border-b border-[#6D5333]/40 shadow-lg"
             : "bg-transparent border-b border-transparent")
         }
         style={{ backgroundColor: shrunk ? "" : "transparent" }}
@@ -11551,7 +11802,7 @@ function Layout() {
           className={
             "lg:hidden pb-1 transition-colors duration-300 " +
             (shrunk
-              ? "bg-neutral-950 border-b border-neutral-800"
+              ? "bg-[#071F35] border-b border-[#6D5333]/40"
               : "bg-transparent border-b border-transparent")
           }
         >
@@ -11560,7 +11811,7 @@ function Layout() {
             className={
               "px-3 py-2 text-center text-[12px] font-semibold leading-tight text-[#C08C45] transition-colors duration-300 " +
               (shrunk
-                ? "border-b border-[#C08C45] bg-neutral-950"
+                ? "border-b border-[#C08C45] bg-[#071F35]"
                 : "border-b border-[#C08C45]/40 bg-transparent")
             }
           >
@@ -11573,7 +11824,7 @@ function Layout() {
             className="block px-4 pt-2 pb-1 text-center leading-tight"
           >
             <div
-              className="text-[20px] md:text-[40px] lg:text-[20px] font-bold tracking-[0.18em] text-neutral-300"
+              className="text-[20px] md:text-[40px] lg:text-[20px] font-bold tracking-[0.18em] text-[#D5CEC4]"
               style={{ fontFamily: "'Cinzel', serif", fontWeight: 1000 }}
             >
               OLD IRONSIDES COFFEE
@@ -11587,9 +11838,9 @@ function Layout() {
               className="flex flex-col justify-center gap-[4px] text-[#C08C45] translate-y-[6px]"
               aria-label="Open menu"
             >
-              <span className="block w-8 h-[3px] bg-[#C08C45]" />
-              <span className="block w-8 h-[3px] bg-[#C08C45]" />
-              <span className="block w-8 h-[3px] bg-[#C08C45]" />
+              <span className="block w-8 h-[3px] bg-[#F3EBDD]" />
+              <span className="block w-8 h-[3px] bg-[#F3EBDD]" />
+              <span className="block w-8 h-[3px] bg-[#F3EBDD]" />
             </button>
 
             <div className="flex gap-4 text-[#C08C45] translate-y-[6px] lg:hidden relative z-[1000001]">
@@ -11601,7 +11852,7 @@ function Layout() {
                 className="relative flex flex-col items-center text-center leading-none z-[1000002] text-[#C08C45]"
               >
                 <ChestIcon className="h-8 w-8 pointer-events-none" />
-                <span className="absolute -top-1 -right-2 text-[10px] font-bold tabular-nums bg-neutral-900 rounded px-1 py-[1px] ring-1 ring-[#C08C45]/60 text-[#C08C45] leading-none pointer-events-none">
+                <span className="absolute -top-1 -right-2 text-[10px] font-bold tabular-nums bg-[#102D44] rounded px-1 py-[1px] ring-1 ring-[#C08C45]/60 text-[#C08C45] leading-none pointer-events-none">
                   {count ?? 0}
                 </span>
               </button>
@@ -11618,11 +11869,11 @@ function Layout() {
         </div>
 
         {/* === DESKTOP TOP BAR === */}
-        <div className="hidden lg:block border-b border-[#C08C45] bg-transparent text-neutral-300 relative z-30">
+        <div className="hidden lg:block border-b border-[#C08C45] bg-transparent text-[#D5CEC4] relative z-30">
           <Container>
             <div className="h-10 flex items-center relative">
               <div className="absolute left-1/2 -translate-x-1/2 text-sm font-semibold tracking-wide text-center flex items-center gap-3">
-                <span className="text-neutral-300">
+                <span className="text-[#D5CEC4]">
                   Roasted To Order Every Monday &amp; Thursday
                 </span>
 
@@ -11630,7 +11881,7 @@ function Layout() {
 
                 <Link
                   to="/legal/shipping"
-                  className="text-neutral-300 underline-offset-2 hover:underline"
+                  className="text-[#D5CEC4] underline-offset-2 hover:underline"
                 >
                   Free Shipping on 3+ Bags
                 </Link>
@@ -11687,8 +11938,8 @@ function Layout() {
                       aria-label="Go to Home Port"
                       className={
                         shrunk
-                          ? "text-[1.8rem] font-bold tracking-[0.16em] text-neutral-300 whitespace-nowrap hover:text-[#C08C45] transition"
-                          : "text-[2.25rem] font-bold tracking-[0.16em] text-neutral-300 whitespace-nowrap hover:text-[#C08C45] transition"
+                          ? "text-[1.8rem] font-bold tracking-[0.16em] text-[#D5CEC4] whitespace-nowrap hover:text-[#F3EBDD] transition"
+                          : "text-[2.25rem] font-bold tracking-[0.16em] text-[#D5CEC4] whitespace-nowrap hover:text-[#F3EBDD] transition"
                       }
                       style={{ fontFamily: "'Cinzel', serif", fontWeight: 700 }}
                     >
@@ -11766,13 +12017,13 @@ function Layout() {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative z-[1000000] w-[80%] max-w-[360px] bg-neutral-950 shadow-xl ring-1 ring-neutral-800 inline-flex flex-col max-h-[90vh]"
+            className="relative z-[1000000] w-[80%] max-w-[360px] bg-[#071F35] shadow-xl ring-1 ring-[#6D5333]/40 inline-flex flex-col max-h-[90vh]"
           >
             {/* header */}
-            <div className="flex items-start justify-between p-4 border-b border-neutral-800">
+            <div className="flex items-start justify-between p-4 border-b border-[#6D5333]/40">
               <div className="text-left">
                 <div
-                  className="text-base font-bold tracking-[0.18em] text-neutral-100 leading-snug"
+                  className="text-base font-bold tracking-[0.18em] text-[#F3EBDD] leading-snug"
                   style={{ fontFamily: "'Cinzel', serif", fontWeight: 700 }}
                 >
                   OLD IRONSIDES COFFEE
@@ -11792,7 +12043,7 @@ function Layout() {
             </div>
 
             {/* body */}
-            <div className="flex-1 overflow-y-auto text-neutral-100 text-lg font-semibold">
+            <div className="flex-1 overflow-y-auto text-[#F3EBDD] text-lg font-semibold">
               <div className="px-4 pt-4 pb-2 text-[#C08C45] text-xs uppercase tracking-[0.22em]">
                 Shop Coffee
               </div>
@@ -11800,7 +12051,7 @@ function Layout() {
               <Link
                 to="/store"
                 onClick={() => setMobileOpen(false)}
-                className="block px-4 py-3 border-b border-neutral-800 text-neutral-200"
+                className="block px-4 py-3 border-b border-[#6D5333]/40 text-[#E6DCC8]"
               >
                 All Coffee
               </Link>
@@ -11808,14 +12059,14 @@ function Layout() {
               <Link
                 to="/roast/armada-sample-pack"
                 onClick={() => setMobileOpen(false)}
-                className="block px-4 py-3 border-b border-neutral-800 text-neutral-200"
+                className="block px-4 py-3 border-b border-[#6D5333]/40 text-[#E6DCC8]"
               >
                 Sample Packs
               </Link>
               <Link
                 to="/subscriptions"
                 onClick={() => setMobileOpen(false)}
-                className="block px-4 py-3 border-b border-neutral-800 text-neutral-200"
+                className="block px-4 py-3 border-b border-[#6D5333]/40 text-[#E6DCC8]"
               >
                 Subscriptions
               </Link>
@@ -11847,7 +12098,7 @@ function Layout() {
                     });
                   }, 80);
                 }}
-                className="block w-full text-left px-4 py-3 border-b border-neutral-800 text-neutral-200"
+                className="block w-full text-left px-4 py-3 border-b border-[#6D5333]/40 text-[#E6DCC8]"
               >
                 Tasting Events
               </button>
@@ -11855,7 +12106,7 @@ function Layout() {
               <Link
                 to="/#origins-sourcing"
                 onClick={() => setMobileOpen(false)}
-                className="block px-4 py-3 border-b border-neutral-800 text-neutral-200"
+                className="block px-4 py-3 border-b border-[#6D5333]/40 text-[#E6DCC8]"
               >
                 Harvest
               </Link>
@@ -11863,7 +12114,7 @@ function Layout() {
               <Link
                 to="/#roasting-process"
                 onClick={() => setMobileOpen(false)}
-                className="block px-4 py-3 border-b border-neutral-800 text-neutral-200"
+                className="block px-4 py-3 border-b border-[#6D5333]/40 text-[#E6DCC8]"
               >
                 Roast Process
               </Link>
@@ -11871,7 +12122,7 @@ function Layout() {
               <Link
                 to="/#origins-about"
                 onClick={() => setMobileOpen(false)}
-                className="block px-4 py-3 border-b border-neutral-800 text-neutral-200"
+                className="block px-4 py-3 border-b border-[#6D5333]/40 text-[#E6DCC8]"
               >
                 Our Story
               </Link>
@@ -11879,7 +12130,7 @@ function Layout() {
               <Link
                 to="/contact"
                 onClick={() => setMobileOpen(false)}
-                className="block px-4 py-4 border-b border-neutral-800"
+                className="block px-4 py-4 border-b border-[#6D5333]/40"
               >
                 Contact
               </Link>
@@ -11938,14 +12189,14 @@ function Layout() {
       />
       {!hidePromoTab && (
         <div className="fixed right-0 md:left-0 md:right-auto top-[58%] md:top-1/2 z-40 -translate-y-1/2 scale-[0.78] md:scale-100 origin-right md:origin-left">
-          <div className="flex flex-col items-center bg-[#B98238] md:bg-[#C08C45] text-black rounded-l-md md:rounded-r-md md:rounded-l-none shadow-lg overflow-hidden md:promo-tab-pulse">
+          <div className="flex flex-col items-center bg-[#B98238] md:bg-[#F3EBDD] text-black rounded-l-md md:rounded-r-md md:rounded-l-none shadow-lg overflow-hidden md:promo-tab-pulse">
             <button
               onClick={() => {
                 const until = Date.now() + 24 * 60 * 60 * 1000;
                 localStorage.setItem("promoTabHiddenUntil", String(until));
                 setHidePromoTab(true);
               }}
-              className="w-full flex items-center justify-center text-black text-lg md:text-xl font-extrabold py-1.5 md:py-2 bg-[#B98238] md:bg-[#C08C45] border-b border-black/20"
+              className="w-full flex items-center justify-center text-black text-lg md:text-xl font-extrabold py-1.5 md:py-2 bg-[#B98238] md:bg-[#F3EBDD] border-b border-black/20"
             >
               ✖
             </button>
@@ -11959,7 +12210,7 @@ function Layout() {
                   })
                 )
               }
-              className="px-2 md:px-3 py-7 md:py-10 font-black text-[0.9rem] md:text-[0.92rem] tracking-[0.14em] hover:bg-[#C08C45] transition"
+              className="px-2 md:px-3 py-7 md:py-10 font-black text-[0.9rem] md:text-[0.92rem] tracking-[0.14em] hover:bg-[#F3EBDD] transition"
               style={{
                 writingMode: "vertical-rl",
                 textOrientation: "mixed",
@@ -11985,7 +12236,7 @@ function Layout() {
                 Old Ironsides Coffee
               </div>
 
-              <p className="mt-1 max-w-[360px] mx-auto lg:mx-0 text-neutral-300 leading-snug">
+              <p className="mt-1 max-w-[360px] mx-auto lg:mx-0 text-[#D5CEC4] leading-snug">
                 Veteran-owned. Veteran Roasted.
               </p>
 
@@ -12004,7 +12255,7 @@ function Layout() {
               <ul className="space-y-2">
                 <li>
                   <Link
-                    className="text-neutral-300 hover:text-[#E6C07F]"
+                    className="text-[#D5CEC4] hover:text-[#E6C07F]"
                     to="/legal/shipping"
                   >
                     Roast &amp; Shipping
@@ -12012,7 +12263,7 @@ function Layout() {
                 </li>
                 <li>
                   <Link
-                    className="text-neutral-300 hover:text-[#E6C07F]"
+                    className="text-[#D5CEC4] hover:text-[#E6C07F]"
                     to="/legal/returns"
                   >
                     Returns
@@ -12020,7 +12271,7 @@ function Layout() {
                 </li>
                 <li>
                   <Link
-                    className="text-neutral-300 hover:text-[#E6C07F]"
+                    className="text-[#D5CEC4] hover:text-[#E6C07F]"
                     to="/legal/terms"
                   >
                     Terms of Service
@@ -12028,7 +12279,7 @@ function Layout() {
                 </li>
                 <li>
                   <Link
-                    className="text-neutral-300 hover:text-[#E6C07F]"
+                    className="text-[#D5CEC4] hover:text-[#E6C07F]"
                     to="/legal/privacy"
                   >
                     Privacy Policy
@@ -12038,7 +12289,7 @@ function Layout() {
                   <button
                     type="button"
                     onClick={() => window.showCookieBanner?.()}
-                    className="text-neutral-300 hover:text-[#E6C07F]"
+                    className="text-[#D5CEC4] hover:text-[#E6C07F]"
                   >
                     Cookie settings
                   </button>
@@ -12047,7 +12298,7 @@ function Layout() {
                   <button
                     type="button"
                     onClick={() => window.showDoNotSell?.()}
-                    className="text-neutral-300 hover:text-[#E6C07F] text-left"
+                    className="text-[#D5CEC4] hover:text-[#E6C07F] text-left"
                     aria-label="Do Not Sell or Share My Personal Information"
                   >
                     Do Not Sell or Share
@@ -12062,7 +12313,7 @@ function Layout() {
                 Dispatch
               </div>
 
-              <ul className="space-y-2 text-neutral-300">
+              <ul className="space-y-2 text-[#D5CEC4]">
                 <li>
                   <a
                     href="mailto:HQ@oldironsidescoffee.org"
@@ -12071,7 +12322,7 @@ function Layout() {
                     HQ@oldironsidescoffee.org
                   </a>
                 </li>
-                <li className="text-neutral-400">
+                <li className="text-[#B8A994]">
                   6 Liberty Square #2564
                   <br />
                   Boston, MA 02109
@@ -12196,42 +12447,56 @@ function RoastCTAInfo() {
 }
 
 /* ================= App Entrypoint ================= */
+function V2SampleRoute() {
+  const { add } = useCart();
+  return <V2ArmadaSamplePage onAddToLocalCart={add} />;
+}
+function V2ContactRoute() {
+  return <V2ContactPage onSubmitPromo={submitPromoEmail} />;
+}
+
 function AppShell() {
   return (
     <>
       <Routes>
         <Route element={<V2Layout />}>
-          <Route index element={<HomePageV2 />} />
+          <Route
+            index
+            element={<HomePageV2 onSubscribe={submitPromoEmail} />}
+          />
           <Route path="store" element={<StorePageV2 />} />
           <Route path="roasting-process" element={<RoastingProcessPage />} />
           <Route path="sourcing" element={<SourcingPage />} />
           <Route path="mission" element={<MissionPage />} />
           <Route path="roast/:slug" element={<RoastDetailPage />} />
+          <Route path="roast/armada-sample-pack" element={<V2SampleRoute />} />
+          <Route path="/fleet-history" element={<V2FleetHistoryPage />} />
+          <Route path="/fleet-story/:slug" element={<V2FleetStoryPage />} />
+          <Route path="/legal/:slug" element={<V2LegalPage />} />
+          <Route path="/account" element={<V2AccountPage />} />
+          <Route path="/contact" element={<V2ContactRoute />} />
+          <Route
+            path="/subscriptions"
+            element={<V2SubscriptionPage roasts={roastCards} />}
+          />
+          <Route
+            path="/account/login"
+            element={<V2AccountPage initialTab="login" />}
+          />
         </Route>
 
         <Route element={<Layout />}>
           <Route path="coffee" element={<Navigate to="/store" replace />} />
-          <Route
-            path="roast/armada-sample-pack"
-            element={<ArmadaSamplePage />}
-          />
 
           <Route path="store/:slug" element={<StoreCategoryPage />} />
-          <Route path="subscriptions" element={<SubscriptionLandingPage />} />
+
           {/* History Story pages */}
-          <Route path="/fleet-history" element={<FleetHistoryPage />} />
-          <Route path="/fleet-story/:slug" element={<FleetStoryPage />} />
+
           <Route path="stories/:slug" element={<FleetStoryPage />} />
 
-          <Route path="contact" element={<ContactPage />} />
           <Route path="sdvosb" element={<SDVOSBPage />} />
-          <Route path="legal/:slug" element={<LegalPage />} />
+
           <Route path="cart" element={<CartPage />} />
-          <Route path="account" element={<SubscribeManagePage />} />
-          <Route
-            path="account/login"
-            element={<SubscribeManagePage initialTab="login" />}
-          />
 
           <Route path="*" element={<NotFoundPage />} />
         </Route>
@@ -12398,7 +12663,7 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
         try {
           await cartDiscountCodesUpdate({
             cartId,
-            discountCodes: ["IRONSIDES15"],
+            discountCodes: ["IRONSIDES20"],
           });
         } catch {}
       }
@@ -12445,7 +12710,7 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <div className="hidden md:flex fixed inset-0 z-[1000002] justify-end items-stretch">
+    <div className="hidden lg:flex fixed inset-0 z-[1000002] justify-end items-stretch">
       {/* BACKDROP */}
       <button
         className="flex-1 bg-black/65"
@@ -12457,14 +12722,14 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
       <div
         className={[
           "h-full w-full max-w-[420px]",
-          "bg-neutral-950 ring-1 ring-neutral-800 shadow-2xl",
+          "bg-[#071F35] ring-1 ring-[#C08C45]/30 shadow-2xl",
           "transition-transform duration-200 ease-out",
           open ? "translate-x-0" : "translate-x-full",
           "flex flex-col overscroll-contain",
         ].join(" ")}
       >
         {/* HEADER + FREE-SHIPPING BANNER */}
-        <div className="border-b border-neutral-800">
+        <div className="border-b border-[#6D5333]/40">
           <div className="flex items-center justify-between px-4 py-2">
             <button
               onClick={onClose}
@@ -12475,7 +12740,7 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
             </button>
 
             <div
-              className="text-base font-extrabold tracking-wider leading-none text-neutral-100"
+              className="text-base font-extrabold tracking-wider leading-none text-[#F3EBDD]"
               style={{ fontFamily: "'Cinzel', serif" }}
             >
               Chest
@@ -12483,7 +12748,7 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
             <span className="w-6" />
           </div>
 
-          <div className="px-4 py-2 bg-[#C08C45] text-neutral-900">
+          <div className="border-y border-[#C08C45]/35 bg-[#F3EBDD] px-4 py-3 text-[#071F35]">
             {freeShippingQualified ? (
               <div className="text-center">
                 <div className="text-[13px] font-extrabold leading-tight">
@@ -12500,9 +12765,9 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
                 } to unlock free shipping`}
               </div>
             )}
-            <div className="mt-2 h-[6px] w-full bg-neutral-200/60 rounded">
+            <div className="mt-2 h-[6px] w-full bg-[#D8C6A9]/50 rounded">
               <div
-                className="h-[6px] bg-neutral-900 rounded"
+                className="h-[6px] bg-[#102D44] rounded"
                 style={{
                   width: `${Math.min(
                     100,
@@ -12517,11 +12782,11 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
         {/* ITEMS */}
         <div className="flex-1 overflow-y-auto overscroll-contain">
           {cart.length === 0 ? (
-            <div className="px-6 py-8 text-center text-neutral-400 text-sm">
+            <div className="px-6 py-8 text-center text-[#B8A994] text-sm">
               Your chest is empty.
             </div>
           ) : (
-            <ul className="divide-y divide-neutral-800">
+            <ul className="divide-y divide-[#6D5333]/40">
               {cart.map((it: any) => {
                 const isSub = !!it?.isSubscription;
                 const price = Number(it.price ?? 0);
@@ -12544,22 +12809,22 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
                         loading="eager"
                         decoding="async"
                         fetchPriority="high"
-                        className="w-11 h-11 rounded-md ring-1 ring-neutral-800 object-cover flex-shrink-0"
+                        className="w-11 h-11 rounded-md ring-1 ring-[#6D5333]/40 object-cover flex-shrink-0"
                       />
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between gap-2">
                           <div className="min-w-0">
-                            <div className="font-semibold text-neutral-100 text-[15px] leading-tight line-clamp-2">
+                            <div className="font-semibold text-[#F3EBDD] text-[15px] leading-tight line-clamp-2">
                               {it.title || "Coffee"}
                             </div>
-                            <div className="text-[11px] text-neutral-400">
+                            <div className="text-[11px] text-[#B8A994]">
                               12oz
                             </div>
 
                             {isSub && (
                               <div className="mt-1">
-                                <div className="inline-flex items-center gap-2 text-[10px] text-emerald-400">
-                                  <span className="px-1.5 py-[1px] rounded bg-emerald-900/30 ring-1 ring-emerald-700">
+                                <div className="inline-flex items-center gap-2 text-[10px] text-[#E6C07F]">
+                                  <span className="px-1.5 py-[1px] border border-[#C08C45]/50 bg-[#F3EBDD]/15 text-[#E6C07F]">
                                     Subscription
                                   </span>
                                   <span>Every {it?.subEvery ?? 30}d</span>
@@ -12593,8 +12858,8 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
                                             (freq[it.id] ??
                                               it?.subEvery ??
                                               30) === d
-                                              ? "bg-[#C08C45] text-neutral-900 ring-[#C08C45]"
-                                              : "bg-neutral-900/60 text-[#C08C45] ring-[#C08C45]/60",
+                                              ? "bg-[#F3EBDD] text-[#071F35] ring-[#C08C45]"
+                                              : "bg-[#102D44] text-[#C08C45] ring-[#C08C45]/60",
                                           ].join(" ")}
                                         >
                                           {d} days
@@ -12628,7 +12893,7 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
                                             [it.id]: false,
                                           }));
                                         }}
-                                        className="flex-1 rounded-md bg-[#C08C45] text-neutral-900 font-semibold py-1.5 text-[12px] hover:bg-[#C08C45] transition"
+                                        className="flex-1 rounded-md bg-[#F3EBDD] text-[#071F35] font-semibold py-1.5 text-[12px] hover:bg-[#F3EBDD] transition"
                                       >
                                         Update
                                       </button>
@@ -12652,7 +12917,7 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
                                           ) {
                                             newPrice =
                                               Math.round(
-                                                (currentPrice / 0.9) * 100
+                                                (currentPrice / 0.85) * 100
                                               ) / 100;
                                           }
 
@@ -12683,7 +12948,7 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
 
                           <button
                             onClick={() => remove(it.id)}
-                            className="text-neutral-400 hover:text-[#C08C45] text-[11px] flex-shrink-0"
+                            className="text-[#B8A994] hover:text-[#F3EBDD] text-[11px] flex-shrink-0"
                             aria-label="Remove"
                           >
                             Remove
@@ -12697,20 +12962,20 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
                               : `$${price.toFixed(2)}`}
                           </div>
 
-                          <div className="inline-flex items-center ring-1 ring-neutral-700 rounded-lg overflow-hidden">
+                          <div className="inline-flex items-center ring-1 ring-[#6D5333]/60 rounded-lg overflow-hidden">
                             <button
                               onClick={() => dec(it.id)}
-                              className="px-2 py-1 text-base text-neutral-200"
+                              className="px-2 py-1 text-base text-[#E6DCC8]"
                               aria-label="Decrease"
                             >
                               −
                             </button>
-                            <div className="px-2 py-1 text-neutral-100 tabular-nums text-[13px]">
+                            <div className="px-2 py-1 text-[#F3EBDD] tabular-nums text-[13px]">
                               {it.qty}
                             </div>
                             <button
                               onClick={() => inc(it.id)}
-                              className="px-2 py-1 text-base text-neutral-200"
+                              className="px-2 py-1 text-base text-[#E6DCC8]"
                               aria-label="Increase"
                             >
                               +
@@ -12739,9 +13004,9 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
                                       [it.id]: true,
                                     }))
                                   }
-                                  className="w-full rounded-md ring-1 ring-[#C08C45]/60 bg-neutral-900/60 text-[#C08C45] font-semibold py-1.5 text-[12px] hover:bg-[#C08C45] hover:text-neutral-900 transition"
+                                  className="w-full rounded-md ring-1 ring-[#C08C45]/60 bg-[#102D44] text-[#C08C45] font-semibold py-1.5 text-[12px] hover:bg-[#F3EBDD] hover:text-[#071F35] transition"
                                 >
-                                  Subscribe &amp; Save 10%
+                                  Subscribe &amp; Save 15%
                                 </button>
                               ) : (
                                 <>
@@ -12758,8 +13023,8 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
                                         className={[
                                           "py-1.5 rounded-md text-[12px] font-semibold ring-1",
                                           selFreq === d
-                                            ? "bg-[#C08C45] text-neutral-900 ring-[#C08C45]"
-                                            : "bg-neutral-900/60 text-[#C08C45] ring-[#C08C45]/60",
+                                            ? "bg-[#F3EBDD] text-[#071F35] ring-[#C08C45]"
+                                            : "bg-[#102D44] text-[#C08C45] ring-[#C08C45]/60",
                                         ].join(" ")}
                                       >
                                         {d} days
@@ -12789,7 +13054,7 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
                                           return next;
                                         });
                                       }}
-                                      className="flex-1 rounded-md bg-[#C08C45] text-neutral-900 font-semibold py-1.5 text-[12px] hover:bg-[#C08C45] transition"
+                                      className="flex-1 rounded-md bg-[#F3EBDD] text-[#071F35] font-semibold py-1.5 text-[12px] hover:bg-[#F3EBDD] transition"
                                     >
                                       Start Subscription
                                     </button>
@@ -12821,8 +13086,8 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
         </div>
 
         {/* FOOTER */}
-        <div className="border-t border-neutral-800 px-4 pt-4 pb-24 space-y-2">
-          <div className="flex items-center justify-between text-[12px] text-neutral-400">
+        <div className="border-t border-[#6D5333]/40 px-4 pt-4 pb-24 space-y-2">
+          <div className="flex items-center justify-between text-[12px] text-[#B8A994]">
             <span>Shipping</span>
             <span>{shippingLabel}</span>
           </div>
@@ -12837,8 +13102,8 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
                 "flex-1 font-extrabold py-2.5 text-center text-[15px]",
                 "rounded-md",
                 checkingOut
-                  ? "bg-[#C08C45]/70 text-neutral-800 cursor-not-allowed"
-                  : "bg-[#C08C45] text-neutral-900",
+                  ? "bg-[#F3EBDD]/70 text-[#071F35] cursor-not-allowed"
+                  : "bg-[#F3EBDD] text-[#071F35]",
               ].join(" ")}
               aria-busy={checkingOut}
             >
@@ -12853,7 +13118,7 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
                 onClose();
                 navigate("/cart");
               }}
-              className="flex-1 rounded-md border border-neutral-600 bg-neutral-900 text-[15px] font-extrabold text-neutral-100 py-2.5 text-center hover:bg-neutral-800"
+              className="flex-1 rounded-md border border-[#C08C45]/60 bg-[#102D44] text-[15px] font-extrabold text-[#F3EBDD] py-2.5 text-center hover:bg-[#18374F]"
             >
               View Chest
             </button>
@@ -12862,7 +13127,7 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
           <button
             type="button"
             onClick={() => setShowRoastInfo(true)}
-            className="block w-full text-center text-[14px] text-red-300 underline underline-offset-4"
+            className="block w-full text-center text-[14px] text-[#E6C07F] underline underline-offset-4"
           >
             Please read before checking out
           </button>
@@ -12871,12 +13136,12 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
         {/* SUBSCRIBE GATE */}
         {showSubGate && (
           <div className="absolute inset-x-0 bottom-0 z-[1000003] p-3">
-            <div className="rounded-xl ring-1 ring-[#C08C45] bg-neutral-900 text-[#C08C45] px-3 py-3 text-sm text-center shadow-2xl">
+            <div className="rounded-xl ring-1 ring-[#C08C45] bg-[#102D44] text-[#C08C45] px-3 py-3 text-sm text-center shadow-2xl">
               Join or sign in to manage your Fleet subscription before checkout.
               <div className="mt-2 flex gap-2 justify-center">
                 <a
                   href="/account/login"
-                  className="px-3 py-1.5 rounded-md bg-[#C08C45] text-neutral-900 font-bold"
+                  className="px-3 py-1.5 rounded-md bg-[#F3EBDD] text-[#071F35] font-bold"
                 >
                   Sign in / Join
                 </a>
@@ -12899,10 +13164,10 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
               onClick={() => setShowRoastInfo(false)}
               aria-label="Close roast info backdrop"
             />
-            <div className="relative w-full max-w-md rounded-2xl bg-neutral-950 ring-1 ring-neutral-800 shadow-2xl p-4">
+            <div className="relative w-full max-w-md rounded-2xl bg-[#071F35] ring-1 ring-[#6D5333]/40 shadow-2xl p-4">
               <div className="flex items-center justify-between mb-2">
                 <div
-                  className="text-sm font-extrabold text-neutral-100"
+                  className="text-sm font-extrabold text-[#F3EBDD]"
                   style={{ fontFamily: "'Cinzel', serif" }}
                 >
                   Roast & Shipping Schedule
@@ -12915,7 +13180,7 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
                   ✕
                 </button>
               </div>
-              <div className="text-[13px] text-neutral-300 space-y-2">
+              <div className="text-[13px] text-[#D5CEC4] space-y-2">
                 <p>
                   We roast to order. All orders are roasted on Monday/Tuesday.
                   Please be sure to place your order before{" "}
@@ -12940,7 +13205,7 @@ function DesktopCartSheet({ onClose }: { onClose: () => void }) {
                   to preserve peak flavor. Tracking is emailed once your order
                   leaves the roastery.
                 </p>
-                <p className="text-blue-300">
+                <p className="text-[#E6DCC8]">
                   If you missed the order cut off time, please contact us and we
                   will see what we can do to still get your order roasted.
                 </p>
@@ -13121,7 +13386,7 @@ function MobileCartSheet({ onClose }: { onClose: () => void }) {
         try {
           await cartDiscountCodesUpdate({
             cartId,
-            discountCodes: ["IRONSIDES15"],
+            discountCodes: ["IRONSIDES20"],
           });
         } catch {}
       }
@@ -13191,14 +13456,14 @@ function MobileCartSheet({ onClose }: { onClose: () => void }) {
         onMouseEnter={() => setPinned(true)}
         className={[
           "h-full w-[80%] max-w-[420px]",
-          "bg-neutral-950 ring-1 ring-neutral-800 shadow-2xl",
+          "bg-[#071F35] ring-1 ring-[#C08C45]/30 shadow-2xl",
           "transition-transform duration-200 ease-out",
           open ? "translate-x-0" : "translate-x-full",
           "flex flex-col overscroll-contain touch-pan-y",
         ].join(" ")}
       >
         {/* HEADER + AMBER FREE-SHIPPING BANNER */}
-        <div className="border-b border-neutral-800">
+        <div className="border-b border-[#6D5333]/40">
           <div className="flex items-center justify-between px-4 py-2">
             <button
               onClick={onClose}
@@ -13209,7 +13474,7 @@ function MobileCartSheet({ onClose }: { onClose: () => void }) {
             </button>
 
             <div
-              className="text-base font-extrabold tracking-wider leading-none text-neutral-100"
+              className="text-base font-extrabold tracking-wider leading-none text-[#F3EBDD]"
               style={{ fontFamily: "'Cinzel', serif" }}
             >
               Shopping Cart
@@ -13217,7 +13482,7 @@ function MobileCartSheet({ onClose }: { onClose: () => void }) {
             <span className="w-6" />
           </div>
 
-          <div className="px-4 py-2 bg-[#C08C45] text-neutral-900">
+          <div className="border-y border-[#C08C45]/35 bg-[#F3EBDD] px-4 py-3 text-[#071F35]">
             {freeShippingQualified ? (
               <div className="text-center">
                 <div className="text-[13px] font-extrabold leading-tight">
@@ -13234,9 +13499,9 @@ function MobileCartSheet({ onClose }: { onClose: () => void }) {
                 } to unlock free shipping`}
               </div>
             )}
-            <div className="mt-2 h-[6px] w-full bg-neutral-200/60 rounded">
+            <div className="mt-2 h-[6px] w-full bg-[#D8C6A9]/50 rounded">
               <div
-                className="h-[6px] bg-neutral-900 rounded"
+                className="h-[6px] bg-[#102D44] rounded"
                 style={{
                   width: `${Math.min(
                     100,
@@ -13251,11 +13516,11 @@ function MobileCartSheet({ onClose }: { onClose: () => void }) {
         {/* ITEMS (condensed further; removes big bean tag) */}
         <div className="flex-1 overflow-y-auto overscroll-contain touch-pan-y">
           {cart.length === 0 ? (
-            <div className="px-6 py-8 text-center text-neutral-400 text-sm">
+            <div className="px-6 py-8 text-center text-[#B8A994] text-sm">
               Your chest is empty.
             </div>
           ) : (
-            <ul className="divide-y divide-neutral-800">
+            <ul className="divide-y divide-[#6D5333]/40">
               {cart.map((it: any) => {
                 const isSub = !!it?.isSubscription;
                 const price = Number(it.price ?? 0);
@@ -13278,24 +13543,24 @@ function MobileCartSheet({ onClose }: { onClose: () => void }) {
                         loading="eager"
                         decoding="async"
                         fetchPriority="high"
-                        className="w-11 h-11 rounded-md ring-1 ring-neutral-800 object-cover flex-shrink-0"
+                        className="w-11 h-11 rounded-md ring-1 ring-[#6D5333]/40 object-cover flex-shrink-0"
                       />
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between gap-2">
                           <div className="min-w-0">
                             {/* Title — no bean badge inline */}
-                            <div className="font-semibold text-neutral-100 text-[15px] leading-tight line-clamp-2">
+                            <div className="font-semibold text-[#F3EBDD] text-[15px] leading-tight line-clamp-2">
                               {it.title || "Coffee"}
                             </div>
                             {/* Size line only */}
-                            <div className="text-[11px] text-neutral-400">
+                            <div className="text-[11px] text-[#B8A994]">
                               12oz
                             </div>
 
                             {isSub && (
                               <div className="mt-1">
-                                <div className="inline-flex items-center gap-2 text-[10px] text-emerald-400">
-                                  <span className="px-1.5 py-[1px] rounded bg-emerald-900/30 ring-1 ring-emerald-700">
+                                <div className="inline-flex items-center gap-2 text-[10px] text-[#E6C07F]">
+                                  <span className="px-1.5 py-[1px] border border-[#C08C45]/50 bg-[#F3EBDD]/15 text-[#E6C07F]">
                                     Subscription
                                   </span>
                                   <span>Every {it?.subEvery ?? 30}d</span>
@@ -13329,8 +13594,8 @@ function MobileCartSheet({ onClose }: { onClose: () => void }) {
                                             (freq[it.id] ??
                                               it?.subEvery ??
                                               30) === d
-                                              ? "bg-[#C08C45] text-neutral-900 ring-[#C08C45]"
-                                              : "bg-neutral-900/60 text-[#C08C45] ring-[#C08C45]/60",
+                                              ? "bg-[#F3EBDD] text-[#071F35] ring-[#C08C45]"
+                                              : "bg-[#102D44] text-[#C08C45] ring-[#C08C45]/60",
                                           ].join(" ")}
                                         >
                                           {d} days
@@ -13365,7 +13630,7 @@ function MobileCartSheet({ onClose }: { onClose: () => void }) {
                                             [it.id]: false,
                                           }));
                                         }}
-                                        className="flex-1 rounded-md bg-[#C08C45] text-neutral-900 font-semibold py-1.5 text-[12px] hover:bg-[#C08C45] transition"
+                                        className="flex-1 rounded-md bg-[#F3EBDD] text-[#071F35] font-semibold py-1.5 text-[12px] hover:bg-[#F3EBDD] transition"
                                       >
                                         Update
                                       </button>
@@ -13394,7 +13659,7 @@ function MobileCartSheet({ onClose }: { onClose: () => void }) {
                                             // Reverse the 15% discount to get the original.
                                             newPrice =
                                               Math.round(
-                                                (currentPrice / 0.9) * 100
+                                                (currentPrice / 0.85) * 100
                                               ) / 100;
                                           }
 
@@ -13426,7 +13691,7 @@ function MobileCartSheet({ onClose }: { onClose: () => void }) {
 
                           <button
                             onClick={() => remove(it.id)}
-                            className="text-neutral-400 hover:text-[#C08C45] text-[11px] flex-shrink-0"
+                            className="text-[#B8A994] hover:text-[#F3EBDD] text-[11px] flex-shrink-0"
                             aria-label="Remove"
                           >
                             Remove
@@ -13441,20 +13706,20 @@ function MobileCartSheet({ onClose }: { onClose: () => void }) {
                               : `$${price.toFixed(2)}`}
                           </div>
 
-                          <div className="inline-flex items-center ring-1 ring-neutral-700 rounded-lg overflow-hidden">
+                          <div className="inline-flex items-center ring-1 ring-[#6D5333]/60 rounded-lg overflow-hidden">
                             <button
                               onClick={() => dec(it.id)}
-                              className="px-2 py-1 text-base text-neutral-200"
+                              className="px-2 py-1 text-base text-[#E6DCC8]"
                               aria-label="Decrease"
                             >
                               −
                             </button>
-                            <div className="px-2 py-1 text-neutral-100 tabular-nums text-[13px]">
+                            <div className="px-2 py-1 text-[#F3EBDD] tabular-nums text-[13px]">
                               {it.qty}
                             </div>
                             <button
                               onClick={() => inc(it.id)}
-                              className="px-2 py-1 text-base text-neutral-200"
+                              className="px-2 py-1 text-base text-[#E6DCC8]"
                               aria-label="Increase"
                             >
                               +
@@ -13484,9 +13749,9 @@ function MobileCartSheet({ onClose }: { onClose: () => void }) {
                                       [it.id]: true,
                                     }))
                                   }
-                                  className="w-full rounded-md ring-1 ring-[#C08C45]/60 bg-neutral-900/60 text-[#C08C45] font-semibold py-1.5 text-[12px] hover:bg-[#C08C45] hover:text-neutral-900 transition"
+                                  className="w-full rounded-md ring-1 ring-[#C08C45]/60 bg-[#102D44] text-[#C08C45] font-semibold py-1.5 text-[12px] hover:bg-[#F3EBDD] hover:text-[#071F35] transition"
                                 >
-                                  Subscribe &amp; Save 10%
+                                  Subscribe &amp; Save 15%
                                 </button>
                               ) : (
                                 <>
@@ -13503,8 +13768,8 @@ function MobileCartSheet({ onClose }: { onClose: () => void }) {
                                         className={[
                                           "py-1.5 rounded-md text-[12px] font-semibold ring-1",
                                           selFreq === d
-                                            ? "bg-[#C08C45] text-neutral-900 ring-[#C08C45]"
-                                            : "bg-neutral-900/60 text-[#C08C45] ring-[#C08C45]/60",
+                                            ? "bg-[#F3EBDD] text-[#071F35] ring-[#C08C45]"
+                                            : "bg-[#102D44] text-[#C08C45] ring-[#C08C45]/60",
                                         ].join(" ")}
                                       >
                                         {d} days
@@ -13535,7 +13800,7 @@ function MobileCartSheet({ onClose }: { onClose: () => void }) {
                                           return next;
                                         });
                                       }}
-                                      className="flex-1 rounded-md bg-[#C08C45] text-neutral-900 font-semibold py-1.5 text-[12px] hover:bg-[#C08C45] transition"
+                                      className="flex-1 rounded-md bg-[#F3EBDD] text-[#071F35] font-semibold py-1.5 text-[12px] hover:bg-[#F3EBDD] transition"
                                     >
                                       Start Subscription
                                     </button>
@@ -13567,8 +13832,8 @@ function MobileCartSheet({ onClose }: { onClose: () => void }) {
         </div>
 
         {/* FOOTER: Checkout ABOVE ID.me, plus links */}
-        <div className="border-t border-neutral-800 px-4 pt-4 pb-24 space-y-2">
-          <div className="flex items-center justify-between text-[12px] text-neutral-400">
+        <div className="border-t border-[#6D5333]/40 px-4 pt-4 pb-24 space-y-2">
+          <div className="flex items-center justify-between text-[12px] text-[#B8A994]">
             <span>Shipping</span>
             <span>{shippingLabel}</span>
           </div>
@@ -13581,8 +13846,8 @@ function MobileCartSheet({ onClose }: { onClose: () => void }) {
             className={[
               "block w-full rounded-xl font-extrabold py-2.5 text-center text-[15px]",
               checkingOut
-                ? "bg-[#C08C45]/70 text-neutral-800 cursor-not-allowed"
-                : "bg-[#C08C45] text-neutral-900",
+                ? "bg-[#F3EBDD]/70 text-[#071F35] cursor-not-allowed"
+                : "bg-[#F3EBDD] text-[#071F35]",
             ].join(" ")}
             aria-busy={checkingOut}
           >
@@ -13593,7 +13858,7 @@ function MobileCartSheet({ onClose }: { onClose: () => void }) {
           <button
             type="button"
             onClick={() => setShowRoastInfo(true)}
-            className="block w-full text-center text-[16px] text-red-300 underline underline-offset-4"
+            className="block w-full text-center text-[16px] text-[#E6C07F] underline underline-offset-4"
           >
             Please read before checking out
           </button>
@@ -13602,12 +13867,12 @@ function MobileCartSheet({ onClose }: { onClose: () => void }) {
         {/* SUBSCRIBE GATE BANNER (blocks checkout when not signed in) */}
         {showSubGate && (
           <div className="absolute inset-x-0 bottom-0 z-[1000003] p-3">
-            <div className="rounded-xl ring-1 ring-[#C08C45] bg-neutral-900 text-[#C08C45] px-3 py-3 text-sm text-center shadow-2xl">
+            <div className="rounded-xl ring-1 ring-[#C08C45] bg-[#102D44] text-[#C08C45] px-3 py-3 text-sm text-center shadow-2xl">
               Join or sign in to manage your Fleet subscription before checkout.
               <div className="mt-2 flex gap-2 justify-center">
                 <a
                   href="/account/login"
-                  className="px-3 py-1.5 rounded-md bg-[#C08C45] text-neutral-900 font-bold"
+                  className="px-3 py-1.5 rounded-md bg-[#F3EBDD] text-[#071F35] font-bold"
                 >
                   Sign in / Join
                 </a>
@@ -13630,10 +13895,10 @@ function MobileCartSheet({ onClose }: { onClose: () => void }) {
               onClick={() => setShowRoastInfo(false)}
               aria-label="Close roast info backdrop"
             />
-            <div className="relative w-full max-w-md rounded-2xl bg-neutral-950 ring-1 ring-neutral-800 shadow-2xl p-4">
+            <div className="relative w-full max-w-md rounded-2xl bg-[#071F35] ring-1 ring-[#6D5333]/40 shadow-2xl p-4">
               <div className="flex items-center justify-between mb-2">
                 <div
-                  className="text-sm font-extrabold text-neutral-100"
+                  className="text-sm font-extrabold text-[#F3EBDD]"
                   style={{ fontFamily: "'Cinzel', serif" }}
                 >
                   Roast & Shipping Schedule
@@ -13646,7 +13911,7 @@ function MobileCartSheet({ onClose }: { onClose: () => void }) {
                   ✕
                 </button>
               </div>
-              <div className="text-[13px] text-neutral-300 space-y-2">
+              <div className="text-[13px] text-[#D5CEC4] space-y-2">
                 <p>
                   We roast to order. All orders are roasted on Monday/Tuesday.
                   Please be sure to place your order before{" "}
@@ -13671,7 +13936,7 @@ function MobileCartSheet({ onClose }: { onClose: () => void }) {
                   to preserve peak flavor. Tracking is emailed once your order
                   leaves the roastery.
                 </p>
-                <p className="text-blue-300">
+                <p className="text-[#E6DCC8]">
                   If you missed the order cut off time, please contact us and we
                   will see what we can do to still get your order roasted.
                 </p>
@@ -13712,14 +13977,49 @@ function useSmokeTests() {
   }, []);
 }
 
+function V2CartDrawerController() {
+  const [cartOpen, setCartOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    const openCart = () => setCartOpen(true);
+    window.addEventListener("open-cart-drawer", openCart);
+
+    return () => {
+      window.removeEventListener("open-cart-drawer", openCart);
+    };
+  }, []);
+
+  React.useEffect(() => {
+    if (!cartOpen) return;
+
+    const closeOnEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setCartOpen(false);
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [cartOpen]);
+
+  if (!cartOpen) return null;
+
+  return (
+    <>
+      <DesktopCartSheet onClose={() => setCartOpen(false)} />
+      <MobileCartSheet onClose={() => setCartOpen(false)} />
+    </>
+  );
+}
+
 export default function App() {
   useSmokeTests();
   return (
     <BrowserRouter>
       <RouteTracker />
+
       <CartProvider>
         <ErrorBoundary>
           <AppShell />
+          <V2CartDrawerController />
         </ErrorBoundary>
       </CartProvider>
     </BrowserRouter>

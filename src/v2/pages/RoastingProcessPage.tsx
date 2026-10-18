@@ -1,269 +1,294 @@
 import { Link } from "react-router-dom";
 
-const roastFacts = [
+const steps = [
   {
     number: "01",
-    title: "ROAST DAY",
-    body: "Coffee is roasted every Monday and Thursday in small batches, with each roast handled and checked for consistency.",
+    title: "ORDER",
+    body: "Your order joins our upcoming small-batch roasting schedule.",
   },
   {
     number: "02",
-    title: "WHY TWICE WEEKLY",
-    body: "Two roast days keep inventory moving and shorten the time between the roaster and your cup.",
+    title: "ROAST",
+    body: "Coffee is roasted every Monday and Thursday.",
   },
   {
     number: "03",
-    title: "RESTED BRIEFLY",
-    body: "Freshly roasted coffee gets a short rest for flavor development before it is packed and prepared to ship.",
+    title: "REST",
+    body: "Freshly roasted beans are given time to develop before shipping.",
   },
   {
     number: "04",
-    title: "NO SHELF COFFEE",
-    body: "The goal is not months of warehouse inventory. The goal is coffee roasted around real demand.",
+    title: "PACK",
+    body: "Coffee is carefully packaged and prepared for fulfillment.",
   },
-];
-
-const process = [
-  ["ORDERED", "YOU PLACE YOUR ORDER"],
-  ["ROASTED", "MONDAY / THURSDAY"],
-  ["RESTED", "BRIEFLY"],
-  ["PACKED", "BY HAND"],
-  ["SHIPPED", "FRESH"],
+  {
+    number: "05",
+    title: "SHIP",
+    body: "Your coffee heads out fresh, without months of warehouse storage.",
+  },
 ];
 
 export default function RoastingProcessPage() {
   return (
-    <main className="bg-[#F3EBDD] text-[#071421]">
-      {/* ================= HERO ================= */}
-      <section className="px-3 pt-3 md:px-5">
-        <div className="mx-auto grid max-w-[1580px] overflow-hidden border border-[#B78A56]/45 bg-[#F7F0E5] lg:grid-cols-[39%_61%]">
-          {/* COPY */}
-          <div className="flex items-center px-7 py-7 md:px-9 lg:px-10 xl:px-12">
-            <div>
-              <div className="text-[0.66rem] font-bold tracking-[0.24em] text-[#A36F2C]">
-                HOW WE ROAST
+    <main className="overflow-hidden bg-[#F3EBDD] text-[#071F35]">
+      {/* ============================================
+          HERO - REAL ROASTERY
+      ============================================ */}
+   <section className="grid lg:grid-cols-[43%_57%]">
+        <div className="flex items-center bg-[#F3EBDD] px-6 py-10 sm:px-10 lg:px-12 xl:px-16 xl:py-16">
+          <div className="max-w-[560px]">
+            <div className="text-[0.65rem] font-bold tracking-[0.24em] text-[#A36F2C]">
+              INSIDE THE ROASTERY
+            </div>
+
+            <div className="mt-3 h-[2px] w-12 bg-[#C08C45]" />
+
+            <h1
+              className="mt-5 text-[2.45rem] leading-[1.06] text-[#071F35] sm:text-[3rem] xl:text-[3.8rem]"
+              style={{ fontFamily: "'Cinzel', serif" }}
+            >
+              REAL COFFEE.
+              <span className="mt-1 block text-[#A36F2C]">
+                REAL ROAST DAYS.
+              </span>
+            </h1>
+
+            <p className="mt-5 max-w-[490px] font-serif text-[1rem] leading-[1.65] text-[#44413D] md:text-[1.1rem]">
+              Every Monday and Thursday, our coffee is roasted in small batches
+              with a focus on freshness, consistency, and the quality of every
+              cup.
+            </p>
+
+            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 border-t border-[#C08C45]/40 pt-5">
+              <div>
+                <div className="text-[0.68rem] font-bold tracking-[0.16em] text-[#9C692C]">
+                  MONDAY
+                </div>
+                <div className="mt-1 text-[0.82rem] text-[#071F35]">
+                  Roast Day
+                </div>
               </div>
 
-              <h1
-                className="mt-2 text-[2.65rem] font-semibold leading-[0.96] sm:text-[3rem] lg:text-[3.15rem] xl:text-[3.5rem]"
-                style={{ fontFamily: "'Cinzel', serif" }}
-              >
-                REAL ROASTERY.
-                <span className="block">REAL ROAST DAYS.</span>
-              </h1>
-
-              <div
-                className="mt-3 text-[1.55rem] leading-[1.08] text-[#A36F2C] lg:text-[1.8rem] xl:text-[2rem]"
-                style={{ fontFamily: "'Cinzel', serif" }}
-              >
-                ROASTED TWICE WEEKLY.
-                <span className="block">SHIPPED AT PEAK FRESHNESS.</span>
+              <div>
+                <div className="text-[0.68rem] font-bold tracking-[0.16em] text-[#9C692C]">
+                  THURSDAY
+                </div>
+                <div className="mt-1 text-[0.82rem] text-[#071F35]">
+                  Roast Day
+                </div>
               </div>
 
-              <div className="mt-4 h-px w-full max-w-[430px] bg-[#C08C45]/60" />
-
-              <p className="mt-4 max-w-[520px] text-[0.86rem] leading-[1.55] text-[#30383E]">
-                Our coffee is roasted in small batches every Monday and
-                Thursday, packed shortly after roasting, and shipped within
-                days.
-              </p>
-
-              <p className="mt-2 text-[0.86rem] font-semibold">
-                No warehouse. No shelves. Just fresh coffee.
-              </p>
+              <div>
+                <div className="text-[0.68rem] font-bold tracking-[0.16em] text-[#9C692C]">
+                  SMALL BATCHES
+                </div>
+                <div className="mt-1 text-[0.82rem] text-[#071F35]">
+                  Roasted to Order
+                </div>
+              </div>
             </div>
           </div>
+        </div>
 
-          {/* PHOTO */}
-          <div className="relative min-h-[320px] sm:min-h-[390px] lg:min-h-[385px]">
-            <img
-              src="/roaster-site2.jpg"
-              alt="Coffee roasting facility"
-              className="absolute inset-0 h-full w-full object-cover object-center"
-            />
+        <div className="relative h-[290px] overflow-hidden bg-[#D9CCB8] sm:h-[380px] lg:h-auto lg:min-h-[440px]">
+          <img
+            src="/roaster-site2.jpg"
+            alt="Actual coffee roasting facility with commercial Probat roaster and American flag"
+            className="absolute inset-0 h-full w-full object-cover object-center"
+          />
+
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#061524]/75 to-transparent px-5 pb-5 pt-14 text-[#F4EBDD] sm:px-8">
+            <div className="text-[0.58rem] font-bold uppercase tracking-[0.2em] text-[#E6C07F]">
+              THE ROASTERY
+            </div>
+            <div className="mt-1 font-serif text-[0.86rem]">
+              Where your coffee begins.
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ================= NAVY FACT BAND ================= */}
-      <section className="px-3 md:px-5">
-        <div className="mx-auto max-w-[1580px] bg-[#061524] text-[#E6DCC8]">
-          <div className="grid md:grid-cols-2 xl:grid-cols-4">
-            {roastFacts.map((item, index) => (
-              <div
-                key={item.title}
-                className={`relative px-6 py-5 lg:px-7 ${
-                  index > 0
-                    ? "border-t border-[#C08C45]/25 md:border-t-0 xl:border-l"
-                    : ""
-                } ${
-                  index === 2
-                    ? "md:border-t md:border-[#C08C45]/25 xl:border-t-0"
-                    : ""
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <span className="text-[0.62rem] font-bold tracking-[0.16em] text-[#C08C45]">
-                    {item.number}
-                  </span>
+      {/* ============================================
+          COMPACT PROCESS TIMELINE
+      ============================================ */}
+      <section className="bg-[#061524] px-5 py-8 text-[#F0E7D5] md:px-8 md:py-10">
+        <div className="mx-auto max-w-[1320px]">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <div className="text-[0.62rem] font-bold uppercase tracking-[0.22em] text-[#C08C45]">
+                THE PROCESS
+              </div>
 
-                  <h2
-                    className="text-[0.9rem] font-semibold tracking-[0.04em]"
-                    style={{ fontFamily: "'Cinzel', serif" }}
-                  >
-                    {item.title}
-                  </h2>
+              <h2
+                className="mt-2 text-[1.8rem] leading-[1.1] sm:text-[2.2rem]"
+                style={{ fontFamily: "'Cinzel', serif" }}
+              >
+                FROM ROASTER TO CUP.
+              </h2>
+            </div>
+
+            <div className="font-serif text-[0.85rem] text-[#C9C1B4]">
+              Five steps. One purpose. Fresh coffee.
+            </div>
+          </div>
+
+          <div className="mt-6 grid grid-cols-2 gap-x-5 gap-y-5 border-t border-[#C08C45]/35 pt-6 md:grid-cols-5 md:gap-5">
+            {steps.map((step) => (
+              <div key={step.number} className="min-w-0">
+                <div className="text-[0.65rem] font-bold tracking-[0.18em] text-[#C08C45]">
+                  {step.number}
                 </div>
 
-                <div className="mt-2 h-px w-12 bg-[#C08C45]" />
+                <h3
+                  className="mt-2 text-[1rem] text-[#F4EBDD]"
+                  style={{ fontFamily: "'Cinzel', serif" }}
+                >
+                  {step.title}
+                </h3>
 
-                <p className="mt-3 text-[0.76rem] leading-[1.5] text-[#CEC6BA]">
-                  {item.body}
+                <p className="mt-2 max-w-[220px] text-[0.76rem] leading-[1.55] text-[#C7C5C1]">
+                  {step.body}
                 </p>
               </div>
             ))}
           </div>
-
-          {/* PROCESS STRIP */}
-          <div className="border-t border-[#C08C45]/35 px-5 py-4">
-            <div className="bg-[#F4EBDD] px-5 py-4 text-[#071421]">
-              <div className="grid gap-4 text-center sm:grid-cols-5">
-                {process.map(([title, sub], index) => (
-                  <div key={title} className="relative">
-                    <div
-                      className="text-[0.88rem] font-semibold"
-                      style={{ fontFamily: "'Cinzel', serif" }}
-                    >
-                      {title}
-                    </div>
-
-                    <div className="mt-1 text-[0.6rem] font-bold tracking-[0.13em] text-[#A36F2C]">
-                      {sub}
-                    </div>
-
-                    {index < process.length - 1 && (
-                      <span className="absolute -right-3 top-1/2 hidden -translate-y-1/2 text-lg text-[#071421]/45 sm:block">
-                        →
-                      </span>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* ================= LOWER FEATURE ================= */}
-      <section className="px-3 pb-3 pt-3 md:px-5">
-        <div className="mx-auto grid max-w-[1580px] overflow-hidden border border-[#B78A56]/45 bg-[#F7F0E5] lg:grid-cols-[0.9fr_0.9fr_1.2fr]">
-          {/* QUOTE */}
-          <div className="flex items-center px-7 py-6 lg:px-8">
-            <div>
-              <div className="text-[2.8rem] leading-[0.7] text-[#A36F2C]">
-                “
-              </div>
-
-              <blockquote
-                className="mt-1 text-[1.15rem] font-semibold leading-[1.23]"
-                style={{ fontFamily: "'Cinzel', serif" }}
-              >
-                WE DO NOT ROAST
-                <span className="block">FOR SHELVES.</span>
-                <span className="mt-1 block text-[#A36F2C]">WE ROAST FOR</span>
-                <span className="block text-[#A36F2C]">
-                  THE PEOPLE DRINKING IT.
-                </span>
-              </blockquote>
-
-              <div className="mt-4 h-px bg-[#C08C45]/55" />
-
-              <p className="mt-3 text-[0.75rem] leading-[1.5] text-[#3D4144]">
-                Freshness comes from shortening the distance between roast day
-                and your morning cup.
-              </p>
-            </div>
-          </div>
-
-          {/* PHOTO */}
-          <div className="relative min-h-[240px] lg:min-h-[265px]">
+      {/* ============================================
+          AUTHENTIC PACKAGING FEATURE
+      ============================================ */}
+      <section className="px-5 py-9 md:px-8 md:py-12">
+        <div className="mx-auto grid max-w-[1320px] items-center gap-7 lg:grid-cols-[48%_52%] lg:gap-12">
+          <div className="relative overflow-hidden">
             <img
-              src="/roaster.jpg"
-              alt="Freshly roasted coffee cooling"
-              className="absolute inset-0 h-full w-full object-cover object-center"
+              src="/stacked-bags1.jpeg"
+              alt="Old Ironsides Coffee bags lined up during packaging at the roastery"
+              loading="lazy"
+              className="h-[250px] w-full object-cover object-center sm:h-[335px] lg:h-[390px]"
             />
           </div>
 
-          {/* DETAILS */}
-          <div className="bg-[#EEE3D2] px-7 py-6 lg:px-8">
-            <div className="text-[0.62rem] font-bold tracking-[0.22em] text-[#A36F2C]">
-              INSIDE THE ROASTERY
+          <div className="min-w-0 lg:pr-6">
+            <div className="text-[0.64rem] font-bold uppercase tracking-[0.24em] text-[#A36F2C]">
+              BEYOND THE ROAST
             </div>
 
             <h2
-              className="mt-1 text-[1.35rem] font-semibold"
+              className="mt-3 text-[2rem] leading-[1.08] text-[#071F35] sm:text-[2.5rem]"
               style={{ fontFamily: "'Cinzel', serif" }}
             >
-              BUILT AROUND THE ROAST DAY.
+              FROM FRESH BEANS
+              <span className="block text-[#A36F2C]">TO FINISHED BAGS.</span>
             </h2>
 
-            <div className="mt-3 h-px bg-[#C08C45]/55" />
+            <p className="mt-4 max-w-[560px] font-serif text-[0.96rem] leading-[1.65] text-[#46423C]">
+              Roasting is only part of the process. Once the coffee is ready,
+              each batch moves through weighing, packaging, and preparation for
+              shipment.
+            </p>
+            <p className="mt-3 max-w-[560px] font-serif text-[0.96rem] leading-[1.65] text-[#46423C]">
+  Each finished bag reflects the care taken throughout the
+  roasting and packaging process.
+</p>
 
-            <div className="mt-4 grid gap-x-6 gap-y-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-              {[
-                [
-                  "SMALL TEAM",
-                  "A focused crew responsible for the details from roast to pack.",
-                ],
-                [
-                  "PRO EQUIPMENT",
-                  "Commercial roasting equipment, precision scales, and proper production controls.",
-                ],
-                [
-                  "HAND PACKED",
-                  "Each bag is weighed, sealed, and prepared shortly after roasting.",
-                ],
-                [
-                  "QUALITY CONTROL",
-                  "Roasts are checked for consistency and flavor before they leave.",
-                ],
-              ].map(([title, body]) => (
-                <div key={title}>
-                  <div className="text-[0.66rem] font-bold tracking-[0.1em] text-[#8F5A24]">
-                    {title}
-                  </div>
-
-                  <p className="mt-1 text-[0.72rem] leading-[1.45] text-[#363B3E]">
-                    {body}
-                  </p>
-                </div>
-              ))}
+            <div className="mt-5 border-l-[3px] border-[#C08C45] pl-4">
+              <p className="font-serif text-[1.02rem] italic leading-[1.5] text-[#102942]">
+                The same attention that goes into roasting should carry through
+                to the package that arrives at your door.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ================= CTA ================= */}
-      <section className="bg-[#061524] px-6 py-4">
-        <div className="mx-auto flex max-w-[1500px] flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <div
-            className="text-[1rem] tracking-[0.05em] text-[#C08C45]"
-            style={{ fontFamily: "'Cinzel', serif" }}
-          >
-            FRESH COFFEE. ROASTED RIGHT. SHIPPED FAST.
+      {/* ============================================
+          PACKED AND READY TO SHIP
+      ============================================ */}
+      <section className="bg-[#EAE0D0] px-5 py-9 md:px-8 md:py-12">
+        <div className="mx-auto grid max-w-[1320px] items-center gap-7 lg:grid-cols-[45%_55%] lg:gap-12">
+          <div className="min-w-0 lg:pl-5">
+            <div className="text-[0.64rem] font-bold uppercase tracking-[0.24em] text-[#A36F2C]">
+              THE FINAL STEP
+            </div>
+
+            <h2
+              className="mt-3 text-[2rem] leading-[1.08] text-[#071F35] sm:text-[2.5rem]"
+              style={{ fontFamily: "'Cinzel', serif" }}
+            >
+              PACKED WITH CARE.
+              <span className="block text-[#A36F2C]">READY FOR YOUR DOOR.</span>
+            </h2>
+
+            <p className="mt-4 max-w-[530px] font-serif text-[0.96rem] leading-[1.65] text-[#46423C]">
+              After roasting and packing, the coffee is prepared for
+              fulfillment. Orders are assembled, boxed, and sent to customers
+              with the finished Old Ironsides packaging.
+            </p>
+
+            <p className="mt-3 max-w-[530px] font-serif text-[0.96rem] leading-[1.65] text-[#46423C]">
+              From the roasting equipment to the shipping box, these photographs
+              show the real process behind the coffee.
+            </p>
+
+            <div className="mt-5 flex flex-wrap gap-3">
+              <Link
+                to="/store"
+                className="inline-flex min-h-[44px] items-center justify-center bg-[#B57A31] px-6 text-[0.72rem] font-bold tracking-[0.08em] text-white transition hover:bg-[#C48A45]"
+              >
+                SHOP THE FLEET
+                <span className="ml-3">→</span>
+              </Link>
+            </div>
           </div>
 
-          <div className="flex flex-col gap-3 sm:flex-row">
+          <div className="relative overflow-hidden lg:order-last">
+            <img
+              src="/boxed-bags1.jpg"
+              alt="Actual Old Ironsides Coffee order packed with coffee bags and branded insert"
+              loading="lazy"
+              className="h-[290px] w-full object-contain object-center sm:h-[360px] lg:h-[400px]"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================
+          FRESHNESS AND FINAL CALL TO ACTION
+      ============================================ */}
+      <section className="bg-[#061524] px-5 py-9 text-[#F0E7D5] md:px-8 md:py-11">
+        <div className="mx-auto flex max-w-[1320px] flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <div className="max-w-[700px]">
+            <div className="text-[0.63rem] font-bold uppercase tracking-[0.22em] text-[#C08C45]">
+              FRESHNESS IS THE STANDARD
+            </div>
+
+            <h2
+              className="mt-2 text-[1.85rem] leading-[1.12] sm:text-[2.25rem]"
+              style={{ fontFamily: "'Cinzel', serif" }}
+            >
+              ROASTED TWICE WEEKLY.
+              <span className="block text-[#C08C45]">ENJOYED AT HOME.</span>
+            </h2>
+
+            <p className="mt-3 max-w-[630px] text-[0.87rem] leading-[1.6] text-[#CDC7BC]">
+              Our Monday and Thursday roasting schedule helps keep the time
+              between roasting and delivery short, so you can enjoy fresh coffee
+              without months of shelf storage.
+            </p>
+          </div>
+
+          <div className="flex shrink-0 flex-col gap-3 sm:flex-row md:flex-col xl:flex-row">
             <Link
               to="/store"
-              className="inline-flex min-w-[205px] items-center justify-center bg-[#B86618] px-7 py-3 text-[0.7rem] font-bold tracking-[0.08em] text-white transition hover:bg-[#C97824]"
+              className="inline-flex min-h-[45px] items-center justify-center bg-[#B57A31] px-6 text-[0.7rem] font-bold tracking-[0.08em] text-white transition hover:bg-[#C48A45]"
             >
               SHOP FRESH COFFEE
             </Link>
 
             <Link
               to="/roast/armada-sample-pack"
-              className="inline-flex min-w-[205px] items-center justify-center border border-[#C08C45] px-7 py-3 text-[0.7rem] font-bold tracking-[0.08em] text-[#E6DCC8] transition hover:bg-[#C08C45] hover:text-black"
+              className="inline-flex min-h-[45px] items-center justify-center border border-[#C08C45] px-6 text-[0.7rem] font-bold tracking-[0.08em] text-[#E6C07F] transition hover:bg-[#C08C45] hover:text-black"
             >
               START WITH A SAMPLE
             </Link>

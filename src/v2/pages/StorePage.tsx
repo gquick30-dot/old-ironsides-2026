@@ -92,7 +92,10 @@ export default function StorePage() {
                 START WITH A SAMPLE
               </Link>
 
-              <div className="flex min-h-[48px] flex-col justify-center border border-[#071F35]/25 bg-[#071F35] px-5">
+              <Link
+                to="/subscriptions"
+                className="flex min-h-[48px] flex-col justify-center border border-[#071F35]/25 bg-[#071F35] px-5 transition hover:bg-[#123852]"
+              >
                 <div className="text-[0.56rem] font-bold tracking-[0.12em] text-[#E6C07F]">
                   SUBSCRIBE & SAVE 15%
                 </div>
@@ -100,7 +103,7 @@ export default function StorePage() {
                 <div className="mt-0.5 text-[0.76rem] font-bold text-[#F3EBDD]">
                   $18.70 / BAG
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
         </div>
